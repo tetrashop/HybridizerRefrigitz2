@@ -7,3 +7,5 @@ G:\'Personal'_'Files'\HybridizerRefrigitz\HybridizerRefrigitz\HybridizerRefrigit
 G:\'Personal'_'Files'\HybridizerRefrigitz\HybridizerRefrigitz\HybridizerRefrigitz\bin\x64\Debug\Hybridizer.Runtime.CUDAImports.xml
 G:\'Personal'_'Files'\HybridizerRefrigitz\HybridizerRefrigitz\HybridizerRefrigitz\obj\x64\Debug\HybridizerRefrigitz.exe
 G:\'Personal'_'Files'\HybridizerRefrigitz\HybridizerRefrigitz\HybridizerRefrigitz\obj\x64\Debug\HybridizerRefrigitz.pdb
+G:\'Personal'_'Files'\HybridizerRefrigitz\HybridizerRefrigitz\HybridizerRefrigitz\obj\x64\Debug\HybridizerRefrigitz.csprojAssemblyReference.cache
+G:\'Personal'_'Files'\HybridizerRefrigitz\HybridizerRefrigitz\HybridizerRefrigitz\obj\x64\Debug\HybridizerRefrigitz.csproj.CoreCompileInputs.cache

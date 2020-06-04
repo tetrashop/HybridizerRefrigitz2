@@ -32,86 +32,44 @@ public class GlobalMembersUci
     public static string StartFEN = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1";
 
 
-    // position() is called when engine receives the "position" UCI command.
-    // The function sets up the position described in the given FEN string ("fen")
-    // or the starting position ("startpos") and then makes the moves given in the
-    // following move list ("moves").
 
-    public static void position(//Position pos, istringstream @is
-        )
-    {
-
-       /* Move m;
-        
-        string token;
-        string fen;
-
-        @is >> token;
-
-        if (token == "startpos")
-        {
-            fen = ((char)StartFEN).ToString();
-            @is >> token; // Consume "moves" token if any
-        }
-        else if (token == "fen")
-        {
-            while (@is >> token && token != "moves")
-            {
-                fen += token + " ";
-            }
-        }
-        else
-            return;
-
-        pos.set(fen, GlobalMembersUcioption.Options["UCI_Chess960"], GlobalMembersThread.Threads.main());
-#if StateStackPtr_ConditionalDefinition1
-		SetupStates = std.auto_ptr<Stack<StateInfo>>(new Stack<StateInfo>());
-#elif StateStackPtr_ConditionalDefinition2
-		SetupStates = std.auto_ptr<Stack<StateInfo>>(new Stack<StateInfo>());
-#else
-        SetupStates = Search.StateStackPtr(new Stack<StateInfo>());
-#endif
-
-        // Parse move list (if any)
-        while (@is >> token && (m = GlobalMembersUci.to_move(pos, token)) != Move.MOVE_NONE)
-        {
-            SetupStates.push(new StateInfo());
-            pos.do_move(m, SetupStates.top());
-        }
-        */
-    }
 
 
     // setoption() is called when engine receives the "setoption" UCI command. The
     // function updates the UCI option ("name") to the given value ("value").
 
-    public enum Color
+    static string IsNullOrEmpty(string name)
+
     {
-        WHITE,
-        BLACK,
-        NO_COLOR,
-        COLOR_NB = 2
+        if (name != null)
+        {
+            if (name != "")
+                return name;
+        }
+
+        return " ";
     }
     public static void setoption(int c,int a//istringstream @is//temporary partameters
         )
     {
-        /*
+        
         string token;
-        string name;
-        string value;
+        string name = "";
+        string value = "";
 
-        //@is >> token; // Consume "name" token
-
+        token = Next(ref Is);
         // Read option name (can contain spaces)
-        while (@is >> token && token != "value")
+        while (token != "value")
         {
-            name += (string)(" ", !string.IsNullOrEmpty(name)) + token;
+           name += IsNullOrEmpty(name) + token;
         }
 
+        token = Next(ref Is);
+
         // Read option value (can contain spaces)
-        while (@is >> token)
+        while (token !=null)
         {
-            value += (string)(" ", !string.IsNullOrEmpty(value)) + token;
+           value += IsNullOrEmpty(value) + token;
         }
 
         if (GlobalMembersUcioption.Options.count(name))
@@ -120,8 +78,8 @@ public class GlobalMembersUci
         }
         else
         {
-            sync_cout << "No such option: " << name << sync_endl;
-        }*/
+            Console.WriteLine("No such option: " + name +"\r\n");
+        }
     }
 
     // position() is called when engine receives the "position" UCI command.
@@ -473,6 +431,83 @@ namespace Search
     }
 
 
+    /// The Stats struct stores moves statistics. According to the template parameter
+    /// the class can store History and Countermoves. History records how often
+    /// different moves have been successful or unsuccessful during the current search
+    /// and is used for reduction and move ordering decisions.
+    /// Countermoves store the move that refute a previous one. Entries are stored
+    /// using only the moving piece and destination square, hence two moves with
+    /// different origin but same destination and piece will be considered identical.
+    //C++ TO C# CONVERTER TODO TASK: C++ template specifiers containing defaults cannot be converted to C#:
+    //ORIGINAL LINE: template<typename T, bool CM = false>
+    public class Stats<T, bool CM = false>
+    {
+
+        public Value Max = new Value(1 << 28);
+
+        //C++ TO C# CONVERTER WARNING: 'const' methods are not available in C#:
+        //ORIGINAL LINE: const T* operator [](Piece pc) const
+        public T this[Piece pc]
+        {
+            get
+            {
+                return table[(int)pc];
+            }
+        }
+        public T this[Piece pc]
+        {
+            get
+            {
+                return table[(int)pc];
+            }
+        }
+        public void clear()
+        {
+            std.memset(table, 0, sizeof(T));
+        }
+        public void update(Piece pc, Square to, Move m)
+        {
+            table[(int)pc, (int)to] = m;
+        }
+        public void update(Piece pc, Square to, Value v)
+        {
+
+            if (Math.Abs((int)v) >= 324)
+                return;
+
+            table[(int)pc, (int)to] -= table[(int)pc, (int)to] * Math.Abs((int)v) / (CM ? 936 : 324);
+            table[(int)pc, (int)to] += (int)v * 32;
+        }
+
+        private T[,] table = new T[(int)Piece.PIECE_NB, (int)Square.SQUARE_NB];
+    }
+
+    public enum Value : int
+    {
+        VALUE_ZERO = 0,
+        VALUE_DRAW = 0,
+        VALUE_KNOWN_WIN = 10000,
+        VALUE_MATE = 32000,
+        VALUE_INFINITE = 32001,
+        VALUE_NONE = 32002,
+
+        VALUE_MATE_IN_MAX_PLY = VALUE_MATE - 2 * MAX_PLY,
+        VALUE_MATED_IN_MAX_PLY = -VALUE_MATE + 2 * MAX_PLY,
+
+        PawnValueMg = 188,
+        PawnValueEg = 248,
+        KnightValueMg = 753,
+        KnightValueEg = 832,
+        BishopValueMg = 826,
+        BishopValueEg = 897,
+        RookValueMg = 1285,
+        RookValueEg = 1371,
+        QueenValueMg = 2513,
+        QueenValueEg = 2650,
+
+        MidgameLimit = 15258,
+        EndgameLimit = 3915
+    }
     /// RootMove struct is used for moves at the root of the tree. For each root move
     /// we store a score and a PV (really a refutation in the case of moves which
     /// fail low). Score is normally set at -VALUE_INFINITE for all non-pv moves.
@@ -586,6 +621,52 @@ public enum Piece
     B_KING,
     PIECE_NB = 16
 }
+
+/// Option class implements an option as defined by UCI protocol
+public class Option
+{
+
+    private delegate void OnChange(Option NamelessParameter);
+
+
+    //C++ TO C# CONVERTER TODO TASK: The implementation of the following method could not be found:
+    //  Option(OnChange);
+    //C++ TO C# CONVERTER TODO TASK: The implementation of the following method could not be found:
+    //  Option(bool v, OnChange);
+    //C++ TO C# CONVERTER TODO TASK: The implementation of the following method could not be found:
+    //  Option(string v, OnChange);
+    //C++ TO C# CONVERTER TODO TASK: The implementation of the following method could not be found:
+    //  Option(int v, int min, int max, OnChange);
+
+    //C++ TO C# CONVERTER NOTE: This 'CopyFrom' method was converted from the original C++ copy assignment operator:
+    //ORIGINAL LINE: Option& operator =(const string&);
+    //C++ TO C# CONVERTER TODO TASK: The implementation of the following method could not be found:
+    //  Option CopyFrom(string NamelessParameter);
+    //C++ TO C# CONVERTER TODO TASK: The implementation of the following method could not be found:
+    //  void operator <<(Option NamelessParameter);
+    //C++ TO C# CONVERTER WARNING: 'const' methods are not available in C#:
+    //ORIGINAL LINE: operator int() const;
+    //C++ TO C# CONVERTER TODO TASK: The implementation of the following method could not be found:
+    //  operator int();
+    //C++ TO C# CONVERTER WARNING: 'const' methods are not available in C#:
+    //ORIGINAL LINE: operator string() const;
+    //C++ TO C# CONVERTER TODO TASK: The implementation of the following method could not be found:
+    //  operator string();
+    public static bool BestMove;
+    //C++ TO C# CONVERTER TODO TASK: C# has no concept of a 'friend' function:
+    //ORIGINAL LINE: friend std::ostream& operator <<(std::ostream&, const ClassicMap<string, Option, CaseInsensitiveLess>&);
+    //C++ TO C# CONVERTER TODO TASK: The implementation of the following method could not be found:
+    //  std::ostream operator <<(std::ostream NamelessParameter1, ClassicMap<string, Option, CaseInsensitiveLess>);
+
+    private string defaultValue;
+    private string currentValue;
+    private string type;
+    private int min;
+    private int max;
+    private uint idx;
+    private OnChange on_change;
+}
+
 public enum Square
 {
     SQ_A1,
@@ -668,10 +749,211 @@ public enum Square
 }
 
 
-
-public class Position
+public enum Color
 {
-    //C++ TO C# CONVERTER TODO TASK: The implementation of the following method could not be found:
+    WHITE,
+    BLACK,
+    NO_COLOR,
+    COLOR_NB = 2
+}
+public class Position
+{   bool BobSection = true;
+
+    const string PieceToChar = "kqrnbp PBNRQK";
+
+    float RowRealesedP = -1, ColumnRealeasedP = -1;
+    float RowRealesed = -1, ColumnRealeased = -1;
+
+    Position set(string fenStr)
+    {
+        return this;
+
+    }
+
+    String Alphabet()
+    {
+        Object O = new Object();
+        lock (O)
+        {
+            String A = "";
+            if (RowRealesed == 0)
+                A = "a";
+            else
+                if (RowRealesed == 1)
+                A = "b";
+            else
+                    if (RowRealesed == 2)
+                A = "c";
+            else
+                        if (RowRealesed == 3)
+                A = "d";
+            else
+                            if (RowRealesed == 4)
+                A = "e";
+            else
+                                if (RowRealesed == 5)
+                A = "f";
+            else
+                                    if (RowRealesed == 6)
+                A = "g";
+            else
+                                        if (RowRealesed == 7)
+                A = "h";
+            return A;
+
+
+        }
+    }
+    String Number()
+    {
+        Object O = new Object();
+        lock (O)
+        {
+            String A = "";
+            if (ColumnRealeased == 7)
+                A = "0";
+            else
+                if (ColumnRealeased == 6)
+                A = "1";
+            else
+                    if (ColumnRealeased == 5)
+                A = "2";
+            else
+                        if (ColumnRealeased == 4)
+                A = "3";
+            else
+                            if (ColumnRealeased == 3)
+                A = "4";
+            else
+                                if (ColumnRealeased == 2)
+                A = "5";
+            else
+                                    if (ColumnRealeased == 1)
+                A = "6";
+            else
+                                        if (ColumnRealeased == 0)
+                A = "7";
+            return A;
+
+        }
+    }
+    bool Empty(int Row, int Column)
+    {
+        Object O = new Object();
+        lock (O)
+        {
+            bool S = false;
+            if (GlobalMembersUci.t.t.Table[Row, Column] == 0)
+                S = true;
+            else
+                S = false;
+            return S;
+        }
+    }
+    String Fen(int RowRealesed, int ColumnRealeased)
+    {
+        Object O = new Object();
+        lock (O)
+        {
+            bool StartPos = false;
+            if (RowRealesed == -1 || ColumnRealeased == -1)
+                StartPos = true;
+
+            int EmptyCnt;
+            String ss = "";
+
+            for (int r = 0; r <= 7; ++r)
+            {
+                for (int f = 0; f <= 7; ++f)
+                {
+                    for (EmptyCnt = 0; f <= 7 && Empty(f, r); ++f)
+                        ++EmptyCnt;
+
+                    if (EmptyCnt != 0)
+                        ss += EmptyCnt;
+
+                    if (f <= 7)
+                        ss += PieceToChar[Piece_on(f, r)];
+                }
+
+                if (r != 7)
+                    ss += '/';
+            }
+            if (!BobSection)
+                ss += " w ";
+            else
+                ss += " b ";
+            if (HybridizerRefrigitz.ChessRules.SmallKingCastleGray)
+                ss += "K";
+
+            if (HybridizerRefrigitz.ChessRules.BigKingCastleGray)
+                ss += "Q";
+
+            if (HybridizerRefrigitz.ChessRules.SmallKingCastleBrown)
+                ss += "k";
+
+            if (HybridizerRefrigitz.ChessRules.BigKingCastleBrown)
+                ss += "q";
+
+            if (!HybridizerRefrigitz.ChessRules.CastleKingAllowedGray && !HybridizerRefrigitz.ChessRules.CastleKingAllowedBrown)
+                ss += '-';
+            String S = " - ";
+
+            if (!StartPos)
+            {
+                if (!BobSection)
+                {
+                    if (System.Math.Abs(GlobalMembersUci.t.t.Table[(int)RowRealesed, (int)ColumnRealeased]) == 1)
+                    {
+                        S = " ";
+                        S += Alphabet() + ((int)(7 - ColumnRealeased)).ToString();
+                        S += " ";
+                    }
+                }
+                else
+                {
+
+                    if (System.Math.Abs(GlobalMembersUci.t.t.Table[(int)RowRealesed, (int)ColumnRealeased]) == 1)
+                    {
+                        S = " ";
+                        S += Alphabet() + ((int)(7 - ColumnRealeased)).ToString();
+                        S += " ";
+                    }
+                }
+            }
+            else
+            {
+                S = " ";
+                S += "-";
+                S += " ";
+            }
+            int StockMovebase = HybridizerRefrigitzForm.MovmentsNumber / 2;
+            int StockMove = HybridizerRefrigitzForm.MovmentsNumber % 2;
+            S += (StockMovebase).ToString() + " " + ((int)StockMove).ToString() + "\n";
+
+            ss += S;
+
+            //if (MovmentsNumber % 2 == 0 && MovmentsNumber != 0)
+            //   StockMovebase++;
+            //else
+            //    StockMove++;
+
+            ss = "position fen " + ss;
+
+            return ss;
+
+
+
+        }
+    }
+    int Piece_on(int Row, int Column)
+    {
+        Object O = new Object();
+        lock (O)
+        {
+            return 6 + GlobalMembersUci.t.t.Table[Row, Column];
+        }
+    }//C++ TO C# CONVERTER TODO TASK: The implementation of the following method could not be found:
     //  static void init();
 
     //C++ TO C# CONVERTER TODO TASK: The implementation of the following method could not be found:
