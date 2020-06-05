@@ -1,27 +1,10 @@
-﻿using System.Collections.Generic;
+using System.Collections.Generic;
 using System;
 using HybridizerRefrigitz;
 public class GlobalMembersUci
 {
     public static ArtificialInteligenceMove t;
-    /*
-	  Stockfish, a UCI chess playing engine derived from Glaurung 2.1
-	  Copyright (C) 2004-2008 Tord Romstad (Glaurung author)
-	  Copyright (C) 2008-2015 Marco Costalba, Joona Kiiski, Tord Romstad
-	
-	  Stockfish is free software: you can redistribute it and/or modify
-	  it under the terms of the GNU General Public License as published by
-	  the Free Software Foundation, either version 3 of the License, or
-	  (at your option) any later version.
-	
-	  Stockfish is distributed in the hope that it will be useful,
-	  but WITHOUT ANY WARRANTY; without even the implied warranty of
-	  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-	  GNU General Public License for more details.
-	
-	  You should have received a copy of the GNU General Public License
-	  along with this program.  If not, see <http://www.gnu.org/licenses/>.
-	*/
+    
 
 
 
@@ -181,14 +164,7 @@ public class GlobalMembersUci
         }
 
 
-        /*	  if (GlobalMembersUcioption.Options.count(name))
-         {
-             GlobalMembersUcioption.Options[name] = value;
-         }
-         else
-         {
-             sync_cout << "No such option: " << name << sync_endl;
-         }*/
+        
     }
 
 
@@ -1190,166 +1166,7 @@ public class Position
     }
     //C++ TO C# CONVERTER WARNING: 'const' methods are not available in C#:
     //ORIGINAL LINE: inline Piece captured_piece() const
-    public Piece captured_piece()
-    {
-        return st.capturedPiece;
-    }
-
-    // Piece specific
-    //C++ TO C# CONVERTER WARNING: 'const' methods are not available in C#:
-    //ORIGINAL LINE: inline bool pawn_passed(Color c, Square s) const
-    public bool pawn_passed(Color c, Square s)
-    {
-        return !(pieces(~c, PieceType.PAWN) & GlobalMembersBenchmark.passed_pawn_mask(c, s));
-    }
-    //C++ TO C# CONVERTER WARNING: 'const' methods are not available in C#:
-    //ORIGINAL LINE: inline bool opposite_bishops() const
-    public bool opposite_bishops()
-    {
-        return pieceCount[(int)Piece.W_BISHOP] == 1 && pieceCount[(int)Piece.B_BISHOP] == 1 && GlobalMembersBenchmark.opposite_colors(square<PieceType.BISHOP>(Color.WHITE), square<PieceType.BISHOP>(Color.BLACK));
-    }
-
-    // Doing and undoing moves
-    //C++ TO C# CONVERTER TODO TASK: The implementation of the following method could not be found:
-    //  void do_move(Move m, StateInfo st, bool givesCheck);
-    //C++ TO C# CONVERTER TODO TASK: The implementation of the following method could not be found:
-    //  void undo_move(Move m);
-    //C++ TO C# CONVERTER TODO TASK: The implementation of the following method could not be found:
-    //  void do_null_move(StateInfo st);
-    //C++ TO C# CONVERTER TODO TASK: The implementation of the following method could not be found:
-    //  void undo_null_move();
-
-    // Static Exchange Evaluation
-    //C++ TO C# CONVERTER WARNING: 'const' methods are not available in C#:
-    //ORIGINAL LINE: bool see_ge(Move m, Value value) const;
-    //C++ TO C# CONVERTER TODO TASK: The implementation of the following method could not be found:
-    //  bool see_ge(Move m, Value value);
-
-    // Accessing hash keys
-    //C++ TO C# CONVERTER WARNING: 'const' methods are not available in C#:
-    //ORIGINAL LINE: inline ulong key() const
-    public ulong key()
-    {
-        return st.key;
-    }
-    //C++ TO C# CONVERTER WARNING: 'const' methods are not available in C#:
-    //ORIGINAL LINE: ulong key_after(Move m) const;
-    //C++ TO C# CONVERTER TODO TASK: The implementation of the following method could not be found:
-    //  ulong key_after(Move m);
-    //C++ TO C# CONVERTER WARNING: 'const' methods are not available in C#:
-    //ORIGINAL LINE: inline ulong material_key() const
-    public ulong material_key()
-    {
-        return st.materialKey;
-    }
-    //C++ TO C# CONVERTER WARNING: 'const' methods are not available in C#:
-    //ORIGINAL LINE: inline ulong pawn_key() const
-    public ulong pawn_key()
-    {
-        return st.pawnKey;
-    }
-
-    // Other properties of the position
-    //C++ TO C# CONVERTER WARNING: 'const' methods are not available in C#:
-    //ORIGINAL LINE: inline Color side_to_move() const
-    public Color side_to_move()
-    {
-        return sideToMove;
-    }
-    //C++ TO C# CONVERTER WARNING: 'const' methods are not available in C#:
-    //ORIGINAL LINE: Phase game_phase() const;
-    //C++ TO C# CONVERTER TODO TASK: The implementation of the following method could not be found:
-    //  Phase game_phase();
-    //C++ TO C# CONVERTER WARNING: 'const' methods are not available in C#:
-    //ORIGINAL LINE: inline int game_ply() const
-    public int game_ply()
-    {
-        return gamePly;
-    }
-    //C++ TO C# CONVERTER WARNING: 'const' methods are not available in C#:
-    //ORIGINAL LINE: inline bool is_chess960() const
-    public bool is_chess960()
-    {
-        return chess960;
-    }
-    //C++ TO C# CONVERTER WARNING: 'const' methods are not available in C#:
-    //ORIGINAL LINE: inline Thread* this_thread() const
-    public Thread this_thread()
-    {
-        return thisThread;
-    }
-    //C++ TO C# CONVERTER WARNING: 'const' methods are not available in C#:
-    //ORIGINAL LINE: inline ulong nodes_searched() const
-    public ulong nodes_searched()
-    {
-        return nodes;
-    }
-    //C++ TO C# CONVERTER WARNING: 'const' methods are not available in C#:
-    //ORIGINAL LINE: bool is_draw() const;
-    //C++ TO C# CONVERTER TODO TASK: The implementation of the following method could not be found:
-    //  bool is_draw();
-    //C++ TO C# CONVERTER WARNING: 'const' methods are not available in C#:
-    //ORIGINAL LINE: inline int rule50_count() const
-    public int rule50_count()
-    {
-        return st.rule50;
-    }
-    //C++ TO C# CONVERTER WARNING: 'const' methods are not available in C#:
-    //ORIGINAL LINE: inline Score psq_score() const
-    public Score psq_score()
-    {
-        return st.psq;
-    }
-    //C++ TO C# CONVERTER WARNING: 'const' methods are not available in C#:
-    //ORIGINAL LINE: inline Value non_pawn_material(Color c) const
-    public Value non_pawn_material(Color c)
-    {
-        return st.nonPawnMaterial[(int)c];
-    }
-
-    // Position consistency check, for debugging
-    //C++ TO C# CONVERTER WARNING: 'const' methods are not available in C#:
-    //ORIGINAL LINE: bool pos_is_ok(int* failedStep = null) const;
-    //C++ TO C# CONVERTER TODO TASK: The implementation of the following method could not be found:
-    //  bool pos_is_ok(ref int failedStep);
-    //C++ TO C# CONVERTER TODO TASK: The implementation of the following method could not be found:
-    //  void flip();
-
-    // Initialization helpers (used while setting up a position)
-    //C++ TO C# CONVERTER TODO TASK: The implementation of the following method could not be found:
-    //  void set_castling_right(Color c, Square rfrom);
-    //C++ TO C# CONVERTER WARNING: 'const' methods are not available in C#:
-    //ORIGINAL LINE: void set_state(StateInfo* si) const;
-    //C++ TO C# CONVERTER TODO TASK: The implementation of the following method could not be found:
-    //  void set_state(StateInfo si);
-    //C++ TO C# CONVERTER WARNING: 'const' methods are not available in C#:
-    //ORIGINAL LINE: void set_check_info(StateInfo* si) const;
-    //C++ TO C# CONVERTER TODO TASK: The implementation of the following method could not be found:
-    //  void set_check_info(StateInfo si);
-
-    // Other helpers
-    private void put_piece(Piece pc, Square s)
-    {
-
-        board[(int)s] = pc;
-        byTypeBB[(int)PieceType.ALL_PIECES] |= s;
-        byTypeBB[(int)GlobalMembersBenchmark.type_of(pc)] |= s;
-        byColorBB[(int)GlobalMembersBenchmark.color_of(pc)] |= s;
-        index[(int)s] = pieceCount[(int)pc]++;
-        pieceList[(int)pc, index[(int)s]] = s;
-        pieceCount[(int)GlobalMembersBenchmark.make_piece(GlobalMembersBenchmark.color_of(pc), PieceType.ALL_PIECES)]++;
-    }
-    private void remove_piece(Piece pc, Square s)
-    {
-
-        // WARNING: This is not a reversible operation. If we remove a piece in
-        // do_move() and then replace it in undo_move() we will put it at the end of
-        // the list and not in its original place, it means index[] and pieceList[]
-        // are not invariant to a do_move() + undo_move() sequence.
-        byTypeBB[(int)PieceType.ALL_PIECES] ^= s;
-        byTypeBB[(int)GlobalMembersBenchmark.type_of(pc)] ^= s;
-        byColorBB[(int)GlobalMembersBenchmark.color_of(pc)] ^= s;
-        /* board[s] = NO_PIECE;  Not needed, overwritten by the capturing one */
+  
         Square lastSquare = pieceList[(int)pc, --pieceCount[(int)pc]];
         index[(int)lastSquare] = index[(int)s];
         pieceList[(int)pc, index[(int)lastSquare]] = lastSquare;
@@ -1376,7 +1193,7 @@ public class Position
     //  void do_castling<bool Do>(Color us, Square from, Square to, Square rfrom, Square rto);
 
     // Data members
-    private Piece[] board = new Piece[(int)Square.SQUARE_NB];
+*/    private Piece[] board = new Piece[(int)Square.SQUARE_NB];
     private ulong[] byTypeBB = new ulong[(int)PieceType.PIECE_TYPE_NB];
     private ulong[] byColorBB = new ulong[(int)Color.COLOR_NB];
     private int[] pieceCount = new int[(int)Piece.PIECE_NB];

@@ -1,4 +1,4 @@
-﻿using System.Diagnostics;
+using System.Diagnostics;
 using System.Collections.Generic;
 using System;
 
@@ -7,7 +7,7 @@ using System;
 
 public static class GlobalMembersUcioption
 {
-	/*
+	
 	  Stockfish, a UCI chess playing engine derived from Glaurung 2.1
 	  Copyright (C) 2004-2008 Tord Romstad (Glaurung author)
 	  Copyright (C) 2008-2015 Marco Costalba, Joona Kiiski, Tord Romstad
@@ -28,7 +28,7 @@ public static class GlobalMembersUcioption
 	*/
 
 
-	/*
+	
 	  Stockfish, a UCI chess playing engine derived from Glaurung 2.1
 	  Copyright (C) 2004-2008 Tord Romstad (Glaurung author)
 	  Copyright (C) 2008-2015 Marco Costalba, Joona Kiiski, Tord Romstad
@@ -50,7 +50,7 @@ public static class GlobalMembersUcioption
 
 
 
-	/*
+	
 	  Stockfish, a UCI chess playing engine derived from Glaurung 2.1
 	  Copyright (C) 2004-2008 Tord Romstad (Glaurung author)
 	  Copyright (C) 2008-2015 Marco Costalba, Joona Kiiski, Tord Romstad
@@ -88,9 +88,9 @@ public static class GlobalMembersUcioption
 	/// -DUSE_PEXT    | Add runtime support for use of pext asm-instruction. Works
 	///               | only in 64-bit mode and requires hardware with pext support.
 
-/*
 
-    /*
+
+    
 	#if _MSC_VER
 	// Disable some silly and noisy warning from MSVC compiler
 	//C++ TO C# CONVERTER TODO TASK: There is no equivalent to most C++ 'pragma' directives in C#:
@@ -832,66 +832,66 @@ public static Move make<MoveType T>(Square from, Square to)
 	  return Move(T + ((pt - PieceType.KNIGHT) << 12) + (from << 6) + to);
 	}
 
-	public static bool is_ok(Move m)
-	{
-	  return GlobalMembersBenchmark.from_sq(m) != GlobalMembersBenchmark.to_sq(m); // Catch MOVE_NULL and MOVE_NONE
-	}
+    	public static bool is_ok(Move m)
+        {
+          return GlobalMembersBenchmark.from_sq(m) != GlobalMembersBenchmark.to_sq(m); // Catch MOVE_NULL and MOVE_NONE
+        }
 
 
 
-//C++ TO C# CONVERTER TODO TASK: The implementation of the following method could not be found:
-	//string engine_info(bool to_uci);
-//C++ TO C# CONVERTER TODO TASK: The implementation of the following method could not be found:
-	//void prefetch(object addr);
-//C++ TO C# CONVERTER TODO TASK: The implementation of the following method could not be found:
-	//void start_logger(string fname);
+    //C++ TO C# CONVERTER TODO TASK: The implementation of the following method could not be found:
+        //string engine_info(bool to_uci);
+    //C++ TO C# CONVERTER TODO TASK: The implementation of the following method could not be found:
+        //void prefetch(object addr);
+    //C++ TO C# CONVERTER TODO TASK: The implementation of the following method could not be found:
+        //void start_logger(string fname);
 
-//C++ TO C# CONVERTER TODO TASK: The implementation of the following method could not be found:
-	//void dbg_hit_on(bool b);
-//C++ TO C# CONVERTER TODO TASK: The implementation of the following method could not be found:
-	//void dbg_hit_on(bool c, bool b);
-//C++ TO C# CONVERTER TODO TASK: The implementation of the following method could not be found:
-	//void dbg_mean_of(int v);
-//C++ TO C# CONVERTER TODO TASK: The implementation of the following method could not be found:
-	//void dbg_print();
-/*
+    //C++ TO C# CONVERTER TODO TASK: The implementation of the following method could not be found:
+        //void dbg_hit_on(bool b);
+    //C++ TO C# CONVERTER TODO TASK: The implementation of the following method could not be found:
+        //void dbg_hit_on(bool c, bool b);
+    //C++ TO C# CONVERTER TODO TASK: The implementation of the following method could not be found:
+        //void dbg_mean_of(int v);
+    //C++ TO C# CONVERTER TODO TASK: The implementation of the following method could not be found:
+        //void dbg_print();
 
-	public static std.chrono.milliseconds.rep now()
-	{
-	  return std.chrono.duration_cast<std.chrono.milliseconds> (std.chrono.steady_clock.now().time_since_epoch()).count();
-	}
-*/
-//C++ TO C# CONVERTER TODO TASK: The original C++ template specifier was replaced with a C# generic specifier, which may not produce the same behavior:
-//ORIGINAL LINE: template<class Entry, int Size>
-//C++ TO C# CONVERTER TODO TASK: The implementation of the following method could not be found:
-	//std::ostream operator <<(std::ostream NamelessParameter1, SyncCout NamelessParameter2);
 
-	/*public static bool operator < (ExtMove f, ExtMove s)
+        public static std.chrono.milliseconds.rep now()
+        {
+          return std.chrono.duration_cast<std.chrono.milliseconds> (std.chrono.steady_clock.now().time_since_epoch()).count();
+        }
+    */
+    //C++ TO C# CONVERTER TODO TASK: The original C++ template specifier was replaced with a C# generic specifier, which may not produce the same behavior:
+    //ORIGINAL LINE: template<class Entry, int Size>
+    //C++ TO C# CONVERTER TODO TASK: The implementation of the following method could not be found:
+    //std::ostream operator <<(std::ostream NamelessParameter1, SyncCout NamelessParameter2);
+
+    public static bool operator < (ExtMove f, ExtMove s)
 	{
 	  return f.value < s.value;
 	}
   */
-//C++ TO C# CONVERTER TODO TASK: C++ template specifiers with non-type parameters cannot be converted to C#:
-//ORIGINAL LINE: template<GenType>
-//C++ TO C# CONVERTER TODO TASK: The implementation of the following method could not be found:
-	//ExtMove[] generate<GenType>(Position pos, ExtMove[] moveList);
+    //C++ TO C# CONVERTER TODO TASK: C++ template specifiers with non-type parameters cannot be converted to C#:
+    //ORIGINAL LINE: template<GenType>
+    //C++ TO C# CONVERTER TODO TASK: The implementation of the following method could not be found:
+    //ExtMove[] generate<GenType>(Position pos, ExtMove[] moveList);
 
-	/// The MoveList struct is a simple wrapper around generate(). It sometimes comes
-	/// in handy to use this class instead of the low level generate() function.
-//C++ TO C# CONVERTER TODO TASK: C++ template specifiers with non-type parameters cannot be converted to C#:
-//ORIGINAL LINE: template<GenType T>
+    /// The MoveList struct is a simple wrapper around generate(). It sometimes comes
+    /// in handy to use this class instead of the low level generate() function.
+    //C++ TO C# CONVERTER TODO TASK: C++ template specifiers with non-type parameters cannot be converted to C#:
+    //ORIGINAL LINE: template<GenType T>
 
-//C++ TO C# CONVERTER TODO TASK: The implementation of the following method could not be found:
-	//void init();
-//C++ TO C# CONVERTER TODO TASK: The implementation of the following method could not be found:
-	//bool probe(Square wksq, Square wpsq, Square bksq, Color us);
+    //C++ TO C# CONVERTER TODO TASK: The implementation of the following method could not be found:
+    //void init();
+    //C++ TO C# CONVERTER TODO TASK: The implementation of the following method could not be found:
+    //bool probe(Square wksq, Square wpsq, Square bksq, Color us);
 
-//C++ TO C# CONVERTER TODO TASK: The implementation of the following method could not be found:
-	//void init();
-//C++ TO C# CONVERTER TODO TASK: The implementation of the following method could not be found:
-	//string pretty(ulong b);
+    //C++ TO C# CONVERTER TODO TASK: The implementation of the following method could not be found:
+    //void init();
+    //C++ TO C# CONVERTER TODO TASK: The implementation of the following method could not be found:
+    //string pretty(ulong b);
 
-	public const ulong DarkSquares = 0xAA55AA55AA55AA55UL;
+    public const ulong DarkSquares = 0xAA55AA55AA55AA55UL;
 
 	public const ulong FileABB = 0x0101010101010101UL;
 	public static ulong FileBBB = FileABB << 1;
@@ -944,7 +944,7 @@ public static Move make<MoveType T>(Square from, Square to)
 
 	/// Overloads of bitwise operators between a Bitboard and a Square for testing
 	/// whether a given bit is set in a bitboard, and for setting and clearing bits.
-    /*
+    
 	public static ulong operator & (ulong b, Square s)
 	{
 	  return b & GlobalMembersBitboard.SquareBB[(int)s];
@@ -980,7 +980,7 @@ public static Move make<MoveType T>(Square from, Square to)
     */
 	/// rank_bb() and file_bb() return a bitboard representing all the squares on
 	/// the given file or rank.
-    /*
+    
 	public static ulong rank_bb(Rank r)
 	{
 	  return GlobalMembersBitboard.RankBB[(int)r];
@@ -1162,7 +1162,7 @@ public static Move make<MoveType T>(Square from, Square to)
 
 	  return (Pt == ((int)PieceType.ROOK) != 0 ? GlobalMembersBitboard.RookAttacks : GlobalMembersBitboard.BishopAttacks)[(int)s][magic_index<Pt>(s, occupied)];
 	}
-    /*
+    
 	public static ulong attacks_bb(Piece pc, Square s, ulong occupied)
 	{
 
@@ -1294,35 +1294,35 @@ public static Move make<MoveType T>(Square from, Square to)
 */
 
 
-	/// The Stats struct stores moves statistics. According to the template parameter
-	/// the class can store History and Countermoves. History records how often
-	/// different moves have been successful or unsuccessful during the current search
-	/// and is used for reduction and move ordering decisions.
-	/// Countermoves store the move that refute a previous one. Entries are stored
-	/// using only the moving piece and destination square, hence two moves with
-	/// different origin but same destination and piece will be considered identical.
-//C++ TO C# CONVERTER TODO TASK: C++ template specifiers containing defaults cannot be converted to C#:
-//ORIGINAL LINE: template<typename T, bool CM = false>
+    /// The Stats struct stores moves statistics. According to the template parameter
+    /// the class can store History and Countermoves. History records how often
+    /// different moves have been successful or unsuccessful during the current search
+    /// and is used for reduction and move ordering decisions.
+    /// Countermoves store the move that refute a previous one. Entries are stored
+    /// using only the moving piece and destination square, hence two moves with
+    /// different origin but same destination and piece will be considered identical.
+    //C++ TO C# CONVERTER TODO TASK: C++ template specifiers containing defaults cannot be converted to C#:
+    //ORIGINAL LINE: template<typename T, bool CM = false>
 
-//C++ TO C# CONVERTER NOTE: 'extern' variable declarations are not required in C#:
-	//extern SignalsType Signals;
-//C++ TO C# CONVERTER NOTE: 'extern' variable declarations are not required in C#:
-	//extern LimitsType Limits;
+    //C++ TO C# CONVERTER NOTE: 'extern' variable declarations are not required in C#:
+    //extern SignalsType Signals;
+    //C++ TO C# CONVERTER NOTE: 'extern' variable declarations are not required in C#:
+    //extern LimitsType Limits;
 
-//C++ TO C# CONVERTER TODO TASK: The implementation of the following method could not be found:
-	//void init();
-//C++ TO C# CONVERTER TODO TASK: The implementation of the following method could not be found:
-	//void clear();
-//C++ TO C# CONVERTER TODO TASK: C++ template specifiers with non-type parameters cannot be converted to C#:
-//ORIGINAL LINE: template<bool Root = true>
-//C++ TO C# CONVERTER TODO TASK: The implementation of the following method could not be found:
-	//ulong perft<bool Root = true>(Position pos, Depth depth);
+    //C++ TO C# CONVERTER TODO TASK: The implementation of the following method could not be found:
+    //void init();
+    //C++ TO C# CONVERTER TODO TASK: The implementation of the following method could not be found:
+    //void clear();
+    //C++ TO C# CONVERTER TODO TASK: C++ template specifiers with non-type parameters cannot be converted to C#:
+    //ORIGINAL LINE: template<bool Root = true>
+    //C++ TO C# CONVERTER TODO TASK: The implementation of the following method could not be found:
+    //ulong perft<bool Root = true>(Position pos, Depth depth);
 
-//C++ TO C# CONVERTER NOTE: 'extern' variable declarations are not required in C#:
-	//extern TranspositionTable TT;
+    //C++ TO C# CONVERTER NOTE: 'extern' variable declarations are not required in C#:
+    //extern TranspositionTable TT;
 
 
-	/*
+    
 	  Stockfish, a UCI chess playing engine derived from Glaurung 2.1
 	  Copyright (C) 2004-2008 Tord Romstad (Glaurung author)
 	  Copyright (C) 2008-2015 Marco Costalba, Joona Kiiski, Tord Romstad
@@ -1345,53 +1345,53 @@ public static Move make<MoveType T>(Square from, Square to)
 
 
 
-//C++ TO C# CONVERTER NOTE: C# has no need of forward class declarations:
-	//class Position;
+    //C++ TO C# CONVERTER NOTE: C# has no need of forward class declarations:
+    //class Position;
 
-/// init() initializes the UCI options to their hard-coded default values
+    /// init() initializes the UCI options to their hard-coded default values
 
-        /*
-	public static void init(SortedDictionary<string, Option, CaseInsensitiveLess> o)
-	{
+    
+public static void init(SortedDictionary<string, Option, CaseInsensitiveLess> o)
+{
 
-	  int MaxHashMB = Is64Bit ? 1024 * 1024 : 2048;
+  int MaxHashMB = Is64Bit ? 1024 * 1024 : 2048;
 
-	  o["Debug Log File"] << new Option("", on_logger);
-	  o["Contempt"] << new Option(0, -100, 100);
-	  o["Threads"] << new Option(1, 1, 128, on_threads);
-	  o["Hash"] << new Option(16, 1, MaxHashMB, on_hash_size);
-	  o["Clear Hash"] << new Option(on_clear_hash);
-	  o["Ponder"] << new Option(false);
-	  o["MultiPV"] << new Option(1, 1, 500);
-	  o["Skill Level"] << new Option(20, 0, 20);
-	  o["Move Overhead"] << new Option(30, 0, 5000);
-	  o["Minimum Thinking Time"] << new Option(20, 0, 5000);
-	  o["Slow Mover"] << new Option(89, 10, 1000);
-	  o["nodestime"] << new Option(0, 0, 10000);
-	  o["UCI_Chess960"] << new Option(false);
-	  o["SyzygyPath"] << new Option("<empty>", on_tb_path);
-	  o["SyzygyProbeDepth"] << new Option(1, 1, 100);
-	  o["Syzygy50MoveRule"] << new Option(true);
-	  o["SyzygyProbeLimit"] << new Option(6, 0, 6);
-	}
+  o["Debug Log File"] << new Option("", on_logger);
+  o["Contempt"] << new Option(0, -100, 100);
+  o["Threads"] << new Option(1, 1, 128, on_threads);
+  o["Hash"] << new Option(16, 1, MaxHashMB, on_hash_size);
+  o["Clear Hash"] << new Option(on_clear_hash);
+  o["Ponder"] << new Option(false);
+  o["MultiPV"] << new Option(1, 1, 500);
+  o["Skill Level"] << new Option(20, 0, 20);
+  o["Move Overhead"] << new Option(30, 0, 5000);
+  o["Minimum Thinking Time"] << new Option(20, 0, 5000);
+  o["Slow Mover"] << new Option(89, 10, 1000);
+  o["nodestime"] << new Option(0, 0, 10000);
+  o["UCI_Chess960"] << new Option(false);
+  o["SyzygyPath"] << new Option("<empty>", on_tb_path);
+  o["SyzygyProbeDepth"] << new Option(1, 1, 100);
+  o["Syzygy50MoveRule"] << new Option(true);
+  o["SyzygyProbeLimit"] << new Option(6, 0, 6);
+}
 //C++ TO C# CONVERTER TODO TASK: The implementation of the following method could not be found:
-	//void loop(int argc, string[] argv);
+//void loop(int argc, string[] argv);
 //C++ TO C# CONVERTER TODO TASK: The implementation of the following method could not be found:
-	//string value(Value v);
+//string value(Value v);
 //C++ TO C# CONVERTER TODO TASK: The implementation of the following method could not be found:
-	//string square(Square s);
+//string square(Square s);
 //C++ TO C# CONVERTER TODO TASK: The implementation of the following method could not be found:
-	//string move(Move m, bool chess960);
+//string move(Move m, bool chess960);
 //C++ TO C# CONVERTER TODO TASK: The implementation of the following method could not be found:
-	//string pv(Position pos, Depth depth, Value alpha, Value beta);
+//string pv(Position pos, Depth depth, Value alpha, Value beta);
 //C++ TO C# CONVERTER TODO TASK: The implementation of the following method could not be found:
-	//Move to_move(Position pos, string str);
+//Move to_move(Position pos, string str);
 
 //C++ TO C# CONVERTER NOTE: 'extern' variable declarations are not required in C#:
-	//extern ClassicMap<string, Option, CaseInsensitiveLess> Options;
-    */
-	public static SortedDictionary<string, Option, CaseInsensitiveLess> Options = new SortedDictionary<string, Option, CaseInsensitiveLess>(); // Global object
-    /*
+//extern ClassicMap<string, Option, CaseInsensitiveLess> Options;
+*/
+    public static SortedDictionary<string, Option, CaseInsensitiveLess> Options = new SortedDictionary<string, Option, CaseInsensitiveLess>(); // Global object
+    
 	/// 'On change' actions, triggered by an option's value change
 	public static void on_clear_hash(Option UnnamedParameter1)
 	{
@@ -1429,11 +1429,7 @@ public static Move make<MoveType T>(Square from, Square to)
 /// any normal move destination square is always different from origin square
 /// while MOVE_NONE and MOVE_NULL have the same origin and destination square.
 
-public enum Move : int
-{
-  MOVE_NONE,
-  MOVE_NULL = 65
-}
+
 
 public enum MoveType
 {
@@ -1443,13 +1439,7 @@ public enum MoveType
   CASTLING = 3 << 14
 }
 
-public enum Color
-{
-  WHITE,
-  BLACK,
-  NO_COLOR,
-  COLOR_NB = 2
-}
+
 
 public enum CastlingSide
 {
@@ -1494,7 +1484,7 @@ public enum ScaleFactor
   SCALE_FACTOR_MAX = 128,
   SCALE_FACTOR_NONE = 255
 }
-
+*/
 public enum Bound
 {
   BOUND_NONE,
@@ -1731,6 +1721,7 @@ public enum SyncCout
 /// For further analysis see
 ///   <http://vigna.di.unimi.it/ftp/papers/xorshift.pdf>
 
+
 public class PRNG
 {
 
@@ -1742,7 +1733,7 @@ public class PRNG
 	s ^= s >> 12, s ^= s << 25, s = s >> 27;
 	return s * 2685821657736338717L;
   }
-    /*
+    
   public PRNG(ulong seed)
   {
 	  this.s = seed;
@@ -1765,9 +1756,8 @@ public class PRNG
 	  return T(rand64() & rand64() & rand64());
   }*/
 }
+*/
 
-
-/*
   Stockfish, a UCI chess playing engine derived from Glaurung 2.1
   Copyright (C) 2004-2008 Tord Romstad (Glaurung author)
   Copyright (C) 2008-2015 Marco Costalba, Joona Kiiski, Tord Romstad
@@ -1789,7 +1779,7 @@ public class PRNG
 
 
 
-/*
+
   Stockfish, a UCI chess playing engine derived from Glaurung 2.1
   Copyright (C) 2004-2008 Tord Romstad (Glaurung author)
   Copyright (C) 2008-2015 Marco Costalba, Joona Kiiski, Tord Romstad
@@ -1811,7 +1801,7 @@ public class PRNG
 
 
 
-/*
+
   Stockfish, a UCI chess playing engine derived from Glaurung 2.1
   Copyright (C) 2004-2008 Tord Romstad (Glaurung author)
   Copyright (C) 2008-2015 Marco Costalba, Joona Kiiski, Tord Romstad
@@ -1845,7 +1835,7 @@ public enum GenType
   NON_EVASIONS,
   LEGAL
 }
-
+*/
 public class ExtMove
 {
   public Move move;
@@ -1859,15 +1849,16 @@ public class ExtMove
   }
 //C++ TO C# CONVERTER NOTE: This 'CopyFrom' method was converted from the original C++ copy assignment operator:
 //ORIGINAL LINE: void operator =(Move m)
-  /*
+  
   public void CopyFrom(Move m)
   {
 	  move = m;
   }*/
 }
+
 public class MoveList <GenType T>
 {
-/*
+
   public MoveList(Position pos)
   {
 	  this.last = generate<T>(pos, moveList);
@@ -1903,13 +1894,13 @@ public class MoveList <GenType T>
 	}
 	return false;
   }
-*/
-  private ExtMove[] moveList = Arrays.InitializeWithDefaultInstances<ExtMove>(MAX_MOVES);
+
+private ExtMove[] moveList = Arrays.InitializeWithDefaultInstances<ExtMove>(MAX_MOVES);
   private ExtMove last;
 }
+*/
 
 
-/*
   Stockfish, a UCI chess playing engine derived from Glaurung 2.1
   Copyright (C) 2004-2008 Tord Romstad (Glaurung author)
   Copyright (C) 2008-2015 Marco Costalba, Joona Kiiski, Tord Romstad
@@ -1931,7 +1922,7 @@ public class MoveList <GenType T>
 
 
 
-/*
+
   Stockfish, a UCI chess playing engine derived from Glaurung 2.1
   Copyright (C) 2004-2008 Tord Romstad (Glaurung author)
   Copyright (C) 2008-2015 Marco Costalba, Joona Kiiski, Tord Romstad
@@ -2058,9 +2049,9 @@ public class Position
   {
 	return byColorBB[(int)c] & (byTypeBB[(int)pt1] | byTypeBB[(int)pt2]);
   }
-//C++ TO C# CONVERTER WARNING: 'const' methods are not available in C#:
-//ORIGINAL LINE: inline Piece piece_on(Square s) const
-  public Piece piece_on(Square s)
+    //C++ TO C# CONVERTER WARNING: 'const' methods are not available in C#:
+    //ORIGINAL LINE: inline Piece piece_on(Square s) const
+    public Piece piece_on(Square s)
   {
 	return board[(int)s];
   }
@@ -2072,7 +2063,7 @@ public class Position
   }
 //C++ TO C# CONVERTER WARNING: 'const' methods are not available in C#:
 //ORIGINAL LINE: inline bool empty(Square s) const
-  public bool empty(Square s)
+*/public bool empty(Square s)
   {
 	return board[(int)s] == Piece.NO_PIECE;
   }
@@ -2080,7 +2071,7 @@ public class Position
 //ORIGINAL LINE: template<PieceType Pt>
 //C++ TO C# CONVERTER WARNING: 'const' methods are not available in C#:
 //ORIGINAL LINE: inline int count(Color c) const
-  public int count<PieceType Pt>(Color c)
+public int count<PieceType Pt>(Color c)
   {
 	return pieceCount[(int)GlobalMembersBenchmark.make_piece(c, Pt)];
   }
@@ -2089,7 +2080,7 @@ public class Position
 //C++ TO C# CONVERTER WARNING: 'const' methods are not available in C#:
 //ORIGINAL LINE: inline const Square* squares(Color c) const
 //C++ TO C# CONVERTER WARNING: C# has no equivalent to methods returning pointers to value types:
-  public Square squares(<PieceType Pt>Color c)
+ public Square squares(<PieceType Pt>Color c)
   {
 	return pieceList[(int)GlobalMembersBenchmark.make_piece(c, Pt)];
   }
@@ -2102,7 +2093,7 @@ public class Position
 	Debug.Assert(pieceCount[(int)GlobalMembersBenchmark.make_piece(c, Pt)] == 1);
 	return pieceList[(int)GlobalMembersBenchmark.make_piece(c, Pt), 0];
   }
-
+    
   // Castling
 //C++ TO C# CONVERTER WARNING: 'const' methods are not available in C#:
 //ORIGINAL LINE: inline int can_castle(Color c) const
@@ -2154,7 +2145,7 @@ public class Position
   {
 	return st.checkSquares[(int)pt];
   }
-
+*/
   // Attacks to/from a given square
 //C++ TO C# CONVERTER WARNING: 'const' methods are not available in C#:
 //ORIGINAL LINE: inline ulong attackers_to(Square s) const
@@ -2171,7 +2162,7 @@ public class Position
   public ulong attacks_from(Piece pc, Square s)
   {
 	return GlobalMembersBenchmark.attacks_bb(pc, s, byTypeBB[(int)PieceType.ALL_PIECES]);
-  }
+  }*/
 //C++ TO C# CONVERTER TODO TASK: C++ template specifiers with non-type parameters cannot be converted to C#:
 //ORIGINAL LINE: template<PieceType>
 //C++ TO C# CONVERTER WARNING: 'const' methods are not available in C#:
@@ -2188,192 +2179,192 @@ public class Position
   {
 	return GlobalMembersBitboard.StepAttacksBB[(int)GlobalMembersBenchmark.make_piece(c, PieceType.PAWN), (int)s];
   }
-//C++ TO C# CONVERTER WARNING: 'const' methods are not available in C#:
-//ORIGINAL LINE: ulong slider_blockers(ulong sliders, Square s, ulong& pinners) const;
-//C++ TO C# CONVERTER TODO TASK: The implementation of the following method could not be found:
-//  ulong slider_blockers(ulong sliders, Square s, ref ulong pinners);
+    //C++ TO C# CONVERTER WARNING: 'const' methods are not available in C#:
+    //ORIGINAL LINE: ulong slider_blockers(ulong sliders, Square s, ulong& pinners) const;
+    //C++ TO C# CONVERTER TODO TASK: The implementation of the following method could not be found:
+    //  ulong slider_blockers(ulong sliders, Square s, ref ulong pinners);
 
-  // Properties of moves
-//C++ TO C# CONVERTER WARNING: 'const' methods are not available in C#:
-//ORIGINAL LINE: bool legal(Move m) const;
-//C++ TO C# CONVERTER TODO TASK: The implementation of the following method could not be found:
-//  bool legal(Move m);
-//C++ TO C# CONVERTER WARNING: 'const' methods are not available in C#:
-//ORIGINAL LINE: bool pseudo_legal(const Move m) const;
-//C++ TO C# CONVERTER TODO TASK: The implementation of the following method could not be found:
-//  bool pseudo_legal(Move m);
-//C++ TO C# CONVERTER WARNING: 'const' methods are not available in C#:
-//ORIGINAL LINE: inline bool capture(Move m) const
-  public bool capture(Move m)
-  {
-	Debug.Assert(GlobalMembersBenchmark.is_ok(m));
-	// Castling is encoded as "king captures rook"
-	return (!empty(GlobalMembersBenchmark.to_sq(m)) && GlobalMembersBenchmark.type_of(m) != MoveType.CASTLING) || GlobalMembersBenchmark.type_of(m) == MoveType.ENPASSANT;
-  }
-//C++ TO C# CONVERTER WARNING: 'const' methods are not available in C#:
-//ORIGINAL LINE: inline bool capture_or_promotion(Move m) const
-  public bool capture_or_promotion(Move m)
-  {
-	Debug.Assert(GlobalMembersBenchmark.is_ok(m));
-	return GlobalMembersBenchmark.type_of(m) != ((int)MoveType.NORMAL) != 0 ? GlobalMembersBenchmark.type_of(m) != MoveType.CASTLING :!empty(GlobalMembersBenchmark.to_sq(m));
-  }
-//C++ TO C# CONVERTER WARNING: 'const' methods are not available in C#:
-//ORIGINAL LINE: bool gives_check(Move m) const;
-//C++ TO C# CONVERTER TODO TASK: The implementation of the following method could not be found:
-//  bool gives_check(Move m);
-//C++ TO C# CONVERTER WARNING: 'const' methods are not available in C#:
-//ORIGINAL LINE: inline bool advanced_pawn_push(Move m) const
-  public bool advanced_pawn_push(Move m)
+    // Properties of moves
+    //C++ TO C# CONVERTER WARNING: 'const' methods are not available in C#:
+    //ORIGINAL LINE: bool legal(Move m) const;
+    //C++ TO C# CONVERTER TODO TASK: The implementation of the following method could not be found:
+    //  bool legal(Move m);
+    //C++ TO C# CONVERTER WARNING: 'const' methods are not available in C#:
+    //ORIGINAL LINE: bool pseudo_legal(const Move m) const;
+    //C++ TO C# CONVERTER TODO TASK: The implementation of the following method could not be found:
+    //  bool pseudo_legal(Move m);
+    //C++ TO C# CONVERTER WARNING: 'const' methods are not available in C#:
+    //ORIGINAL LINE: inline bool capture(Move m) const
+      public bool capture(Move m)
+      {
+        Debug.Assert(GlobalMembersBenchmark.is_ok(m));
+        // Castling is encoded as "king captures rook"
+        return (!empty(GlobalMembersBenchmark.to_sq(m)) && GlobalMembersBenchmark.type_of(m) != MoveType.CASTLING) || GlobalMembersBenchmark.type_of(m) == MoveType.ENPASSANT;
+      }
+    //C++ TO C# CONVERTER WARNING: 'const' methods are not available in C#:
+    //ORIGINAL LINE: inline bool capture_or_promotion(Move m) const
+      public bool capture_or_promotion(Move m)
+      {
+        Debug.Assert(GlobalMembersBenchmark.is_ok(m));
+        return GlobalMembersBenchmark.type_of(m) != ((int)MoveType.NORMAL) != 0 ? GlobalMembersBenchmark.type_of(m) != MoveType.CASTLING :!empty(GlobalMembersBenchmark.to_sq(m));
+      }
+    //C++ TO C# CONVERTER WARNING: 'const' methods are not available in C#:
+    //ORIGINAL LINE: bool gives_check(Move m) const;
+    //C++ TO C# CONVERTER TODO TASK: The implementation of the following method could not be found:
+    //  bool gives_check(Move m);
+    //C++ TO C# CONVERTER WARNING: 'const' methods are not available in C#:
+    //ORIGINAL LINE: inline bool advanced_pawn_push(Move m) const
+    public bool advanced_pawn_push(Move m)
   {
 	return GlobalMembersBenchmark.type_of(moved_piece(m)) == PieceType.PAWN && GlobalMembersBenchmark.relative_rank(sideToMove, GlobalMembersBenchmark.from_sq(m)) > Rank.RANK_4;
-  }
-//C++ TO C# CONVERTER WARNING: 'const' methods are not available in C#:
-//ORIGINAL LINE: inline Piece moved_piece(Move m) const
-  public Piece moved_piece(Move m)
+  }*/
+    //C++ TO C# CONVERTER WARNING: 'const' methods are not available in C#:
+    //ORIGINAL LINE: inline Piece moved_piece(Move m) const
+    public Piece moved_piece(Move m)
   {
 	return board[(int)GlobalMembersBenchmark.from_sq(m)];
   }
-//C++ TO C# CONVERTER WARNING: 'const' methods are not available in C#:
-//ORIGINAL LINE: inline Piece captured_piece() const
-  public Piece captured_piece()
-  {
-	return st.capturedPiece;
-  }
+    //C++ TO C# CONVERTER WARNING: 'const' methods are not available in C#:
+    //ORIGINAL LINE: inline Piece captured_piece() const
+     public Piece captured_piece()
+      {
+        return st.capturedPiece;
+      }
 
-  // Piece specific
-//C++ TO C# CONVERTER WARNING: 'const' methods are not available in C#:
-//ORIGINAL LINE: inline bool pawn_passed(Color c, Square s) const
-  public bool pawn_passed(Color c, Square s)
-  {
-	return !(pieces(~c, PieceType.PAWN) & GlobalMembersBenchmark.passed_pawn_mask(c, s));
-  }
-//C++ TO C# CONVERTER WARNING: 'const' methods are not available in C#:
-//ORIGINAL LINE: inline bool opposite_bishops() const
-  public bool opposite_bishops()
+      // Piece specific
+    //C++ TO C# CONVERTER WARNING: 'const' methods are not available in C#:
+    //ORIGINAL LINE: inline bool pawn_passed(Color c, Square s) const
+      public bool pawn_passed(Color c, Square s)
+      {
+        return !(pieces(~c, PieceType.PAWN) & GlobalMembersBenchmark.passed_pawn_mask(c, s));
+      }
+    //C++ TO C# CONVERTER WARNING: 'const' methods are not available in C#:
+    //ORIGINAL LINE: inline bool opposite_bishops() const
+    public bool opposite_bishops()
   {
 	return pieceCount[(int)Piece.W_BISHOP] == 1 && pieceCount[(int)Piece.B_BISHOP] == 1 && GlobalMembersBenchmark.opposite_colors(square<PieceType.BISHOP>(Color.WHITE), square<PieceType.BISHOP>(Color.BLACK));
   }
 
-  // Doing and undoing moves
-//C++ TO C# CONVERTER TODO TASK: The implementation of the following method could not be found:
-//  void do_move(Move m, StateInfo st, bool givesCheck);
-//C++ TO C# CONVERTER TODO TASK: The implementation of the following method could not be found:
-//  void undo_move(Move m);
-//C++ TO C# CONVERTER TODO TASK: The implementation of the following method could not be found:
-//  void do_null_move(StateInfo st);
-//C++ TO C# CONVERTER TODO TASK: The implementation of the following method could not be found:
-//  void undo_null_move();
+    // Doing and undoing moves
+    //C++ TO C# CONVERTER TODO TASK: The implementation of the following method could not be found:
+    //  void do_move(Move m, StateInfo st, bool givesCheck);
+    //C++ TO C# CONVERTER TODO TASK: The implementation of the following method could not be found:
+    //  void undo_move(Move m);
+    //C++ TO C# CONVERTER TODO TASK: The implementation of the following method could not be found:
+    //  void do_null_move(StateInfo st);
+    //C++ TO C# CONVERTER TODO TASK: The implementation of the following method could not be found:
+    //  void undo_null_move();
 
-  // Static Exchange Evaluation
-//C++ TO C# CONVERTER WARNING: 'const' methods are not available in C#:
-//ORIGINAL LINE: bool see_ge(Move m, Value value) const;
-//C++ TO C# CONVERTER TODO TASK: The implementation of the following method could not be found:
-//  bool see_ge(Move m, Value value);
+    // Static Exchange Evaluation
+    //C++ TO C# CONVERTER WARNING: 'const' methods are not available in C#:
+    //ORIGINAL LINE: bool see_ge(Move m, Value value) const;
+    //C++ TO C# CONVERTER TODO TASK: The implementation of the following method could not be found:
+    //  bool see_ge(Move m, Value value);
 
-  // Accessing hash keys
-//C++ TO C# CONVERTER WARNING: 'const' methods are not available in C#:
-//ORIGINAL LINE: inline ulong key() const
-  public ulong key()
+    // Accessing hash keys
+    //C++ TO C# CONVERTER WARNING: 'const' methods are not available in C#:
+    //ORIGINAL LINE: inline ulong key() const
+    public ulong key()
   {
 	return st.key;
   }
-//C++ TO C# CONVERTER WARNING: 'const' methods are not available in C#:
-//ORIGINAL LINE: ulong key_after(Move m) const;
-//C++ TO C# CONVERTER TODO TASK: The implementation of the following method could not be found:
-//  ulong key_after(Move m);
-//C++ TO C# CONVERTER WARNING: 'const' methods are not available in C#:
-//ORIGINAL LINE: inline ulong material_key() const
-  public ulong material_key()
+    //C++ TO C# CONVERTER WARNING: 'const' methods are not available in C#:
+    //ORIGINAL LINE: ulong key_after(Move m) const;
+    //C++ TO C# CONVERTER TODO TASK: The implementation of the following method could not be found:
+    //  ulong key_after(Move m);
+    //C++ TO C# CONVERTER WARNING: 'const' methods are not available in C#:
+    //ORIGINAL LINE: inline ulong material_key() const
+    public ulong material_key()
   {
 	return st.materialKey;
   }
-//C++ TO C# CONVERTER WARNING: 'const' methods are not available in C#:
-//ORIGINAL LINE: inline ulong pawn_key() const
-  public ulong pawn_key()
+    //C++ TO C# CONVERTER WARNING: 'const' methods are not available in C#:
+    //ORIGINAL LINE: inline ulong pawn_key() const
+    public ulong pawn_key()
   {
 	return st.pawnKey;
   }
 
-  // Other properties of the position
-//C++ TO C# CONVERTER WARNING: 'const' methods are not available in C#:
-//ORIGINAL LINE: inline Color side_to_move() const
-  public Color side_to_move()
+    // Other properties of the position
+    //C++ TO C# CONVERTER WARNING: 'const' methods are not available in C#:
+    //ORIGINAL LINE: inline Color side_to_move() const
+    public Color side_to_move()
   {
 	return sideToMove;
   }
-//C++ TO C# CONVERTER WARNING: 'const' methods are not available in C#:
-//ORIGINAL LINE: Phase game_phase() const;
-//C++ TO C# CONVERTER TODO TASK: The implementation of the following method could not be found:
-//  Phase game_phase();
-//C++ TO C# CONVERTER WARNING: 'const' methods are not available in C#:
-//ORIGINAL LINE: inline int game_ply() const
-  public int game_ply()
+    //C++ TO C# CONVERTER WARNING: 'const' methods are not available in C#:
+    //ORIGINAL LINE: Phase game_phase() const;
+    //C++ TO C# CONVERTER TODO TASK: The implementation of the following method could not be found:
+    //  Phase game_phase();
+    //C++ TO C# CONVERTER WARNING: 'const' methods are not available in C#:
+    //ORIGINAL LINE: inline int game_ply() const
+    public int game_ply()
   {
 	return gamePly;
   }
-//C++ TO C# CONVERTER WARNING: 'const' methods are not available in C#:
-//ORIGINAL LINE: inline bool is_chess960() const
-  public bool is_chess960()
+    //C++ TO C# CONVERTER WARNING: 'const' methods are not available in C#:
+    //ORIGINAL LINE: inline bool is_chess960() const
+    public bool is_chess960()
   {
 	return chess960;
   }
-//C++ TO C# CONVERTER WARNING: 'const' methods are not available in C#:
-//ORIGINAL LINE: inline Thread* this_thread() const
-  public Thread this_thread()
+    //C++ TO C# CONVERTER WARNING: 'const' methods are not available in C#:
+    //ORIGINAL LINE: inline Thread* this_thread() const
+    public Thread this_thread()
   {
 	return thisThread;
   }
-//C++ TO C# CONVERTER WARNING: 'const' methods are not available in C#:
-//ORIGINAL LINE: inline ulong nodes_searched() const
-  public ulong nodes_searched()
+    //C++ TO C# CONVERTER WARNING: 'const' methods are not available in C#:
+    //ORIGINAL LINE: inline ulong nodes_searched() const
+    public ulong nodes_searched()
   {
 	return nodes;
   }
-//C++ TO C# CONVERTER WARNING: 'const' methods are not available in C#:
-//ORIGINAL LINE: bool is_draw() const;
-//C++ TO C# CONVERTER TODO TASK: The implementation of the following method could not be found:
-//  bool is_draw();
-//C++ TO C# CONVERTER WARNING: 'const' methods are not available in C#:
-//ORIGINAL LINE: inline int rule50_count() const
-  public int rule50_count()
+    //C++ TO C# CONVERTER WARNING: 'const' methods are not available in C#:
+    //ORIGINAL LINE: bool is_draw() const;
+    //C++ TO C# CONVERTER TODO TASK: The implementation of the following method could not be found:
+    //  bool is_draw();
+    //C++ TO C# CONVERTER WARNING: 'const' methods are not available in C#:
+    //ORIGINAL LINE: inline int rule50_count() const
+    public int rule50_count()
   {
 	return st.rule50;
   }
-//C++ TO C# CONVERTER WARNING: 'const' methods are not available in C#:
-//ORIGINAL LINE: inline Score psq_score() const
-  public Score psq_score()
+    //C++ TO C# CONVERTER WARNING: 'const' methods are not available in C#:
+    //ORIGINAL LINE: inline Score psq_score() const
+    public Score psq_score()
   {
 	return st.psq;
   }
-//C++ TO C# CONVERTER WARNING: 'const' methods are not available in C#:
-//ORIGINAL LINE: inline Value non_pawn_material(Color c) const
-  public Value non_pawn_material(Color c)
+    //C++ TO C# CONVERTER WARNING: 'const' methods are not available in C#:
+    //ORIGINAL LINE: inline Value non_pawn_material(Color c) const
+    public Value non_pawn_material(Color c)
   {
 	return st.nonPawnMaterial[(int)c];
   }
 
-  // Position consistency check, for debugging
-//C++ TO C# CONVERTER WARNING: 'const' methods are not available in C#:
-//ORIGINAL LINE: bool pos_is_ok(int* failedStep = null) const;
-//C++ TO C# CONVERTER TODO TASK: The implementation of the following method could not be found:
-//  bool pos_is_ok(ref int failedStep);
-//C++ TO C# CONVERTER TODO TASK: The implementation of the following method could not be found:
-//  void flip();
+    // Position consistency check, for debugging
+    //C++ TO C# CONVERTER WARNING: 'const' methods are not available in C#:
+    //ORIGINAL LINE: bool pos_is_ok(int* failedStep = null) const;
+    //C++ TO C# CONVERTER TODO TASK: The implementation of the following method could not be found:
+    //  bool pos_is_ok(ref int failedStep);
+    //C++ TO C# CONVERTER TODO TASK: The implementation of the following method could not be found:
+    //  void flip();
 
-  // Initialization helpers (used while setting up a position)
-//C++ TO C# CONVERTER TODO TASK: The implementation of the following method could not be found:
-//  void set_castling_right(Color c, Square rfrom);
-//C++ TO C# CONVERTER WARNING: 'const' methods are not available in C#:
-//ORIGINAL LINE: void set_state(StateInfo* si) const;
-//C++ TO C# CONVERTER TODO TASK: The implementation of the following method could not be found:
-//  void set_state(StateInfo si);
-//C++ TO C# CONVERTER WARNING: 'const' methods are not available in C#:
-//ORIGINAL LINE: void set_check_info(StateInfo* si) const;
-//C++ TO C# CONVERTER TODO TASK: The implementation of the following method could not be found:
-//  void set_check_info(StateInfo si);
-
-  // Other helpers
-  private void put_piece(Piece pc, Square s)
+    // Initialization helpers (used while setting up a position)
+    //C++ TO C# CONVERTER TODO TASK: The implementation of the following method could not be found:
+    //  void set_castling_right(Color c, Square rfrom);
+    //C++ TO C# CONVERTER WARNING: 'const' methods are not available in C#:
+    //ORIGINAL LINE: void set_state(StateInfo* si) const;
+    //C++ TO C# CONVERTER TODO TASK: The implementation of the following method could not be found:
+    //  void set_state(StateInfo si);
+    //C++ TO C# CONVERTER WARNING: 'const' methods are not available in C#:
+    //ORIGINAL LINE: void set_check_info(StateInfo* si) const;
+    //C++ TO C# CONVERTER TODO TASK: The implementation of the following method could not be found:
+    //  void set_check_info(StateInfo si);
+    
+    // Other helpers
+    private void put_piece(Piece pc, Square s)
   {
 
 	board[(int)s] = pc;
@@ -2394,7 +2385,6 @@ public class Position
 	byTypeBB[(int)PieceType.ALL_PIECES] ^= s;
 	byTypeBB[(int)GlobalMembersBenchmark.type_of(pc)] ^= s;
 	byColorBB[(int)GlobalMembersBenchmark.color_of(pc)] ^= s;
-	/* board[s] = NO_PIECE;  Not needed, overwritten by the capturing one */
 	Square lastSquare = pieceList[(int)pc, --pieceCount[(int)pc]];
 	index[(int)lastSquare] = index[(int)s];
 	pieceList[(int)pc, index[(int)lastSquare]] = lastSquare;
@@ -2414,7 +2404,7 @@ public class Position
 	board[(int)to] = pc;
 	index[(int)to] = index[(int)from];
 	pieceList[(int)pc, index[(int)to]] = to;
-  }
+  }*/
 //C++ TO C# CONVERTER TODO TASK: C++ template specifiers with non-type parameters cannot be converted to C#:
 //ORIGINAL LINE: template<bool Do>
 //C++ TO C# CONVERTER TODO TASK: The implementation of the following method could not be found:
@@ -2680,7 +2670,7 @@ public class SignalsType
 } // namespace Search
 
 
-/*
+
   Stockfish, a UCI chess playing engine derived from Glaurung 2.1
   Copyright (C) 2004-2008 Tord Romstad (Glaurung author)
   Copyright (C) 2008-2015 Marco Costalba, Joona Kiiski, Tord Romstad
@@ -2759,7 +2749,7 @@ public class TTEntry <bool Root = true>
 
 	// Don't overwrite more valuable entries
 	if ((k >> 48) != key16 || d / Depth.ONE_PLY > depth8 - 4 || b == Bound.BOUND_EXACT)
-	 /* || g != (genBound8 & 0xFC) // Matching non-zero keys are already refreshed by probe() */
+	  || g != (genBound8 & 0xFC) // Matching non-zero keys are already refreshed by probe() */
 	{
 		key16 = (ushort)(k >> 48);
 		value16 = (short)v;
@@ -2844,7 +2834,7 @@ public class TranspositionTable
   private object mem;
   private byte generation8; // Size must be not bigger than TTEntry::genBound8
 }
-
+*/
 namespace UCI
 {
 
@@ -2859,14 +2849,14 @@ public class CaseInsensitiveLess
 //C++ TO C# CONVERTER WARNING: 'const' methods are not available in C#:
 //ORIGINAL LINE: bool operator ()(const string& s1, const string& s2) const
 //C++ TO C# CONVERTER TODO TASK: The () operator cannot be overloaded in C#:
-  public static bool operator ()(string s1, string s2)
+ public static bool operator ()(string s1, string s2)
   {
 
 	return std.lexicographical_compare(s1.GetEnumerator(), s1.end(), s2.GetEnumerator(), s2.end(), (sbyte c1, sbyte c2) =>
 	{
 		return char.ToLower(c1) < char.ToLower(c2);
 	});
-  }
+  }*/
 }
 
 /// Our options container is actually a std::map
@@ -2975,7 +2965,7 @@ public class Option
 
 	*ImpliedObject = o;
 	ImpliedObject.idx = operator << _insert_order++;
-  }
+  }*/
 //C++ TO C# CONVERTER WARNING: 'const' methods are not available in C#:
 //ORIGINAL LINE: operator int() const
   public static implicit operator int(Option ImpliedObject)
