@@ -32,6 +32,7 @@ public class GlobalMembersUci
 
         return " ";
     }
+   
     public static void setoption(int c,int a//istringstream @is//temporary partameters
         )
     {
@@ -266,7 +267,7 @@ public class GlobalMembersUci
 
             token = ""; // getline() could return empty or blank line
                         //is >> skipws >> token;
-
+            token = Console.ReadLine();
             // The GUI sends 'ponderhit' to tell us to ponder on the same move the
             // opponent has played. In case Signals.stopOnPonderhit is set we are
             // waiting for 'ponderhit' to stop the search (for instance because we
@@ -282,20 +283,14 @@ public class GlobalMembersUci
                     HybridizerRefrigitz.AllDraw.CalIdle = 2;
                     while (HybridizerRefrigitz.AllDraw.CalIdle != 1) { }
                 }
-                 Search::Signals.stop = true;
-                // Threads.main()->start_searching(true); // Could be sleeping
+                t.t.Play(-1, -1);//remain fen
             }
             else if (token == "ponderhit")
             {
-                if (HybridizerRefrigitz.AllDraw.CalIdle == 0)
-                {
+                HybridizerRefrigitz.AllDraw.CalIdle = 0;
+                
 
-                    HybridizerRefrigitz.AllDraw.CalIdle = 2;
-                    while (HybridizerRefrigitz.AllDraw.CalIdle != 1) { };
-                }
-
-                //Search::Limits.ponder = 0; // Switch to normal search
-
+      
             }
             else if (token == "uci")
 
@@ -309,8 +304,8 @@ public class GlobalMembersUci
 
 
             {
-                //Search::clear();
-                //Time.availableNodes = 0;
+                t.t.Form1_Load();
+
             }
             else if (token == "isready")
             {

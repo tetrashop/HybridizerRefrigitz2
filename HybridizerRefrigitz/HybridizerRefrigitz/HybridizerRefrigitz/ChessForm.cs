@@ -335,12 +335,7 @@ namespace HybridizerRefrigitz
 
                     if (i == -1 && j == -1)
                     {
-//						if(AllDraw.CalIdle==2)
-//						{
-//							AllDraw.CalIdle=5;
-//							return 1;
-//						}
-						AllDraw.MaxAStarGreedy=HybridizerRefrigitz.AllDraw.PlatformHelperProcessorCount;
+             			AllDraw.MaxAStarGreedy=HybridizerRefrigitz.AllDraw.PlatformHelperProcessorCount;
                         Again:
                         CoPermit = false;
                         Person = false;
