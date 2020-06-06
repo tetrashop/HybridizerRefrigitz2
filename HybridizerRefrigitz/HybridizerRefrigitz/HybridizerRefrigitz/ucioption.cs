@@ -62,11 +62,27 @@ public static Move make<MoveType T>(Square from, Square to)
 	public static ulong Rank6BB = Rank1BB << (8 * 5);
 	public static ulong Rank7BB = Rank1BB << (8 * 6);
 	public static ulong Rank8BB = Rank1BB << (8 * 7);
-	
 
+    public class Position
+    {
+        private Piece[] board = new Piece[(int)Square.SQUARE_NB];
+        private ulong[] byTypeBB = new ulong[(int)PieceType.PIECE_TYPE_NB];
+        private ulong[] byColorBB = new ulong[(int)Color.COLOR_NB];
+        private int[] pieceCount = new int[(int)Piece.PIECE_NB];
+        private Square[,] pieceList = new Square[(int)Piece.PIECE_NB, 16];
+        private int[] index = new int[(int)Square.SQUARE_NB];
+        private int[] castlingRightsMask = new int[(int)Square.SQUARE_NB];
+        private Square[] castlingRookSquare = new Square[(int)CastlingRight.CASTLING_RIGHT_NB];
+        private ulong[] castlingPath = new ulong[(int)CastlingRight.CASTLING_RIGHT_NB];
+        private ulong nodes;
+        private int gamePly;
+        private Color sideToMove;
+        private Thread thisThread;
+        private StateInfo st;
+        private bool chess960;
+    }
 
-
-  public static SortedDictionary<string, Option, CaseInsensitiveLess> Options = new SortedDictionary<string, Option, CaseInsensitiveLess>(); 
+    public static SortedDictionary<string, Option, CaseInsensitiveLess> Options = new SortedDictionary<string, Option, CaseInsensitiveLess>(); 
     
 
 }
@@ -135,36 +151,9 @@ public enum Value : int
   EndgameLimit = 3915
 }
 
-public enum PieceType
-{
-  NO_PIECE_TYPE,
-  PAWN,
-  KNIGHT,
-  BISHOP,
-  ROOK,
-  QUEEN,
-  KING,
-  ALL_PIECES = 0,
-  PIECE_TYPE_NB = 8
-}
 
-public enum Piece
-{
-  NO_PIECE,
-  W_PAWN = 1,
-  W_KNIGHT,
-  W_BISHOP,
-  W_ROOK,
-  W_QUEEN,
-  W_KING,
-  B_PAWN = 9,
-  B_KNIGHT,
-  B_BISHOP,
-  B_ROOK,
-  B_QUEEN,
-  B_KING,
-  PIECE_NB = 16
-}
+
+
 
 
 
@@ -289,50 +278,6 @@ namespace Search
 /// we store a score and a PV (really a refutation in the case of moves which
 /// fail low). Score is normally set at -VALUE_INFINITE for all non-pv moves.
 
-public class RootMove
-{
-
-  public Value score = -Value.VALUE_INFINITE;
-  public Value previousScore = -Value.VALUE_INFINITE;
-  public List<Move> pv = new List<Move>();
-}
-
-
-
-/// LimitsType struct stores information sent by GUI about available time to
-/// search the current move, maximum depth/time, if we are in analysis mode or
-/// if we have to ponder while it's our opponent's turn to move.
-
-public class LimitsType
-{
-
-  public LimitsType() // Init explicitly due to broken value-initialization of non POD in MSVC
-  {
-	nodes = time[(int)Color.WHITE] = time[(int)Color.BLACK] = inc[(int)Color.WHITE] = inc[(int)Color.BLACK] = npmsec = movestogo = depth = movetime = mate = infinite = ponder = 0;
-  }
-
-  public List<Move> searchmoves = new List<Move>();
-  public int[] time = new int[(int)Color.COLOR_NB];
-  public int[] inc = new int[(int)Color.COLOR_NB];
-  public int npmsec;
-  public int movestogo;
-  public int depth;
-  public int movetime;
-  public int mate;
-  public int infinite;
-  public int ponder;
-  public long nodes;
-  public std.chrono.milliseconds.rep startTime = new std.chrono.milliseconds.rep();
-}
-
-
-public class SignalsType
-{
-  public std.atomic_bool stop = new std.atomic_bool();
-  public std.atomic_bool stopOnPonderhit = new std.atomic_bool();
-}
-
-} // namespace Search
 
 
 
@@ -419,57 +364,13 @@ public class Option
   }
 
 
-  /// operator=() updates currentValue and triggers on_change() action. It's up to
-  /// the GUI to check for option's limits, but we could receive the new value from
-  /// the user by console window, so let's check the bounds anyway.
-
-//C++ TO C# CONVERTER NOTE: This 'CopyFrom' method was converted from the original C++ copy assignment operator:
-//ORIGINAL LINE: Option& operator =(const string& v)
-  public Option CopyFrom(string v)
-  {
-
-	Debug.Assert(!string.IsNullOrEmpty(type));
-
-	if ((type != "button" && string.IsNullOrEmpty(v)) || (type == "check" && v != "true" && v != "false") || (type == "spin" && (stoi(v) < min || stoi(v) > max)))
-	{
-		return this;
-	}
-
-	if (type != "button")
-	{
-		currentValue = v;
-	}
-
-	if (on_change)
-	{
-		on_change(this);
-	}
-
-	return this;
-  }
-
-  /// operator<<() inits options and assigns idx in the correct printing order
-
-//C++ TO C# CONVERTER NOTE: This was formerly a static local variable declaration (not allowed in C#):
-  private uint operator << _insert_order = 0;
-  public static void operator << (Option ImpliedObject, Option o)
-  {
-
-//C++ TO C# CONVERTER NOTE: This static local variable declaration (not allowed in C#) has been moved just prior to the method:
-
-
-	*ImpliedObject = o;
-	ImpliedObject.idx = operator << _insert_order++;
-  }*/
-//C++ TO C# CONVERTER WARNING: 'const' methods are not available in C#:
-//ORIGINAL LINE: operator int() const
+ 
   public static implicit operator int(Option ImpliedObject)
   {
 	Debug.Assert(ImpliedObject.type == "check" || ImpliedObject.type == "spin");
 	return (ImpliedObject.type == "spin" ? stoi(ImpliedObject.currentValue) : ImpliedObject.currentValue == "true");
   }
-//C++ TO C# CONVERTER WARNING: 'const' methods are not available in C#:
-//ORIGINAL LINE: operator string() const
+
   public static implicit operator string(Option ImpliedObject)
   {
 	Debug.Assert(ImpliedObject.type == "string");

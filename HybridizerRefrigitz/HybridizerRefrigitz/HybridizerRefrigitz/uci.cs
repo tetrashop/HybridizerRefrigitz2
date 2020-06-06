@@ -321,7 +321,7 @@ public class GlobalMembersUci
                 }
                 t.t.Play(AllDraw.OrderPlate, -1);
 
-                go(pos, is);
+                //go(pos, is);
             }
 
             else if (token == "position")
@@ -486,26 +486,8 @@ namespace Search
     public class RootMove
     {
 
-        public RootMove(Move m)
-        {
-            this.pv = new List<Move>(1, m);
-        }
-
-        //C++ TO C# CONVERTER WARNING: 'const' methods are not available in C#:
-        //ORIGINAL LINE: bool operator <(const RootMove& m) const
-        public static bool operator <(RootMove ImpliedObject, RootMove m) // Descending sort
-        {
-            return m.score < ImpliedObject.score;
-        }
-        //C++ TO C# CONVERTER WARNING: 'const' methods are not available in C#:
-        //ORIGINAL LINE: bool operator ==(const Move& m) const
-        public static bool operator ==(RootMove ImpliedObject, Move m)
-        {
-            return ImpliedObject.pv[0] == m;
-        }
-        //C++ TO C# CONVERTER TODO TASK: The implementation of the following method could not be found:
-        //  bool extract_ponder_from_tt(Position pos);
-
+        
+        
         public Value score = -Value.VALUE_INFINITE;
         public Value previousScore = -Value.VALUE_INFINITE;
         public List<Move> pv = new List<Move>();
@@ -525,12 +507,7 @@ namespace Search
             nodes = time[(int)Color.WHITE] = time[(int)Color.BLACK] = inc[(int)Color.WHITE] = inc[(int)Color.BLACK] = npmsec = movestogo = depth = movetime = mate = infinite = ponder = 0;
         }
 
-        //C++ TO C# CONVERTER WARNING: 'const' methods are not available in C#:
-        //ORIGINAL LINE: bool use_time_management() const
-        public bool use_time_management()
-        {
-            return !(mate | movetime | depth | nodes | infinite);
-        }
+        
 
         public List<Move> searchmoves = new List<Move>();
         public int[] time = new int[(int)Color.COLOR_NB];
