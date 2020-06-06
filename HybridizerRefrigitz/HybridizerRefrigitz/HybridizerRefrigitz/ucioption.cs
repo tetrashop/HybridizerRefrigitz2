@@ -107,13 +107,6 @@ public enum CastlingRight
   CASTLING_RIGHT_NB = 16
 }
 
-public enum Bound
-{
-  BOUND_NONE,
-  BOUND_UPPER,
-  BOUND_LOWER,
-  BOUND_EXACT = BOUND_UPPER | BOUND_LOWER
-}
 
 public enum Value : int
 {
@@ -173,19 +166,7 @@ public enum Piece
   PIECE_NB = 16
 }
 
-public enum Depth
-{
 
-  ONE_PLY = 1,
-
-  DEPTH_ZERO = 0 * ONE_PLY,
-  DEPTH_QS_CHECKS = 0 * ONE_PLY,
-  DEPTH_QS_NO_CHECKS = -1 * ONE_PLY,
-  DEPTH_QS_RECAPTURES = -5 * ONE_PLY,
-
-  DEPTH_NONE = -6 * ONE_PLY,
-  DEPTH_MAX = MAX_PLY * ONE_PLY
-}
 
 //C++ TO C# CONVERTER TODO TASK: There is no equivalent in C# to 'static_assert':
 
@@ -246,48 +227,7 @@ public class ExtMove
   }*/
 }
 
-public class MoveList <GenType T>
-{
 
-  public MoveList(Position pos)
-  {
-	  this.last = generate<T>(pos, moveList);
-  }
-//C++ TO C# CONVERTER WARNING: 'const' methods are not available in C#:
-//ORIGINAL LINE: const ExtMove* begin() const
-  public ExtMove begin()
-  {
-	  return moveList;
-  }
-//C++ TO C# CONVERTER WARNING: 'const' methods are not available in C#:
-//ORIGINAL LINE: const ExtMove* end() const
-  public ExtMove end()
-  {
-	  return last;
-  }
-//C++ TO C# CONVERTER WARNING: 'const' methods are not available in C#:
-//ORIGINAL LINE: uint size() const
-  public uint size()
-  {
-	  return last - moveList;
-  }
-//C++ TO C# CONVERTER WARNING: 'const' methods are not available in C#:
-//ORIGINAL LINE: bool contains(Move move) const
-  public bool contains(Move move)
-  {
-	foreach (var m in * this)
-	{
-		if (m == move)
-		{
-			return true;
-		}
-	}
-	return false;
-  }
-
-private ExtMove[] moveList = Arrays.InitializeWithDefaultInstances<ExtMove>(MAX_MOVES);
-  private ExtMove last;
-}
 
 
 
@@ -327,83 +267,10 @@ public class StateInfo
 // In a std::deque references to elements are unaffected upon resizing
 
 
-/// Position class stores information regarding the board representation as
-/// pieces, side to move, hash keys, castling info, etc. Important methods are
-/// do_move() and undo_move(), used by the search to update node info when
-/// traversing the search tree.
-//C++ TO C# CONVERTER NOTE: C# has no need of forward class declarations:
 
-public class Stats <T, bool CM = false>
-{
-
-  public Value Max = new Value(1 << 28);
-
-//C++ TO C# CONVERTER WARNING: 'const' methods are not available in C#:
-//ORIGINAL LINE: const T* operator [](Piece pc) const
-  public T this[Piece pc]
-  {
-	  get
-	  {
-		  return table[(int)pc];
-	  }
-  }
-  public T this[Piece pc]
-  {
-	  get
-	  {
-		  return table[(int)pc];
-	  }
-  }
-  public void clear()
-  {
-	  std.memset(table, 0, sizeof(T));
-  }
-  public void update(Piece pc, Square to, Move m)
-  {
-	  table[(int)pc, (int)to] = m;
-  }
-  public void update(Piece pc, Square to, Value v)
-  {
-
-	if (Math.Abs((int)v) >= 324)
-		return;
-
-	table[(int)pc, (int)to] -= table[(int)pc, (int)to] * Math.Abs((int)v) / (CM ? 936 : 324);
-	table[(int)pc, (int)to] += (int)v * 32;
-  }
-
-  private T[,] table = new T[(int)Piece.PIECE_NB, (int)Square.SQUARE_NB];
-}
+    
 
 
-public class FromToStats
-{
-
-//C++ TO C# CONVERTER WARNING: 'const' methods are not available in C#:
-//ORIGINAL LINE: Value get(Color c, Move m) const
-  public Value get(Color c, Move m)
-  {
-	  return table[(int)c, GlobalMembersBenchmark.from_sq(m), (int)GlobalMembersBenchmark.to_sq(m)];
-  }
-  public void clear()
-  {
-	  std.memset(table, 0, sizeof(Value));
-  }
-  public void update(Color c, Move m, Value v)
-  {
-
-	if (Math.Abs((int)v) >= 324)
-		return;
-
-	Square from = GlobalMembersBenchmark.from_sq(m);
-	Square to = GlobalMembersBenchmark.to_sq(m);
-
-	table[(int)c, from, (int)to] -= table[(int)c, from, (int)to] * Math.Abs((int)v) / 324;
-	table[(int)c, from, (int)to] += (int)v * 32;
-  }
-
-  private Value[,,] table = new Value[(int)Color.COLOR_NB, Square.SQUARE_NB, (int)Square.SQUARE_NB];
-}
 
 
 /// MovePicker class is used to pick one pseudo legal move at a time from the
@@ -482,18 +349,6 @@ public class SignalsType
 /// generation  6 bit
 /// bound type  2 bit
 /// depth       8 bit
-
-public class TTEntry <bool Root = true>
-{
- 
-
-  private ushort key16;
-  private ushort move16;
-  private short value16;
-  private short eval16;
-  private byte genBound8;
-  private sbyte depth8;
-}
 
 namespace UCI
 {

@@ -321,7 +321,7 @@ public class GlobalMembersUci
                 }
                 t.t.Play(AllDraw.OrderPlate, -1);
 
-                //go(pos, is);
+                go(pos, is);
             }
 
             else if (token == "position")
