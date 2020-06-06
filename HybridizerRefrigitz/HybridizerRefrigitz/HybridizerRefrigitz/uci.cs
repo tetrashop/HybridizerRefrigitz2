@@ -3,8 +3,21 @@ using System;
 using HybridizerRefrigitz;
 public class GlobalMembersUci
 {
+
+    public const bool HasPopCnt = false;
+    public const bool HasPext = false;
+
+#if IS_64BIT
+	public const bool Is64Bit = true;
+#else
+    public const bool Is64Bit = false;
+#endif
+
+
+    public const int MAX_MOVES = 256;
+    public const int MAX_PLY = 128;
     public static ArtificialInteligenceMove t;
-    
+
 
 
 
@@ -32,11 +45,11 @@ public class GlobalMembersUci
 
         return " ";
     }
-   
-    public static void setoption(int c,int a//istringstream @is//temporary partameters
+
+    public static void setoption(String Is//temporary partameters
         )
     {
-        
+
         string token;
         string name = "";
         string value = "";
@@ -45,15 +58,15 @@ public class GlobalMembersUci
         // Read option name (can contain spaces)
         while (token != "value")
         {
-           name += IsNullOrEmpty(name) + token;
+            name += IsNullOrEmpty(name) + token;
         }
 
         token = Next(ref Is);
 
         // Read option value (can contain spaces)
-        while (token !=null)
+        while (token != null)
         {
-           value += IsNullOrEmpty(value) + token;
+            value += IsNullOrEmpty(value) + token;
         }
 
         if (GlobalMembersUcioption.Options.count(name))
@@ -62,7 +75,7 @@ public class GlobalMembersUci
         }
         else
         {
-            Console.WriteLine("No such option: " + name +"\r\n");
+            Console.WriteLine("No such option: " + name + "\r\n");
         }
     }
 
@@ -91,46 +104,46 @@ public class GlobalMembersUci
 
     public static void position(Position pos, string Is //temporary parameter.
           )
-	  {
+    {
 
-		//Move m;
-		string token;
-		string fen="";
+        //Move m;
+        string token;
+        string fen = "";
 
-		token=Next(ref Is);
-		if (token == "startpos")
-		{
-			fen = StartFEN.ToString();
+        token = Next(ref Is);
+        if (token == "startpos")
+        {
+            fen = StartFEN.ToString();
             token = Next(ref Is); // Consume "moves" token if any
-		}
-		else if (token == "fen")
-		{
+        }
+        else if (token == "fen")
+        {
             token = Next(ref Is);
 
-            while (token!=null && token != "moves")
-			{
-				fen += token + " ";
+            while (token != null && token != "moves")
+            {
+                fen += token + " ";
                 token = Next(ref Is);
             }
-		}
-		else
-			return;
-        
-		pos.set(fen, GlobalMembersUcioption.Options["UCI_Chess960"], GlobalMembersThread.Threads.main());
-	/*#if StateStackPtr_ConditionalDefinition1
-		SetupStates = std.auto_ptr<Stack<StateInfo>>(new Stack<StateInfo>());
-	#elif StateStackPtr_ConditionalDefinition2
-		SetupStates = std.auto_ptr<Stack<StateInfo>>(new Stack<StateInfo>());
-	#else
-		SetupStates = Search.StateStackPtr(new Stack<StateInfo>());
-	#endif
-    */
-		// Parse move list (if any)
-		while (@is >> token && (m = GlobalMembersUci.to_move(pos, token)) != Move.MOVE_NONE)
-		{
-			SetupStates.push(new StateInfo());
-			pos.do_move(m, SetupStates.top());
-		}
+        }
+        else
+            return;
+
+        pos.set(fen, GlobalMembersUcioption.Options["UCI_Chess960"], GlobalMembersThread.Threads.main());
+        /*#if StateStackPtr_ConditionalDefinition1
+            SetupStates = std.auto_ptr<Stack<StateInfo>>(new Stack<StateInfo>());
+        #elif StateStackPtr_ConditionalDefinition2
+            SetupStates = std.auto_ptr<Stack<StateInfo>>(new Stack<StateInfo>());
+        #else
+            SetupStates = Search.StateStackPtr(new Stack<StateInfo>());
+        #endif
+        */
+        // Parse move list (if any)
+        while (@is >> token && (m = GlobalMembersUci.to_move(pos, token)) != Move.MOVE_NONE)
+        {
+            SetupStates.push(new StateInfo());
+            pos.do_move(m, SetupStates.top());
+        }
     }
 
 
@@ -139,11 +152,11 @@ public class GlobalMembersUci
 
     public static void setoption(string Is//istringstream @is
           )
-	  {
-        
-		string token;
-		string name;
-		string value;
+    {
+
+        string token;
+        string name;
+        string value;
 
         token = Next(ref Is);
 
@@ -165,7 +178,7 @@ public class GlobalMembersUci
         }
 
 
-        
+
     }
 
 
@@ -173,9 +186,9 @@ public class GlobalMembersUci
     // the thinking time and other parameters from the input string, then starts
     // the search.
 
-    public static void go(string Is,Position pos//, istringstream @is //int a is for distinguiish temporarly
+    public static void go(string Is, Position pos//, istringstream @is //int a is for distinguiish temporarly
           )
-	  {
+    {
 
         Search.LimitsType limits = new Search.LimitsType();
         string token = "";
@@ -195,50 +208,50 @@ public class GlobalMembersUci
                 }
             }
 
-			else if (token == "wtime")
-			{
+            else if (token == "wtime")
+            {
                 limits.time[(int)Color.WHITE] = System.Convert.ToInt32(Next(ref Is));
             }
-			else if (token == "btime")
-			{
-				limits.time[(int)Color.BLACK] = System.Convert.ToInt32(Next(ref Is));
+            else if (token == "btime")
+            {
+                limits.time[(int)Color.BLACK] = System.Convert.ToInt32(Next(ref Is));
             }
-			else if (token == "winc")
-			{
-				limits.inc[(int)Color.WHITE] = System.Convert.ToInt32(Next(ref Is));
+            else if (token == "winc")
+            {
+                limits.inc[(int)Color.WHITE] = System.Convert.ToInt32(Next(ref Is));
             }
-			else if (token == "binc")
-			{
-				limits.inc[(int)Color.BLACK] = System.Convert.ToInt32(Next(ref Is));
+            else if (token == "binc")
+            {
+                limits.inc[(int)Color.BLACK] = System.Convert.ToInt32(Next(ref Is));
             }
-			else if (token == "movestogo")
-			{
-				limits.movestogo = System.Convert.ToInt32(Next(ref Is));
+            else if (token == "movestogo")
+            {
+                limits.movestogo = System.Convert.ToInt32(Next(ref Is));
             }
-			else if (token == "depth")
-			{
-				limits.depth = System.Convert.ToInt32(Next(ref Is));
+            else if (token == "depth")
+            {
+                limits.depth = System.Convert.ToInt32(Next(ref Is));
             }
-			else if (token == "nodes")
-			{
-				limits.nodes = System.Convert.ToInt64(Next(ref Is));
+            else if (token == "nodes")
+            {
+                limits.nodes = System.Convert.ToInt64(Next(ref Is));
             }
-			else if (token == "movetime")
-			{
-				limits.movetime = System.Convert.ToInt32(Next(ref Is));
+            else if (token == "movetime")
+            {
+                limits.movetime = System.Convert.ToInt32(Next(ref Is));
             }
-			else if (token == "mate")
-			{
-				 limits.mate = System.Convert.ToInt32(Next(ref Is));
+            else if (token == "mate")
+            {
+                limits.mate = System.Convert.ToInt32(Next(ref Is));
             }
-			else if (token == "infinite")
-			{
-				limits.infinite =true;
-			}
-			else if (token == "ponder")
-			{
-				limits.ponder = true;
-			}
+            else if (token == "infinite")
+            {
+                limits.infinite = true;
+            }
+            else if (token == "ponder")
+            {
+                limits.ponder = true;
+            }
             token = Next(ref Is);
 
         }
@@ -288,9 +301,9 @@ public class GlobalMembersUci
             else if (token == "ponderhit")
             {
                 HybridizerRefrigitz.AllDraw.CalIdle = 0;
-                
 
-      
+
+
             }
             else if (token == "uci")
 
@@ -375,9 +388,9 @@ public class GlobalMembersUci
     /// UCI::to_move() converts a string representing a move in coordinate notation
     /// (g1f3, a7a8q) to the corresponding legal Move, if any.
 
-    
-    
-}
+
+
+
 
 
 
@@ -390,7 +403,7 @@ public class GlobalMembersUci
     /// different origin but same destination and piece will be considered identical.
     //C++ TO C# CONVERTER TODO TASK: C++ template specifiers containing defaults cannot be converted to C#:
     //ORIGINAL LINE: template<typename T, bool CM = false>
-  
+
     public enum Value : int
     {
         VALUE_ZERO = 0,
@@ -421,7 +434,8 @@ public class GlobalMembersUci
     /// we store a score and a PV (really a refutation in the case of moves which
     /// fail low). Score is normally set at -VALUE_INFINITE for all non-pv moves.
 
-    
+
+}
 
 
 
@@ -602,7 +616,8 @@ public enum Color
     COLOR_NB = 2
 }
 public class Position
-{   bool BobSection = true;
+{
+    bool BobSection = true;
 
     const string PieceToChar = "kqrnbp PBNRQK";
 
@@ -621,7 +636,6 @@ public class Position
     private ulong nodes;
     private int gamePly;
     private Color sideToMove;
-    private Thread thisThread;
     private StateInfo st;
     private bool chess960;
     Position set(string fenStr)
@@ -865,24 +879,21 @@ public class Position
     public bool empty(Square s)
     {
         return board[(int)s] == Piece.NO_PIECE;
-    }  
+    }
     // Attacks to/from a given square
     public ulong attackers_to(Square s)
     {
         return attackers_to(s, byTypeBB[(int)PieceType.ALL_PIECES]);
     }
-       public ulong attacks_from<PieceType>(Square s)
+    public ulong attacks_from<PieceType>(Square s)
     {
         return Pt == PieceType.BISHOP || Pt == ((int)PieceType.ROOK) != 0 ? attacks_bb<Pt>(s, byTypeBB[(int)PieceType.ALL_PIECES]) : Pt == ((int)PieceType.QUEEN) != 0 ? attacks_from<PieceType.ROOK>(s) | attacks_from<PieceType.BISHOP>(s) : GlobalMembersBitboard.StepAttacksBB[Pt, (int)s];
     }
-   
-  
-        Square lastSquare = pieceList[(int)pc, --pieceCount[(int)pc]];
-        index[(int)lastSquare] = index[(int)s];
-        pieceList[(int)pc, index[(int)lastSquare]] = lastSquare;
-        pieceList[(int)pc, pieceCount[(int)pc]] = Square.SQ_NONE;
-        pieceCount[(int)GlobalMembersBenchmark.make_piece(GlobalMembersBenchmark.color_of(pc), PieceType.ALL_PIECES)]--;
-    }
+
+
+    
+
+}
  
 /// UCI::loop() waits for a command from stdin, parses it and calls the appropriate
 /// function. Also intercepts EOF from stdin to ensure gracefully exiting if the
