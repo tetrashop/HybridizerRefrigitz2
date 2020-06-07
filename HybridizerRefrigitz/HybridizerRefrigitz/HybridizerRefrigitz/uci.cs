@@ -30,11 +30,53 @@ public class GlobalMembersUci
 
 
 
+ /*   public class MoveList<GenType T>
+{
 
-    // setoption() is called when engine receives the "setoption" UCI command. The
-    // function updates the UCI option ("name") to the given value ("value").
+  public MoveList(Position pos)
+    {
+        this.last = generate<T>(pos, moveList);
+    }
+    //C++ TO C# CONVERTER WARNING: 'const' methods are not available in C#:
+    //ORIGINAL LINE: const ExtMove* begin() const
+    public ExtMove begin()
+    {
+        return moveList;
+    }
+    //C++ TO C# CONVERTER WARNING: 'const' methods are not available in C#:
+    //ORIGINAL LINE: const ExtMove* end() const
+    public ExtMove end()
+    {
+        return last;
+    }
+    //C++ TO C# CONVERTER WARNING: 'const' methods are not available in C#:
+    //ORIGINAL LINE: uint size() const
+    public uint size()
+    {
+        return last - moveList;
+    }
+    //C++ TO C# CONVERTER WARNING: 'const' methods are not available in C#:
+    //ORIGINAL LINE: bool contains(Move move) const
+    public bool contains(Move move)
+    {
+        foreach (var m in *this)
+        {
+            if (m == move)
+            {
+                return true;
+            }
+        }
+        return false;
+    }
 
-    static string IsNullOrEmpty(string name)
+    private ExtMove[] moveList = Arrays.InitializeWithDefaultInstances<ExtMove>(MAX_MOVES);
+    private ExtMove last;
+}
+*/
+// setoption() is called when engine receives the "setoption" UCI command. The
+// function updates the UCI option ("name") to the given value ("value").
+
+static string IsNullOrEmpty(string name)
 
     {
         if (name != null)
@@ -139,18 +181,43 @@ public class GlobalMembersUci
         #endif
         */
         // Parse move list (if any)
-        while (@is >> token && (m = GlobalMembersUci.to_move(pos, token)) != Move.MOVE_NONE)
+        token = Next(ref Is);
+
+        while (token!=null && (m = GlobalMembersUci.to_move(pos, token)) != Move.MOVE_NONE)
         {
             SetupStates.push(new StateInfo());
             pos.do_move(m, SetupStates.top());
         }
     }
+    /// UCI::to_move() converts a string representing a move in coordinate notation
+    /// (g1f3, a7a8q) to the corresponding legal Move, if any.
+
+    public static Move to_move(Position pos, string str)
+    {
+
+        if (str.Length == 5) // Junior could send promotion piece in uppercase
+        {
+            str = StringFunctions.ChangeCharacter(str, 4, (sbyte)char.ToLower(str[4]));
+        }
+
+        foreach (var m in new MoveList<GenType.LEGAL>(pos))
+        {
+            if (str == GlobalMembersUci.move(m, pos.is_chess960()))
+            {
+                return m;
+            }
+        }
+
+        return Move.MOVE_NONE;
+    }
 
 
-    // setoption() is called when engine receives the "setoption" UCI command. The
-    // function updates the UCI option ("name") to the given value ("value").
 
-    public static void setoption(string Is//istringstream @is
+
+// setoption() is called when engine receives the "setoption" UCI command. The
+// function updates the UCI option ("name") to the given value ("value").
+
+public static void setoption(string Is//istringstream @is
           )
     {
 
