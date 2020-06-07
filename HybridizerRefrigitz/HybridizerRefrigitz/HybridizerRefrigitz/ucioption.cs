@@ -35,10 +35,7 @@ public static Move make<MoveType T>(Square from, Square to)
 	  return Move(T + ((pt - PieceType.KNIGHT) << 12) + (from << 6) + to);
 	}
 
-    	public static bool is_ok(Move m)
-        {
-          return GlobalMembersBenchmark.from_sq(m) != GlobalMembersBenchmark.to_sq(m); 
-        }
+    	
 
 
      
@@ -77,7 +74,6 @@ public static Move make<MoveType T>(Square from, Square to)
         private ulong nodes;
         private int gamePly;
         private Color sideToMove;
-        private Thread thisThread;
         private StateInfo st;
         private bool chess960;
     }
@@ -98,17 +94,6 @@ public static Move make<MoveType T>(Square from, Square to)
 /// Special cases are MOVE_NONE and MOVE_NULL. We can sneak these in because in
 /// any normal move destination square is always different from origin square
 /// while MOVE_NONE and MOVE_NULL have the same origin and destination square.
-
-
-
-public enum MoveType
-{
-  NORMAL,
-  PROMOTION = 1 << 14,
-  ENPASSANT = 2 << 14,
-  CASTLING = 3 << 14
-}
-
 
 
 
@@ -173,18 +158,7 @@ public enum File : int
   FILE_NB
 }
 
-public enum Rank : int
-{
-  RANK_1,
-  RANK_2,
-  RANK_3,
-  RANK_4,
-  RANK_5,
-  RANK_6,
-  RANK_7,
-  RANK_8,
-  RANK_NB
-}
+
 
 
 /// Score enum stores a middlegame and an endgame value in a single integer
@@ -270,16 +244,14 @@ public class StateInfo
 /// to get a cut-off first.
 
 
-namespace Search
-{
+
 
 
 /// RootMove struct is used for moves at the root of the tree. For each root move
 /// we store a score and a PV (really a refutation in the case of moves which
 /// fail low). Score is normally set at -VALUE_INFINITE for all non-pv moves.
 
-
-
+    
 
  
 
