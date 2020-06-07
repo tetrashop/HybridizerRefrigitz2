@@ -1,2 +1,2 @@
 # HybridizerRefrigitz2
-GPU
+#GPU And CPU
