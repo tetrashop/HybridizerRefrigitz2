@@ -83,7 +83,6 @@
     <Compile Include="ThinkingChess.cs" />
     <Compile Include="TimeElapced.cs" />
     <Compile Include="uci.cs" />
-    <Compile Include="ucioption.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
