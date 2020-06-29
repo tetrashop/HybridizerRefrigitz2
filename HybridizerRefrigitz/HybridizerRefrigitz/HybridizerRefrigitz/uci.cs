@@ -3,6 +3,8 @@ using System;
 using HybridizerRefrigitz;
 public class GlobalMembersUci
 {
+    const string PieceToChar = "kqrnbp PBNRQK";
+
 
     public const bool HasPopCnt = false;
     public const bool HasPext = false;
@@ -68,6 +70,159 @@ static string IsNullOrEmpty(string name)
         return m;
 
     }
+    String Alphabet()
+    {
+        Object O = new Object();
+        lock (O)
+        {
+            String A = "";
+            if (GlobalMembersUci.t.t.R.CromosomRow == 0)
+                A = "a";
+            else
+                if (GlobalMembersUci.t.t.R.CromosomRow == 1)
+                A = "b";
+            else
+                    if (GlobalMembersUci.t.t.R.CromosomRow == 2)
+                A = "c";
+            else
+                        if (GlobalMembersUci.t.t.R.CromosomRow == 3)
+                A = "d";
+            else
+                            if (GlobalMembersUci.t.t.R.CromosomRow == 4)
+                A = "e";
+            else
+                                if (GlobalMembersUci.t.t.R.CromosomRow == 5)
+                A = "f";
+            else
+                                    if (GlobalMembersUci.t.t.R.CromosomRow == 6)
+                A = "g";
+            else
+                                        if (GlobalMembersUci.t.t.R.CromosomRow == 7)
+                A = "h";
+            return A;
+
+
+        }
+    }
+    int Piece_on(int Row, int Column)
+    {
+        Object O = new Object();
+        lock (O)
+        {
+            return 6 + HybridizerRefrigitz.HybridizerRefrigitzForm.Table[Row, Column];
+        }
+    }
+    bool Empty(int Row, int Column)
+    {
+        Object O = new Object();
+        lock (O)
+        {
+            bool S = false;
+            if (HybridizerRefrigitz.HybridizerRefrigitzForm.Table[Row, Column] == 0)
+                S = true;
+            else
+                S = false;
+            return S;
+        }
+    }
+
+    String Fen()
+    {
+        Object O = new Object();
+        lock (O)
+        {
+            bool StartPos = false;
+            if (GlobalMembersUci.t.t.R.CromosomRow == -1 || GlobalMembersUci.t.t.R.CromosomColumn == -1)
+                StartPos = true;
+
+            int EmptyCnt;
+            String ss = "";
+
+            for (int r = 0; r <= 7; ++r)
+            {
+                for (int f = 0; f <= 7; ++f)
+                {
+                    for (EmptyCnt = 0; f <= 7 && Empty(f, r); ++f)
+                        ++EmptyCnt;
+
+                    if (EmptyCnt != 0)
+                        ss += EmptyCnt;
+
+                    if (f <= 7)
+                        ss += PieceToChar[Piece_on(f, r)];
+                }
+
+                if (r != 7)
+                    ss += '/';
+            }
+            if (!(GlobalMembersUci.t.t.order == 1))
+                ss += " w ";
+            else
+                ss += " b ";
+            if (HybridizerRefrigitz.ChessRules.SmallKingCastleGray)
+                ss += "K";
+
+            if (HybridizerRefrigitz.ChessRules.BigKingCastleGray)
+                ss += "Q";
+
+            if (HybridizerRefrigitz.ChessRules.SmallKingCastleBrown)
+                ss += "k";
+
+            if (HybridizerRefrigitz.ChessRules.BigKingCastleBrown)
+                ss += "q";
+
+            if (!HybridizerRefrigitz.ChessRules.CastleKingAllowedGray && !HybridizerRefrigitz.ChessRules.CastleKingAllowedBrown)
+                ss += '-';
+            String S = " - ";
+
+            if (!StartPos)
+            {
+                if (!(GlobalMembersUci.t.t.order==1))
+                {
+                    if (System.Math.Abs(HybridizerRefrigitz.HybridizerRefrigitzForm.Table[(int)GlobalMembersUci.t.t.R.CromosomRow, (int)GlobalMembersUci.t.t.R.CromosomColumn]) == 1)
+                    {
+                        S = " ";
+                        S += Alphabet() + ((int)(7 - GlobalMembersUci.t.t.R.CromosomColumn)).ToString();
+                        S += " ";
+                    }
+                }
+                else
+                {
+
+                    if (System.Math.Abs(HybridizerRefrigitz.HybridizerRefrigitzForm.Table[(int)GlobalMembersUci.t.t.R.CromosomRow, (int)GlobalMembersUci.t.t.R.CromosomColumn]) == 1)
+                    {
+                        S = " ";
+             
+                        S += Alphabet() + ((int)(7 - GlobalMembersUci.t.t.R.CromosomColumn)).ToString();
+                        S += " ";
+                    }
+                }
+            }
+            else
+            {
+                S = " ";
+                S += "-";
+                S += " ";
+            }
+            int StockMovebase =HybridizerRefrigitz.HybridizerRefrigitzForm.MovmentsNumber / 2;
+            int StockMove = HybridizerRefrigitz.HybridizerRefrigitzForm.MovmentsNumber % 2;
+            S += (StockMovebase).ToString() + " " + ((int)StockMove).ToString() + "\n";
+
+            ss += S;
+
+            //if (MovmentsNumber % 2 == 0 && MovmentsNumber != 0)
+            //   StockMovebase++;
+            //else
+            //    StockMove++;
+
+            //ss = "position fen " + ss;
+
+            return ss;
+              //return fenS.ToString();
+
+
+        }
+    }
 
     public static void position(//Position pos, 
         string Is //temporary parameter.
@@ -93,6 +248,7 @@ static string IsNullOrEmpty(string name)
                 fen += token + " ";
                 token = Next(ref Is);
             }
+
         }
         else
             return;

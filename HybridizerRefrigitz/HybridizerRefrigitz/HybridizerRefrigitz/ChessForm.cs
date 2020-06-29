@@ -39,12 +39,12 @@ namespace HybridizerRefrigitz
 		public HybridizerRefrigitz.HybridizerRefrigitzGeneticAlgorithm R = new HybridizerRefrigitz.HybridizerRefrigitzGeneticAlgorithm(false, false,UsePenaltyRegardMechnisam, false, false, false, false, true);
 		bool Person = true;
 		public HybridizerRefrigitz.AllDraw Draw = new AllDraw(-1, false, false, UsePenaltyRegardMechnisam, false, false, false, AStarGreedyHeuristic, true);
-		public int[,] Table = null;
+		public static int[,] Table = null;
 		bool FOUND = false;
 
 		#region These are the global variables and objects for HybridizerRefrigitzForm class
 			private int cl;
-		private int order;
+		public int order;
 		private int x1;
 		private int y1;
 		public Board brd=new Board();
