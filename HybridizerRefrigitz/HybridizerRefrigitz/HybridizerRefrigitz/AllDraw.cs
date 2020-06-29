@@ -8614,6 +8614,7 @@ namespace HybridizerRefrigitz
                 }
             }
         }
+       
         public void FoundOfLeafDepenOfKindFullGame(int[,] Table, int Order, int iAStarGreedy, int ii, int jj, int ik, int jjj, bool FOUND, int LeafAStarGreedy)
         {
             LeafSemaphoreIndex = true;
