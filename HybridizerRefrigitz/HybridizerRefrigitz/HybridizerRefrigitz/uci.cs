@@ -324,7 +324,9 @@ static string IsNullOrEmpty(string name)
             }
             else if (token == "depth")
             {
-             //   limits.depth = System.Convert.ToInt32(Next(ref Is));
+                AllDraw.MaxAStarGreedy = System.Convert.ToInt32(Next(ref Is));
+
+                //   limits.depth = System.Convert.ToInt32(Next(ref Is));
             }
             else if (token == "nodes")
             {
@@ -332,10 +334,12 @@ static string IsNullOrEmpty(string name)
             }
             else if (token == "movetime")
             {
-              //  limits.movetime = System.Convert.ToInt32(Next(ref Is));
+                AllDraw.TimeMax = System.Convert.ToInt32(Next(ref Is));
+                //  limits.movetime = System.Convert.ToInt32(Next(ref Is));
             }
             else if (token == "mate")
             {
+                AllDraw.EndOfGame = true;
              //   limits.mate = System.Convert.ToInt32(Next(ref Is));
             }
             else if (token == "infinite")
