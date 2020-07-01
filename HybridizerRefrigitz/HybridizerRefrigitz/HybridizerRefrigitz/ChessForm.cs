@@ -192,7 +192,7 @@ namespace HybridizerRefrigitz
                 {
                     //MessageBox.Show("Wait...");
                     var parallelOptions = new ParallelOptions();
-                    parallelOptions.MaxDegreeOfParallelism = AllDraw.PlatformHelperProcessorCount;
+                    parallelOptions.MaxDegreeOfParallelism = -1;
                     HybridizerRefrigitz.AllDraw.OrderPlateDraw = -1;
                     HybridizerRefrigitz.AllDraw.TableListAction.Add(CloneATable(brd.GetTable()));
                     Table = CloneATable(brd.GetTable());
