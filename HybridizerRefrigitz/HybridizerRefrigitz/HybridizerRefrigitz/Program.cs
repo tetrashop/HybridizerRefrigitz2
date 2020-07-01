@@ -14,7 +14,7 @@ namespace HybridizerRefrigitz
     static class Program
     {
        
-
+        [Kernel]
         //Main Programm.
         //[STAThread]
         static void Main()
@@ -25,6 +25,7 @@ namespace HybridizerRefrigitz
              runner.Wrap(GlobalMembersUci.t);
              */
             GlobalMembersUci.t = new ArtificialInteligenceMove(new HybridizerRefrigitzForm());
+            GlobalMembersUci.t.t.Form1_Load();
             Console.ReadLine();
         }
     }
