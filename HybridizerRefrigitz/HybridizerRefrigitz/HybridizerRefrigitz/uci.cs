@@ -3,6 +3,7 @@ using System;
 using HybridizerRefrigitz;
 public class GlobalMembersUci
 {
+    int i = 0;
     const string PieceToChar = "kqrnbp PBNRQK";
 
 
@@ -52,13 +53,15 @@ static string IsNullOrEmpty(string name)
     // The function sets up the position described in the given FEN string ("fen")
     // or the starting position ("startpos") and then makes the moves given in the
     // following move list ("moves").
-    static string Next(ref string Is)
+    static string Next(ref string[] Is)
     {
         string m = "";
         try
         {
-            m = Is.Substring(0, Is.IndexOf(" "));
-            Is = Is.Substring(Is.IndexOf(" ") + 1);
+            m = Is[0];
+            for (int b = 0; b < Is.Length; b++)
+                Is[b] = Is[b + 1];
+            Is[Is.Length - 1] = "\0";
         }
         catch (Exception t)
         {
@@ -225,7 +228,7 @@ static string IsNullOrEmpty(string name)
     }
 
     public static void position(//Position pos, 
-        string Is //temporary parameter.
+        string[] Is //temporary parameter.
           )
     {
 
@@ -273,7 +276,7 @@ static string IsNullOrEmpty(string name)
     }
 
     
-    public static void go(string Is//, Position pos//, istringstream @is //int a is for distinguiish temporarly
+    public static void go(string[] Is//, Position pos//, istringstream @is //int a is for distinguiish temporarly
           )
     {
 
@@ -414,14 +417,14 @@ static string IsNullOrEmpty(string name)
 
             else if (token == "go")
             {
-                if (HybridizerRefrigitz.AllDraw.CalIdle == 0)
+               if (HybridizerRefrigitz.AllDraw.CalIdle == 0)
                 {
                     HybridizerRefrigitz.AllDraw.CalIdle = 2;
                     while (HybridizerRefrigitz.AllDraw.CalIdle != 1) { }
                 }
                 t.t.Play(AllDraw.OrderPlate, -1);
-
-                //go(pos, is);
+                //undeterministic blok line location!
+                go(argv);
             }
 
             else if (token == "position")
