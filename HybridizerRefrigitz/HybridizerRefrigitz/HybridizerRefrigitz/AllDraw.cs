@@ -24424,26 +24424,7 @@ if (Kind == 2 && ElephantOnTable[i].ElefantThinking[0].AStarGreedy != null && El
                         Less = Int32.MinValue;
                     }
                 }
-                //THIS.Invoke((MethodInvoker)delegate()
-                {
-                    Object OOO = new Object();
-                    lock (OOO)
-                    {
-                        if (!SetDept)
-                            MaxAStarGreedy = System.Convert.ToInt32(AllDraw.MaxDuringLevelThinkingCreation);
-                        AllDraw.AStarGreedyiLevelMax = MaxAStarGreedy;
-                        AStarGreedyiLevelMax = System.Convert.ToInt32(AllDraw.MaxDuringLevelThinkingCreation);
-                        AllDraw.MaxAStarGreedyHeuristicProgress = 6;
-                        for (var i = 0; i <= MaxAStarGreedy; i++)
-                            AllDraw.MaxAStarGreedyHeuristicProgress += AllDraw.MaxAStarGreedyHeuristicProgress * 6;
-                        increasedProgress = (int)((int)999999999 / (int)(AllDraw.MaxAStarGreedyHeuristicProgress));
-                        Object Omm1 = new Object();
-                        lock (Omm1)
-                        {
-                            AStarGreedytMaxCount = (int)MaxAStarGreedy;
-                        }
-                    }
-                }
+                
                 ChessRules.CurrentOrder = Current;
                 Order = DummyOrder;
                 int iiii = ii, jjjj = jj, Ord = Order;
@@ -24454,9 +24435,7 @@ if (Kind == 2 && ElephantOnTable[i].ElefantThinking[0].AStarGreedy != null && El
                     TimeInitiation= DateTime.Now.Hour * 24 * 60 * 60 + DateTime.Now.Minute * 60 + DateTime.Now.Second;
 
                     //if (MaxAStarGreedy == 0)
-                    MaxAStarGreedy = PlatformHelper.ProcessorCount;
-                    MaxAStarGreedy1 = MaxAStarGreedy;
-                    int[,] Tabl = CloneATable(Table);
+                     int[,] Tabl = CloneATable(Table);
                     ConsoleColor aaa = a;
                     AllDraw THISA = AStarGreedyString;
                     var H = Task.Factory.StartNew(() => InitiateAStarGreedyt(MaxAStarGreedy1, iiii, jjjj, aaa, CloneATable(Tabl), Ord, false, FOUND, LeafAStarGreedy));

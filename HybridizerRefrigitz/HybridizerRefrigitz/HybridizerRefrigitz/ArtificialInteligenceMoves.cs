@@ -63,7 +63,6 @@ public class ArtificialInteligenceMove
 							HybridizerRefrigitz.AllDraw.Blitz=false;
 															Idle=true;
                             HybridizerRefrigitz.AllDraw.TimeInitiation = (DateTime.Now.Hour * 60 * 60 * 1000 + DateTime.Now.Minute * 60 * 1000 + DateTime.Now.Second * 1000);
-                            HybridizerRefrigitz.AllDraw.MaxAStarGreedy = HybridizerRefrigitz.AllDraw.PlatformHelperProcessorCount * LevelMul;
                             var arrayA =Task.Factory.StartNew(() =>	t.Draw.InitiateAStarGreedyt(HybridizerRefrigitz.AllDraw.MaxAStarGreedy,1, 4,OrderConsoleColor(t.Draw.OrderP), CloneATable(t.brd.GetTable()), t.Draw.OrderP, false, false, 0));
 							//var arrayA =Task.Factory.StartNew(() =>	t.Play(-1,-1));
                             arrayA.Wait();

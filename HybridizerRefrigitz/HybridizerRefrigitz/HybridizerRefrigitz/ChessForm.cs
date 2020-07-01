@@ -223,8 +223,7 @@ namespace HybridizerRefrigitz
                                 aa = ConsoleColor.Black;
                             bool B = AllDraw.Blitz;
                             AllDraw.Blitz = false;
-                            HybridizerRefrigitz.AllDraw.MaxAStarGreedy = AllDraw.PlatformHelperProcessorCount;
-                            
+                           
                             if (Draw.IsAtLeastAllObjectIsNull())
                             {
                                 Draw.TableList.Clear();
@@ -1014,7 +1013,7 @@ namespace HybridizerRefrigitz
                                             aa = ConsoleColor.Black;
                                         bool B = AllDraw.Blitz;
                                         AllDraw.Blitz = false;
-                                        HybridizerRefrigitz.AllDraw.MaxAStarGreedy = AllDraw.PlatformHelperProcessorCount;
+                                        
 
                                         AllDraw thiB = Draw.AStarGreedyString;
                                         if (Draw.IsAtLeastAllObjectIsNull())
@@ -1091,7 +1090,7 @@ namespace HybridizerRefrigitz
                                     aa = ConsoleColor.Black;
                                 bool B = AllDraw.Blitz;
                                 AllDraw.Blitz = false;
-                                HybridizerRefrigitz.AllDraw.MaxAStarGreedy = AllDraw.PlatformHelperProcessorCount;
+                                
 
                                 AllDraw thiB = Draw.AStarGreedyString;
                                 if (Draw.IsAtLeastAllObjectIsNull())
@@ -1507,7 +1506,7 @@ namespace HybridizerRefrigitz
                             aa = ConsoleColor.Black;
                         bool B = AllDraw.Blitz;
                         AllDraw.Blitz = false;
-                        HybridizerRefrigitz.AllDraw.MaxAStarGreedy = AllDraw.PlatformHelperProcessorCount ;
+                        
 
                         FOUND = false;
 
