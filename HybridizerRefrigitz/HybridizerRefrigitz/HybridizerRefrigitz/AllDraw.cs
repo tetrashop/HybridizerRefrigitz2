@@ -54,6 +54,7 @@ namespace HybridizerRefrigitz
     [Serializable]
     public class AllDraw//: IDisposable
     { public static int TimeInitiation = 100;
+        public static int TimeMax = 100;
         public static bool IdleInWork = false;
         public static int PlatformHelperProcessorCount = PlatformHelper.ProcessorCount;
         public static int CalIdle = 0;
@@ -16511,6 +16512,16 @@ namespace HybridizerRefrigitz
             bool Is = false;
             try
             {
+                int now = DateTime.Now.Hour * 24 * 60 * 60 + DateTime.Now.Minute * 60 + DateTime.Now.Second;
+                  if(
+                    (now-TimeInitiation)>TimeMax)
+                    return true;
+                    
+
+               
+                    
+
+             
                 if (Kind == 1)
                 {
                     Is = Is || InitiateAStarGreedytSoldier(i, Kind, Order);
@@ -17746,8 +17757,8 @@ namespace HybridizerRefrigitz
             }
 
         }
-        //initiation setdrawfounding tow stage computational method 
-        public bool InitiateAStarGreedytCreationThinking(int iAStarGreedy, int ii, int jj, ConsoleColor a, int[,] Tab, int Order, bool TB, bool FOUND, int LeafAStarGreedy//, ref Refrigtz.Timer timer, ref Refrigtz.Timer Timerint, ref int Less
+       //initiation setdrawfounding tow stage computational method 
+        public  bool InitiateAStarGreedytCreationThinking(int iAStarGreedy, int ii, int jj, ConsoleColor a, int[,] Tab, int Order, bool TB, bool FOUND, int LeafAStarGreedy//, ref Refrigtz.Timer timer, ref Refrigtz.Timer Timerint, ref int Less
      )
         {
 
@@ -17800,7 +17811,7 @@ namespace HybridizerRefrigitz
 
             return true;
         }
-        public bool InitiateAStarGreedytCreationThinkingGray(int DummyOrder, int DummyCurrentOrder, int iAStarGreedy, int ii, int jj, int i, int j, ConsoleColor a, int[,] Table, int Order, bool TB, bool FOUND, int LeafAStarGreedy//, ref Refrigtz.Timer timer, ref Refrigtz.Timer Timerint, ref int Less
+         public  bool InitiateAStarGreedytCreationThinkingGray(int DummyOrder, int DummyCurrentOrder, int iAStarGreedy, int ii, int jj, int i, int j, ConsoleColor a, int[,] Table, int Order, bool TB, bool FOUND, int LeafAStarGreedy//, ref Refrigtz.Timer timer, ref Refrigtz.Timer Timerint, ref int Less
 )
         {
             Object o = new Object();
@@ -24440,6 +24451,8 @@ if (Kind == 2 && ElephantOnTable[i].ElefantThinking[0].AStarGreedy != null && El
                 Object OOOO = new Object();
                 lock (OOOO)
                 {
+                    TimeInitiation= DateTime.Now.Hour * 24 * 60 * 60 + DateTime.Now.Minute * 60 + DateTime.Now.Second;
+
                     //if (MaxAStarGreedy == 0)
                     MaxAStarGreedy = PlatformHelper.ProcessorCount;
                     MaxAStarGreedy1 = MaxAStarGreedy;

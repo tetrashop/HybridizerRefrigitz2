@@ -300,19 +300,23 @@ static string IsNullOrEmpty(string name)
 
             else if (token == "wtime")
             {
-               // limits.time[(int)Color.WHITE] = System.Convert.ToInt32(Next(ref Is));
+            AllDraw.TimeMax = System.Convert.ToInt32(Next(ref Is));
+                // limits.time[(int)Color.WHITE] = System.Convert.ToInt32(Next(ref Is));
             }
             else if (token == "btime")
             {
-              //  limits.time[(int)Color.BLACK] = System.Convert.ToInt32(Next(ref Is));
+                AllDraw.TimeMax = System.Convert.ToInt32(Next(ref Is));
+                //  limits.time[(int)Color.BLACK] = System.Convert.ToInt32(Next(ref Is));
             }
             else if (token == "winc")
             {
-              //  limits.inc[(int)Color.WHITE] = System.Convert.ToInt32(Next(ref Is));
+                AllDraw.TimeMax = System.Convert.ToInt32(Next(ref Is));
+                //  limits.inc[(int)Color.WHITE] = System.Convert.ToInt32(Next(ref Is));
             }
             else if (token == "binc")
             {
-             //   limits.inc[(int)Color.BLACK] = System.Convert.ToInt32(Next(ref Is));
+                AllDraw.TimeMax = System.Convert.ToInt32(Next(ref Is));
+                //   limits.inc[(int)Color.BLACK] = System.Convert.ToInt32(Next(ref Is));
             }
             else if (token == "movestogo")
             {
