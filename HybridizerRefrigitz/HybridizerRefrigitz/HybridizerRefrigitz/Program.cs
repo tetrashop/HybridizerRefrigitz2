@@ -17,7 +17,7 @@ namespace HybridizerRefrigitz
         [Kernel]
         //Main Programm.
         //[STAThread]
-        static void Main()
+        static void Main(string[] args)
         {
             /* cuda.DeviceSynchronize();
              HybRunner runner = HybRunner.Cuda("Hybridizer.Runtime.CUDAImports.dll").SetDistrib(1, 2);
@@ -26,7 +26,7 @@ namespace HybridizerRefrigitz
              */
             GlobalMembersUci.t = new ArtificialInteligenceMove(new HybridizerRefrigitzForm());
             GlobalMembersUci.t.t.Form1_Load();
-            Console.ReadLine();
+            GlobalMembersUci.loop(args);
         }
     }
 }

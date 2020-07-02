@@ -357,7 +357,7 @@ static string IsNullOrEmpty(string name)
         //GlobalMembersThread.Threads.start_thinking(pos, limits, SetupStates);
 
     }
-    void loop(string[] argv)
+    public static void loop(string[] argv)
     {
 
         //Position pos;
