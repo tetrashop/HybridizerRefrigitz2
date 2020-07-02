@@ -59,7 +59,7 @@ static string IsNullOrEmpty(string name)
         try
         {
             m = Is[0];
-            for (int b = 0; b < Is.Length; b++)
+            for (int b = 0; b < Is.Length - 1; b++)
                 Is[b] = Is[b + 1];
             Is[Is.Length - 1] = "\0";
         }
@@ -129,104 +129,7 @@ static string IsNullOrEmpty(string name)
         }
     }
 
-    String Fen()
-    {
-        Object O = new Object();
-        lock (O)
-        {
-            bool StartPos = false;
-            if (GlobalMembersUci.t.t.R.CromosomRow == -1 || GlobalMembersUci.t.t.R.CromosomColumn == -1)
-                StartPos = true;
-
-            int EmptyCnt;
-            String ss = "";
-
-            for (int r = 0; r <= 7; ++r)
-            {
-                for (int f = 0; f <= 7; ++f)
-                {
-                    for (EmptyCnt = 0; f <= 7 && Empty(f, r); ++f)
-                        ++EmptyCnt;
-
-                    if (EmptyCnt != 0)
-                        ss += EmptyCnt;
-
-                    if (f <= 7)
-                        ss += PieceToChar[Piece_on(f, r)];
-                }
-
-                if (r != 7)
-                    ss += '/';
-            }
-            if (!(GlobalMembersUci.t.t.order == 1))
-                ss += " w ";
-            else
-                ss += " b ";
-            if (HybridizerRefrigitz.ChessRules.SmallKingCastleGray)
-                ss += "K";
-
-            if (HybridizerRefrigitz.ChessRules.BigKingCastleGray)
-                ss += "Q";
-
-            if (HybridizerRefrigitz.ChessRules.SmallKingCastleBrown)
-                ss += "k";
-
-            if (HybridizerRefrigitz.ChessRules.BigKingCastleBrown)
-                ss += "q";
-
-            if (!HybridizerRefrigitz.ChessRules.CastleKingAllowedGray && !HybridizerRefrigitz.ChessRules.CastleKingAllowedBrown)
-                ss += '-';
-            String S = " - ";
-
-            if (!StartPos)
-            {
-                if (!(GlobalMembersUci.t.t.order==1))
-                {
-                    if (System.Math.Abs(HybridizerRefrigitz.HybridizerRefrigitzForm.Table[(int)GlobalMembersUci.t.t.R.CromosomRow, (int)GlobalMembersUci.t.t.R.CromosomColumn]) == 1)
-                    {
-                        S = " ";
-                        S += Alphabet() + ((int)(7 - GlobalMembersUci.t.t.R.CromosomColumn)).ToString();
-                        S += " ";
-                    }
-                }
-                else
-                {
-
-                    if (System.Math.Abs(HybridizerRefrigitz.HybridizerRefrigitzForm.Table[(int)GlobalMembersUci.t.t.R.CromosomRow, (int)GlobalMembersUci.t.t.R.CromosomColumn]) == 1)
-                    {
-                        S = " ";
-             
-                        S += Alphabet() + ((int)(7 - GlobalMembersUci.t.t.R.CromosomColumn)).ToString();
-                        S += " ";
-                    }
-                }
-            }
-            else
-            {
-                S = " ";
-                S += "-";
-                S += " ";
-            }
-            int StockMovebase =HybridizerRefrigitz.HybridizerRefrigitzForm.MovmentsNumber / 2;
-            int StockMove = HybridizerRefrigitz.HybridizerRefrigitzForm.MovmentsNumber % 2;
-            S += (StockMovebase).ToString() + " " + ((int)StockMove).ToString() + "\n";
-
-            ss += S;
-
-            //if (MovmentsNumber % 2 == 0 && MovmentsNumber != 0)
-            //   StockMovebase++;
-            //else
-            //    StockMove++;
-
-            //ss = "position fen " + ss;
-
-            return ss;
-              //return fenS.ToString();
-
-
-        }
-    }
-
+  
     public static void position(//Position pos, 
         string[] Is //temporary parameter.
           )
@@ -251,7 +154,7 @@ static string IsNullOrEmpty(string name)
                 fen += token + " ";
                 token = Next(ref Is);
             }
-
+            
         }
         else
             return;
@@ -395,6 +298,7 @@ static string IsNullOrEmpty(string name)
                     while (HybridizerRefrigitz.AllDraw.CalIdle != 1) { }
                 }
                 t.t.Play(-1, -1);//remain fen
+                StartFEN = (new GlobalMembersUci()).Fen();
             }
             else if (token == "ponderhit")
             {
@@ -406,6 +310,8 @@ static string IsNullOrEmpty(string name)
             else if (token == "uci")
 
             {
+                Console.WriteLine("\nid name tetrashop.ir and faradars.org 2020 Hybridizer chess engine.");
+
                 //sync_cout << "id name " << engine_info(true)
                 //     << "\n" << Options
                 //    << "\nuciok" << sync_endl;
@@ -420,7 +326,10 @@ static string IsNullOrEmpty(string name)
             }
             else if (token == "isready")
             {
-                //sync_cout << "readyok" << sync_endl;
+                if (AllDraw.CalIdle == 0)
+                    Console.WriteLine("\nreadyok");
+
+                    //sync_cout << "readyok" << sync_endl;
             }
 
             else if (token == "go")
@@ -483,15 +392,112 @@ static string IsNullOrEmpty(string name)
 
         // Threads.main()->wait_for_search_finished();
     }
-  
+    String Fen()
+    {
+        Object O = new Object();
+        lock (O)
+        {
+            bool StartPos = false;
+            if (GlobalMembersUci.t.t.R.CromosomRow == -1 || GlobalMembersUci.t.t.R.CromosomColumn == -1)
+                StartPos = true;
+
+            int EmptyCnt;
+            String ss = "";
+
+            for (int r = 0; r <= 7; ++r)
+            {
+                for (int f = 0; f <= 7; ++f)
+                {
+                    for (EmptyCnt = 0; f <= 7 && Empty(f, r); ++f)
+                        ++EmptyCnt;
+
+                    if (EmptyCnt != 0)
+                        ss += EmptyCnt;
+
+                    if (f <= 7)
+                        ss += PieceToChar[Piece_on(f, r)];
+                }
+
+                if (r != 7)
+                    ss += '/';
+            }
+            if (!(GlobalMembersUci.t.t.order == 1))
+                ss += " w ";
+            else
+                ss += " b ";
+            if (HybridizerRefrigitz.ChessRules.SmallKingCastleGray)
+                ss += "K";
+
+            if (HybridizerRefrigitz.ChessRules.BigKingCastleGray)
+                ss += "Q";
+
+            if (HybridizerRefrigitz.ChessRules.SmallKingCastleBrown)
+                ss += "k";
+
+            if (HybridizerRefrigitz.ChessRules.BigKingCastleBrown)
+                ss += "q";
+
+            if (!HybridizerRefrigitz.ChessRules.CastleKingAllowedGray && !HybridizerRefrigitz.ChessRules.CastleKingAllowedBrown)
+                ss += '-';
+            String S = " - ";
+
+            if (!StartPos)
+            {
+                if (!(GlobalMembersUci.t.t.order == 1))
+                {
+                    if (System.Math.Abs(HybridizerRefrigitz.HybridizerRefrigitzForm.Table[(int)GlobalMembersUci.t.t.R.CromosomRow, (int)GlobalMembersUci.t.t.R.CromosomColumn]) == 1)
+                    {
+                        S = " ";
+                        S += Alphabet() + ((int)(7 - GlobalMembersUci.t.t.R.CromosomColumn)).ToString();
+                        S += " ";
+                    }
+                }
+                else
+                {
+
+                    if (System.Math.Abs(HybridizerRefrigitz.HybridizerRefrigitzForm.Table[(int)GlobalMembersUci.t.t.R.CromosomRow, (int)GlobalMembersUci.t.t.R.CromosomColumn]) == 1)
+                    {
+                        S = " ";
+
+                        S += Alphabet() + ((int)(7 - GlobalMembersUci.t.t.R.CromosomColumn)).ToString();
+                        S += " ";
+                    }
+                }
+            }
+            else
+            {
+                S = " ";
+                S += "-";
+                S += " ";
+            }
+            int StockMovebase = HybridizerRefrigitz.HybridizerRefrigitzForm.MovmentsNumber / 2;
+            int StockMove = HybridizerRefrigitz.HybridizerRefrigitzForm.MovmentsNumber % 2;
+            S += (StockMovebase).ToString() + " " + ((int)StockMove).ToString() + "\n";
+
+            ss += S;
+
+            //if (MovmentsNumber % 2 == 0 && MovmentsNumber != 0)
+            //   StockMovebase++;
+            //else
+            //    StockMove++;
+
+            //ss = "position fen " + ss;
+
+            return ss;
+            //return fenS.ToString();
+
+
+        }
+    }
+
 }
 
 
 
-    
-    
 
- // namespace Search
+
+
+// namespace Search
 public enum Move : int
 {
     MOVE_NONE,

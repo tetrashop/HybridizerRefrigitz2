@@ -38,6 +38,19 @@ namespace HybridizerRefrigitz
                         GlobalMembersUci.t.t.Form1_Load();
                 }
             }
+            else
+            {
+                if (GlobalMembersUci.t.t == null)
+                {
+                    if (!GlobalMembersUci.t.t.LoadP)
+                        GlobalMembersUci.t.t.Form1_Load();
+                }
+                else
+                {
+                    if (!GlobalMembersUci.t.t.LoadP)
+                        GlobalMembersUci.t.t.Form1_Load();
+                }
+            }
             GlobalMembersUci.loop(args);
         }
     }
