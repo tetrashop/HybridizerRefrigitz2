@@ -13,7 +13,7 @@ namespace HybridizerRefrigitz
     
     static class Program
     {
-       
+
         [Kernel]
         //Main Programm.
         //[STAThread]
@@ -24,8 +24,20 @@ namespace HybridizerRefrigitz
              GlobalMembersUci.t = new ArtificialInteligenceMove(new HybridizerRefrigitzForm());
              runner.Wrap(GlobalMembersUci.t);
              */
-            GlobalMembersUci.t = new ArtificialInteligenceMove(new HybridizerRefrigitzForm());
-            GlobalMembersUci.t.t.Form1_Load();
+            if (GlobalMembersUci.t == null)
+            {
+                GlobalMembersUci.t = new ArtificialInteligenceMove(new HybridizerRefrigitzForm());
+                if (GlobalMembersUci.t.t == null)
+                {
+                    if (!GlobalMembersUci.t.t.LoadP)
+                        GlobalMembersUci.t.t.Form1_Load();
+                }
+                else
+                {
+                    if (!GlobalMembersUci.t.t.LoadP)
+                        GlobalMembersUci.t.t.Form1_Load();
+                }
+            }
             GlobalMembersUci.loop(args);
         }
     }
