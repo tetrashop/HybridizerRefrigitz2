@@ -73,6 +73,75 @@ static string IsNullOrEmpty(string name)
         return m;
 
     }
+    static void AlphabetRecurveFirst( String B)
+    {
+        Object O = new Object();
+        lock (O)
+        {
+            String A = B[0].ToString();
+            if (A == "a")
+                GlobalMembersUci.t.t.R.CromosomRowFirst = 0;
+            else
+                if (A == "b")
+                GlobalMembersUci.t.t.R.CromosomRowFirst = 1;
+            else
+                    if (A == "c")
+                GlobalMembersUci.t.t.R.CromosomRowFirst = 2;
+            else
+                        if (A == "d")
+                GlobalMembersUci.t.t.R.CromosomRowFirst = 3;
+            else
+                            if (A == "e")
+                GlobalMembersUci.t.t.R.CromosomRowFirst = 4;
+            else
+                                if (A == "f")
+                GlobalMembersUci.t.t.R.CromosomRowFirst = 5;
+            else
+                                    if (A == "g")
+                GlobalMembersUci.t.t.R.CromosomRowFirst = 6;
+            else
+                                        if (A == "h")
+                GlobalMembersUci.t.t.R.CromosomRowFirst = 7;
+            return;
+
+
+        }
+    }
+    static void AlphabetRecurve(String B)
+    {
+        Object O = new Object();
+        lock (O)
+        {
+            String A = B[2].ToString();
+            if (A == "a")
+                GlobalMembersUci.t.t.R.CromosomRow = 0;
+            else
+                if (A == "b")
+                GlobalMembersUci.t.t.R.CromosomRow = 1;
+            else
+                    if (A == "c")
+                GlobalMembersUci.t.t.R.CromosomRow = 2;
+            else
+                        if (A == "d")
+                GlobalMembersUci.t.t.R.CromosomRow = 3;
+            else
+                            if (A == "e")
+                GlobalMembersUci.t.t.R.CromosomRow = 4;
+            else
+                                if (A == "f")
+                GlobalMembersUci.t.t.R.CromosomRow = 5;
+            else
+                                    if (A == "g")
+                GlobalMembersUci.t.t.R.CromosomRow = 6;
+            else
+                                        if (A == "h")
+                GlobalMembersUci.t.t.R.CromosomRow = 7;
+            return;
+
+
+        }
+    }
+
     String Alphabet()
     {
         Object O = new Object();
@@ -129,7 +198,7 @@ static string IsNullOrEmpty(string name)
         }
     }
 
-  
+
     public static void position(//Position pos, 
         string[] Is //temporary parameter.
           )
@@ -155,13 +224,30 @@ static string IsNullOrEmpty(string name)
                 fen += token + " ";
                 token = Next(ref Is);
             }
-            
+
         }
         else
             return;
         r.parse(fen);
         //target passent
         string move = r.move;
+        if (move.Length == 4)
+        {
+            AlphabetRecurveFirst(move);
+            GlobalMembersUci.t.t.R.CromosomColumnFirst = ((int)(7 - System.Convert.ToInt32(move[1])));
+
+            AlphabetRecurve(move);
+            GlobalMembersUci.t.t.R.CromosomColumn = ((int)(7 - System.Convert.ToInt32(move[3])));
+            HybridizerRefrigitzForm.Table[GlobalMembersUci.t.t.R.CromosomRow, GlobalMembersUci.t.t.R.CromosomColumn] = HybridizerRefrigitzForm.Table[GlobalMembersUci.t.t.R.CromosomRowFirst, GlobalMembersUci.t.t.R.CromosomColumnFirst];
+            HybridizerRefrigitzForm.Table[GlobalMembersUci.t.t.R.CromosomRowFirst, GlobalMembersUci.t.t.R.CromosomColumnFirst] = 0;
+        }
+        else
+        {
+            if (move.Length == 4)
+            {
+
+            }
+        }
         //pos.set(fen, GlobalMembersUcioption.Options["UCI_Chess960"], GlobalMembersThread.Threads.main());
         /*#if StateStackPtr_ConditionalDefinition1
             SetupStates = std.auto_ptr<Stack<StateInfo>>(new Stack<StateInfo>());
@@ -181,7 +267,7 @@ static string IsNullOrEmpty(string name)
         }*/
     }
 
-    
+
     public static void go(string[] Is//, Position pos//, istringstream @is //int a is for distinguiish temporarly
           )
     {
