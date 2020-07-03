@@ -8,7 +8,7 @@ using System.Text;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Runtime.Serialization;
 using System.IO;
-namespace HybridizerRefrigitz
+namespace GalleryStudio
 {
     [Serializable]
     public class RefregitzOperator//:RefregizMemmory
@@ -28,9 +28,9 @@ namespace HybridizerRefrigitz
         public static String Root = System.IO.Path.GetDirectoryName(Environment.GetCommandLineArgs()[0]);
 
         string SAllDraw ="";
-        //static HybridizerRefrigitz.RefregizMemmory Node;
+        //static GalleryStudio.RefregizMemmory Node;
         //HybridizerRefrigitz.AllDraw Current = null;
-        //HybridizerRefrigitz.RefregizMemmory Next = null;
+        //GalleryStudio.RefregizMemmory Next = null;
         //int Kind = -1;
         static void Log(Exception ex)
         {

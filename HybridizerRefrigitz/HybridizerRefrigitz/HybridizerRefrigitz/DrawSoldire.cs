@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-//using System.Drawing;
+using System.Drawing;
 using System.IO;
 
 namespace HybridizerRefrigitz
@@ -12,11 +12,11 @@ namespace HybridizerRefrigitz
     {
         
         StringBuilder Space = new StringBuilder("&nbsp;");
-//// The field 'DrawSoldier.Spaces' is assigned but its value is never used
-// The field 'DrawSoldier.Spaces' is assigned but its value is never used
-        
- // The field 'DrawSoldier.Spaces' is assigned but its value is never used
-// // The field 'DrawSoldier.Spaces' is assigned but its value is never used
+//#pragma warning disable CS0414 // The field 'DrawSoldier.Spaces' is assigned but its value is never used
+#pragma warning disable CS0414 // The field 'DrawSoldier.Spaces' is assigned but its value is never used
+        int Spaces = 0;
+#pragma warning restore CS0414 // The field 'DrawSoldier.Spaces' is assigned but its value is never used
+//#pragma warning restore CS0414 // The field 'DrawSoldier.Spaces' is assigned but its value is never used
 
 
         public int WinOcuuredatChiled = 0; public int[] LoseOcuuredatChiled = { 0, 0, 0 };
@@ -32,7 +32,7 @@ namespace HybridizerRefrigitz
         
         
         public bool MovementsAStarGreedyHeuristicFoundT = false;
-        public bool IgnoreSelfobjectsT = false;
+        public bool IgnoreSelfObjectsT = false;
         public bool UsePenaltyRegardMechnisamT = true;
         public bool BestMovmentsT = false;
         public bool PredictHeuristicT = true;
@@ -41,7 +41,7 @@ namespace HybridizerRefrigitz
         public bool ArrangmentsChanged = true;
         public static int MaxHeuristicxS = int.MinValue;
         public float Row, Column;
-        public ConsoleColor color;
+        public Color color;
         public ThinkingHybridizerRefrigitz[] SoldierThinking = new ThinkingHybridizerRefrigitz[AllDraw.SodierMovments];
         public int[,] Table = null;
         public int Order = 0;
@@ -52,18 +52,18 @@ namespace HybridizerRefrigitz
 
             try
             {
-                object a = new object();
+                Object a = new Object();
                 lock (a)
                 {
                     string stackTrace = ex.ToString();
                     //Write to File.
-                     File.AppendAllText(AllDraw.Root + "\\ErrorProgramRun.txt",  ": On" + DateTime.Now.ToString());
+                    Helper.WaitOnUsed(AllDraw.Root + "\\ErrorProgramRun.txt"); File.AppendAllText(AllDraw.Root + "\\ErrorProgramRun.txt", stackTrace + ": On" + DateTime.Now.ToString());
 
                 }
             }
-
-            catch (Exception t) { /*Log(t);*/ }
-
+#pragma warning disable CS0168 // The variable 't' is declared but never used
+            catch (Exception t) { }
+#pragma warning restore CS0168 // The variable 't' is declared but never used
         }
 
         public void Dispose()
@@ -78,7 +78,7 @@ namespace HybridizerRefrigitz
             int a = ReturnHeuristic();
             if (MaxHeuristicxS < a)
             {
-                object O2 = new object();
+                Object O2 = new Object();
                 lock (O2)
                 {
                     MaxNotFound = false;
@@ -119,7 +119,7 @@ namespace HybridizerRefrigitz
         //Constructor 1.
 
         //Constructor 2.
-        public DrawSoldier(int CurrentAStarGredy, bool MovementsAStarGreedyHeuristicTFou, bool IgnoreSelfObject, bool UsePenaltyRegardMechnisa, bool BestMovment, bool PredictHurist, bool OnlySel, bool AStarGreedyHuris, bool Arrangments, float i, float j, ConsoleColor a, int[,] Tab, int Ord, bool TB, int Cur//, ref AllDraw. THIS
+        public DrawSoldier(int CurrentAStarGredy, bool MovementsAStarGreedyHeuristicTFou, bool IgnoreSelfObject, bool UsePenaltyRegardMechnisa, bool BestMovment, bool PredictHurist, bool OnlySel, bool AStarGreedyHuris, bool Arrangments, float i, float j, Color a, int[,] Tab, int Ord, bool TB, int Cur//, ref AllDraw. THIS
             ) :
             base(Arrangments, (int)i, (int)j, a, Tab, Ord, TB, Cur)
         {
@@ -131,7 +131,7 @@ namespace HybridizerRefrigitz
 
                 CurrentAStarGredyMax = CurrentAStarGredy;
                 MovementsAStarGreedyHeuristicFoundT = MovementsAStarGreedyHeuristicTFou;
-                IgnoreSelfobjectsT = IgnoreSelfObject;
+                IgnoreSelfObjectsT = IgnoreSelfObject;
                 UsePenaltyRegardMechnisamT = UsePenaltyRegardMechnisa;
                 BestMovmentsT = BestMovment;
                 PredictHeuristicT = PredictHurist;
@@ -145,10 +145,10 @@ namespace HybridizerRefrigitz
                         Table[ii, jj] = Tab[ii, jj];
                 for (var ii = 0; ii < AllDraw.SodierMovments; ii++)
 
-                    SoldierThinking[ii] = new ThinkingHybridizerRefrigitz(ii,1,CurrentAStarGredyMax, MovementsAStarGreedyHeuristicFoundT, IgnoreSelfobjectsT, UsePenaltyRegardMechnisamT, BestMovmentsT, PredictHeuristicT, OnlySelfT, AStarGreedyHeuristicT, ArrangmentsChanged, (int)i, (int)j, a, CloneATable(Tab), 4, Ord, TB, Cur, 16, 1);
+                    SoldierThinking[ii] = new ThinkingHybridizerRefrigitz(ii,1,CurrentAStarGredyMax, MovementsAStarGreedyHeuristicFoundT, IgnoreSelfObjectsT, UsePenaltyRegardMechnisamT, BestMovmentsT, PredictHeuristicT, OnlySelfT, AStarGreedyHeuristicT, ArrangmentsChanged, (int)i, (int)j, a, CloneATable(Tab), 4, Ord, TB, Cur, 16, 1);
                 Row = i;
                 Column = j;
-                color =a;
+                color = a;
                 Order = Ord;
                 Current = Cur;
             }
@@ -164,15 +164,15 @@ namespace HybridizerRefrigitz
             for (var i = 0; i < 8; i++)
                 for (var j = 0; j < 8; j++)
                     Tab[i, j] = this.Table[i, j];
-            //Initiate a object and Assignemt of a Clone to Construction of a Copy.
+            //Initiate a Object and Assignemt of a Clone to Construction of a Copy.
 
-            AA = new DrawSoldier(CurrentAStarGredyMax, MovementsAStarGreedyHeuristicFoundT, IgnoreSelfobjectsT, UsePenaltyRegardMechnisamT, BestMovmentsT, PredictHeuristicT, OnlySelfT, AStarGreedyHeuristicT, ArrangmentsChanged, this.Row, this.Column, this.color, CloneATable(Tab), this.Order, false, this.Current
+            AA = new DrawSoldier(CurrentAStarGredyMax, MovementsAStarGreedyHeuristicFoundT, IgnoreSelfObjectsT, UsePenaltyRegardMechnisamT, BestMovmentsT, PredictHeuristicT, OnlySelfT, AStarGreedyHeuristicT, ArrangmentsChanged, this.Row, this.Column, this.color, CloneATable(Tab), this.Order, false, this.Current
                 );
             AA.ArrangmentsChanged = ArrangmentsChanged;
             for (var i = 0; i < AllDraw.SodierMovments; i++)
             {
 
-                AA.SoldierThinking[i] = new ThinkingHybridizerRefrigitz(i,1,CurrentAStarGredyMax, MovementsAStarGreedyHeuristicFoundT, IgnoreSelfobjectsT, UsePenaltyRegardMechnisamT, BestMovmentsT, PredictHeuristicT, OnlySelfT, AStarGreedyHeuristicT, ArrangmentsChanged, (int)this.Row, (int)this.Column);
+                AA.SoldierThinking[i] = new ThinkingHybridizerRefrigitz(i,1,CurrentAStarGredyMax, MovementsAStarGreedyHeuristicFoundT, IgnoreSelfObjectsT, UsePenaltyRegardMechnisamT, BestMovmentsT, PredictHeuristicT, OnlySelfT, AStarGreedyHeuristicT, ArrangmentsChanged, (int)this.Row, (int)this.Column);
                 this.SoldierThinking[i].Clone(ref AA.SoldierThinking[i]);
 
             }
@@ -184,29 +184,177 @@ namespace HybridizerRefrigitz
             AA.Column = Column;
             AA.Order = Order;
             AA.Current = Current;
-            AA.color=color;
+            AA.color = color;
             
         }
         
         bool[,] CloneATable(bool[,] Tab)
         {
             
-            object O = new object();
+            Object O = new Object();
             lock (O)
             {
-                //Create and new an object.
+                //Create and new an Object.
                 bool[,] Table = new bool[8, 8];
-                //Assigne Parameter To New objects.
+                //Assigne Parameter To New Objects.
                 for (var i = 0; i < 8; i++)
                     for (var j = 0; j < 8; j++)
                         Table[i, j] = Tab[i, j];
-                //Return New object.
+                //Return New Object.
                 
                 return Table;
             }
 
         }
-        
+        //Drawing Soldiers On the Table Method..
+        public void DrawSoldierOnTable( int CellW, int CellH)
+        {
+            object balancelockS = new object();
+
+            lock (balancelockS)
+            {
+                
+                try
+                {
+
+  
+                    //When Conversion Solders Not Occured.
+                    if (!ConvertOperation((int)Row, (int)Column, color, CloneATable(Table), Order, false, Current))
+                    {
+
+                        //WHITE Color.
+                        if (((int)Row >= 0) && ((int)Row < 8) && ((int)Column >= 0) && ((int)Column < 8))
+                        {
+
+
+                            //If Order is WHITE.
+                            if (Order == 1)
+                            {
+                                Object O1 = new Object();
+                                lock (O1)
+                                {    //Draw an Instant from File of WHITE Soldeirs.
+                                    //g.DrawImage(Image.FromFile(AllDraw.ImagesSubRoot + "SG.png"), new Rectangle((int)(Row * (float)CellW), (int)(Column * (float)CellH), CellW, CellH));
+
+                                }
+                            }
+                            else
+                            {
+                                Object O1 = new Object();
+                                lock (O1)
+                                {    //Draw an Instant from File of WHITE Soldeirs.
+                                     //Draw an Instatnt of BLACK Soldier File On the Table.
+                                    //g.DrawImage(Image.FromFile(AllDraw.ImagesSubRoot + "SB.png"), new Rectangle((int)(Row * (float)CellW), (int)(Column * (float)CellH), CellW, CellH));
+                                }
+                            }
+
+
+                        }
+                        else//If Minsister Conversion Occured.
+                            if (ConvertedToMinister)
+                        {
+
+                            //Color of WHITE.
+                            if (Order == 1)
+                            {
+                                Object O1 = new Object();
+                                lock (O1)
+                                {    //Draw an Instant from File of WHITE Soldeirs.
+                                     //Draw of WHITE Minsister Image File By an Instant.
+                                    //g.DrawImage(Image.FromFile(AllDraw.ImagesSubRoot + "MG.png"), new Rectangle((int)(Row * (float)CellW), (int)(Column * (float)CellH), CellW, CellH));
+                                }
+                            }
+                            else
+                            {
+                                Object O1 = new Object();
+                                lock (O1)
+                                {    //Draw an Instant from File of WHITE Soldeirs.
+                                     //Draw a Image File on the Table Form n Instatnt One.
+                                    //g.DrawImage(Image.FromFile(AllDraw.ImagesSubRoot + "MB.png"), new Rectangle((int)(Row * (float)CellW), (int)(Column * (float)CellH), CellW, CellH));
+                                }
+                            }
+
+                        }
+                        else if (ConvertedToCastle)//When Castled Converted.
+                        {
+
+                            //Color of WHITE.
+                            if (Order == 1)
+                            {
+                                Object O1 = new Object();
+                                lock (O1)
+                                {    //Draw an Instant from File of WHITE Soldeirs.
+                                     //Create on the Inststant of WHITE Castles Images.
+                                    //g.DrawImage(Image.FromFile(AllDraw.ImagesSubRoot + "BrG.png"), new Rectangle((int)(Row * (float)CellW), (int)(Column * (float)CellH), CellW, CellH));
+                                }
+                            }
+                            else
+                            {
+                                Object O1 = new Object();
+                                lock (O1)
+                                {    //Draw an Instant from File of WHITE Soldeirs.
+                                     //Creat of an Instant of BLACK Image Castles.
+                                    //g.DrawImage(Image.FromFile(AllDraw.ImagesSubRoot + "BrB.png"), new Rectangle((int)(Row * (float)CellW), (int)(Column * (float)CellH), CellW, CellH));
+                                }
+                            }
+
+                        }
+                        else if (ConvertedToHourse)//When Hourse Conversion Occured.
+                        {
+
+
+                            //Color of WHITE.
+                            if (Order == 1)
+                            {
+                                Object O1 = new Object();
+                                lock (O1)
+                                {//Draw an Instatnt of WHITE Hourse Image File.
+                                    //g.DrawImage(Image.FromFile(AllDraw.ImagesSubRoot + "HG.png"), new Rectangle((int)(Row * (float)CellW), (int)(Column * (int)CellH), CellW, CellH));
+                                }
+                            }
+                            else
+                            {
+                                Object O1 = new Object();
+                                lock (O1)
+                                {//Creat of an Instatnt Hourse Image File.
+                                    //g.DrawImage(Image.FromFile(AllDraw.ImagesSubRoot + "HB.png"), new Rectangle((int)(Row * (float)CellW), (int)(Column * (float)CellH), CellW, CellH));
+                                }
+                            }
+
+
+                        }
+                        else if (ConvertedToElefant)//When Elephant Conversion.
+                        {
+
+                            //Color of WHITE.
+                            if (Order == 1)
+                            {
+                                Object O1 = new Object();
+                                lock (O1)
+                                {//Draw an Instatnt Image of WHITE Elephant.
+                                    //g.DrawImage(Image.FromFile(AllDraw.ImagesSubRoot + "EG.png"), new Rectangle((int)(Row * (float)CellW), (int)(Column * (float)CellH), CellW, CellH));
+                                }
+                            }
+                            else
+                            {
+                                Object O1 = new Object();
+                                lock (O1)
+                                {//Draw of Instant Image of BLACK Elephant.
+                                    ////g.DrawImage(Image.FromFile(AllDraw.ImagesSubRoot + "EB.png"), new Rectangle((int)(Row * (float)CellW), (int)(Column * (float)CellH), CellW, CellH));
+                                }
+                            }
+
+
+                        }
+                    }
+
+                }
+                catch (Exception t)
+                {
+                    Log(t);
+                }
+                
+            }
+        }
     }
 }
 //End of Documentation.

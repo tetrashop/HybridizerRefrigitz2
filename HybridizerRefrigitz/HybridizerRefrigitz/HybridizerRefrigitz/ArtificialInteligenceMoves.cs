@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using System;
+using System.Drawing;
 
-
-
+using HybridizerRefrigitz;
 
 public class ArtificialInteligenceMove
 {	public static bool UpdateIsRunning=false; 
@@ -14,7 +14,7 @@ public class ArtificialInteligenceMove
 	int Order=1;
 	public int x,y,x1,y1;
 
-    public HybridizerRefrigitz.HybridizerRefrigitzForm t = null;
+   public HybridizerRefrigitz.HybridizerRefrigitzForm t = null;
 
     bool Idle = false;
 	public static bool IdleProgress=true;
@@ -30,14 +30,14 @@ public class ArtificialInteligenceMove
 	}
 
 
-    ConsoleColor OrderConsoleColor(int Ord)
+    Color OrderColor(int Ord)
     {
         Object O = new Object();
         lock (O)
         {
-            ConsoleColor a = ConsoleColor.Gray;
+            Color a = Color.WHITE;
             if (Ord == -1)
-                a = ConsoleColor.Black;
+                a = Color.BLACK;
             return a;
         }
     }
@@ -63,7 +63,7 @@ public class ArtificialInteligenceMove
 							HybridizerRefrigitz.AllDraw.Blitz=false;
 															Idle=true;
                             HybridizerRefrigitz.AllDraw.TimeInitiation = (DateTime.Now.Hour * 60 * 60 * 1000 + DateTime.Now.Minute * 60 * 1000 + DateTime.Now.Second * 1000);
-                            var arrayA =Task.Factory.StartNew(() =>	t.Draw.InitiateAStarGreedyt(HybridizerRefrigitz.AllDraw.MaxAStarGreedy,1, 4,OrderConsoleColor(t.Draw.OrderP), CloneATable(t.brd.GetTable()), t.Draw.OrderP, false, false, 0));
+                            var arrayA =Task.Factory.StartNew(() =>	t.Draw.InitiateAStarGreedyt(HybridizerRefrigitz.AllDraw.MaxAStarGreedy,1, 4,OrderColor(t.Draw.OrderP), CloneATable(t.brd.GetTable()), t.Draw.OrderP, false, false, 0));
 							//var arrayA =Task.Factory.StartNew(() =>	t.Play(-1,-1));
                             arrayA.Wait();
 							object i=new object();

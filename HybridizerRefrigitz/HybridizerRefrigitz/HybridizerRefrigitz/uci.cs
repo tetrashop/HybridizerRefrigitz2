@@ -134,6 +134,7 @@ static string IsNullOrEmpty(string name)
         string[] Is //temporary parameter.
           )
     {
+        ChessLibrary.FenNotation r = new ChessLibrary.FenNotation(StartFEN);
 
         //Move m;
         string token;
@@ -158,9 +159,8 @@ static string IsNullOrEmpty(string name)
         }
         else
             return;
-        ChessLibrary.FenNotation r = new ChessLibrary.FenNotation();
         r.parse(fen);
-        //tarrget passent
+        //target passent
         string move = r.move;
         //pos.set(fen, GlobalMembersUcioption.Options["UCI_Chess960"], GlobalMembersThread.Threads.main());
         /*#if StateStackPtr_ConditionalDefinition1
@@ -428,19 +428,19 @@ static string IsNullOrEmpty(string name)
                 ss += " w ";
             else
                 ss += " b ";
-            if (HybridizerRefrigitz.ChessRules.SmallKingCastleGray)
+            if (HybridizerRefrigitz.ChessRules.SmallKingCastleWHITE)
                 ss += "K";
 
-            if (HybridizerRefrigitz.ChessRules.BigKingCastleGray)
+            if (HybridizerRefrigitz.ChessRules.BigKingCastleWHITE)
                 ss += "Q";
 
-            if (HybridizerRefrigitz.ChessRules.SmallKingCastleBrown)
+            if (HybridizerRefrigitz.ChessRules.SmallKingCastleBLACK)
                 ss += "k";
 
-            if (HybridizerRefrigitz.ChessRules.BigKingCastleBrown)
+            if (HybridizerRefrigitz.ChessRules.BigKingCastleBLACK)
                 ss += "q";
 
-            if (!HybridizerRefrigitz.ChessRules.CastleKingAllowedGray && !HybridizerRefrigitz.ChessRules.CastleKingAllowedBrown)
+            if (!HybridizerRefrigitz.ChessRules.CastleKingAllowedWHITE && !HybridizerRefrigitz.ChessRules.CastleKingAllowedBLACK)
                 ss += '-';
             String S = " - ";
 

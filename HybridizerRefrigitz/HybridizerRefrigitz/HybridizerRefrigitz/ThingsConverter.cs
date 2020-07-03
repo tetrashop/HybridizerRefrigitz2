@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-
+using System.Drawing;
 namespace HybridizerRefrigitz
 {
     [Serializable]
@@ -29,7 +29,7 @@ namespace HybridizerRefrigitz
         public bool ConvertedToHourse = false;
         public int Max;
         public int RowS, ColumnS;
-        ConsoleColor color;
+        Color color;
         int Order;
         int Current = 0;
         private int rowSource;
@@ -42,7 +42,7 @@ namespace HybridizerRefrigitz
         { //long Time = TimeElapced.TimeNow();Spaces++;
         }
         //Constructor
-        public ThingsConverter(bool Arrangments, int i, int j, ConsoleColor a, int[,] Tab, int Ord, bool TB, int Cur//,ref AllDraw. THI
+        public ThingsConverter(bool Arrangments, int i, int j, Color a, int[,] Tab, int Ord, bool TB, int Cur//,ref AllDraw. THI
             )
         {
             //long Time = TimeElapced.TimeNow();Spaces++;
@@ -68,13 +68,13 @@ namespace HybridizerRefrigitz
             return Tabl;
         }
 
-        public ThingsConverter(bool arrangmentsChanged, int rowSource, int columnSource, ConsoleColor CO, int[,] tableS, int order, int v)
+        public ThingsConverter(bool arrangmentsChanged, int rowSource, int columnSource, Color color, int[,] tableS, int order, int v)
         {
             //long Time = TimeElapced.TimeNow();Spaces++;
             ArrangmentsChanged = arrangmentsChanged;
             this.rowSource = rowSource;
             this.columnSource = columnSource;
-            this.color = CO;
+            this.color = color;
             this.tableS = CloneATable(tableS);
             Order = order;
             this.v = v;
@@ -82,7 +82,7 @@ namespace HybridizerRefrigitz
         }
 
         //Convert Operation of Randomly All State Method.
-        public bool ConvertOperation(int i, int j, ConsoleColor a, int[,] Tab, int Ord, bool TB, int Cur)
+        public bool ConvertOperation(int i, int j, Color a, int[,] Tab, int Ord, bool TB, int Cur)
         {
             //long Time = TimeElapced.TimeNow();Spaces++;
             Object OOO = new Object();
@@ -142,7 +142,7 @@ namespace HybridizerRefrigitz
                             //Randomly Number of 4 kind Object.
                             int Rand = -1;
                             if (//AllDraw.Person && 
-                                AllDraw.StateCP && AllDraw.THISSecradioButtonGrayOrderChecked)
+                                AllDraw.StateCP && AllDraw.THISSecradioButtonWHITEOrderChecked)
                             {
                                 if (AllDraw.OrderPlateDraw == 1)
                                 {
@@ -160,7 +160,7 @@ namespace HybridizerRefrigitz
                             }
                             else
                                 if (//AllDraw.Person &&
-                                AllDraw.StateCP && AllDraw.THISSecradioButtonBrownOrderChecked)
+                                AllDraw.StateCP && AllDraw.THISSecradioButtonBLACKOrderChecked)
                             {
                                 if (AllDraw.OrderPlateDraw == -1)
                                 {
@@ -179,7 +179,7 @@ namespace HybridizerRefrigitz
                             }
                             else
                                 Rand = (new Random()).Next(0, 4);
-                            //If Rand is Equaled the Operation will cuased automaticcally base on ConsoleColor..
+                            //If Rand is Equaled the Operation will cuased automaticcally base on Color..
                             if (Rand == 0)
                             {
                                 if (Order == 1)
@@ -251,7 +251,7 @@ namespace HybridizerRefrigitz
                                 //Randomly Number of 4 kind Object.
                                 int Rand = -1;
                                 if (//AllDraw.Person &&
-                                    AllDraw.StateCP && AllDraw.THISSecradioButtonGrayOrderChecked)
+                                    AllDraw.StateCP && AllDraw.THISSecradioButtonWHITEOrderChecked)
                                 {
                                     if (AllDraw.OrderPlateDraw == 1)
                                     {
@@ -269,7 +269,7 @@ namespace HybridizerRefrigitz
                                 }
                                 else
                                     if (//AllDraw.Person && 
-                                    AllDraw.StateCP && AllDraw.THISSecradioButtonBrownOrderChecked)
+                                    AllDraw.StateCP && AllDraw.THISSecradioButtonBLACKOrderChecked)
                                 {
                                     if (AllDraw.OrderPlateDraw == -1)
                                     {
@@ -287,7 +287,7 @@ namespace HybridizerRefrigitz
                                 }
                                 else
                                     Rand = (new Random()).Next(0, 4);
-                                //If Rand is Equaled the Operation will cuased automaticcally base on ConsoleColor..
+                                //If Rand is Equaled the Operation will cuased automaticcally base on Color..
                                 if (Rand == 0)
                                 {
                                     if (Order == 1)
@@ -362,7 +362,7 @@ namespace HybridizerRefrigitz
                                 //Randomly Number of 4 kind Object.
                                 int Rand = -1;
                                 if (//AllDraw.Person && 
-                                    AllDraw.StateCP && AllDraw.THISSecradioButtonGrayOrderChecked)
+                                    AllDraw.StateCP && AllDraw.THISSecradioButtonWHITEOrderChecked)
                                 {
                                     if (AllDraw.OrderPlateDraw == 1)
                                     {
@@ -380,7 +380,7 @@ namespace HybridizerRefrigitz
                                 }
                                 else
                                     if (//AllDraw.Person && 
-                                    AllDraw.StateCP && AllDraw.THISSecradioButtonBrownOrderChecked)
+                                    AllDraw.StateCP && AllDraw.THISSecradioButtonBLACKOrderChecked)
                                 {
                                     if (AllDraw.OrderPlateDraw == -1)
                                     {
@@ -398,7 +398,7 @@ namespace HybridizerRefrigitz
                                 }
                                 else
                                     Rand = (new Random()).Next(0, 4);
-                                //If Rand is Equaled the Operation will cuased automaticcally base on ConsoleColor..
+                                //If Rand is Equaled the Operation will cuased automaticcally base on Color..
                                 if (Rand == 0)
                                 {
                                     if (Order == 1)

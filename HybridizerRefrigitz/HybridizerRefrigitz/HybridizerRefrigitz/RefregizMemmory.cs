@@ -9,7 +9,7 @@ using System.Text;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Runtime.Serialization;
 using System.IO;
-namespace HybridizerRefrigitz
+namespace GalleryStudio
 {
 
     [Serializable]
@@ -30,7 +30,7 @@ namespace HybridizerRefrigitz
         public bool ArrangmentsT = false;
         string SAllDraw = "";
         public int Kind = 0;
-        //static HybridizerRefrigitz.RefregizMemmory Node;
+        //static GalleryStudio.RefregizMemmory Node;
         public HybridizerRefrigitz.AllDraw Current = null;
          //bool NewListOfNextBegins = true;
 
@@ -102,10 +102,20 @@ namespace HybridizerRefrigitz
                     tt = (HybridizerRefrigitz.AllDraw)Formatters.Deserialize(DummyFileStream);
                     if (tt == null)
                         return tt;
-                    tt = (HybridizerRefrigitz.AllDraw)tt.LoaderEC(Quantum, Order, DummyFileStream, Formatters);
+                    try
+                    {
+                        tt = (HybridizerRefrigitz.AllDraw)tt.LoaderEC(Quantum, Order, DummyFileStream, Formatters);
 
-                    DummyFileStream.Flush();
-                    DummyFileStream.Close();
+                        DummyFileStream.Flush();
+                        DummyFileStream.Close();
+                    }
+                    catch (Exception tttt)
+                    {
+                        DummyFileStream.Flush();
+                        DummyFileStream.Close();
+                    }
+
+
 
                     return tt;
                 }

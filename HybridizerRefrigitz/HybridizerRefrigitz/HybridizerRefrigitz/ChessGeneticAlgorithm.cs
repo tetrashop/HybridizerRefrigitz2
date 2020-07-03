@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-
+using System.Drawing;
 using System.IO;
 namespace HybridizerRefrigitz
 {
@@ -38,10 +38,10 @@ namespace HybridizerRefrigitz
         const int TowObjectDistanceInBigCastleAfter = 1;
         const int TowObjectDistanceInSamllCastleBefor = 2;
         const int TowObjectDistanceInSmallCastleAfter = 1;
-        const int CastleGray = 4;
-        const int CastleBrown = -4;
-        const int KingGray = 6;
-        const int KingBrown = -6;
+        const int CastleWHITE = 4;
+        const int CastleBLACK = -4;
+        const int KingWHITE = 6;
+        const int KingBLACK = -6;
         //Initiate Global Variables.
         public bool MovementsAStarGreedyHeuristicFoundT = false;
         public bool IgnoreSelfObjectsT = false;
@@ -136,10 +136,10 @@ namespace HybridizerRefrigitz
         //Found of Different Home Gen in Tow HybridizerRefrigitz Home Table Method. 
         public bool FindGenToModified(int[,] Cromosom1, int[,] Cromosom2, List<int[,]> List, int Index, int Order, bool and)
         {
-            ChessRules.SmallKingCastleBrown = false;
-            ChessRules.SmallKingCastleGray = false;
-            ChessRules.BigKingCastleBrown = false;
-            ChessRules.BigKingCastleGray = false;
+            ChessRules.SmallKingCastleBLACK = false;
+            ChessRules.SmallKingCastleWHITE = false;
+            ChessRules.BigKingCastleBLACK = false;
+            ChessRules.BigKingCastleWHITE = false;
             //Injtjate Local Varjables.
             bool Find = false;
             int FindNumber = 0;
@@ -153,7 +153,7 @@ namespace HybridizerRefrigitz
                     if (Cromosom1[j, i] == 0 && Cromosom2[j, i] == 0)
                         continue;
 
-                    //Gray Order.
+                    //WHITE Order.
                     
                     if (!ArrangmentsChanged)
                     {
@@ -229,8 +229,8 @@ namespace HybridizerRefrigitz
                             //Castles King Valjdjty Condjtjon.
                             if (Order == 1 && i == DistantRowUp)
                             {
-                                //Small Gray Castles King.
-                                if (j == DistantColumnSmall && Cromosom2[SmallCastleCastleColumnAfter, DistantRowUp] == KingGray && Cromosom2[SmallCastleCastleColumnAfter, DistantRowUp] == CastleGray && Cromosom1[SmallCastleKingColumnBefore, DistantRowUp] == KingGray && Cromosom1[SmallCastleCastleColumnBefore, DistantRowUp] == CastleGray)
+                                //Small WHITE Castles King.
+                                if (j == DistantColumnSmall && Cromosom2[SmallCastleCastleColumnAfter, DistantRowUp] == KingWHITE && Cromosom2[SmallCastleCastleColumnAfter, DistantRowUp] == CastleWHITE && Cromosom1[SmallCastleKingColumnBefore, DistantRowUp] == KingWHITE && Cromosom1[SmallCastleCastleColumnBefore, DistantRowUp] == CastleWHITE)
                                 {
                                     CromosomRowFirst = SmallCastleKingColumnBefore;
                                     CromosomColumnFirst = i;
@@ -238,11 +238,11 @@ namespace HybridizerRefrigitz
                                     CromosomColumn = i;
                                     Find = true;
                                     FindNumber++;
-                                    ChessRules.SmallKingCastleGray = true;
+                                    ChessRules.SmallKingCastleWHITE = true;
                                     Brj = true;
                                 }
-                                else //Big Brjges King Gray.
-                                    if (j == DistantColumnBig && Cromosom2[BigCastleCastleColumnAfter, DistantRowUp] == CastleGray && Cromosom2[BigCastleKingColumnAfter, DistantRowUp] == KingGray && Cromosom1[BigCastleCastleColumnBefore, DistantRowUp] == CastleGray && Cromosom1[BigCastleKingColumnBefore, DistantRowUp] == KingGray)
+                                else //Big Brjges King WHITE.
+                                    if (j == DistantColumnBig && Cromosom2[BigCastleCastleColumnAfter, DistantRowUp] == CastleWHITE && Cromosom2[BigCastleKingColumnAfter, DistantRowUp] == KingWHITE && Cromosom1[BigCastleCastleColumnBefore, DistantRowUp] == CastleWHITE && Cromosom1[BigCastleKingColumnBefore, DistantRowUp] == KingWHITE)
                                 {
                                     CromosomRowFirst = DistantRowUp;
                                     CromosomColumnFirst = i;
@@ -250,15 +250,15 @@ namespace HybridizerRefrigitz
                                     CromosomColumn = i;
                                     Find = true;
                                     FindNumber++;
-                                    ChessRules.BigKingCastleGray = true;
+                                    ChessRules.BigKingCastleWHITE = true;
                                     Brj = true;
                                 }
 
                             }
                             else if (i == DistantRowBelow)
                             {
-                                //Small Castles King Brown.
-                                if (j == DistantColumnSmall && Cromosom2[BigCastleKingColumnAfter, DistantRowBelow] == KingBrown && Cromosom2[BigCastleCastleColumnAfter, DistantRowBelow] == CastleBrown && Cromosom1[BigCastleKingColumnBefore, DistantRowBelow] == KingBrown && Cromosom1[BigCastleCastleColumnBefore, DistantRowBelow] == CastleBrown)
+                                //Small Castles King BLACK.
+                                if (j == DistantColumnSmall && Cromosom2[BigCastleKingColumnAfter, DistantRowBelow] == KingBLACK && Cromosom2[BigCastleCastleColumnAfter, DistantRowBelow] == CastleBLACK && Cromosom1[BigCastleKingColumnBefore, DistantRowBelow] == KingBLACK && Cromosom1[BigCastleCastleColumnBefore, DistantRowBelow] == CastleBLACK)
                                 {
                                     Object O = new Object();
                                     lock (O)
@@ -269,12 +269,12 @@ namespace HybridizerRefrigitz
                                         CromosomColumn = i;
                                         Find = true;
                                         FindNumber++;
-                                        ChessRules.SmallKingCastleBrown = true;
+                                        ChessRules.SmallKingCastleBLACK = true;
                                         Brj = true;
                                     }
                                 }
-                                else//Big Castles King Brown.
-                                    if (j == DistantColumnBig && Cromosom2[BigCastleCastleColumnAfter, DistantRowBelow] == CastleBrown && Cromosom2[BigCastleKingColumnBefore, DistantRowBelow] == KingBrown && Cromosom1[BigCastleCastleColumnBefore, DistantRowBelow] == CastleBrown && Cromosom1[BigCastleKingColumnBefore, DistantRowBelow] == KingBrown)
+                                else//Big Castles King BLACK.
+                                    if (j == DistantColumnBig && Cromosom2[BigCastleCastleColumnAfter, DistantRowBelow] == CastleBLACK && Cromosom2[BigCastleKingColumnBefore, DistantRowBelow] == KingBLACK && Cromosom1[BigCastleCastleColumnBefore, DistantRowBelow] == CastleBLACK && Cromosom1[BigCastleKingColumnBefore, DistantRowBelow] == KingBLACK)
                                 {
                                     Object O = new Object();
                                     lock (O)
@@ -285,7 +285,7 @@ namespace HybridizerRefrigitz
                                         CromosomColumn = i;
                                         Find = true;
                                         FindNumber++;
-                                        ChessRules.BigKingCastleBrown = true;
+                                        ChessRules.BigKingCastleBLACK = true;
                                         Brj = true;
                                     }
                                 }
@@ -368,8 +368,8 @@ namespace HybridizerRefrigitz
                             //Castles King Valjdjty Condjtjon.
                             if (Order == 1 && i == DistantRowBelow)
                             {
-                                //Small Gray Castles King.
-                                if (j == DistantColumnSmall && Cromosom2[SmallCastleKingColumnAfter, DistantRowBelow] == KingGray && Cromosom2[SmallCastleCastleColumnAfter, DistantRowBelow] == CastleGray && Cromosom1[SmallCastleKingColumnBefore, DistantRowBelow] == KingGray && Cromosom1[SmallCastleCastleColumnBefore, DistantRowBelow] == CastleGray)
+                                //Small WHITE Castles King.
+                                if (j == DistantColumnSmall && Cromosom2[SmallCastleKingColumnAfter, DistantRowBelow] == KingWHITE && Cromosom2[SmallCastleCastleColumnAfter, DistantRowBelow] == CastleWHITE && Cromosom1[SmallCastleKingColumnBefore, DistantRowBelow] == KingWHITE && Cromosom1[SmallCastleCastleColumnBefore, DistantRowBelow] == CastleWHITE)
                                 {
                                     CromosomRowFirst = DistantRowBelow;
                                     CromosomColumnFirst = i;
@@ -377,11 +377,11 @@ namespace HybridizerRefrigitz
                                     CromosomColumn = i;
                                     Find = true;
                                     FindNumber++;
-                                    ChessRules.SmallKingCastleGray = true;
+                                    ChessRules.SmallKingCastleWHITE = true;
                                     Brj = true;
                                 }
-                                else //Big Brjges King Gray.
-                                    if (j == DistantColumnBig && Cromosom2[BigCastleCastleColumnAfter, DistantRowBelow] == CastleGray && Cromosom2[BigCastleKingColumnAfter, DistantRowBelow] == KingGray && Cromosom1[BigCastleCastleColumnBefore, DistantRowBelow] == CastleGray && Cromosom1[BigCastleKingColumnBefore, DistantRowBelow] == KingGray)
+                                else //Big Brjges King WHITE.
+                                    if (j == DistantColumnBig && Cromosom2[BigCastleCastleColumnAfter, DistantRowBelow] == CastleWHITE && Cromosom2[BigCastleKingColumnAfter, DistantRowBelow] == KingWHITE && Cromosom1[BigCastleCastleColumnBefore, DistantRowBelow] == CastleWHITE && Cromosom1[BigCastleKingColumnBefore, DistantRowBelow] == KingWHITE)
                                 {
                                     CromosomRowFirst = DistantRowBelow;
                                     CromosomColumnFirst = i;
@@ -389,15 +389,15 @@ namespace HybridizerRefrigitz
                                     CromosomColumn = i;
                                     Find = true;
                                     FindNumber++;
-                                    ChessRules.BigKingCastleGray = true;
+                                    ChessRules.BigKingCastleWHITE = true;
                                     Brj = true;
                                 }
 
                             }
                             else if (i == DistantRowUp)
                             {
-                                //Small Castles King Brown.
-                                if (j == DistantColumnSmall && Cromosom2[SmallCastleKingColumnAfter, DistantRowUp] == KingBrown && Cromosom2[SmallCastleCastleColumnAfter, DistantRowUp] == CastleBrown && Cromosom1[SmallCastleKingColumnBefore, DistantRowUp] == KingBrown && Cromosom1[SmallCastleCastleColumnBefore, DistantRowUp] == CastleBrown)
+                                //Small Castles King BLACK.
+                                if (j == DistantColumnSmall && Cromosom2[SmallCastleKingColumnAfter, DistantRowUp] == KingBLACK && Cromosom2[SmallCastleCastleColumnAfter, DistantRowUp] == CastleBLACK && Cromosom1[SmallCastleKingColumnBefore, DistantRowUp] == KingBLACK && Cromosom1[SmallCastleCastleColumnBefore, DistantRowUp] == CastleBLACK)
                                 {
                                     Object O = new Object();
                                     lock (O)
@@ -408,12 +408,12 @@ namespace HybridizerRefrigitz
                                         CromosomColumn = i;
                                         Find = true;
                                         FindNumber++;
-                                        ChessRules.SmallKingCastleBrown = true;
+                                        ChessRules.SmallKingCastleBLACK = true;
                                         Brj = true;
                                     }
                                 }
-                                else//Big Castles King Brown.
-                                    if (j == DistantColumnBig && Cromosom2[BigCastleCastleColumnAfter, DistantRowUp] == CastleBrown && Cromosom2[BigCastleKingColumnAfter, DistantRowUp] == KingBrown && Cromosom1[BigCastleCastleColumnBefore, DistantRowUp] == CastleBrown && Cromosom1[BigCastleKingColumnBefore, DistantRowUp] == KingBrown)
+                                else//Big Castles King BLACK.
+                                    if (j == DistantColumnBig && Cromosom2[BigCastleCastleColumnAfter, DistantRowUp] == CastleBLACK && Cromosom2[BigCastleKingColumnAfter, DistantRowUp] == KingBLACK && Cromosom1[BigCastleCastleColumnBefore, DistantRowUp] == CastleBLACK && Cromosom1[BigCastleKingColumnBefore, DistantRowUp] == KingBLACK)
                                 {
                                     Object O = new Object();
                                     lock (O)
@@ -424,7 +424,7 @@ namespace HybridizerRefrigitz
                                         CromosomColumn = i;
                                         Find = true;
                                         FindNumber++;
-                                        ChessRules.BigKingCastleBrown = true;
+                                        ChessRules.BigKingCastleBLACK = true;
                                         Brj = true;
                                     }
                                 }
@@ -580,9 +580,9 @@ namespace HybridizerRefrigitz
 
             //Initiate Global Variables.
             BeginFind:
-            ConsoleColor color = ConsoleColor.Gray;
+            Color color = Color.WHITE;
             if (Order == -1)
-                color = ConsoleColor.Black;
+                color = Color.BLACK;
             try
             {
                 //If Cromosom Location is Not Founded.
@@ -610,9 +610,9 @@ namespace HybridizerRefrigitz
                             GeneticTable[ii, jj] = List[List.Count + MinusOne][ii, jj];
                 }
                 //Initiate Global and Local Variables.
-                color = ConsoleColor.Gray;
+                color = Color.WHITE;
                 if (Order == -1)
-                    color = ConsoleColor.Black;
+                    color = Color.BLACK;
                 //For All Gens.
                 for (Gen1 = 0; Gen1 < 8; Gen1++)
                     for (Gen2 = 0; Gen2 < 8; Gen2++)
@@ -622,7 +622,7 @@ namespace HybridizerRefrigitz
                             continue;
                         //Rulement of Gen Movments.
                         if ((new ChessRules(0, MovementsAStarGreedyHeuristicFoundT, IgnoreSelfObjectsT, UsePenaltyRegardMechnisamT, BestMovmentsT, PredictHeuristicT, OnlySelfT, AStarGreedyHeuristicT, ArrangmentsChanged, GeneticTable[CromosomRow, CromosomColumn], CloneATable(GeneticTable), Order, CromosomRow, CromosomColumn)).Rules(CromosomRow, CromosomColumn, Gen1,
-                        Gen2, color , GeneticTable[CromosomRow, CromosomColumn]))
+                        Gen2, color, GeneticTable[CromosomRow, CromosomColumn]))
                         {
                             //Initiate Global Variables and Syntax.
                             int[] A = new int[2];

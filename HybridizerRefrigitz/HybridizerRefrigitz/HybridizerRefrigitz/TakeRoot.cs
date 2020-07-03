@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.IO;
@@ -151,11 +151,11 @@ namespace HybridizerRefrigitz
                         {
                             //if (!Quantum)
                             {
-#pragma warning disable CS0436 // The type 'RefregizMemmory' in 'G:\'Personal'_'Files'\Refregitz\PortableChess\Chess\RefregizMemmory.cs' conflicts with the imported type 'RefregizMemmory' in 'HybridizerRefrigitz, Version=6.0.0.14, Culture=neutral, PublicKeyToken=null'. Using the type defined in 'G:\'Personal'_'Files'\Refregitz\PortableChess\Chess\RefregizMemmory.cs'.
-#pragma warning disable CS0436 // The type 'RefregizMemmory' in 'G:\'Personal'_'Files'\Refregitz\PortableChess\Chess\RefregizMemmory.cs' conflicts with the imported type 'RefregizMemmory' in 'HybridizerRefrigitz, Version=6.0.0.14, Culture=neutral, PublicKeyToken=null'. Using the type defined in 'G:\'Personal'_'Files'\Refregitz\PortableChess\Chess\RefregizMemmory.cs'.
-                                HybridizerRefrigitz.RefregizMemmory tr = new HybridizerRefrigitz.RefregizMemmory(MovementsAStarGreedyHeuristicFound, IInoreSelfObjects, UsePenaltyRegardMechnisam, BestMovments, PredictHeuristic, OnlySelf, AStarGreedyHeuristic, ArrangmentsChanged);
-#pragma warning restore CS0436 // The type 'RefregizMemmory' in 'G:\'Personal'_'Files'\Refregitz\PortableChess\Chess\RefregizMemmory.cs' conflicts with the imported type 'RefregizMemmory' in 'HybridizerRefrigitz, Version=6.0.0.14, Culture=neutral, PublicKeyToken=null'. Using the type defined in 'G:\'Personal'_'Files'\Refregitz\PortableChess\Chess\RefregizMemmory.cs'.
-#pragma warning restore CS0436 // The type 'RefregizMemmory' in 'G:\'Personal'_'Files'\Refregitz\PortableChess\Chess\RefregizMemmory.cs' conflicts with the imported type 'RefregizMemmory' in 'HybridizerRefrigitz, Version=6.0.0.14, Culture=neutral, PublicKeyToken=null'. Using the type defined in 'G:\'Personal'_'Files'\Refregitz\PortableChess\Chess\RefregizMemmory.cs'.
+#pragma warning disable CS0436 // The type 'RefregizMemmory' in 'G:\'Personal'_'Files'\Refregitz\PortableChess\Chess\RefregizMemmory.cs' conflicts with the imported type 'RefregizMemmory' in 'GalleryStudio, Version=6.0.0.14, Culture=neutral, PublicKeyToken=null'. Using the type defined in 'G:\'Personal'_'Files'\Refregitz\PortableChess\Chess\RefregizMemmory.cs'.
+#pragma warning disable CS0436 // The type 'RefregizMemmory' in 'G:\'Personal'_'Files'\Refregitz\PortableChess\Chess\RefregizMemmory.cs' conflicts with the imported type 'RefregizMemmory' in 'GalleryStudio, Version=6.0.0.14, Culture=neutral, PublicKeyToken=null'. Using the type defined in 'G:\'Personal'_'Files'\Refregitz\PortableChess\Chess\RefregizMemmory.cs'.
+                                GalleryStudio.RefregizMemmory tr = new GalleryStudio.RefregizMemmory(MovementsAStarGreedyHeuristicFound, IInoreSelfObjects, UsePenaltyRegardMechnisam, BestMovments, PredictHeuristic, OnlySelf, AStarGreedyHeuristic, ArrangmentsChanged);
+#pragma warning restore CS0436 // The type 'RefregizMemmory' in 'G:\'Personal'_'Files'\Refregitz\PortableChess\Chess\RefregizMemmory.cs' conflicts with the imported type 'RefregizMemmory' in 'GalleryStudio, Version=6.0.0.14, Culture=neutral, PublicKeyToken=null'. Using the type defined in 'G:\'Personal'_'Files'\Refregitz\PortableChess\Chess\RefregizMemmory.cs'.
+#pragma warning restore CS0436 // The type 'RefregizMemmory' in 'G:\'Personal'_'Files'\Refregitz\PortableChess\Chess\RefregizMemmory.cs' conflicts with the imported type 'RefregizMemmory' in 'GalleryStudio, Version=6.0.0.14, Culture=neutral, PublicKeyToken=null'. Using the type defined in 'G:\'Personal'_'Files'\Refregitz\PortableChess\Chess\RefregizMemmory.cs'.
                                 t = (HybridizerRefrigitz.AllDraw)tr.Load(Quantum, HybridizerRefrigitzForm.OrderPlate);
                                 if (t != null)
                                 {
@@ -176,7 +176,7 @@ namespace HybridizerRefrigitz
                             }
                             /*else
                             {
-                                HybridizerRefrigitz.RefregizMemmory tr = new HybridizerRefrigitz.RefregizMemmory(MovementsAStarGreedyHeuristicFound, IInoreSelfObjects, UsePenaltyRegardMechnisam, BestMovments, PredictHeuristic, OnlySelf, AStarGreedyHeuristic, ArrangmentsChanged);
+                                GalleryStudio.RefregizMemmory tr = new GalleryStudio.RefregizMemmory(MovementsAStarGreedyHeuristicFound, IInoreSelfObjects, UsePenaltyRegardMechnisam, BestMovments, PredictHeuristic, OnlySelf, AStarGreedyHeuristic, ArrangmentsChanged);
                                tt =(QuantumRefrigiz.AllDraw) tr.LoadQ(Quantum, HybridizerRefrigitzForm.OrderPlate);
                                 if (t != null)
                                 {
@@ -192,7 +192,7 @@ namespace HybridizerRefrigitz
 
                                     DrawDrawen = true;
 
-                                    System.Windows.Forms.MessageBox.Show("Load Completed.");
+                                    //System.Windows.Forms.MessageBox.Show("Load Completed.");
                                 }
                             }*/
                         }
@@ -263,11 +263,11 @@ namespace HybridizerRefrigitz
                     HybridizerRefrigitz.AllDraw Stote = Curent.Draw;
                     if (!File.Exists(AllDrawKindString))
                     {
-#pragma warning disable CS0436 // The type 'RefregizMemmory' in 'G:\'Personal'_'Files'\Refregitz\PortableChess\Chess\RefregizMemmory.cs' conflicts with the imported type 'RefregizMemmory' in 'HybridizerRefrigitz, Version=6.0.0.14, Culture=neutral, PublicKeyToken=null'. Using the type defined in 'G:\'Personal'_'Files'\Refregitz\PortableChess\Chess\RefregizMemmory.cs'.
-#pragma warning disable CS0436 // The type 'RefregizMemmory' in 'G:\'Personal'_'Files'\Refregitz\PortableChess\Chess\RefregizMemmory.cs' conflicts with the imported type 'RefregizMemmory' in 'HybridizerRefrigitz, Version=6.0.0.14, Culture=neutral, PublicKeyToken=null'. Using the type defined in 'G:\'Personal'_'Files'\Refregitz\PortableChess\Chess\RefregizMemmory.cs'.
-                        HybridizerRefrigitz.RefregizMemmory rt = new HybridizerRefrigitz.RefregizMemmory(MovementsAStarGreedyHeuristicFound, IInoreSelfObjects, UsePenaltyRegardMechnisam, BestMovments, PredictHeuristic, OnlySelf, AStarGreedyHeuristic, ArrangmentsChanged
-#pragma warning restore CS0436 // The type 'RefregizMemmory' in 'G:\'Personal'_'Files'\Refregitz\PortableChess\Chess\RefregizMemmory.cs' conflicts with the imported type 'RefregizMemmory' in 'HybridizerRefrigitz, Version=6.0.0.14, Culture=neutral, PublicKeyToken=null'. Using the type defined in 'G:\'Personal'_'Files'\Refregitz\PortableChess\Chess\RefregizMemmory.cs'.
-#pragma warning restore CS0436 // The type 'RefregizMemmory' in 'G:\'Personal'_'Files'\Refregitz\PortableChess\Chess\RefregizMemmory.cs' conflicts with the imported type 'RefregizMemmory' in 'HybridizerRefrigitz, Version=6.0.0.14, Culture=neutral, PublicKeyToken=null'. Using the type defined in 'G:\'Personal'_'Files'\Refregitz\PortableChess\Chess\RefregizMemmory.cs'.
+#pragma warning disable CS0436 // The type 'RefregizMemmory' in 'G:\'Personal'_'Files'\Refregitz\PortableChess\Chess\RefregizMemmory.cs' conflicts with the imported type 'RefregizMemmory' in 'GalleryStudio, Version=6.0.0.14, Culture=neutral, PublicKeyToken=null'. Using the type defined in 'G:\'Personal'_'Files'\Refregitz\PortableChess\Chess\RefregizMemmory.cs'.
+#pragma warning disable CS0436 // The type 'RefregizMemmory' in 'G:\'Personal'_'Files'\Refregitz\PortableChess\Chess\RefregizMemmory.cs' conflicts with the imported type 'RefregizMemmory' in 'GalleryStudio, Version=6.0.0.14, Culture=neutral, PublicKeyToken=null'. Using the type defined in 'G:\'Personal'_'Files'\Refregitz\PortableChess\Chess\RefregizMemmory.cs'.
+                        GalleryStudio.RefregizMemmory rt = new GalleryStudio.RefregizMemmory(MovementsAStarGreedyHeuristicFound, IInoreSelfObjects, UsePenaltyRegardMechnisam, BestMovments, PredictHeuristic, OnlySelf, AStarGreedyHeuristic, ArrangmentsChanged
+#pragma warning restore CS0436 // The type 'RefregizMemmory' in 'G:\'Personal'_'Files'\Refregitz\PortableChess\Chess\RefregizMemmory.cs' conflicts with the imported type 'RefregizMemmory' in 'GalleryStudio, Version=6.0.0.14, Culture=neutral, PublicKeyToken=null'. Using the type defined in 'G:\'Personal'_'Files'\Refregitz\PortableChess\Chess\RefregizMemmory.cs'.
+#pragma warning restore CS0436 // The type 'RefregizMemmory' in 'G:\'Personal'_'Files'\Refregitz\PortableChess\Chess\RefregizMemmory.cs' conflicts with the imported type 'RefregizMemmory' in 'GalleryStudio, Version=6.0.0.14, Culture=neutral, PublicKeyToken=null'. Using the type defined in 'G:\'Personal'_'Files'\Refregitz\PortableChess\Chess\RefregizMemmory.cs'.
                             );
                         //if (!Quantum)
                         {
@@ -280,9 +280,9 @@ namespace HybridizerRefrigitz
                                 //.SetBoxText("\r\nSaved Completed.");
                                 //Curent.RefreshBoxText();
                                 //PictureBoxHybridizerRefrigitz.SendToBack();
-                                //PictureBoxTimerGray.SendToBack();
-                                //PictureBoxTimerBrown.SendToBack();
-                                //MessageBox.Show("Saved Completed.");
+                                //PictureBoxTimerWHITE.SendToBack();
+                                //PictureBoxTimerBLACK.SendToBack();
+                                ////MessageBox.Show("Saved Completed.");
                             }
                         }
                         /*else {
@@ -295,9 +295,9 @@ namespace HybridizerRefrigitz
     //Curent.SetBoxText("\r\nSaved Completed.");
                             //    Curent.RefreshBoxText();
                                 //PictureBoxHybridizerRefrigitz.SendToBack();
-                                //PictureBoxTimerGray.SendToBack();
-                                //PictureBoxTimerBrown.SendToBack();
-                                //MessageBox.Show("Saved Completed.");
+                                //PictureBoxTimerWHITE.SendToBack();
+                                //PictureBoxTimerBLACK.SendToBack();
+                                ////MessageBox.Show("Saved Completed.");
                             }
                         */
                     }
@@ -307,11 +307,11 @@ namespace HybridizerRefrigitz
                         //DrawManagement(FOUND, UsePenaltyRegardMechnisam, AStarGreedyHeuristic);
 
                         File.Delete(HybridizerRefrigitzForm.AllDrawKindString);
-#pragma warning disable CS0436 // The type 'RefregizMemmory' in 'G:\'Personal'_'Files'\Refregitz\PortableChess\Chess\RefregizMemmory.cs' conflicts with the imported type 'RefregizMemmory' in 'HybridizerRefrigitz, Version=6.0.0.14, Culture=neutral, PublicKeyToken=null'. Using the type defined in 'G:\'Personal'_'Files'\Refregitz\PortableChess\Chess\RefregizMemmory.cs'.
-#pragma warning disable CS0436 // The type 'RefregizMemmory' in 'G:\'Personal'_'Files'\Refregitz\PortableChess\Chess\RefregizMemmory.cs' conflicts with the imported type 'RefregizMemmory' in 'HybridizerRefrigitz, Version=6.0.0.14, Culture=neutral, PublicKeyToken=null'. Using the type defined in 'G:\'Personal'_'Files'\Refregitz\PortableChess\Chess\RefregizMemmory.cs'.
-                        HybridizerRefrigitz.RefregizMemmory rt = new HybridizerRefrigitz.RefregizMemmory(MovementsAStarGreedyHeuristicFound, IInoreSelfObjects, UsePenaltyRegardMechnisam, BestMovments, PredictHeuristic, OnlySelf, AStarGreedyHeuristic, ArrangmentsChanged
-#pragma warning restore CS0436 // The type 'RefregizMemmory' in 'G:\'Personal'_'Files'\Refregitz\PortableChess\Chess\RefregizMemmory.cs' conflicts with the imported type 'RefregizMemmory' in 'HybridizerRefrigitz, Version=6.0.0.14, Culture=neutral, PublicKeyToken=null'. Using the type defined in 'G:\'Personal'_'Files'\Refregitz\PortableChess\Chess\RefregizMemmory.cs'.
-#pragma warning restore CS0436 // The type 'RefregizMemmory' in 'G:\'Personal'_'Files'\Refregitz\PortableChess\Chess\RefregizMemmory.cs' conflicts with the imported type 'RefregizMemmory' in 'HybridizerRefrigitz, Version=6.0.0.14, Culture=neutral, PublicKeyToken=null'. Using the type defined in 'G:\'Personal'_'Files'\Refregitz\PortableChess\Chess\RefregizMemmory.cs'.
+#pragma warning disable CS0436 // The type 'RefregizMemmory' in 'G:\'Personal'_'Files'\Refregitz\PortableChess\Chess\RefregizMemmory.cs' conflicts with the imported type 'RefregizMemmory' in 'GalleryStudio, Version=6.0.0.14, Culture=neutral, PublicKeyToken=null'. Using the type defined in 'G:\'Personal'_'Files'\Refregitz\PortableChess\Chess\RefregizMemmory.cs'.
+#pragma warning disable CS0436 // The type 'RefregizMemmory' in 'G:\'Personal'_'Files'\Refregitz\PortableChess\Chess\RefregizMemmory.cs' conflicts with the imported type 'RefregizMemmory' in 'GalleryStudio, Version=6.0.0.14, Culture=neutral, PublicKeyToken=null'. Using the type defined in 'G:\'Personal'_'Files'\Refregitz\PortableChess\Chess\RefregizMemmory.cs'.
+                        GalleryStudio.RefregizMemmory rt = new GalleryStudio.RefregizMemmory(MovementsAStarGreedyHeuristicFound, IInoreSelfObjects, UsePenaltyRegardMechnisam, BestMovments, PredictHeuristic, OnlySelf, AStarGreedyHeuristic, ArrangmentsChanged
+#pragma warning restore CS0436 // The type 'RefregizMemmory' in 'G:\'Personal'_'Files'\Refregitz\PortableChess\Chess\RefregizMemmory.cs' conflicts with the imported type 'RefregizMemmory' in 'GalleryStudio, Version=6.0.0.14, Culture=neutral, PublicKeyToken=null'. Using the type defined in 'G:\'Personal'_'Files'\Refregitz\PortableChess\Chess\RefregizMemmory.cs'.
+#pragma warning restore CS0436 // The type 'RefregizMemmory' in 'G:\'Personal'_'Files'\Refregitz\PortableChess\Chess\RefregizMemmory.cs' conflicts with the imported type 'RefregizMemmory' in 'GalleryStudio, Version=6.0.0.14, Culture=neutral, PublicKeyToken=null'. Using the type defined in 'G:\'Personal'_'Files'\Refregitz\PortableChess\Chess\RefregizMemmory.cs'.
                             );
                         //"Universal Root Founding";
                         if (Curent.Draw != null)
@@ -323,9 +323,9 @@ namespace HybridizerRefrigitz
                             // Curent.SetBoxText("\r\nSaved Completed.");
                             // Curent.RefreshBoxText();
                             //PictureBoxHybridizerRefrigitz.SendToBack();
-                            //PictureBoxTimerGray.SendToBack();
-                            //PictureBoxTimerBrown.SendToBack();
-                            //MessageBox.Show("Saved Completed.");
+                            //PictureBoxTimerWHITE.SendToBack();
+                            //PictureBoxTimerBLACK.SendToBack();
+                            ////MessageBox.Show("Saved Completed.");
                         }
                         //DrawManagement(FOUND, UsePenaltyRegardMechnisam, AStarGreedyHeuristic);
 

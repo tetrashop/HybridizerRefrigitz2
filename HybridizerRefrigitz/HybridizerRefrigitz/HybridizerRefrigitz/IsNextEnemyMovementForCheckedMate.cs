@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-
+using System.Drawing;
 using System.Threading.Tasks;
 
 namespace HybridizerRefrigitz
@@ -40,9 +40,9 @@ namespace HybridizerRefrigitz
         {
             //long Time = TimeElapced.TimeNow();Spaces++;
             bool IS= false;
-            ConsoleColor a = ConsoleColor.Gray;
+            Color a = Color.WHITE;
             if (OrderP== -1)
-                a = ConsoleColor.Black;
+                a = Color.BLACK;
             String A1 = AllDraw.ActionString.ToString();
             bool A2 = AllDraw.ActionStringReady;
             bool A3 = AllDraw.AStarGreadyFirstSearch;
@@ -102,8 +102,8 @@ namespace HybridizerRefrigitz
             List<int> A55 = new List<int>();
             for (var i = 0; i < AllDraw.StoreADrawAStarGreedy.Count; i++)
                 A55.Add(AllDraw.StoreADrawAStarGreedy[i]);
-            int A56 = AllDraw.SuppportCountStaticBrown;
-            int A57 = AllDraw.SuppportCountStaticGray;
+            int A56 = AllDraw.SuppportCountStaticBLACK;
+            int A57 = AllDraw.SuppportCountStaticWHITE;
             String A58 = AllDraw.SyntaxToWrite;
             List<int[,]> A59 = new List<int[,]>();
             for (var i = 0; i < AllDraw.TableCurrent.Count; i++)
@@ -125,16 +125,16 @@ namespace HybridizerRefrigitz
             AllDraw A66 = null;
             if (AllDraw.THISDummy != null)
                 AllDraw.THISDummy.Clone(A66);
-            bool A67 = AllDraw.THISSecradioButtonBrownOrderChecked;
-            bool A68 = AllDraw.THISSecradioButtonGrayOrderChecked;
+            bool A67 = AllDraw.THISSecradioButtonBLACKOrderChecked;
+            bool A68 = AllDraw.THISSecradioButtonWHITEOrderChecked;
             bool A69 = AllDraw.UseDoubleTime;
             String B1 = ThinkingHybridizerRefrigitz.ActionsString;
             int B2 = ThinkingHybridizerRefrigitz.BeginThread;
             int B3 = ThinkingHybridizerRefrigitz.EndThread;
             int B4 = ThinkingHybridizerRefrigitz.FoundFirstMating;
             int B5 = ThinkingHybridizerRefrigitz.FoundFirstSelfMating;
-            bool B6 = ThinkingHybridizerRefrigitz.KingMaovableBrown;
-            bool B7 = ThinkingHybridizerRefrigitz.KingMaovableGray;
+            bool B6 = ThinkingHybridizerRefrigitz.KingMaovableBLACK;
+            bool B7 = ThinkingHybridizerRefrigitz.KingMaovableWHITE;
             bool B8 = ThinkingHybridizerRefrigitz.LearningVarsCheckedMateOccured;
             bool B9 = ThinkingHybridizerRefrigitz.LearningVarsCheckedMateOccuredOneCheckedMate;
             int B10 = ThinkingHybridizerRefrigitz.MaxHeuristicx;
@@ -212,8 +212,8 @@ namespace HybridizerRefrigitz
             AllDraw.StoreADrawAStarGreedy.Clear();
             for (var i = 0; i < AllDraw.StoreADrawAStarGreedy.Count; i++)
                 AllDraw.StoreADrawAStarGreedy.Add(A55[i]);
-             AllDraw.SuppportCountStaticBrown= A56;
-             AllDraw.SuppportCountStaticGray= A57;
+             AllDraw.SuppportCountStaticBLACK= A56;
+             AllDraw.SuppportCountStaticWHITE= A57;
             AllDraw.SyntaxToWrite = A58;
             AllDraw.TableCurrent.Clear();
             for (var i = 0; i < AllDraw.TableCurrent.Count; i++)
@@ -234,16 +234,16 @@ namespace HybridizerRefrigitz
              AllDraw.THIScomboBoxMaxLevelText= A65;
             if (A66 != null)
                 A66.Clone(AllDraw.THISDummy);
-             AllDraw.THISSecradioButtonBrownOrderChecked= A67;
-             AllDraw.THISSecradioButtonGrayOrderChecked= A68;
+             AllDraw.THISSecradioButtonBLACKOrderChecked= A67;
+             AllDraw.THISSecradioButtonWHITEOrderChecked= A68;
              AllDraw.UseDoubleTime= A69;
              ThinkingHybridizerRefrigitz.ActionsString= B1;
              ThinkingHybridizerRefrigitz.BeginThread = B2;
              ThinkingHybridizerRefrigitz.EndThread = B3;
              ThinkingHybridizerRefrigitz.FoundFirstMating = B4;
              ThinkingHybridizerRefrigitz.FoundFirstSelfMating = B5;
-             ThinkingHybridizerRefrigitz.KingMaovableBrown = B6;
-             ThinkingHybridizerRefrigitz.KingMaovableGray = B7;
+             ThinkingHybridizerRefrigitz.KingMaovableBLACK = B6;
+             ThinkingHybridizerRefrigitz.KingMaovableWHITE = B7;
              ThinkingHybridizerRefrigitz.LearningVarsCheckedMateOccured = B8;
              ThinkingHybridizerRefrigitz.LearningVarsCheckedMateOccuredOneCheckedMate = B9;
              ThinkingHybridizerRefrigitz.MaxHeuristicx = B10;

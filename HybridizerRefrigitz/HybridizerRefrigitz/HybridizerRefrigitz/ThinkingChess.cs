@@ -41,7 +41,7 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-
+using System.Drawing;
 using System.IO;
 using System.Text;
 using System.Threading;
@@ -80,13 +80,13 @@ namespace HybridizerRefrigitz
         int HeuristicAllMoveMidel = 0;
         List<int[]> HeuristicAllReducedMove = new List<int[]>();
         int HeuristicAllReducedMoveMidel = 0;
-        public static int NoOfBoardMovedGray = 0;
-        public static int NoOfBoardMovedBrown = 0;
+        public static int NoOfBoardMovedWHITE = 0;
+        public static int NoOfBoardMovedBLACK = 0;
         public static int NoOfMovableAllObjectMove = 1;
-        public int DifOfNoOfSupporteAndReducedSupportGray = int.MinValue;
-        public int DifOfNoOfSupporteAndReducedSupportBrown = int.MinValue;
-        public static int ColleralationGray = int.MaxValue;
-        public static int ColleralationBrown = int.MaxValue;
+        public int DifOfNoOfSupporteAndReducedSupportWHITE = int.MinValue;
+        public int DifOfNoOfSupporteAndReducedSupportBLACK = int.MinValue;
+        public static int ColleralationWHITE = int.MaxValue;
+        public static int ColleralationBLACK = int.MaxValue;
         public static int Colleralation = int.MaxValue;
         public static int DeColleralation = int.MaxValue;
         public static int[,] TableInitiation ={
@@ -125,11 +125,11 @@ namespace HybridizerRefrigitz
         public List<bool> KishSelf = new List<bool>();
         public List<bool> KishEnemy = new List<bool>();
         readonly StringBuilder Space = new StringBuilder("&nbsp;");
-//#pragma warning disable CS0414 // The field 'ThinkingHybridizerRefrigitz.Spaces' is assigned but its value is never used
+        //#pragma warning disable CS0414 // The field 'ThinkingHybridizerRefrigitz.Spaces' is assigned but its value is never used
 #pragma warning disable CS0414 // The field 'ThinkingHybridizerRefrigitz.Spaces' is assigned but its value is never used
         readonly int Spaces = 0;
 #pragma warning restore CS0414 // The field 'ThinkingHybridizerRefrigitz.Spaces' is assigned but its value is never used
-//#pragma warning restore CS0414 // The field 'ThinkingHybridizerRefrigitz.Spaces' is assigned but its value is never used
+        //#pragma warning restore CS0414 // The field 'ThinkingHybridizerRefrigitz.Spaces' is assigned but its value is never used
         public int HeuristicAttackValueSup = new int();
         public int HeuristicMovementValueSup = new int();
         public int HeuristicSelfSupportedValueSup = new int();
@@ -182,8 +182,8 @@ namespace HybridizerRefrigitz
         public int MinisterHigh = 0;
         public int KingMidle = 0;
         public int KingHigh = 0;
-        public static bool KingMaovableGray = false;
-        public static bool KingMaovableBrown = false;
+        public static bool KingMaovableWHITE = false;
+        public static bool KingMaovableBLACK = false;
         public static int FoundFirstMating;
         public static int FoundFirstSelfMating;
         public int SodierValue = 1 * 3;
@@ -250,7 +250,7 @@ namespace HybridizerRefrigitz
         public List<QuantumAtamata> PenaltyRegardListKing = null;
         public int Max;
         public int Row, Column;
-        public ConsoleColor color;
+        public Color color;
         public int Order;
         //[NonSerialized()]
         public List<AllDraw> AStarGreedy = new List<AllDraw>();
@@ -490,7 +490,7 @@ namespace HybridizerRefrigitz
                 {
                     if (Order == 1)
                     {
-                        //Number of Gray Objects at Last Row Bottmm.
+                        //Number of WHITE Objects at Last Row Bottmm.
                         for (var i = 0; i < 2; i++)
                             for (var j = 6; j < 8; j++)
                                 if (Table[i, j] > 0)
@@ -498,7 +498,7 @@ namespace HybridizerRefrigitz
                     }
                     else
                     {
-                        //Number of Brown Objects at Last tow Row Upper.
+                        //Number of BLACK Objects at Last tow Row Upper.
                         for (var i = 0; i < 8; i++)
                             for (var j = 0; j < 2; j++)
                                 if (Table[i, j] < 0)
@@ -509,7 +509,7 @@ namespace HybridizerRefrigitz
                 {
                     if (Order == -1)
                     {
-                        //Number of Brown Objects Table at Last tow row Uppper.
+                        //Number of BLACK Objects Table at Last tow row Uppper.
                         for (var i = 0; i < 8; i++)
                             for (var j = 6; j < 2; j++)
                                 if (Table[i, j] > 0)
@@ -517,7 +517,7 @@ namespace HybridizerRefrigitz
                     }
                     else
                     {
-                        //Number of Gray Objects Table at Last tow rown below.
+                        //Number of WHITE Objects Table at Last tow rown below.
                         for (var i = 0; i < 2; i++)
                             for (var j = 0; j < 8; j++)
                                 if (Table[i, j] < 0)
@@ -530,7 +530,7 @@ namespace HybridizerRefrigitz
             }
         }
         //Constructor
-        public ThinkingHybridizerRefrigitz(int iInde, int KindO, int CurrentAStarGredy, bool MovementsAStarGreedyHeuristicTFou, bool IgnoreSelfObject, bool UsePenaltyRegardMechnisa, bool BestMovment, bool PredictHurist, bool OnlySel, bool AStarGreedyHuris, bool Arrangments, int i, int j, ConsoleColor a, int[,] Tab, int Ma, int Ord, bool ThinkingBeg, int CurA, int ThingN, int Kin)
+        public ThinkingHybridizerRefrigitz(int iInde, int KindO, int CurrentAStarGredy, bool MovementsAStarGreedyHeuristicTFou, bool IgnoreSelfObject, bool UsePenaltyRegardMechnisa, bool BestMovment, bool PredictHurist, bool OnlySel, bool AStarGreedyHuris, bool Arrangments, int i, int j, Color a, int[,] Tab, int Ma, int Ord, bool ThinkingBeg, int CurA, int ThingN, int Kin)
         {
             Object O = new Object();
             lock (O)
@@ -897,7 +897,7 @@ namespace HybridizerRefrigitz
                 AA.ThinkingFinished = ThinkingFinished;
             }
         }
-        bool IsDistributedObjectAttackNonDistributedEnemyObject(bool Before, int[,] Table, int Ord, ConsoleColor aa, int RowS, int ColS, int RowD, int ColD)
+        bool IsDistributedObjectAttackNonDistributedEnemyObject(bool Before, int[,] Table, int Ord, Color aa, int RowS, int ColS, int RowD, int ColD)
         {
             Object O = new Object();
             lock (O)
@@ -909,7 +909,7 @@ namespace HybridizerRefrigitz
             }
         }
         ///Heuristic of Attacker.
-        int HeuristicAttack(bool Before, int[,] Table, int Ord, ConsoleColor aa, int RowS, int ColS, int RowD, int ColD)
+        int HeuristicAttack(bool Before, int[,] Table, int Ord, Color aa, int RowS, int ColS, int RowD, int ColD)
         {
             Object O = new Object();
             lock (O)
@@ -924,7 +924,7 @@ namespace HybridizerRefrigitz
                 if (!AStarGreedyHeuristicT)
                 {
                     int Order = new int();
-                    ConsoleColor a = new ConsoleColor();
+                    Color a = new Color();
                     a = aa;
                     if (RowS == RowD && ColS == ColD)
                         return HeuristicAttackValue;
@@ -938,14 +938,14 @@ namespace HybridizerRefrigitz
                         Order = -1;
                         Sign = AllDraw.SignAttack;
                         ChessRules.CurrentOrder = -1;
-                        a = ConsoleColor.Black;
+                        a = Color.BLACK;
                     }
                     else if (Table[RowD, ColD] < 0 && DummyOrder == 1 && Table[RowS, ColS] > 0)
                     {
                         Order = 1;
                         Sign = AllDraw.SignAttack;
                         ChessRules.CurrentOrder = -1;
-                        a = ConsoleColor.Gray;
+                        a = Color.WHITE;
                     }
                     else
                         return HeuristicAttackValue;
@@ -987,13 +987,13 @@ namespace HybridizerRefrigitz
                                                 continue;
                                             if (Order == -1 && Table[g, h] <= 0)
                                                 continue;
-                                            ConsoleColor aaa = new ConsoleColor();
+                                            Color aaa = new Color();
                                             //Assgin Enemy ints.
-                                            aaa = ConsoleColor.Gray;
+                                            aaa = Color.WHITE;
                                             if (Order * -1 == -1)
-                                                aaa = ConsoleColor.Black;
+                                                aaa = Color.BLACK;
                                             else
-                                                aaa = ConsoleColor.Gray;
+                                                aaa = Color.WHITE;
                                             //When Enemy is Supported.
                                             bool A = new bool();
                                             bool B = new bool();
@@ -1036,7 +1036,7 @@ namespace HybridizerRefrigitz
                 else
                 {
                     int Order = new int();
-                    ConsoleColor a = new ConsoleColor();
+                    Color a = new Color();
                     a = aa;
                     //Ignore of Current.
                     if (RowS == RowD && ColS == ColD)
@@ -1051,14 +1051,14 @@ namespace HybridizerRefrigitz
                         Order = -1;
                         Sign = AllDraw.SignAttack;
                         ChessRules.CurrentOrder = -1;
-                        a = ConsoleColor.Black;
+                        a = Color.BLACK;
                     }
                     else if (Table[RowD, ColD] < 0 && DummyOrder == 1 && Table[RowS, ColS] > 0)
                     {
                         Order = 1;
                         Sign = AllDraw.SignAttack;
                         ChessRules.CurrentOrder = -1;
-                        a = ConsoleColor.Gray;
+                        a = Color.WHITE;
                     }
                     else
                         return HeuristicAttackValue;
@@ -1081,8 +1081,8 @@ namespace HybridizerRefrigitz
 
                             if (ab)
                             {
-                         
-                                    HA += RationalRegard;
+
+                                HA += RationalRegard;
 
                                 //When there is supporter of attacked Objects take Heuristic negative else take muliply sign and muliply Heuristic.
                                 //For All Enemy Obejcts.                                             
@@ -1103,13 +1103,13 @@ namespace HybridizerRefrigitz
                                             continue;
                                         if (Order == -1 && Table[g, h] <= 0)
                                             continue;
-                                        ConsoleColor aaa = new ConsoleColor();
+                                        Color aaa = new Color();
                                         //Assgin Enemy ints.
-                                        aaa = ConsoleColor.Gray;
+                                        aaa = Color.WHITE;
                                         if (Order * -1 == -1)
-                                            aaa = ConsoleColor.Black;
+                                            aaa = Color.BLACK;
                                         else
-                                            aaa = ConsoleColor.Gray;
+                                            aaa = Color.WHITE;
                                         //When Enemy is Supported.
                                         bool A = new bool();
                                         bool B = new bool();
@@ -1153,13 +1153,13 @@ namespace HybridizerRefrigitz
                 return 1 * HA;
             }
         }
-        bool IsMinisteBreakable(bool Before, int[,] Table, int Ord, ConsoleColor aa, int RowS, int ColS, int RowD, int ColD)
+        bool IsMinisteBreakable(bool Before, int[,] Table, int Ord, Color aa, int RowS, int ColS, int RowD, int ColD)
         {
             bool Is = false;
-            const int MinisterGray = 5, MinisterBrown = -5;
+            const int MinisterWHITE = 5, MinisterBLACK = -5;
             if (Order == -1)
             {
-                if (Table[RowD, ColD] == MinisterGray)
+                if (Table[RowD, ColD] == MinisterWHITE)
                     return true;
 
             }
@@ -1167,19 +1167,19 @@ namespace HybridizerRefrigitz
             {
                 if (Order == 1)
                 {
-                    if (Table[RowD, ColD] == MinisterBrown)
+                    if (Table[RowD, ColD] == MinisterBLACK)
                         return true;
                 }
             }
             return Is;
         }
-        bool IsMinistePowerfull(bool Before, int[,] Table, int Ord, ConsoleColor aa, int RowS, int ColS, int RowD, int ColD)
+        bool IsMinistePowerfull(bool Before, int[,] Table, int Ord, Color aa, int RowS, int ColS, int RowD, int ColD)
         {
             bool Is = true;
-            const int MinisterGray = 5, MinisterBrown = -5;
+            const int MinisterWHITE = 5, MinisterBLACK = -5;
             if (Order == 1)
             {
-                if (Table[RowS, ColS] == MinisterGray)
+                if (Table[RowS, ColS] == MinisterWHITE)
                 {
                     bool ab = false;
                     var th = Task.Factory.StartNew(() => ab = IsNumberOfObjecttIsLessThanThreashold(CloneATable(Table), 31));
@@ -1194,7 +1194,7 @@ namespace HybridizerRefrigitz
             }
             else
             {
-                if (Table[RowS, ColS] == MinisterBrown)
+                if (Table[RowS, ColS] == MinisterBLACK)
                 {
                     bool ab = false;
                     var th = Task.Factory.StartNew(() => ab = IsNumberOfObjecttIsLessThanThreashold(CloneATable(Table), 31));
@@ -1209,7 +1209,7 @@ namespace HybridizerRefrigitz
             }
             return Is;
         }
-        int HeuristicReducsedAttack(bool Before, int[,] Table, int Ord, ConsoleColor aa, int RowS, int ColS, int RowD, int ColD
+        int HeuristicReducsedAttack(bool Before, int[,] Table, int Ord, Color aa, int RowS, int ColS, int RowD, int ColD
                   )
         {
             Object O = new Object();
@@ -1232,12 +1232,12 @@ namespace HybridizerRefrigitz
                             //For Current Object Lcation.
                             int Order = new int();
                             Order = DumOrder;
-                            ConsoleColor a = new ConsoleColor();
+                            Color a = new Color();
                             a = aa;
                             //Ignore Current Unnessery Home.
                             if (RowS == RowD && ColS == ColD)
                                 return 0;
-                            //Default Is Gray One.
+                            //Default Is WHITE One.
                             Order = DummyOrder;
                             ///When Supporte is true. means [RowD,ColD] Supportes [RowS,ColS].
                             ///What is Supporte!
@@ -1253,14 +1253,14 @@ namespace HybridizerRefrigitz
                                 Order = 1;
                                 Sign = 1 * AllDraw.SignAttack;
                                 ChessRules.CurrentOrder = 1;
-                                a = ConsoleColor.Gray;
+                                a = Color.WHITE;
                             }
                             else if (Table[RowD, ColD] < 0 && DummyOrder == 1 && Table[RowS, ColS] > 0)
                             {
                                 Order = -1;
                                 Sign = 1 * AllDraw.SignAttack;
                                 ChessRules.CurrentOrder = -1;
-                                a = ConsoleColor.Black;
+                                a = Color.BLACK;
                             }
                             else
                                 return HeuristicReducedAttackValue;
@@ -1295,13 +1295,13 @@ namespace HybridizerRefrigitz
                                                     continue;
                                                 if (Order == -1 && Table[g, h] <= 0)
                                                     continue;
-                                                ConsoleColor aaa = new ConsoleColor();
+                                                Color aaa = new Color();
                                                 //Assgin Enemy ints.
-                                                aaa = ConsoleColor.Gray;
+                                                aaa = Color.WHITE;
                                                 if (Order * -1 == -1)
-                                                    aaa = ConsoleColor.Black;
+                                                    aaa = Color.BLACK;
                                                 else
-                                                    aaa = ConsoleColor.Gray;
+                                                    aaa = Color.WHITE;
                                                 //When Enemy is Supported.
                                                 bool A = new bool();
                                                 bool B = new bool();
@@ -1352,7 +1352,7 @@ namespace HybridizerRefrigitz
                 {
 
                     int Order = new int();
-                    ConsoleColor a = new ConsoleColor();
+                    Color a = new Color();
                     a = aa;
                     {
                         //Ignore Current Home.
@@ -1367,14 +1367,14 @@ namespace HybridizerRefrigitz
                             Order = 1;
                             Sign = 1 * AllDraw.SignAttack;
                             ChessRules.CurrentOrder = 1;
-                            a = ConsoleColor.Gray;
+                            a = Color.WHITE;
                         }
                         else if (Table[RowD, ColD] < 0 && DummyOrder == 1 && Table[RowS, ColS] > 0)
                         {
                             Order = -1;
                             Sign = 1 * AllDraw.SignAttack;
                             ChessRules.CurrentOrder = -1;
-                            a = ConsoleColor.Black;
+                            a = Color.BLACK;
                         }
                         else
                             return HeuristicReducedAttackValue;
@@ -1409,13 +1409,13 @@ namespace HybridizerRefrigitz
                                                 continue;
                                             if (Order == -1 && Table[g, h] <= 0)
                                                 continue;
-                                            ConsoleColor aaa = new ConsoleColor();
+                                            Color aaa = new Color();
                                             //Assgin Enemy ints.
-                                            aaa = ConsoleColor.Gray;
+                                            aaa = Color.WHITE;
                                             if (Order * -1 == -1)
-                                                aaa = ConsoleColor.Black;
+                                                aaa = Color.BLACK;
                                             else
-                                                aaa = ConsoleColor.Gray;
+                                                aaa = Color.WHITE;
                                             //When Enemy is Supported.
                                             bool A = new bool();
                                             bool B = new bool();
@@ -1496,7 +1496,7 @@ namespace HybridizerRefrigitz
             }
         }
         ///Heuristic of ObjectDanger.
-        int HeuristicObjectDangour(int[,] Table, int Order, ConsoleColor a, int RowS, int ColS, int RowD, int ColD)
+        int HeuristicObjectDangour(int[,] Table, int Order, Color a, int RowS, int ColS, int RowD, int ColD)
         {
             Object O = new Object();
             lock (O)
@@ -1525,7 +1525,7 @@ namespace HybridizerRefrigitz
                             Sign = -1 * AllDraw.SignAttack;
                             ChessRules.CurrentOrder = 1;
                         }
-                        a = ConsoleColor.Gray;
+                        a = Color.WHITE;
                     }
                     else if (Table[RowD, ColD] < 0 && DummyOrder == 1 && Table[RowS, ColS] > 0)
                     {
@@ -1536,7 +1536,7 @@ namespace HybridizerRefrigitz
                             Sign = -1 * AllDraw.SignAttack;
                             ChessRules.CurrentOrder = -1;
                         }
-                        a = ConsoleColor.Black;
+                        a = Color.BLACK;
                     }
                     else
                         return HeuristicCheckedMate;
@@ -1573,7 +1573,7 @@ namespace HybridizerRefrigitz
                             Sign = -1 * AllDraw.SignAttack;
                             ChessRules.CurrentOrder = 1;
                         }
-                        a = ConsoleColor.Gray;
+                        a = Color.WHITE;
                     }
                     else if (Table[RowD, ColD] < 0 && DummyOrder == 1 && Table[RowS, ColS] > 0)
                     {
@@ -1584,7 +1584,7 @@ namespace HybridizerRefrigitz
                             Sign = -1 * AllDraw.SignAttack;
                             ChessRules.CurrentOrder = -1;
                         }
-                        a = ConsoleColor.Black;
+                        a = Color.BLACK;
                     }
                     else
                         return HeuristicCheckedMate;
@@ -1614,7 +1614,7 @@ namespace HybridizerRefrigitz
                 return HA * 1;
             }
         }
-        int HeuristicKiller(int Killed, int[,] Tabl, int RowS, int ColS, int RowD, int ColD, int Ord, ConsoleColor aa, bool Hit)
+        int HeuristicKiller(int Killed, int[,] Tabl, int RowS, int ColS, int RowD, int ColD, int Ord, Color aa, bool Hit)
         {
             Object O = new Object();
             lock (O)
@@ -1624,7 +1624,7 @@ namespace HybridizerRefrigitz
                     for (var jk = 0; jk < 8; jk++)
                         Tab[ik, jk] = Tabl[ik, jk];
                 int HeuristicReducedSupport = 0;
-                //Defualt is Gray Order.
+                //Defualt is WHITE Order.
                 int HA = 0;
                 int Sign = AllDraw.SignKiller;
                 int DummyOrder = Ord;
@@ -1638,18 +1638,18 @@ namespace HybridizerRefrigitz
 
                 int Order = new int();
                 Order = DummyOrder;
-                ConsoleColor a = new ConsoleColor();
+                Color a = new Color();
                 a = aa;
-                ConsoleColor colorAS = a;
+                Color colorAS = a;
                 //Ignore of Self.
                 if (Order == 1 && Tab[RowD, ColD] >= 0)
                     return HeuristicReducedSupport;
                 if (Order == -1 && Tab[RowD, ColD] <= 0)
                     return HeuristicReducedSupport;
                 bool EnemyNotSupported = false;
-                a = ConsoleColor.Gray;
+                a = Color.WHITE;
                 if (Order == -1)
-                    a = ConsoleColor.Black;
+                    a = Color.BLACK;
                 //Wehn Curfrent Movemnet is on attack.
                 Object O1 = new Object();
                 lock (O1)
@@ -1690,7 +1690,7 @@ namespace HybridizerRefrigitz
             }
         }
         //Attacks Of Enemy that is not Supported.QC_OK
-        bool InAttackEnemyThatIsNotSupported(int Kilded, int[,] Table, int Order, ConsoleColor a, int i, int j, int ii, int jj)
+        bool InAttackEnemyThatIsNotSupported(int Kilded, int[,] Table, int Order, Color a, int i, int j, int ii, int jj)
         {
 
             Object O = new Object();
@@ -1742,9 +1742,9 @@ namespace HybridizerRefrigitz
                             else
                                     if (Order1 == -1 && Tab[RowS, ColS] <= 0)
                                 continue;
-                            a = ConsoleColor.Gray;
+                            a = Color.WHITE;
                             if (Order1 * -1 == -1)
-                                a = ConsoleColor.Black;
+                                a = Color.BLACK;
                             //When Enemy is Supported.
                             Object O1 = new Object();
                             lock (O1)
@@ -1782,7 +1782,7 @@ namespace HybridizerRefrigitz
             }
         }
         //When at least one Attacked Self Object return true.
-        bool InAttackEnemyThatIsNotSupportedAll(bool EnemyIsValuable, int[,] Table, int Order, ConsoleColor a, int ij, int ji, int iij, int jji, ref List<int[]> ValuableEnemyNotSupported)
+        bool InAttackEnemyThatIsNotSupportedAll(bool EnemyIsValuable, int[,] Table, int Order, Color a, int ij, int ji, int iij, int jji, ref List<int[]> ValuableEnemyNotSupported)
         {
             Object O = new Object();
             lock (O)
@@ -1833,7 +1833,7 @@ namespace HybridizerRefrigitz
                                         ValuableEnemyNotSupported = ValuableEnemyNotSupportedA;
 
                                         if (ab)
-                                           continue;
+                                            continue;
                                         EnemyNotSupported = true;
                                         InAttackedNotEnemySupported = false;
                                         var th1 = Task.Factory.StartNew(() => ab = Attack(CloneATable(Tab), i, j, ii, jj, a, Order));
@@ -1854,9 +1854,9 @@ namespace HybridizerRefrigitz
                                                     else
                                                         if (Order == -1 && Tab[RowS, ColS] <= 0)
                                                         continue;
-                                                    a = ConsoleColor.Gray;
+                                                    a = Color.WHITE;
                                                     if (Order * -1 == -1)
-                                                        a = ConsoleColor.Black;
+                                                        a = Color.BLACK;
                                                     //
                                                     var th2 = Task.Factory.StartNew(() => ab = Support(CloneATable(Tab), RowS, ColS, ii, jj, a, Order * -1));
                                                     th2.Wait();
@@ -1937,9 +1937,9 @@ namespace HybridizerRefrigitz
                     return 0;
                 }
                 ChessRules A = new ChessRules(CurrentAStarGredyMax, MovementsAStarGreedyHeuristicFoundT, IgnoreSelfObjectsT, UsePenaltyRegardMechnisamT, BestMovmentsT, PredictHeuristicT, OnlySelfT, AStarGreedyHeuristicT, ArrangmentsChanged, Table[i, j], CloneATable(Table), Order * -1, i, j);
-                ConsoleColor a = ConsoleColor.Gray;
+                Color a = Color.WHITE;
                 if (Order * -1 == -1)
-                    a = ConsoleColor.Black;
+                    a = Color.BLACK;
                 int[,] Tab = new int[8, 8];
                 Object O = new Object();
                 lock (O)
@@ -1973,9 +1973,9 @@ namespace HybridizerRefrigitz
                                     continue;
                                 if (Order == -1 && Tab[RowS, ColS] >= 0)
                                     continue;
-                                a = ConsoleColor.Gray;
+                                a = Color.WHITE;
                                 if (Order * -1 == -1)
-                                    a = ConsoleColor.Black;
+                                    a = Color.BLACK;
                                 bool ab = false;
                                 var th = Task.Factory.StartNew(() => ab = Attack(CloneATable(Tab), ii, jj, RowS, ColS, a, Order * -1));
                                 th.Wait();
@@ -2000,9 +2000,9 @@ namespace HybridizerRefrigitz
                                                 continue;
                                             if (Order == -1 && Tab[RowD, ColD] >= 0)
                                                 continue;
-                                            a = ConsoleColor.Gray;
+                                            a = Color.WHITE;
                                             if (Order == -1)
-                                                a = ConsoleColor.Black;
+                                                a = Color.BLACK;
                                             //when there is attack of self node to that enemy node.
                                             var th1 = Task.Factory.StartNew(() => ab = Support(CloneATable(Tab), RowD, ColD, RowS, ColS, a, Order) || Attack(CloneATable(Tab), RowD, ColD, ii, jj, a, Order));
                                             th1.Wait();
@@ -2036,7 +2036,7 @@ namespace HybridizerRefrigitz
             }
         }
         //Supported of Self that is Not Attacks.QC_BAD
-        bool InAttackSelfThatNotSupported(int[,] TableS, int Order, ConsoleColor a, int ij, int ji, int ii, int jj)
+        bool InAttackSelfThatNotSupported(int[,] TableS, int Order, Color a, int ij, int ji, int ii, int jj)
         {
             Object O = new Object();
             lock (O)
@@ -2068,9 +2068,9 @@ namespace HybridizerRefrigitz
                             if (Order == -1 && Tab[RowS, ColS] <= 0)
                                 continue;
                             //Enemy
-                            a = ConsoleColor.Gray;
+                            a = Color.WHITE;
                             if (Order * -1 == -1)
-                                a = ConsoleColor.Black;
+                                a = Color.BLACK;
                             for (var ik = 0; ik < 8; ik++)
                                 for (var jk = 0; jk < 8; jk++)
                                     Tab[ik, jk] = TableS[ik, jk];
@@ -2086,9 +2086,9 @@ namespace HybridizerRefrigitz
                                 if (ab)
                                 {
                                     InAttackedNotSelfSupported = true;
-                                    a = ConsoleColor.Gray;
+                                    a = Color.WHITE;
                                     if (Order == -1)
-                                        a = ConsoleColor.Black;
+                                        a = Color.BLACK;
                                     //For Self.
                                     for (int RowD = 0; RowD < 8; RowD++)
                                     {
@@ -2100,9 +2100,9 @@ namespace HybridizerRefrigitz
                                             else
                                                 if (Order == -1 && Tab[RowD, ColD] >= 0)
                                                 continue;
-                                            a = ConsoleColor.Gray;
+                                            a = Color.WHITE;
                                             if (Order == -1)
-                                                a = ConsoleColor.Black;
+                                                a = Color.BLACK;
                                             for (var ik = 0; ik < 8; ik++)
                                                 for (var jk = 0; jk < 8; jk++)
                                                     Tab[ik, jk] = TableS[ik, jk];
@@ -2112,7 +2112,7 @@ namespace HybridizerRefrigitz
                                             th1.Wait();
                                             th1.Dispose();
                                             if (ab)
-                                             {
+                                            {
                                                 SelfSupported = true;
                                                 S = S && true;
                                                 break;
@@ -2159,7 +2159,7 @@ namespace HybridizerRefrigitz
             }
         }
         //When there is at least on self object that is not safty.
-        bool InAttackSelfThatNotSupportedAll(int[,] TableS, int Order, ConsoleColor a, int i, int j, int RowS, int ColS, int ikk, int jkk, int iik, int jjk)
+        bool InAttackSelfThatNotSupportedAll(int[,] TableS, int Order, Color a, int i, int j, int RowS, int ColS, int ikk, int jkk, int iik, int jjk)
         {
             Object O = new Object();
             lock (O)
@@ -2171,7 +2171,7 @@ namespace HybridizerRefrigitz
                 Object O1 = new Object();
                 lock (O1)
                 {
-                    var th = Task.Factory.StartNew(() => IsTowValuableObject = InAttackSelfThatNotSupportedCalculateValuableAll(CloneATable(TableS), Order, a, ikk, jkk, iik, jjk, ref ValuableSelfSupported));
+                    var th = Task.Factory.StartNew(() => IsTowValuableObject = InAttackSelfThatNotSupportedCalculateValuableAll(CloneATable(TableS), Order, color, ikk, jkk, iik, jjk, ref ValuableSelfSupported));
                     th.Wait();
                     th.Dispose();
 
@@ -2208,10 +2208,10 @@ namespace HybridizerRefrigitz
                     if (i == RowS && j == ColS)
                         return false;
                     //Enemy
-                    a = ConsoleColor.Gray;
+                    a = Color.WHITE;
                     Order = Ord;
                     if (Order * -1 == -1)
-                        a = ConsoleColor.Black;
+                        a = Color.BLACK;
                     for (var ik = 0; ik < 8; ik++)
                         for (var jk = 0; jk < 8; jk++)
                             Tab[ik, jk] = TableS[ik, jk];
@@ -2229,9 +2229,9 @@ namespace HybridizerRefrigitz
                         if (ab)
                         {
                             InAttackedNotSelfSupported = true;
-                            a = ConsoleColor.Gray;
+                            a = Color.WHITE;
                             if (Order == -1)
-                                a = ConsoleColor.Black;
+                                a = Color.BLACK;
                             //For Self.
                             for (int RowD = 0; RowD < 8; RowD++)
                             {
@@ -2245,9 +2245,9 @@ namespace HybridizerRefrigitz
                                         continue;
                                     if (i == RowD && j == ColD)
                                         continue;
-                                    a = ConsoleColor.Gray;
+                                    a = Color.WHITE;
                                     if (Order == -1)
-                                        a = ConsoleColor.Black;
+                                        a = Color.BLACK;
                                     for (var ik = 0; ik < 8; ik++)
                                         for (var jk = 0; jk < 8; jk++)
                                             Tab[ik, jk] = TableS[ik, jk];
@@ -2284,7 +2284,7 @@ namespace HybridizerRefrigitz
             }
         }
         //Creation A Complete List of Attacked Self Object(s).
-        bool InAttackSelfThatNotSupportedCalculateValuableAll(int[,] TableS, int Order, ConsoleColor a, int ij, int ji, int ii, int jj, ref List<int[]> ValuableSelfSupported)
+        bool InAttackSelfThatNotSupportedCalculateValuableAll(int[,] TableS, int Order, Color a, int ij, int ji, int ii, int jj, ref List<int[]> ValuableSelfSupported)
         {
             Object O = new Object();
             lock (O)
@@ -2322,9 +2322,9 @@ namespace HybridizerRefrigitz
                                     if (Order == -1 && Tab[RowS, ColS] <= 0)
                                     continue;
                                 //Enemy
-                                a = ConsoleColor.Gray;
+                                a = Color.WHITE;
                                 if (Order * -1 == -1)
-                                    a = ConsoleColor.Black;
+                                    a = Color.BLACK;
                                 for (var ik = 0; ik < 8; ik++)
                                     for (var jk = 0; jk < 8; jk++)
                                         Tab[ik, jk] = TableS[ik, jk];
@@ -2342,9 +2342,9 @@ namespace HybridizerRefrigitz
                                     if (ab)
                                     {
                                         InAttackedNotSelfSupported = true;
-                                        a = ConsoleColor.Gray;
+                                        a = Color.WHITE;
                                         if (Order == -1)
-                                            a = ConsoleColor.Black;
+                                            a = Color.BLACK;
                                         //For Self.
                                         for (int RowD = 0; RowD < 8; RowD++)
                                         {
@@ -2356,9 +2356,9 @@ namespace HybridizerRefrigitz
                                                 else
                                                     if (Order == -1 && Tab[RowD, ColD] >= 0)
                                                     continue;
-                                                a = ConsoleColor.Gray;
+                                                a = Color.WHITE;
                                                 if (Order == -1)
-                                                    a = ConsoleColor.Black;
+                                                    a = Color.BLACK;
                                                 for (var ik = 0; ik < 8; ik++)
                                                     for (var jk = 0; jk < 8; jk++)
                                                         Tab[ik, jk] = TableS[ik, jk];
@@ -2459,7 +2459,7 @@ namespace HybridizerRefrigitz
             }
         }
         //When Current Movment Take Supporte.QC_OK
-        bool IsCurrentMoveTakeSupporte(int[,] Table, int Order, ConsoleColor a, int i, int j, int ii, int jj)
+        bool IsCurrentMoveTakeSupporte(int[,] Table, int Order, Color a, int i, int j, int ii, int jj)
         {
             Object O = new Object();
             lock (O)
@@ -2480,9 +2480,9 @@ namespace HybridizerRefrigitz
                             continue;
                         if (Tab[RowS, ColS] >= 0 && Order == -1)
                             continue;
-                        a = ConsoleColor.Gray;
+                        a = Color.WHITE;
                         if (Order == -1)
-                            a = ConsoleColor.Black;
+                            a = Color.BLACK;
 
                         //When there is Attacks.
                         if (Support(CloneATable(Tab), RowS, ColS, ii, jj, a, Order))
@@ -2493,7 +2493,7 @@ namespace HybridizerRefrigitz
             }
         }
         ///Heuristic of King safty.
-        int HeuristicKingSafety(int[,] Tab, int Order, ConsoleColor a, int CurrentAStarGredy, int RowS, int ColS, int RowD, int ColD
+        int HeuristicKingSafety(int[,] Tab, int Order, Color a, int CurrentAStarGredy, int RowS, int ColS, int RowD, int ColD
           )
         {
 
@@ -2501,17 +2501,17 @@ namespace HybridizerRefrigitz
             lock (ol)
             {
                 int HA = 0;
-                const int CastleGray = 4, CastleBrown = -4, KingGray = 6, KingBrown = -6;
+                const int CastleWHITE = 4, CastleBLACK = -4, KingWHITE = 6, KingBLACK = -6;
                 if (Order == 1)
                 {
                     int RowK = -1, ColK = -1;
                     ChessRules G = new ChessRules(CurrentAStarGredyMax, MovementsAStarGreedyHeuristicFoundT, IgnoreSelfObjectsT, UsePenaltyRegardMechnisamT, BestMovmentsT, PredictHeuristicT, OnlySelfT, AStarGreedyHeuristicT, ArrangmentsChanged, Order, CloneATable(Tab), Order, RowS, ColS);
-                    G.FindGrayKing(CloneATable(Tab), ref RowK, ref ColK);
+                    G.FindWHITEKing(CloneATable(Tab), ref RowK, ref ColK);
                     if (Kind == 7)
                         HA = RationalRegard;
-                    if (Tab[RowK, ColK] == KingGray && Tab[RowK, ColK] == TableInitiation[RowK, ColK] && ChessRules.CastleKingAllowedGray)
+                    if (Tab[RowK, ColK] == KingWHITE && Tab[RowK, ColK] == TableInitiation[RowK, ColK] && ChessRules.CastleKingAllowedWHITE)
                         HA += RationalPenalty;
-                    if ((Tab[RowK, ColK] == KingGray) && (Tab[RowK, 7] == CastleGray || Tab[RowK, 0] == CastleGray) && (TableInitiation[RowK, ColK] == 6) && ChessRules.CastleKingAllowedGray)
+                    if ((Tab[RowK, ColK] == KingWHITE) && (Tab[RowK, 7] == CastleWHITE || Tab[RowK, 0] == CastleWHITE) && (TableInitiation[RowK, ColK] == 6) && ChessRules.CastleKingAllowedWHITE)
                     {
                         if (RowS == RowK && ColS == 5)
                             HA += RationalRegard;
@@ -2538,12 +2538,12 @@ namespace HybridizerRefrigitz
                 {
                     int RowK = -1, ColK = -1;
                     ChessRules G = new ChessRules(CurrentAStarGredyMax, MovementsAStarGreedyHeuristicFoundT, IgnoreSelfObjectsT, UsePenaltyRegardMechnisamT, BestMovmentsT, PredictHeuristicT, OnlySelfT, AStarGreedyHeuristicT, ArrangmentsChanged, Order, CloneATable(Tab), Order, RowS, ColS);
-                    G.FindBrownKing(CloneATable(Tab), ref RowK, ref ColK);
+                    G.FindBLACKKing(CloneATable(Tab), ref RowK, ref ColK);
                     if (Kind == -7)
                         HA = RationalRegard;
-                    if (Tab[RowK, ColK] == KingBrown && Tab[RowK, ColK] == TableInitiation[RowK, ColK] && ChessRules.CastleKingAllowedBrown)
+                    if (Tab[RowK, ColK] == KingBLACK && Tab[RowK, ColK] == TableInitiation[RowK, ColK] && ChessRules.CastleKingAllowedBLACK)
                         HA += RationalPenalty;
-                    if ((Tab[RowK, ColK] == KingBrown) && (Tab[RowK, 7] == CastleBrown || Tab[RowK, 0] == CastleBrown) && (TableInitiation[RowK, ColK] == -6) && ChessRules.CastleKingAllowedBrown)
+                    if ((Tab[RowK, ColK] == KingBLACK) && (Tab[RowK, 7] == CastleBLACK || Tab[RowK, 0] == CastleBLACK) && (TableInitiation[RowK, ColK] == -6) && ChessRules.CastleKingAllowedBLACK)
                     {
                         if (RowS == RowK && ColS == 5)
                             HA += RationalRegard;
@@ -2568,7 +2568,7 @@ namespace HybridizerRefrigitz
             }
 
         }
-        int HeuristicKingPreventionOfCheckedAtBegin(int[,] Tab, int Order, ConsoleColor a, int CurrentAStarGredy, int RowS, int ColS, int RowD, int ColD
+        int HeuristicKingPreventionOfCheckedAtBegin(int[,] Tab, int Order, Color a, int CurrentAStarGredy, int RowS, int ColS, int RowD, int ColD
             )
         {
             Object O3 = new Object();
@@ -2585,27 +2585,27 @@ namespace HybridizerRefrigitz
                     th.Wait();
                     th.Dispose();
 
-                    if (!(A.CheckMateGray || A.CheckMateBrown))
+                    if (!(A.CheckMateWHITE || A.CheckMateBLACK))
                     {
-                        if (A.CheckGray || A.CheckBrown)
+                        if (A.CheckWHITE || A.CheckBLACK)
                         {
                             HA += RationalPenalty;
                         }
                     }
                     if (Order == 1)
                     {
-                        if (A.CheckMateGray)
+                        if (A.CheckMateWHITE)
                             HA += RationalPenalty;
                         else
-                        if (A.CheckMateBrown)
+                        if (A.CheckMateBLACK)
                             HA += RationalRegard;
                     }
                     else
                     {
-                        if (A.CheckMateGray)
+                        if (A.CheckMateWHITE)
                             HA += RationalRegard;
                         else
-             if (A.CheckMateBrown)
+             if (A.CheckMateBLACK)
                             HA += RationalPenalty;
                     }
                 }
@@ -2615,31 +2615,31 @@ namespace HybridizerRefrigitz
                     var th = Task.Factory.StartNew(() => A.CheckMate(Tabl, Order));
                     th.Wait();
                     th.Dispose();
-                    if (A.CheckGray || A.CheckBrown)
+                    if (A.CheckWHITE || A.CheckBLACK)
                     {
                         HA += RationalRegard;
                     }
                     if (Order == 1)
                     {
-                        if (A.CheckMateGray)
+                        if (A.CheckMateWHITE)
                             HA += RationalPenalty;
                         else
-                        if (A.CheckMateBrown)
+                        if (A.CheckMateBLACK)
                             HA += RationalRegard;
                     }
                     else
                     {
-                        if (A.CheckMateGray)
+                        if (A.CheckMateWHITE)
                             HA += RationalRegard;
                         else
-             if (A.CheckMateBrown)
+             if (A.CheckMateBLACK)
                             HA += RationalPenalty;
                     }
                 }
                 return HA;
             }
         }
-        int HeuristicSupported(int[,] Tab, int Ord, ConsoleColor aa, int RowS, int ColS, int RowD, int ColD
+        int HeuristicSupported(int[,] Tab, int Ord, Color aa, int RowS, int ColS, int RowD, int ColD
            )
         {
 
@@ -2666,7 +2666,7 @@ namespace HybridizerRefrigitz
         }
         ///Identification of Equality
         //Heuristic of Supportation.
-        int HeuristicSelfSupported(int[,] Tab, int Ord, ConsoleColor aa, int RowS, int ColS, int RowD, int ColD
+        int HeuristicSelfSupported(int[,] Tab, int Ord, Color aa, int RowS, int ColS, int RowD, int ColD
           )
         {
             Object O = new Object();
@@ -2687,12 +2687,12 @@ namespace HybridizerRefrigitz
                             //For Current Object Lcation.
                             int Order = new int();
                             Order = DumOrder;
-                            ConsoleColor a = new ConsoleColor();
+                            Color a = new Color();
                             a = aa;
                             //Ignore Current Unnessery Home.
                             if (RowS == RowD && ColS == ColD)
                                 return 0;
-                            //Default Is Gray One.
+                            //Default Is WHITE One.
                             int Sign = 1;
                             Order = DummyOrder;
                             ///When Supporte is true. means [RowD,ColD] Supportes [RowS,ColS].
@@ -2710,7 +2710,7 @@ namespace HybridizerRefrigitz
                                     Sign = 1 * AllDraw.SignSupport;
                                     ChessRules.CurrentOrder = -1;
                                 }
-                                a = ConsoleColor.Black;
+                                a = Color.BLACK;
                             }
                             else if (Tab[RowD, ColD] > 0 && DummyOrder == 1 && Tab[RowS, ColS] > 0)
                             {
@@ -2721,7 +2721,7 @@ namespace HybridizerRefrigitz
                                     Sign = 1 * AllDraw.SignSupport;
                                     ChessRules.CurrentOrder = 1;
                                 }
-                                a = ConsoleColor.Gray;
+                                a = Color.WHITE;
                             }
                             else
                                 return HeuristicSelfSupportedValue;
@@ -2757,18 +2757,18 @@ namespace HybridizerRefrigitz
                                                 continue;
                                             if (!Scop(g, h, RowS, ColS, System.Math.Abs(Tab[g, h])))
                                                 continue;
-                                            ConsoleColor aaa = new ConsoleColor();
+                                            Color aaa = new Color();
                                             //Assgin Enemy ints.
-                                            aaa = ConsoleColor.Gray;
-                                            aa = ConsoleColor.Gray;
+                                            aaa = Color.WHITE;
+                                            aa = Color.WHITE;
                                             if (Order == -1)
-                                                aaa = ConsoleColor.Black;
+                                                aaa = Color.BLACK;
                                             else
-                                                aaa = ConsoleColor.Gray;
+                                                aaa = Color.WHITE;
                                             if (Order * -1 == -1)
-                                                aa = ConsoleColor.Black;
+                                                aa = Color.BLACK;
                                             else
-                                                aa = ConsoleColor.Gray;
+                                                aa = Color.WHITE;
                                             //When Enemy is Supported.
                                             bool A = new bool();
                                             bool B = new bool();
@@ -2819,7 +2819,7 @@ namespace HybridizerRefrigitz
                             {
                                 {
                                     int Order = new int();
-                                    ConsoleColor a = new ConsoleColor();
+                                    Color a = new Color();
                                     a = aa;
                                     {
                                         //Ignore Current Home.
@@ -2840,7 +2840,7 @@ namespace HybridizerRefrigitz
                                             {
                                                 Sign = 1 * AllDraw.SignSupport;
                                                 ChessRules.CurrentOrder = -1;
-                                                a = ConsoleColor.Black;
+                                                a = Color.BLACK;
                                             }
                                         }
                                         else if (Tab[RowD, ColD] > 0 && DummyOrder == 1 && Tab[RowS, ColS] > 0)
@@ -2851,7 +2851,7 @@ namespace HybridizerRefrigitz
                                             {
                                                 Sign = 1 * AllDraw.SignSupport;
                                                 ChessRules.CurrentOrder = 1;
-                                                a = ConsoleColor.Gray;
+                                                a = Color.WHITE;
                                             }
                                         }
                                         else
@@ -2888,18 +2888,18 @@ namespace HybridizerRefrigitz
                                                             continue;
                                                         if (!Scop(g, h, RowS, ColS, System.Math.Abs(Tab[g, h])))
                                                             continue;
-                                                        ConsoleColor aaa = new ConsoleColor();
+                                                        Color aaa = new Color();
                                                         //Assgin Enemy ints.
-                                                        aaa = ConsoleColor.Gray;
-                                                        aa = ConsoleColor.Gray;
+                                                        aaa = Color.WHITE;
+                                                        aa = Color.WHITE;
                                                         if (Order == -1)
-                                                            aaa = ConsoleColor.Black;
+                                                            aaa = Color.BLACK;
                                                         else
-                                                            aaa = ConsoleColor.Gray;
+                                                            aaa = Color.WHITE;
                                                         if (Order * -1 == -1)
-                                                            aa = ConsoleColor.Black;
+                                                            aa = Color.BLACK;
                                                         else
-                                                            aa = ConsoleColor.Gray;
+                                                            aa = Color.WHITE;
                                                         //When Enemy is Supported.
                                                         bool A = new bool();
                                                         bool B = new bool();
@@ -2952,7 +2952,7 @@ namespace HybridizerRefrigitz
             }
         }        ///Identification of Equality
         //Heuristic of Supportation.
-        int HeuristicEnemySupported(int[,] Tab, int Ord, ConsoleColor aa, int RowD, int ColD, int RowS, int ColS
+        int HeuristicEnemySupported(int[,] Tab, int Ord, Color aa, int RowD, int ColD, int RowS, int ColS
           )
         {
             Object O = new Object();
@@ -2973,12 +2973,12 @@ namespace HybridizerRefrigitz
                             //For Current Object Lcation.
                             int Order = new int();
                             Order = DumOrder;
-                            ConsoleColor a = new ConsoleColor();
+                            Color a = new Color();
                             a = aa;
                             //Ignore Current Unnessery Home.
                             if (RowS == RowD && ColS == ColD)
                                 return 0;
-                            //Default Is Gray One.
+                            //Default Is WHITE One.
                             int Sign = 1;
                             Order = DummyOrder;
                             ///When Supporte is true. means [RowD,ColD] Supportes [RowS,ColS].
@@ -2996,7 +2996,7 @@ namespace HybridizerRefrigitz
                                     Sign = 1 * AllDraw.SignSupport;
                                     ChessRules.CurrentOrder = -1;
                                 }
-                                a = ConsoleColor.Black;
+                                a = Color.BLACK;
                             }
                             else if (Tab[RowD, ColD] > 0 && DummyOrder == 1 && Tab[RowS, ColS] > 0)
                             {
@@ -3007,7 +3007,7 @@ namespace HybridizerRefrigitz
                                     Sign = 1 * AllDraw.SignSupport;
                                     ChessRules.CurrentOrder = 1;
                                 }
-                                a = ConsoleColor.Gray;
+                                a = Color.WHITE;
                             }
                             else
                                 return HeuristicSelfSupportedValue;
@@ -3018,7 +3018,7 @@ namespace HybridizerRefrigitz
                             th.Dispose();
                             if (ab)
                             {
-                             
+
                                 //Calculate Local Support Heuristic.
                                 HA += RationalPenalty;
                                 int Supported = new int();
@@ -3044,18 +3044,18 @@ namespace HybridizerRefrigitz
                                                 continue;
                                             if (!Scop(g, h, RowS, ColS, System.Math.Abs(Tab[g, h])))
                                                 continue;
-                                            ConsoleColor aaa = new ConsoleColor();
+                                            Color aaa = new Color();
                                             //Assgin Enemy ints.
-                                            aaa = ConsoleColor.Gray;
-                                            aa = ConsoleColor.Gray;
+                                            aaa = Color.WHITE;
+                                            aa = Color.WHITE;
                                             if (Order == -1)
-                                                aaa = ConsoleColor.Black;
+                                                aaa = Color.BLACK;
                                             else
-                                                aaa = ConsoleColor.Gray;
+                                                aaa = Color.WHITE;
                                             if (Order * -1 == -1)
-                                                aa = ConsoleColor.Black;
+                                                aa = Color.BLACK;
                                             else
-                                                aa = ConsoleColor.Gray;
+                                                aa = Color.WHITE;
                                             //When Enemy is Supported.
                                             bool A = new bool();
                                             bool B = new bool();
@@ -3105,7 +3105,7 @@ namespace HybridizerRefrigitz
                             {
                                 {
                                     int Order = new int();
-                                    ConsoleColor a = new ConsoleColor();
+                                    Color a = new Color();
                                     a = aa;
                                     {
                                         //Ignore Current Home.
@@ -3126,7 +3126,7 @@ namespace HybridizerRefrigitz
                                             {
                                                 Sign = 1 * AllDraw.SignSupport;
                                                 ChessRules.CurrentOrder = -1;
-                                                a = ConsoleColor.Black;
+                                                a = Color.BLACK;
                                             }
                                         }
                                         else if (Tab[RowD, ColD] > 0 && DummyOrder == 1 && Tab[RowS, ColS] > 0)
@@ -3137,7 +3137,7 @@ namespace HybridizerRefrigitz
                                             {
                                                 Sign = 1 * AllDraw.SignSupport;
                                                 ChessRules.CurrentOrder = 1;
-                                                a = ConsoleColor.Gray;
+                                                a = Color.WHITE;
                                             }
                                         }
                                         else
@@ -3149,7 +3149,7 @@ namespace HybridizerRefrigitz
                                         th.Dispose();
                                         if (ab)
                                         {
-                                            
+
                                             //Calculate Local Support Heuristic.
                                             HA += RationalPenalty;
                                             int Supported = new int();
@@ -3175,18 +3175,18 @@ namespace HybridizerRefrigitz
                                                             continue;
                                                         if (!Scop(g, h, RowS, ColS, System.Math.Abs(Tab[g, h])))
                                                             continue;
-                                                        ConsoleColor aaa = new ConsoleColor();
+                                                        Color aaa = new Color();
                                                         //Assgin Enemy ints.
-                                                        aaa = ConsoleColor.Gray;
-                                                        aa = ConsoleColor.Gray;
+                                                        aaa = Color.WHITE;
+                                                        aa = Color.WHITE;
                                                         if (Order == -1)
-                                                            aaa = ConsoleColor.Black;
+                                                            aaa = Color.BLACK;
                                                         else
-                                                            aaa = ConsoleColor.Gray;
+                                                            aaa = Color.WHITE;
                                                         if (Order * -1 == -1)
-                                                            aa = ConsoleColor.Black;
+                                                            aa = Color.BLACK;
                                                         else
-                                                            aa = ConsoleColor.Gray;
+                                                            aa = Color.WHITE;
                                                         //When Enemy is Supported.
                                                         bool A = new bool();
                                                         bool B = new bool();
@@ -3299,7 +3299,7 @@ namespace HybridizerRefrigitz
             }
         }
         ///Move Determination.
-        public bool Movable(int[,] Tab, int i, int j, int ii, int jj, ConsoleColor a, int Order)
+        public bool Movable(int[,] Tab, int i, int j, int ii, int jj, Color a, int Order)
         {
             Object O = new Object();
             lock (O)
@@ -3326,7 +3326,7 @@ namespace HybridizerRefrigitz
                     th.Dispose();
                     if (ab)
                     {
-                       
+
                         return true;
                     }
                 }
@@ -3400,11 +3400,11 @@ namespace HybridizerRefrigitz
                 if (AA.Check(CloneATable(Tab), Order))
                 {
                     //When there is Current Checked or Objects Danger return false.
-                    if (Order == 1 && (AA.CheckGray || AA.CheckGrayObjectDangour))
+                    if (Order == 1 && (AA.CheckWHITE || AA.CheckWHITEObjectDangour))
                     {
                         return Remove;
                     }
-                    if (Order == -1 && (AA.CheckBrown || AA.CheckBrownObjectDangour))
+                    if (Order == -1 && (AA.CheckBLACK || AA.CheckBLACKObjectDangour))
                     {
                         return Remove;
                     }
@@ -3425,9 +3425,9 @@ namespace HybridizerRefrigitz
                             for (var ColS = 0; ColS < 8; ColS++)
                                 Table[RowS, ColS] = Tab[RowS, ColS];
                         ChessRules A = new ChessRules(CurrentAStarGredyMax, MovementsAStarGreedyHeuristicFoundT, IgnoreSelfObjectsT, UsePenaltyRegardMechnisamT, BestMovmentsT, PredictHeuristicT, OnlySelfT, AStarGreedyHeuristicT, ArrangmentsChanged, Table[ii, jj], CloneATable(Table), Order * -1, ii, jj);
-                        ConsoleColor a = ConsoleColor.Gray;
+                        Color a = Color.WHITE;
                         if (Order * -1 == -1)
-                            a = ConsoleColor.Black;
+                            a = Color.BLACK;
                         //When there is movment to current OPbject.
                         bool ab = false;
                         var th = Task.Factory.StartNew(() => ab = A.Rules(ii, jj, i, j, a, Table[ii, jj]));
@@ -3448,9 +3448,9 @@ namespace HybridizerRefrigitz
                             //Create New HybridizerRefrigitz Rule Object.
                             A = new ChessRules(CurrentAStarGredyMax, MovementsAStarGreedyHeuristicFoundT, IgnoreSelfObjectsT, UsePenaltyRegardMechnisamT, BestMovmentsT, PredictHeuristicT, OnlySelfT, AStarGreedyHeuristicT, ArrangmentsChanged, Table[ii, jj], CloneATable(Table), Order, ii, jj);
                             //Detect int.
-                            a = ConsoleColor.Gray;
+                            a = Color.WHITE;
                             if (Order == -1)
-                                a = ConsoleColor.Black;
+                                a = Color.BLACK;
                             //When Current Movments Attacks Enemy.
                             var th2 = Task.Factory.StartNew(() => ab = Attack(CloneATable(Table), i, j, ii, jj, a, Order));
                             th2.Wait();
@@ -3476,16 +3476,16 @@ namespace HybridizerRefrigitz
                                             //Take Move.
                                             Table[ii, jj] = Table[i, j];
                                             Table[i, j] = 0;
-                                            a = ConsoleColor.Gray;
+                                            a = Color.WHITE;
                                             if (Order * -1 == -1)
-                                                a = ConsoleColor.Black;
+                                                a = Color.BLACK;
                                             //When Enemy Attacks Current Moved.
                                             var th4 = Task.Factory.StartNew(() => ab = Attack(CloneATable(Table), RowS, ColS, ii, jj, a, Order * -1));
                                             th4.Wait();
                                             th4.Dispose();
                                             if (ab)
                                             {
-                                             
+
                                                 //For Current Order.
                                                 for (int RowD = 0; RowD < 8; RowD++)
                                                     for (int ColD = 0; ColD < 8; ColD++)
@@ -3495,9 +3495,9 @@ namespace HybridizerRefrigitz
                                                             continue;
                                                         if (Order == -1 && Tab[RowD, ColD] >= 0)
                                                             continue;
-                                                        a = ConsoleColor.Gray;
+                                                        a = Color.WHITE;
                                                         if (Order == -1)
-                                                            a = ConsoleColor.Black;
+                                                            a = Color.BLACK;
                                                         //When Self Supported Current
                                                         var th5 = Task.Factory.StartNew(() => ab = Support(CloneATable(Table), RowD, ColD, i, j, a, Order));
                                                         th5.Wait();
@@ -3542,27 +3542,27 @@ namespace HybridizerRefrigitz
             }
         }
         //Dangouring of current movment fo current Order.
-        bool IsCurrentStateIsDangreousForCurrentOrder(int[,] Tabl, int Order, ConsoleColor a, int ii, int jj)
+        bool IsCurrentStateIsDangreousForCurrentOrder(int[,] Tabl, int Order, Color a, int ii, int jj)
         {
             Object O = new Object();
             lock (O)
             {
                 //Initiate Object.
                 ChessRules A = new ChessRules(CurrentAStarGredyMax, MovementsAStarGreedyHeuristicFoundT, IgnoreSelfObjectsT, UsePenaltyRegardMechnisamT, BestMovmentsT, PredictHeuristicT, OnlySelfT, AStarGreedyHeuristicT, ArrangmentsChanged, 1, CloneATable(Tabl), 1, Row, Column);
-                //Gray Order.
+                //WHITE Order.
                 if (Order == 1)
                 {
-                    //Find location of Gray King.
+                    //Find location of WHITE King.
                     int RowG = -1, ColumnG = -1;
-                    A.FindGrayKing(Tabl, ref RowG, ref ColumnG);
+                    A.FindWHITEKing(Tabl, ref RowG, ref ColumnG);
                     //When found.
                     if (RowG != -1 && ColumnG != -1)
                     {
-                        //For Brown
+                        //For BLACK
                         for (var i = 0; i < 8; i++)
                             for (var j = 0; j < 8; j++)
                             {
-                                //Ignore of Gray and Empty
+                                //Ignore of WHITE and Empty
                                 if (Tabl[i, j] >= 0)
                                     continue;
                                 if (i != ii && j != jj)
@@ -3575,21 +3575,21 @@ namespace HybridizerRefrigitz
                                     //For Enemy Order.
                                     if (TablCon[i, j] < 0)
                                     {
-                                        //For Gray and Empty Objects.
+                                        //For WHITE and Empty Objects.
                                         if (TablCon[ii, jj] >= 0)
                                         {
                                             //Setting Enemy Order.
                                             int DummyOrder = Order;
                                             int DummyCurrentOrder = ChessRules.CurrentOrder;
                                             A = new ChessRules(CurrentAStarGredyMax, MovementsAStarGreedyHeuristicFoundT, IgnoreSelfObjectsT, UsePenaltyRegardMechnisamT, BestMovmentsT, PredictHeuristicT, OnlySelfT, AStarGreedyHeuristicT, ArrangmentsChanged, TablCon[i, j], TablCon, -1, i, j);
-                                            //When Enemy is Attacked Gray Objects.
+                                            //When Enemy is Attacked WHITE Objects.
                                             bool ab = false;
-                                            var th = Task.Factory.StartNew(() => ab = A.Rules(i, j, ii, jj, ConsoleColor.Black, TablCon[i, j]));
+                                            var th = Task.Factory.StartNew(() => ab = A.Rules(i, j, ii, jj, Color.BLACK, TablCon[i, j]));
                                             th.Wait();
                                             th.Dispose();
                                             if (ab)
                                             {
-                                                
+
                                                 //Take Movments.
                                                 TablCon[ii, jj] = TablCon[i, j];
                                                 TablCon[i, j] = 0;
@@ -3603,9 +3603,9 @@ namespace HybridizerRefrigitz
                                                 th1.Dispose();
                                                 if (ab)
                                                 {
-                                                    
-                                                    //When Gray is Check.
-                                                    if (A.CheckGray)
+
+                                                    //When WHITE is Check.
+                                                    if (A.CheckWHITE)
                                                     {
                                                         //For Enemy Order Objects.
                                                         for (int RowD = 0; RowD < 8; RowD++)
@@ -3617,11 +3617,11 @@ namespace HybridizerRefrigitz
                                                                     //Setting Enemy.
                                                                     ChessRules.CurrentOrder = -1;
                                                                     //When Enemy is Supported 
-                                                                    var th2 = Task.Factory.StartNew(() => ab = Support(TablCon, RowD, ColD, i, j, ConsoleColor.Black, -1));
+                                                                    var th2 = Task.Factory.StartNew(() => ab = Support(TablCon, RowD, ColD, i, j, Color.BLACK, -1));
                                                                     th2.Wait();
                                                                     th2.Dispose();
                                                                     if (ab)
-                                                                    {                                                                        
+                                                                    {
                                                                         //restore and return true.
                                                                         Order = DummyOrder;
                                                                         ChessRules.CurrentOrder = DummyCurrentOrder;
@@ -3640,16 +3640,16 @@ namespace HybridizerRefrigitz
                             }
                     }
                 }
-                //For Brown Order.
+                //For BLACK Order.
                 else if (Order == -1)
                 {
-                    //Found of Brown King.
+                    //Found of BLACK King.
                     int RowB = -1, ColumnB = -1;
-                    A.FindBrownKing(Tabl, ref RowB, ref ColumnB);
+                    A.FindBLACKKing(Tabl, ref RowB, ref ColumnB);
                     //When found.
                     if (RowB != -1 && ColumnB != -1)
                     {
-                        //For Gray.
+                        //For WHITE.
                         for (var i = 0; i < 8; i++)
                             for (var j = 0; j < 8; j++)
                             {
@@ -3675,11 +3675,11 @@ namespace HybridizerRefrigitz
                                             ChessRules.CurrentOrder = 1;
                                             //When Enemy Attacked Self Objects.
                                             bool ab = false;
-                                            var th = Task.Factory.StartNew(() => ab = A.Rules(i, j, ii, jj, ConsoleColor.Gray, TablCon[i, j]));
+                                            var th = Task.Factory.StartNew(() => ab = A.Rules(i, j, ii, jj, Color.WHITE, TablCon[i, j]));
                                             th.Wait();
                                             th.Dispose();
                                             if (ab)
-                                            {                                               
+                                            {
                                                 //Take movemnts.
                                                 TablCon[ii, jj] = TablCon[i, j];
                                                 TablCon[i, j] = 0;
@@ -3692,8 +3692,8 @@ namespace HybridizerRefrigitz
                                                 th1.Dispose();
                                                 if (ab)
                                                 {
-                                                   //When Current is Check.
-                                                    if (A.CheckBrown)
+                                                    //When Current is Check.
+                                                    if (A.CheckBLACK)
                                                     {
                                                         //For Enemy Objecvts.
                                                         for (int RowD = 0; RowD < 8; RowD++)
@@ -3705,11 +3705,11 @@ namespace HybridizerRefrigitz
                                                                     //Setting Enemy Order
                                                                     ChessRules.CurrentOrder = 1;
                                                                     //When Enemy is Supported.
-                                                                    var th2 = Task.Factory.StartNew(() => ab = Support(TablCon, RowD, ColD, i, j, ConsoleColor.Gray, 1));
+                                                                    var th2 = Task.Factory.StartNew(() => ab = Support(TablCon, RowD, ColD, i, j, Color.WHITE, 1));
                                                                     th2.Wait();
                                                                     th2.Dispose();
                                                                     if (ab)
-                                                                    {                                                                      
+                                                                    {
                                                                         //restore and return true.
                                                                         Order = DummyOrder;
                                                                         ChessRules.CurrentOrder = DummyCurrentOrder;
@@ -3750,9 +3750,9 @@ namespace HybridizerRefrigitz
                     int[,] Tab2 = CloneATable(Tabl);
                     ChessRules A = new ChessRules(CurrentAStarGredyMax, MovementsAStarGreedyHeuristicFoundT, IgnoreSelfObjectsT, UsePenaltyRegardMechnisamT, BestMovmentsT, PredictHeuristicT, OnlySelfT, AStarGreedyHeuristicT, ArrangmentsChanged, Tab2[ik, jk], Tab2, Order * -1, ik, jk);
                     if (Order * -1 == 1)
-                        color = ConsoleColor.Gray;
+                        color = Color.WHITE;
                     else
-                        color = ConsoleColor.Black;
+                        color = Color.BLACK;
                     //When Enemy Attack Currnet.
                     bool ab = false;
                     var th = Task.Factory.StartNew(() => ab = A.Rules(ik, jk, iki, jki, color, Tab2[ik, jk]));
@@ -3760,7 +3760,7 @@ namespace HybridizerRefrigitz
                     th.Dispose();
                     if (ab)
                     {
-                        
+
                         Tab2[iki, jki] = Tab2[ik, jk];
                         Tab2[ik, jk] = 0;
                         A = new ChessRules(CurrentAStarGredyMax, MovementsAStarGreedyHeuristicFoundT, IgnoreSelfObjectsT, UsePenaltyRegardMechnisamT, BestMovmentsT, PredictHeuristicT, OnlySelfT, AStarGreedyHeuristicT, ArrangmentsChanged, Tab2[iki, jki], Tab2, Order * -1, iki, jki);
@@ -3770,10 +3770,10 @@ namespace HybridizerRefrigitz
                         th1.Dispose();
                         if (ab)
                         {
-                            //When Order is Gray.
+                            //When Order is WHITE.
                             if (OrderPalte == 1)
                             {
-                                if (A.CheckMateGray)
+                                if (A.CheckMateWHITE)
                                 {
                                     Is[0] = 1;
                                     if (KindCheckedSelf)
@@ -3781,66 +3781,66 @@ namespace HybridizerRefrigitz
                                 }
                                 else
                                 {
-                                    //if (A.CheckMateBrown)
+                                    //if (A.CheckMateBLACK)
                                 }
                             }
-                            //When Order is Brown.
+                            //When Order is BLACK.
                             else
                                if (OrderPalte == -1)
                             {
-                                if (A.CheckMateBrown)
+                                if (A.CheckMateBLACK)
                                 {
                                     Is[0] = 1;
                                     Is[1] = Depth;
                                 }
                                 else
                                 {
-                                    //if (A.CheckMateGray)
+                                    //if (A.CheckMateWHITE)
                                 }
                             }
 
-                            //When Order * -1 is Gray
+                            //When Order * -1 is WHITE
                             if (OrderPalteMulMinuse == 1)
                             {
-                                if (A.CheckMateGray)
+                                if (A.CheckMateWHITE)
                                 {
                                     Is[2] = 1;
                                     Is[3] = Depth;
                                 }
                                 else
                                 {
-                                    //if (A.CheckMateBrown)
+                                    //if (A.CheckMateBLACK)
                                 }
                             }
-                            //When Order * -1 is Brown
+                            //When Order * -1 is BLACK
                             else
                                if (OrderPalteMulMinuse == -1)
                             {
-                                if (A.CheckMateBrown)
+                                if (A.CheckMateBLACK)
                                 {
                                     Is[2] = 1;
                                     Is[3] = Depth;
                                 }
                                 else
                                 {
-                                    //if (A.CheckMateGray)
+                                    //if (A.CheckMateWHITE)
                                 }
                             }
 
                         }
                         if (Order * -1 == 1)
-                            color = ConsoleColor.Gray;
+                            color = Color.WHITE;
                         else
-                            color = ConsoleColor.Black;
+                            color = Color.BLACK;
                         //if (Tab2[iki, jki] == 0)
                         //For Movements.
                         int Ord = Order * -1;
                         int[,] Tab = CloneATable(Tab2);
-                        ConsoleColor a = color;
+                        Color a = color;
                         if (Ord == 1)
-                            a = ConsoleColor.Gray;
+                            a = Color.WHITE;
                         else
-                            a = ConsoleColor.Black;
+                            a = Color.BLACK;
                         int ik1 = ik, jk1 = jk, iki1 = iki, jki1 = jki, OrderP = OrderPalte, OrderM = OrderPalteMulMinuse, Depth1 = Depth + 1;
                         bool KindCheckedSelf1 = KindCheckedSelf;
                         Object O1 = new Object();
@@ -3850,7 +3850,7 @@ namespace HybridizerRefrigitz
                             var th2 = Task.Factory.StartNew(() => IS = IsNextMovmentIsCheckOrCheckMateForCurrentMovment(CloneATable(Tab), Ord, a, Depth1, OrderP, OrderM, KindCheckedSelf1));
                             th2.Wait();
                             th2.Dispose();
-                           
+
                         }
                         if (Is[0] == 1) Is[0] = 1;
                         if (IS[2] == 1) Is[2] = 1;
@@ -3885,28 +3885,28 @@ namespace HybridizerRefrigitz
                     //When for penalty.
                     if (OrderPalte == AllDraw.OrderPlate)
                     {
-                        //When Order is Gray.
+                        //When Order is WHITE.
                         if (OrderPalte == 1)
                         {
-                            if (A.CheckMateGray)
+                            if (A.CheckMateWHITE)
                                 Is = true;
                             else
                             {
-                                if (A.CheckMateBrown)
+                                if (A.CheckMateBLACK)
                                 {
                                     return Is;
                                 }
                             }
                         }
-                        //When Order is Brown.
+                        //When Order is BLACK.
                         else
                            if (OrderPalte == -1)
                         {
-                            if (A.CheckMateBrown)
+                            if (A.CheckMateBLACK)
                                 Is = true;
                             else
                             {
-                                if (A.CheckMateGray)
+                                if (A.CheckMateWHITE)
                                 {
                                     return Is;
                                 }
@@ -3916,28 +3916,28 @@ namespace HybridizerRefrigitz
                     //When for regard.
                     else
                     {
-                        //When Order * -1 is Gray
+                        //When Order * -1 is WHITE
                         if (OrderPalte == 1)
                         {
-                            if (A.CheckMateGray)
+                            if (A.CheckMateWHITE)
                                 Is = true;
                             else
                             {
-                                if (A.CheckMateBrown)
+                                if (A.CheckMateBLACK)
                                 {
                                     return Is;
                                 }
                             }
                         }
-                        //When Order * -1 is Brown
+                        //When Order * -1 is BLACK
                         else
                            if (OrderPalte == -1)
                         {
-                            if (A.CheckMateBrown)
+                            if (A.CheckMateBLACK)
                                 Is = true;
                             else
                             {
-                                if (A.CheckMateGray)
+                                if (A.CheckMateWHITE)
                                 {
                                     return Is;
                                 }
@@ -3948,7 +3948,7 @@ namespace HybridizerRefrigitz
                 return Is;
             }
         }
-        int[] IsNextMovmentIsCheckOrCheckMateForCurrentMovment(int[,] Tabl, int Order, ConsoleColor a, int Depth, int OrderPalte, int OrderPalteMinusPluse, bool KindCheckedSelf)
+        int[] IsNextMovmentIsCheckOrCheckMateForCurrentMovment(int[,] Tabl, int Order, Color a, int Depth, int OrderPalte, int OrderPalteMinusPluse, bool KindCheckedSelf)
         {
             Object O = new Object();
             lock (O)
@@ -4241,7 +4241,7 @@ namespace HybridizerRefrigitz
             }
         }
         //When Current Movements is in dangrous and is not movable.
-        bool IsGardForCurrentMovmentsAndIsNotMovable(int[,] Tab, int Order, ConsoleColor a, int ii, int jj, int RowS, int ColS)
+        bool IsGardForCurrentMovmentsAndIsNotMovable(int[,] Tab, int Order, Color a, int ii, int jj, int RowS, int ColS)
         {
             Object O = new Object();
             lock (O)
@@ -4283,9 +4283,9 @@ namespace HybridizerRefrigitz
                     ChessRules.CurrentOrder = Order * -1;
                     //Initiate for not exiting from abnormal loop.
                     Attacked = false;
-                    ConsoleColor aa = ConsoleColor.Gray;
+                    Color aa = Color.WHITE;
                     if (Order * -1 == -1)
-                        aa = ConsoleColor.Black;
+                        aa = Color.BLACK;
                     bool ab = false;
                     var th = Task.Factory.StartNew(() => ab = Attack(CloneATable(Tab), ii, jj, RowS, ColS, aa, Order * -1) && (ObjectValueCalculator(CloneATable(Tab), ii, jj) < ObjectValueCalculator(CloneATable(Tab), RowS, ColS)));
                     th.Wait();
@@ -4372,7 +4372,7 @@ namespace HybridizerRefrigitz
             }
         }
         ///when current movments gards enemy with higer priority at movment.QC_OK
-        bool IsCurrentCanGardHighPriorityEnemy(int Depth, int[,] Table, int Order, ConsoleColor a, int ij, int ji, int iij, int jji, int OrderPlate)
+        bool IsCurrentCanGardHighPriorityEnemy(int Depth, int[,] Table, int Order, Color a, int ij, int ji, int iij, int jji, int OrderPlate)
         {
             Object O = new Object();
             lock (O)
@@ -4435,9 +4435,9 @@ namespace HybridizerRefrigitz
                                             Tabl1[ii, jj] = Tabl1[i, j];
                                             Tabl1[i, j] = 0;
                                             if (Order * -1 == 1)
-                                                a = ConsoleColor.Gray;
+                                                a = Color.WHITE;
                                             else
-                                                a = ConsoleColor.Black;
+                                                a = Color.BLACK;
                                             var th2 = Task.Factory.StartNew(() => IsGardHighPriority = IsGardHighPriority || IsCurrentCanGardHighPriorityEnemy(Depth, CloneATable(Table), Order * -1, a, ii, jj, i, j, OrderPlate));
                                             th2.Wait();
                                             th2.Dispose();
@@ -4638,40 +4638,40 @@ namespace HybridizerRefrigitz
                 if (!IsNumberOfObjecttIsLessThanThreashold(CloneATable(Table)))
                     return false;
                 bool Is = false;
-                const int MinisteGrayObj = 5, CastleGrayObj = 4, ElepahantGrayObj = 2, PawnGrayObj = 1;
-                const int MinisteBrownObj = -5, CastleBrownObj = -4//, ElephantBrownObj = -2
-                , PawnBrownObj = -1;
+                const int MinisteWHITEObj = 5, CastleWHITEObj = 4, ElepahantWHITEObj = 2, PawnWHITEObj = 1;
+                const int MinisteBLACKObj = -5, CastleBLACKObj = -4//, ElephantBLACKObj = -2
+                , PawnBLACKObj = -1;
                 if (Order == 1)
                 {
                     if (ColK == 0)
                     {
-                        if (Table[Rowk, ColK + 1] == ElepahantGrayObj)
+                        if (Table[Rowk, ColK + 1] == ElepahantWHITEObj)
                         {
-                            if (Table[Rowk, ColK + 2] == CastleGrayObj)
+                            if (Table[Rowk, ColK + 2] == CastleWHITEObj)
                             {
-                                if ((Table[Rowk - 1, ColK + 1] == PawnGrayObj) || (Table[Rowk + 1, ColK + 1] == PawnGrayObj))
+                                if ((Table[Rowk - 1, ColK + 1] == PawnWHITEObj) || (Table[Rowk + 1, ColK + 1] == PawnWHITEObj))
                                 {
                                     Is = true;
                                 }
                             }
-                            if (Table[Rowk + 1, ColK + 2] == CastleGrayObj)
+                            if (Table[Rowk + 1, ColK + 2] == CastleWHITEObj)
                             {
-                                if ((Table[Rowk - 1, ColK + 1] == MinisteGrayObj) || (Table[Rowk + 1, ColK + 1] == MinisteGrayObj))
+                                if ((Table[Rowk - 1, ColK + 1] == MinisteWHITEObj) || (Table[Rowk + 1, ColK + 1] == MinisteWHITEObj))
                                 {
                                     Is = true;
                                 }
                             }
                         }
-                        if (Table[Rowk, ColK + 1] == PawnGrayObj)
+                        if (Table[Rowk, ColK + 1] == PawnWHITEObj)
                         {
-                            if (Table[Rowk + 1, ColK + 2] == MinisteGrayObj)
+                            if (Table[Rowk + 1, ColK + 2] == MinisteWHITEObj)
                             {
-                                if (Table[Rowk - 1, ColK + 2] == PawnGrayObj)
+                                if (Table[Rowk - 1, ColK + 2] == PawnWHITEObj)
                                     Is = true;
                             }
-                            if (Table[Rowk + 1, ColK + 2] == MinisteGrayObj)
+                            if (Table[Rowk + 1, ColK + 2] == MinisteWHITEObj)
                             {
-                                if (Table[Rowk - 2, ColK + 2] == PawnGrayObj)
+                                if (Table[Rowk - 2, ColK + 2] == PawnWHITEObj)
                                     Is = true;
                             }
                         }
@@ -4681,33 +4681,33 @@ namespace HybridizerRefrigitz
                 {
                     if (ColK == 7)
                     {
-                        if (Table[Rowk, ColK - 1] == ElepahantGrayObj)
+                        if (Table[Rowk, ColK - 1] == ElepahantWHITEObj)
                         {
-                            if (Table[Rowk, ColK - 2] == CastleBrownObj)
+                            if (Table[Rowk, ColK - 2] == CastleBLACKObj)
                             {
-                                if ((Table[Rowk - 1, ColK - 1] == PawnBrownObj) || (Table[Rowk + 1, ColK - 1] == PawnBrownObj))
+                                if ((Table[Rowk - 1, ColK - 1] == PawnBLACKObj) || (Table[Rowk + 1, ColK - 1] == PawnBLACKObj))
                                 {
                                     Is = true;
                                 }
                             }
-                            if (Table[Rowk - 1, ColK - 2] == CastleBrownObj)
+                            if (Table[Rowk - 1, ColK - 2] == CastleBLACKObj)
                             {
-                                if ((Table[Rowk - 1, ColK - 1] == MinisteBrownObj) || (Table[Rowk + 1, ColK - 1] == MinisteBrownObj))
+                                if ((Table[Rowk - 1, ColK - 1] == MinisteBLACKObj) || (Table[Rowk + 1, ColK - 1] == MinisteBLACKObj))
                                 {
                                     Is = true;
                                 }
                             }
                         }
-                        if (Table[Rowk, ColK - 1] == PawnBrownObj)
+                        if (Table[Rowk, ColK - 1] == PawnBLACKObj)
                         {
-                            if (Table[Rowk - 1, ColK - 2] == MinisteBrownObj)
+                            if (Table[Rowk - 1, ColK - 2] == MinisteBLACKObj)
                             {
-                                if (Table[Rowk + 1, ColK - 2] == PawnBrownObj)
+                                if (Table[Rowk + 1, ColK - 2] == PawnBLACKObj)
                                     Is = true;
                             }
-                            if (Table[Rowk - 1, ColK - 2] == MinisteBrownObj)
+                            if (Table[Rowk - 1, ColK - 2] == MinisteBLACKObj)
                             {
-                                if (Table[Rowk + 1, ColK - 2] == PawnBrownObj)
+                                if (Table[Rowk + 1, ColK - 2] == PawnBLACKObj)
                                     Is = true;
                             }
                         }
@@ -4716,7 +4716,7 @@ namespace HybridizerRefrigitz
                 return Is;
             }
         }
-        public int SimpleMate_Zero(int RowS, int ColS, int RowD, int ColD, int[,] Table, ConsoleColor a)
+        public int SimpleMate_Zero(int RowS, int ColS, int RowD, int ColD, int[,] Table, Color a)
         {
             Object O = new Object();
             lock (O)
@@ -4732,10 +4732,10 @@ namespace HybridizerRefrigitz
                     th.Dispose();
                     if (ab)
                     {
-                        if (Order == 1 && G.CheckMateBrown)
+                        if (Order == 1 && G.CheckMateBLACK)
                             HA += RationalRegard;
                         else
-                     if (Order == 1 && G.CheckMateGray)
+                     if (Order == 1 && G.CheckMateWHITE)
                             HA += RationalPenalty;
                     }
                 }
@@ -4749,17 +4749,17 @@ namespace HybridizerRefrigitz
                     th.Dispose();
                     if (ab)
                     {
-                        if (Order == -1 && G.CheckMateGray)
+                        if (Order == -1 && G.CheckMateWHITE)
                             HA += RationalRegard;
                         else
-                        if (Order == -1 && G.CheckMateBrown)
+                        if (Order == -1 && G.CheckMateBLACK)
                             HA += RationalPenalty;
                     }
                 }
                 return HA;
             }
         }
-        public int SimpleMate_One(int RowS, int ColS, int RowD, int ColD, int[,] Table, ConsoleColor a)
+        public int SimpleMate_One(int RowS, int ColS, int RowD, int ColD, int[,] Table, Color a)
         {
             Object O = new Object();
             lock (O)
@@ -4769,7 +4769,7 @@ namespace HybridizerRefrigitz
                 {
                     int RowK = -1, ColK = -1;
                     ChessRules G = new ChessRules(CurrentAStarGredyMax, MovementsAStarGreedyHeuristicFoundT, IgnoreSelfObjectsT, UsePenaltyRegardMechnisamT, BestMovmentsT, PredictHeuristicT, OnlySelfT, AStarGreedyHeuristicT, ArrangmentsChanged, Order, CloneATable(Table), Order, RowS, ColS);
-                    G.FindBrownKing(CloneATable(Table), ref RowK, ref ColK);
+                    G.FindBLACKKing(CloneATable(Table), ref RowK, ref ColK);
                     bool S1 = false;
                     var H1 = Task.Factory.StartNew(() => S1 = CurrentIsTowCastleOrMinisterBecomeCheckedMateAtCloseRanAway(RowK, ColK, CloneATable(Table)));
                     H1.Wait();
@@ -4799,7 +4799,7 @@ namespace HybridizerRefrigitz
                 {
                     int RowK = -1, ColK = -1;
                     ChessRules G = new ChessRules(CurrentAStarGredyMax, MovementsAStarGreedyHeuristicFoundT, IgnoreSelfObjectsT, UsePenaltyRegardMechnisamT, BestMovmentsT, PredictHeuristicT, OnlySelfT, AStarGreedyHeuristicT, ArrangmentsChanged, Order, CloneATable(Table), Order, RowS, ColS);
-                    G.FindGrayKing(CloneATable(Table), ref RowK, ref ColK);
+                    G.FindWHITEKing(CloneATable(Table), ref RowK, ref ColK);
                     bool S1 = false;
                     var H1 = Task.Factory.StartNew(() => S1 = CurrentIsTowCastleOrMinisterBecomeCheckedMateAtCloseRanAway(RowK, ColK, CloneATable(Table)));
                     H1.Wait();
@@ -4823,11 +4823,11 @@ namespace HybridizerRefrigitz
                             if (S3)
                                 HA += RationalRegard;
                         }
-                    }  }
+                    } }
                 return HA;
             }
         }
-        public int SimpleMate_Tow(int RowS, int ColS, int RowD, int ColD, int[,] Table, ConsoleColor a)
+        public int SimpleMate_Tow(int RowS, int ColS, int RowD, int ColD, int[,] Table, Color a)
         {
             Object O = new Object();
             lock (O)
@@ -4837,7 +4837,7 @@ namespace HybridizerRefrigitz
                 {
                     int RowK = -1, ColK = -1;
                     ChessRules G = new ChessRules(CurrentAStarGredyMax, MovementsAStarGreedyHeuristicFoundT, IgnoreSelfObjectsT, UsePenaltyRegardMechnisamT, BestMovmentsT, PredictHeuristicT, OnlySelfT, AStarGreedyHeuristicT, ArrangmentsChanged, Order, CloneATable(Table), Order, RowS, ColS);
-                    G.FindBrownKing(CloneATable(Table), ref RowK, ref ColK);
+                    G.FindBLACKKing(CloneATable(Table), ref RowK, ref ColK);
                     if (EnemyKingCanMateByCloseHome(RowK, ColK, CloneATable(Table), Order))
                         HA += RationalRegard;
                 }
@@ -4845,14 +4845,14 @@ namespace HybridizerRefrigitz
                 {
                     int RowK = -1, ColK = -1;
                     ChessRules G = new ChessRules(CurrentAStarGredyMax, MovementsAStarGreedyHeuristicFoundT, IgnoreSelfObjectsT, UsePenaltyRegardMechnisamT, BestMovmentsT, PredictHeuristicT, OnlySelfT, AStarGreedyHeuristicT, ArrangmentsChanged, Order, CloneATable(Table), Order, RowS, ColS);
-                    G.FindGrayKing(CloneATable(Table), ref RowK, ref ColK);
+                    G.FindWHITEKing(CloneATable(Table), ref RowK, ref ColK);
                     if (EnemyKingCanMateByCloseHome(RowK, ColK, CloneATable(Table), Order))
                         HA += RationalRegard;
                 }
                 return HA;
             }
         }
-        public int SimpleMate_Three_And_Four(int RowS, int ColS, int RowD, int ColD, int[,] Table, ConsoleColor a)
+        public int SimpleMate_Three_And_Four(int RowS, int ColS, int RowD, int ColD, int[,] Table, Color a)
         {
             Object O = new Object();
             lock (O)
@@ -4862,7 +4862,7 @@ namespace HybridizerRefrigitz
                 {
                     int RowK = -1, ColK = -1;
                     ChessRules G = new ChessRules(CurrentAStarGredyMax, MovementsAStarGreedyHeuristicFoundT, IgnoreSelfObjectsT, UsePenaltyRegardMechnisamT, BestMovmentsT, PredictHeuristicT, OnlySelfT, AStarGreedyHeuristicT, ArrangmentsChanged, Order, CloneATable(Table), Order, RowS, ColS);
-                    G.FindBrownKing(CloneATable(Table), ref RowK, ref ColK);
+                    G.FindBLACKKing(CloneATable(Table), ref RowK, ref ColK);
                     if (EnemyKingHaveAtMostOneEmptyItemInAttack(RowK, ColK, CloneATable(Table), Order))
                         HA += RationalRegard;
                 }
@@ -4870,7 +4870,7 @@ namespace HybridizerRefrigitz
                 {
                     int RowK = -1, ColK = -1;
                     ChessRules G = new ChessRules(CurrentAStarGredyMax, MovementsAStarGreedyHeuristicFoundT, IgnoreSelfObjectsT, UsePenaltyRegardMechnisamT, BestMovmentsT, PredictHeuristicT, OnlySelfT, AStarGreedyHeuristicT, ArrangmentsChanged, Order, CloneATable(Table), Order, RowS, ColS);
-                    G.FindGrayKing(CloneATable(Table), ref RowK, ref ColK);
+                    G.FindWHITEKing(CloneATable(Table), ref RowK, ref ColK);
                     if (EnemyKingHaveAtMostOneEmptyItemInAttack(RowK, ColK, CloneATable(Table), Order))
                         HA += RationalRegard;
                 }
@@ -4883,60 +4883,106 @@ namespace HybridizerRefrigitz
             lock (O)
             {
                 int NIs = 0;
-                if ((ColK - 1 >= 0) && !SameSign(Table[Rowk, ColK], Table[Rowk, ColK - 1]))
+                if ((ColK - 1 >= 0))
                 {
-                    EmptyR.Add(Rowk);
-                    EmptyC.Add(ColK - 1);
-                    NIs++;
+                    if (!SameSign(Table[Rowk, ColK], Table[Rowk, ColK - 1]))
+                    {
+
+                        EmptyR.Add(Rowk);
+                        EmptyC.Add(ColK - 1);
+                        NIs++;
+                    }
                 }
-                if ((ColK + 1 < 8) && !SameSign(Table[Rowk, ColK], Table[Rowk, ColK + 1]))
+
+                if ((ColK + 1 < 8))
                 {
-                    EmptyR.Add(Rowk);
-                    EmptyC.Add(ColK + 1);
-                    NIs++;
+                    if (!SameSign(Table[Rowk, ColK], Table[Rowk, ColK + 1]))
+                    {
+
+                        EmptyR.Add(Rowk);
+                        EmptyC.Add(ColK + 1);
+                        NIs++;
+                    }
                 }
-                if ((Rowk - 1 >= 0) && !SameSign(Table[Rowk, ColK], Table[Rowk - 1, ColK]))
+
+                if ((Rowk - 1 >= 0))
                 {
-                    EmptyR.Add(Rowk - 1);
-                    EmptyC.Add(ColK);
-                    NIs++;
+                    if (!SameSign(Table[Rowk, ColK], Table[Rowk - 1, ColK]))
+                    {
+                        EmptyR.Add(Rowk - 1);
+                        EmptyC.Add(ColK);
+                        NIs++;
+                    }
                 }
-                if ((Row + 1 < 8) && !SameSign(Table[Rowk, ColK], Table[Rowk + 1, ColK]))
+                if ((Row + 1 < 8))
                 {
-                    EmptyR.Add(Rowk + 1);
-                    EmptyC.Add(ColK);
-                    NIs++;
+                    if (!SameSign(Table[Rowk, ColK], Table[Rowk + 1, ColK]))
+                    {
+                        EmptyR.Add(Rowk + 1);
+                        EmptyC.Add(ColK);
+                        NIs++;
+                    }
                 }
-                if ((ColK - 1 >= 0) && (Rowk - 1 >= 0) && !SameSign(Table[Rowk, ColK], Table[Rowk - 1, ColK - 1]))
+                if ((ColK - 1 >= 0))
                 {
-                    EmptyR.Add(Rowk - 1);
-                    EmptyC.Add(ColK - 1);
-                    NIs++;
+                    if (!SameSign(Table[Rowk, ColK], Table[Rowk - 1, ColK - 1]))
+
+                    {
+                        EmptyR.Add(Rowk - 1);
+                        EmptyC.Add(ColK - 1);
+                        NIs++;
+                    }
                 }
-                if ((ColK - 1 >= 0) && (Rowk + 1 < 8) && !SameSign(Table[Rowk, ColK], Table[Rowk + 1, ColK - 1]))
+                if ((Rowk + 1 < 8))
                 {
-                    EmptyR.Add(Rowk + 1);
-                    EmptyC.Add(ColK - 1);
-                    NIs++;
+                    if ((ColK - 1 >= 0))
+                    {
+                        if (!SameSign(Table[Rowk, ColK], Table[Rowk + 1, ColK - 1]))
+                        {
+                            EmptyR.Add(Rowk + 1);
+                            EmptyC.Add(ColK - 1);
+                            NIs++;
+                        }
+                    }
                 }
-                if ((ColK + 1 < 8) && (Rowk + 1 < 8) && !SameSign(Table[Rowk, ColK], Table[Rowk + 1, ColK + 1]))
+                if ((Rowk + 1 < 8))
                 {
-                    EmptyR.Add(Rowk + 1);
-                    EmptyC.Add(ColK + 1);
-                    NIs++;
+                    if ((ColK + 1 < 8))
+                    {
+                        if (!SameSign(Table[Rowk, ColK], Table[Rowk + 1, ColK + 1]))
+                        {
+                            EmptyR.Add(Rowk + 1);
+                            EmptyC.Add(ColK + 1);
+                            NIs++;
+                        }
+                    }
                 }
-                if ((ColK + 1 < 8) && (Rowk - 1 >= 0) && !SameSign(Table[Rowk, ColK], Table[Rowk - 1, ColK + 1]))
+                if ((ColK + 1 < 8))
                 {
-                    EmptyR.Add(Rowk - 1);
-                    EmptyC.Add(ColK + 1);
-                    NIs++;
+                    if ((Rowk - 1 >= 0))
+                    {
+                        if (!SameSign(Table[Rowk, ColK], Table[Rowk - 1, ColK + 1]))
+                        {
+                            EmptyR.Add(Rowk - 1);
+                            EmptyC.Add(ColK + 1);
+                            NIs++;
+                        }
+                    }
                 }
-                if ((ColK + 1 < 8) && (Rowk - 1 >= 0) && !SameSign(Table[Rowk, ColK], Table[Rowk - 1, ColK + 1]))
+
+                if ((ColK - 1 >= 0))
                 {
-                    EmptyR.Add(Rowk - 1);
-                    EmptyC.Add(ColK + 1);
-                    NIs++;
+                    if ((Rowk - 1 >= 0))
+                    {
+                        if (!SameSign(Table[Rowk, ColK], Table[Rowk - 1, ColK - 1]))
+                        {
+                            EmptyR.Add(Rowk - 1);
+                            EmptyC.Add(ColK + 1);
+                            NIs++;
+                        }
+                    }
                 }
+
                 return NIs;
             }
         }
@@ -5093,28 +5139,28 @@ namespace HybridizerRefrigitz
                 return Is;
             }
         }
-        bool IsMinisterOrElephantBecomeActive(int RowS, int ColS, int RowD, int ColD, int[,] Table, ConsoleColor a)
+        bool IsMinisterOrElephantBecomeActive(int RowS, int ColS, int RowD, int ColD, int[,] Table, Color a)
         {
             bool Is = false;
-            const int ElephantGray = 2, ElephantBrown = -2;
-            const int MinisterGray = 2, MinisterBrown = -2;
+            const int ElephantWHITE = 2, ElephantBLACK = -2;
+            const int MinisterWHITE = 2, MinisterBLACK = -2;
             if (Order == 1)
             {
-                if (Table[7, 2] == ElephantGray)
+                if (Table[7, 2] == ElephantWHITE)
                 {
                     if (ColS == 6 && RowS == 1)
                         Is = true;
                     if (ColS == 6 && RowS == 3)
                         Is = true;
                 }
-                if (Table[7, 5] == ElephantGray)
+                if (Table[7, 5] == ElephantWHITE)
                 {
                     if (ColS == 6 && RowS == 4)
                         Is = true;
                     if (ColS == 6 && RowS == 6)
                         Is = true;
                 }
-                if (Table[7, 3] == MinisterGray)
+                if (Table[7, 3] == MinisterWHITE)
                 {
                     if (ColS == 6 && RowS == 2)
                         Is = true;
@@ -5126,21 +5172,21 @@ namespace HybridizerRefrigitz
             }
             else
             {
-                if (Table[0, 2] == ElephantBrown)
+                if (Table[0, 2] == ElephantBLACK)
                 {
                     if (ColS == 1 && RowS == 1)
                         Is = true;
                     if (ColS == 1 && RowS == 3)
                         Is = true;
                 }
-                if (Table[0, 5] == ElephantBrown)
+                if (Table[0, 5] == ElephantBLACK)
                 {
                     if (ColS == 1 && RowS == 4)
                         Is = true;
                     if (ColS == 1 && RowS == 6)
                         Is = true;
                 }
-                if (Table[0, 3] == MinisterBrown)
+                if (Table[0, 3] == MinisterBLACK)
                 {
                     if (ColS == 1 && RowS == 2)
                         Is = true;
@@ -5152,7 +5198,7 @@ namespace HybridizerRefrigitz
             }
             return Is;
         }
-        bool IsContorlCenter(int RowS, int ColS, int RowD, int ColD, int[,] Table, ConsoleColor a)
+        bool IsContorlCenter(int RowS, int ColS, int RowD, int ColD, int[,] Table, Color a)
         {
             bool Is = false;
             const int ControlF = 3, ControlS = 4;
@@ -5173,7 +5219,7 @@ namespace HybridizerRefrigitz
             return Is;
         }
         ///Heuristic of Check and CheckMate.
-        public int HeuristicCheckAndCheckMate(int RowS, int ColS, int RowD, int ColD, int[,] Table, ConsoleColor a)
+        public int HeuristicCheckAndCheckMate(int RowS, int ColS, int RowD, int ColD, int[,] Table, Color a)
         {
             Object O = new Object();
             lock (O)
@@ -5223,7 +5269,7 @@ namespace HybridizerRefrigitz
             }
         }
         //Veryfy and detect Object Value.
-        int VeryFye(int[,] Table, int Order, ConsoleColor a)
+        int VeryFye(int[,] Table, int Order, Color a)
         {
             Object O = new Object();
             lock (O)
@@ -5253,7 +5299,7 @@ namespace HybridizerRefrigitz
         }
         //QC_OK
         //Numbers of Supporting Current Objects method.
-        int SupporterCount(int[,] Table, int Order, ConsoleColor a, int ii, int jj)
+        int SupporterCount(int[,] Table, int Order, Color a, int ii, int jj)
         {
             Object O = new Object();
             lock (O)
@@ -5290,7 +5336,7 @@ namespace HybridizerRefrigitz
             }
         }
         //Attacks on Enemies.
-        int AttackerCount(int[,] Table, int Order, ConsoleColor a, int i, int j)
+        int AttackerCount(int[,] Table, int Order, Color a, int i, int j)
         {
             Object O = new Object();
             lock (O)
@@ -5328,7 +5374,7 @@ namespace HybridizerRefrigitz
             }
         }
         //Attackers of Enemies.QC_OK.
-        int EnemyAttackerCount(int[,] Table, int Order, ConsoleColor a, int ii, int jj)
+        int EnemyAttackerCount(int[,] Table, int Order, Color a, int ii, int jj)
         {
             Object O = new Object();
             lock (O)
@@ -5463,14 +5509,14 @@ namespace HybridizerRefrigitz
             }
         }
         //when center is controled by traversal objects.
-        public bool CenrtrallnControlByTraversal(int[,] Tab, ConsoleColor a, int Order, int RowS, int ColS, int RowD, int ColD)
+        public bool CenrtrallnControlByTraversal(int[,] Tab, Color a, int Order, int RowS, int ColS, int RowD, int ColD)
         {
             Object O = new Object();
             lock (O)
             {
-                ConsoleColor aa = ConsoleColor.Gray;
+                Color aa = Color.WHITE;
                 if (Order * -1 == -1)
-                    aa = ConsoleColor.Black;
+                    aa = Color.BLACK;
                 bool Is = false;
                 if (Tab[RowS, ColS] == 1 || Tab[RowS, ColS] == -1)
                     return Is;
@@ -5934,13 +5980,13 @@ namespace HybridizerRefrigitz
             }
         }
         //Distribution of Objects
-        public int HeuristicDistribution(bool Before, int[,] Tab, int Order, ConsoleColor a, int RowS, int ColS, int RowD, int ColD)
+        public int HeuristicDistribution(bool Before, int[,] Tab, int Order, Color a, int RowS, int ColS, int RowD, int ColD)
         {
             Object O = new Object();
             lock (O)
             {
                 int Dis = 0;
-                const int ObjectGray = 0, ObjectBrown = 0;
+                const int ObjectWHITE = 0, ObjectBLACK = 0;
                 //opperation decision making  on pawn movment
                 bool ab = false;
                 var th1 = Task.Factory.StartNew(() => ab = IsTableRowColIsZero(RowS, ColS) && HeuristicAllReducedAttacked.Count == 0);
@@ -5972,7 +6018,7 @@ namespace HybridizerRefrigitz
                         if (Tab[RowS, ColS] == 4 || Tab[RowD, ColD] == 4)
                             Dis += RationalRegard;
                     }
-                       if ((Tab[3, 4] > ObjectGray && Tab[4, 3] > ObjectGray && Tab[3, 3] > ObjectGray && Tab[4, 4] > ObjectGray) || (IsNumberOfObjecttIsLessThanThreashold(CloneATable(Tab), 25)))
+                       if ((Tab[3, 4] > ObjectWHITE && Tab[4, 3] > ObjectWHITE && Tab[3, 3] > ObjectWHITE && Tab[4, 4] > ObjectWHITE) || (IsNumberOfObjecttIsLessThanThreashold(CloneATable(Tab), 25)))
                     {
                         var th3 = Task.Factory.StartNew(() => ab = (Tab[RowS, ColS] == 3) && (NoOfExistInReducedAttackList(Before, RowS, ColS, RowD, ColD) > 0));
                         th3.Wait();
@@ -6017,9 +6063,9 @@ namespace HybridizerRefrigitz
                             Colleralation = Cor;
                             Dis += RationalRegard;
                         }
-                        if (Cor < ColleralationGray && Tab[RowS, ColS] > 0 && (Cor >= 0))
+                        if (Cor < ColleralationWHITE && Tab[RowS, ColS] > 0 && (Cor >= 0))
                         {
-                            ColleralationGray = Cor;
+                            ColleralationWHITE = Cor;
                         }
 
                     }
@@ -6054,7 +6100,7 @@ namespace HybridizerRefrigitz
                         }
                     }
 
-                    var th11 = Task.Factory.StartNew(() => ab = ((Tab[3, 4] > ObjectGray && Tab[4, 3] > ObjectGray && Tab[3, 3] > ObjectGray && Tab[4, 4] > ObjectGray)) && (!IsNumberOfObjecttIsLessThanThreashold(CloneATable(Tab), 25)));
+                    var th11 = Task.Factory.StartNew(() => ab = ((Tab[3, 4] > ObjectWHITE && Tab[4, 3] > ObjectWHITE && Tab[3, 3] > ObjectWHITE && Tab[4, 4] > ObjectWHITE)) && (!IsNumberOfObjecttIsLessThanThreashold(CloneATable(Tab), 25)));
                     th11.Wait();
                     th11.Dispose();
                     if (!ab)
@@ -6085,7 +6131,7 @@ namespace HybridizerRefrigitz
                         if (Tab[RowS, ColS] == -4 || Tab[RowD, ColD] == -4)
                             Dis += RationalRegard;
                     }
-                    if ((Tab[3, 4] < ObjectBrown && Tab[4, 3] < ObjectBrown && Tab[3, 3] < ObjectBrown && Tab[4, 4] < ObjectBrown) || (IsNumberOfObjecttIsLessThanThreashold(CloneATable(Tab), 25)))
+                    if ((Tab[3, 4] < ObjectBLACK && Tab[4, 3] < ObjectBLACK && Tab[3, 3] < ObjectBLACK && Tab[4, 4] < ObjectBLACK) || (IsNumberOfObjecttIsLessThanThreashold(CloneATable(Tab), 25)))
                     {
                         var th13 = Task.Factory.StartNew(() => ab = (Tab[RowS, ColS] == -3) && (NoOfExistInReducedAttackList(Before, RowS, ColS, RowD, ColD) > 0));
                         th13.Wait();
@@ -6131,9 +6177,9 @@ namespace HybridizerRefrigitz
                             Colleralation = Cor;
                             Dis += RationalRegard;
                         }
-                        if (Cor < ColleralationBrown && Tab[RowS, ColS] < 0 && (Cor >= 0))
+                        if (Cor < ColleralationBLACK && Tab[RowS, ColS] < 0 && (Cor >= 0))
                         {
-                            ColleralationBrown = Cor;
+                            ColleralationBLACK = Cor;
                         }
                     }
                     var th18 = Task.Factory.StartNew(() => ab = (Tab[RowS, ColS] < 0) && (NoOfExistInReducedAttackList(Before, RowS, ColS, RowD, ColD) > 0));
@@ -6165,7 +6211,7 @@ namespace HybridizerRefrigitz
                             }
                         }
                     }
-                    if (!((Tab[3, 4] < ObjectBrown && Tab[4, 3] < ObjectBrown && Tab[3, 3] < ObjectBrown && Tab[4, 4] < ObjectBrown)) && (!IsNumberOfObjecttIsLessThanThreashold(CloneATable(Tab), 25)))
+                    if (!((Tab[3, 4] < ObjectBLACK && Tab[4, 3] < ObjectBLACK && Tab[3, 3] < ObjectBLACK && Tab[4, 4] < ObjectBLACK)) && (!IsNumberOfObjecttIsLessThanThreashold(CloneATable(Tab), 25)))
                     {
                         if (!IsNumberOfObjecttIsLessThanThreashold(CloneATable(Tab), 32))
                         {
@@ -6310,7 +6356,7 @@ namespace HybridizerRefrigitz
             }
         }
         //when pawn move to center by no reducedattack rational regard and heuristic of attacked and "IsPawnIsolatedOrDoubleBackAwayOrHung" rational penalty
-        public int HeuristicObjectAtCenterAndPawnAttackTraversalObjectsAndDangourForEnemy(int[,] Table, ConsoleColor aa, int Ord, int ii, int jj, int i, int j)
+        public int HeuristicObjectAtCenterAndPawnAttackTraversalObjectsAndDangourForEnemy(int[,] Table, Color aa, int Ord, int ii, int jj, int i, int j)
         {
             Object O = new Object();
             lock (O)
@@ -6360,15 +6406,15 @@ namespace HybridizerRefrigitz
                 return HA;
             }
         }
-        //ConsoleColor by order specified
-        ConsoleColor OrderConsoleColor(int Ord)
+        //color by order specified
+        Color OrderColor(int Ord)
         {
             Object O = new Object();
             lock (O)
             {
-                ConsoleColor a = ConsoleColor.Gray;
+                Color a = Color.WHITE;
                 if (Ord == -1)
-                    a = ConsoleColor.Black;
+                    a = Color.BLACK;
                 return a;
             }
         }
@@ -6450,7 +6496,7 @@ namespace HybridizerRefrigitz
             }
         }
         //all heuristics  of attacked and reduced attacked ans supported and reduced attacked
-        public int[] HeuristicAll(bool Before, int Killed, int[,] Table, ConsoleColor aa, int Ord)
+        public int[] HeuristicAll(bool Before, int Killed, int[,] Table, Color aa, int Ord)
         {
 
             Object O = new Object();
@@ -6495,7 +6541,7 @@ namespace HybridizerRefrigitz
                                                     th.Dispose();
                                                     if (ab)
                                                     {
-                                                        var th1 = Task.Factory.StartNew(() => ab = Attack(CloneATable(Table), RowD, ColD, RowS, ColS, OrderConsoleColor(Ord * -1), Ord * -1));
+                                                        var th1 = Task.Factory.StartNew(() => ab = Attack(CloneATable(Table), RowD, ColD, RowS, ColS, OrderColor(Ord * -1), Ord * -1));
                                                         th1.Wait();
                                                         th1.Dispose();
                                                         if (ab)
@@ -6518,7 +6564,7 @@ namespace HybridizerRefrigitz
                                                 th.Dispose();
                                                 if (ab)
                                                 {
-                                                    var th1 = Task.Factory.StartNew(() => ab = Support(CloneATable(Table), RowD, ColD, RowS, ColS, OrderConsoleColor(Ord * -1), Ord * -1));
+                                                    var th1 = Task.Factory.StartNew(() => ab = Support(CloneATable(Table), RowD, ColD, RowS, ColS, OrderColor(Ord * -1), Ord * -1));
                                                     th1.Wait();
                                                     th1.Dispose();
                                                     if (ab)
@@ -6540,7 +6586,7 @@ namespace HybridizerRefrigitz
                                                 th.Dispose();
                                                 if (ab)
                                                 {
-                                                    var th1 = Task.Factory.StartNew(() => ab = Attack(CloneATable(Table), RowS, ColS, RowD, ColD, OrderConsoleColor(Ord), Ord));
+                                                    var th1 = Task.Factory.StartNew(() => ab = Attack(CloneATable(Table), RowS, ColS, RowD, ColD, OrderColor(Ord), Ord));
                                                     th1.Wait();
                                                     th1.Dispose();
                                                     if (ab)
@@ -6562,7 +6608,7 @@ namespace HybridizerRefrigitz
                                                  th.Dispose();
                                                  if (ab)
                                                  {
-                                                     var th1 = Task.Factory.StartNew(() => ab = Support(CloneATable(Table), RowS, ColS, RowD, ColD, OrderConsoleColor(Ord), Ord));
+                                                     var th1 = Task.Factory.StartNew(() => ab = Support(CloneATable(Table), RowS, ColS, RowD, ColD, OrderColor(Ord), Ord));
                                                      th1.Wait();
                                                      th1.Dispose();
                                                      if (ab)
@@ -7056,7 +7102,7 @@ namespace HybridizerRefrigitz
             }
         }
         //create heuristic and lists of move and reduced move and attack and reduced attack and support and reduced support
-        public int[] HeuristicExchange(bool Before, int Killed, int[,] Table, ConsoleColor aa, int Ord, int Ros, int Cos, int Rod, int Cod)
+        public int[] HeuristicExchange(bool Before, int Killed, int[,] Table, Color aa, int Ord, int Ros, int Cos, int Rod, int Cod)
         {
 
             Object O = new Object();
@@ -7097,7 +7143,7 @@ namespace HybridizerRefrigitz
                                                 if (ab)
                                                 {
 
-                                                    var th1 = Task.Factory.StartNew(() => ab = Attack(CloneATable(Table), RowD, ColD, RowS, ColS, OrderConsoleColor(Ord * -1), Ord * -1));
+                                                    var th1 = Task.Factory.StartNew(() => ab = Attack(CloneATable(Table), RowD, ColD, RowS, ColS, OrderColor(Ord * -1), Ord * -1));
                                                     th1.Wait();
                                                     th1.Dispose();
                                                     if (ab)
@@ -7131,7 +7177,7 @@ namespace HybridizerRefrigitz
                                                         if (ab)
                                                         {
 
-                                                            var th1 = Task.Factory.StartNew(() => ab = Support(CloneATable(Table), RowD, ColD, RowS, ColS, OrderConsoleColor(Ord * -1), Ord * -1));
+                                                            var th1 = Task.Factory.StartNew(() => ab = Support(CloneATable(Table), RowD, ColD, RowS, ColS, OrderColor(Ord * -1), Ord * -1));
                                                             th1.Wait();
                                                             th1.Dispose();
                                                             if (ab)
@@ -7165,7 +7211,7 @@ namespace HybridizerRefrigitz
                                                         if (ab)
                                                         {
 
-                                                            var th1 = Task.Factory.StartNew(() => ab = Movable(CloneATable(Table), RowD, ColD, RowS, ColS, OrderConsoleColor(Ord * -1), Ord * -1));
+                                                            var th1 = Task.Factory.StartNew(() => ab = Movable(CloneATable(Table), RowD, ColD, RowS, ColS, OrderColor(Ord * -1), Ord * -1));
                                                             th1.Wait();
                                                             th1.Dispose();
                                                             if (ab)
@@ -7198,7 +7244,7 @@ namespace HybridizerRefrigitz
                                                         if (ab)
                                                         {
 
-                                                            var th1 = Task.Factory.StartNew(() => ab = Attack(CloneATable(Table), RowS, ColS, RowD, ColD, OrderConsoleColor(Ord), Ord));
+                                                            var th1 = Task.Factory.StartNew(() => ab = Attack(CloneATable(Table), RowS, ColS, RowD, ColD, OrderColor(Ord), Ord));
                                                             th1.Wait();
                                                             th1.Dispose();
                                                             if (ab)
@@ -7229,7 +7275,7 @@ namespace HybridizerRefrigitz
                                                         th.Dispose();
                                                         if (ab)
                                                         {
-                                                            var th1 = Task.Factory.StartNew(() => ab = Support(CloneATable(Table), RowS, ColS, RowD, ColD, OrderConsoleColor(Ord), Ord));
+                                                            var th1 = Task.Factory.StartNew(() => ab = Support(CloneATable(Table), RowS, ColS, RowD, ColD, OrderColor(Ord), Ord));
                                                             th1.Wait();
                                                             th1.Dispose();
                                                             if (ab)
@@ -7261,7 +7307,7 @@ namespace HybridizerRefrigitz
                                                         if (ab)
                                                         {
 
-                                                            var th1 = Task.Factory.StartNew(() => ab = Movable(CloneATable(Table), RowS, ColS, RowD, ColD, OrderConsoleColor(Ord), Ord));
+                                                            var th1 = Task.Factory.StartNew(() => ab = Movable(CloneATable(Table), RowS, ColS, RowD, ColD, OrderColor(Ord), Ord));
                                                             th1.Wait();
                                                             th1.Dispose();
                                                             if (ab)
@@ -7354,7 +7400,7 @@ namespace HybridizerRefrigitz
                             int i6 = Ros, j6 = Cos, iiii6 = Rod, jjjj6 = Cod;
                             int[,] Table6 = CloneATable(Table);
                             int Ord6 = Ord;
-                            ConsoleColor aa6 = aa;
+                            Color aa6 = aa;
                             var H3 = Task.Factory.StartNew(() => HAA6 = HeuristicEnemySupported(Table6, Ord6, aa6, i6, j6, iiii6, jjjj6));
                             H3.Wait();
                             H3.Dispose();
@@ -7463,7 +7509,7 @@ namespace HybridizerRefrigitz
             }
         }
         //Heuristic of Movments.
-        public int HeuristicMovment(bool Before, int[,] Table, ConsoleColor aa, int Ord, int RowS, int ColS, int RowD, int ColD)
+        public int HeuristicMovment(bool Before, int[,] Table, Color aa, int Ord, int RowS, int ColS, int RowD, int ColD)
         {
             Object O = new Object();
             lock (O)
@@ -7487,7 +7533,7 @@ namespace HybridizerRefrigitz
             }
         }
         //Heuristic of self Movments.
-        public int HeuristicMovmentSelf(bool Before, int[,] Table, ConsoleColor aa, int Ord, int RowS, int ColS, int RowD, int ColD)
+        public int HeuristicMovmentSelf(bool Before, int[,] Table, Color aa, int Ord, int RowS, int ColS, int RowD, int ColD)
         {
             Object O = new Object();
             lock (O)
@@ -7501,7 +7547,7 @@ namespace HybridizerRefrigitz
                 if (!AStarGreedyHeuristicT)
                 {
                     int Order = new int();
-                    ConsoleColor a = new ConsoleColor();
+                    Color a = new Color();
                     a = aa;
                     Order = DummyOrder;
                     int Sign = new int();
@@ -7517,7 +7563,7 @@ namespace HybridizerRefrigitz
                             Sign = 1 * AllDraw.SignMovments;
                             ChessRules.CurrentOrder = -1;
                         }
-                        a = ConsoleColor.Black;
+                        a = Color.BLACK;
                     }
                     else if (Table[RowD, ColD] == 0 && DummyOrder == 1 && Table[RowS, ColS] >= 0)
                     {
@@ -7528,7 +7574,7 @@ namespace HybridizerRefrigitz
                             Sign = 1 * AllDraw.SignMovments;
                             ChessRules.CurrentOrder = 1;
                         }
-                        a = ConsoleColor.Gray;
+                        a = Color.WHITE;
                     }
                     else
                         return HeuristicMovementValue;
@@ -7563,13 +7609,13 @@ namespace HybridizerRefrigitz
                                             continue;
                                         if (Order == -1 && Table[g, h] == 0)
                                             continue;
-                                        ConsoleColor aaa = new ConsoleColor();
+                                        Color aaa = new Color();
                                         //Assgin Enemy ints.
-                                        aaa = ConsoleColor.Gray;
+                                        aaa = Color.WHITE;
                                         if (Order * -1 == -1)
-                                            aaa = ConsoleColor.Black;
+                                            aaa = Color.BLACK;
                                         else
-                                            aaa = ConsoleColor.Gray;
+                                            aaa = Color.WHITE;
                                         //When Enemy is Supported.
                                         bool A = new bool();
                                         bool B = new bool();
@@ -7618,7 +7664,7 @@ namespace HybridizerRefrigitz
                 else
                 {
                     int Order = new int();
-                    ConsoleColor a = new ConsoleColor();
+                    Color a = new Color();
                     a = aa;
                     if (RowD == RowS && ColD == ColS)
                         return HeuristicMovementValue;
@@ -7635,7 +7681,7 @@ namespace HybridizerRefrigitz
                         {
                             Sign = 1 * AllDraw.SignMovments;
                             ChessRules.CurrentOrder = -1;
-                            a = ConsoleColor.Black;
+                            a = Color.BLACK;
                         }
                     }
                     else if (Table[RowD, ColD] == 0 && DummyOrder == 1 && Table[RowS, ColS] >= 0)
@@ -7646,7 +7692,7 @@ namespace HybridizerRefrigitz
                         {
                             Sign = 1 * AllDraw.SignMovments;
                             ChessRules.CurrentOrder = 1;
-                            a = ConsoleColor.Gray;
+                            a = Color.WHITE;
                         }
                     }
                     else
@@ -7679,13 +7725,13 @@ namespace HybridizerRefrigitz
                                             continue;
                                         if (Order == -1 && Table[g, h] == 0)
                                             continue;
-                                        ConsoleColor aaa = new ConsoleColor();
+                                        Color aaa = new Color();
                                         //Assgin Enemy ints.
-                                        aaa = ConsoleColor.Gray;
+                                        aaa = Color.WHITE;
                                         if (Order * -1 == -1)
-                                            aaa = ConsoleColor.Black;
+                                            aaa = Color.BLACK;
                                         else
-                                            aaa = ConsoleColor.Gray;
+                                            aaa = Color.WHITE;
                                         //When Enemy is Supported.
                                         bool A = new bool();
                                         bool B = new bool();
@@ -7737,7 +7783,7 @@ namespace HybridizerRefrigitz
             }
         }
         //Heuristic of enemy Movments.
-        public int HeuristicMovmentEnemy(bool Before, int[,] Table, ConsoleColor aa, int Ord, int RowD, int ColD, int RowS, int ColS)
+        public int HeuristicMovmentEnemy(bool Before, int[,] Table, Color aa, int Ord, int RowD, int ColD, int RowS, int ColS)
         {
             Object O = new Object();
             lock (O)
@@ -7751,7 +7797,7 @@ namespace HybridizerRefrigitz
                 if (!AStarGreedyHeuristicT)
                 {
                     int Order = new int();
-                    ConsoleColor a = new ConsoleColor();
+                    Color a = new Color();
                     a = aa;
                     Order = DummyOrder;
                     int Sign = new int();
@@ -7767,7 +7813,7 @@ namespace HybridizerRefrigitz
                             Sign = 1 * AllDraw.SignMovments;
                             ChessRules.CurrentOrder = -1;
                         }
-                        a = ConsoleColor.Black;
+                        a = Color.BLACK;
                     }
                     else if (Table[RowD, ColD] == 0 && DummyOrder == 1 && Table[RowS, ColS] >= 0)
                     {
@@ -7778,7 +7824,7 @@ namespace HybridizerRefrigitz
                             Sign = 1 * AllDraw.SignMovments;
                             ChessRules.CurrentOrder = 1;
                         }
-                        a = ConsoleColor.Gray;
+                        a = Color.WHITE;
                     }
                     else
                         return HeuristicMovementValue;
@@ -7813,13 +7859,13 @@ namespace HybridizerRefrigitz
                                             continue;
                                         if (Order == -1 && Table[g, h] == 0)
                                             continue;
-                                        ConsoleColor aaa = new ConsoleColor();
+                                        Color aaa = new Color();
                                         //Assgin Enemy ints.
-                                        aaa = ConsoleColor.Gray;
+                                        aaa = Color.WHITE;
                                         if (Order * -1 == -1)
-                                            aaa = ConsoleColor.Black;
+                                            aaa = Color.BLACK;
                                         else
-                                            aaa = ConsoleColor.Gray;
+                                            aaa = Color.WHITE;
                                         //When Enemy is Supported.
                                         bool A = new bool();
                                         bool B = new bool();
@@ -7866,7 +7912,7 @@ namespace HybridizerRefrigitz
                 else
                 {
                     int Order = new int();
-                    ConsoleColor a = new ConsoleColor();
+                    Color a = new Color();
                     a = aa;
                     if (RowD == RowS && ColD == ColS)
                         return HeuristicMovementValue;
@@ -7883,7 +7929,7 @@ namespace HybridizerRefrigitz
                         {
                             Sign = 1 * AllDraw.SignMovments;
                             ChessRules.CurrentOrder = -1;
-                            a = ConsoleColor.Black;
+                            a = Color.BLACK;
                         }
                     }
                     else if (Table[RowD, ColD] == 0 && DummyOrder == 1 && Table[RowS, ColS] >= 0)
@@ -7894,7 +7940,7 @@ namespace HybridizerRefrigitz
                         {
                             Sign = 1 * AllDraw.SignMovments;
                             ChessRules.CurrentOrder = 1;
-                            a = ConsoleColor.Gray;
+                            a = Color.WHITE;
                         }
                     }
                     else
@@ -7926,13 +7972,13 @@ namespace HybridizerRefrigitz
                                             continue;
                                         if (Order == -1 && Table[g, h] == 0)
                                             continue;
-                                        ConsoleColor aaa = new ConsoleColor();
+                                        Color aaa = new Color();
                                         //Assgin Enemy ints.
-                                        aaa = ConsoleColor.Gray;
+                                        aaa = Color.WHITE;
                                         if (Order * -1 == -1)
-                                            aaa = ConsoleColor.Black;
+                                            aaa = Color.BLACK;
                                         else
-                                            aaa = ConsoleColor.Gray;
+                                            aaa = Color.WHITE;
                                         //When Enemy is Supported.
                                         bool A = new bool();
                                         bool B = new bool();
@@ -7983,7 +8029,7 @@ namespace HybridizerRefrigitz
             }
         }
         ///Attack Determination.QC_Ok
-        public bool Attack(int[,] Tab, int i, int j, int ii, int jj, ConsoleColor a, int Order)
+        public bool Attack(int[,] Tab, int i, int j, int ii, int jj, Color a, int Order)
         {
             Object O = new Object();
             lock (O)
@@ -8019,7 +8065,7 @@ namespace HybridizerRefrigitz
             }
         }
         //Object Danger Determination.
-        public bool ObjectDanger(int[,] Tab, int i, int j, int ii, int jj, ConsoleColor a, int Order)
+        public bool ObjectDanger(int[,] Tab, int i, int j, int ii, int jj, Color a, int Order)
         {
             Object O = new Object();
             lock (O)
@@ -8060,12 +8106,12 @@ namespace HybridizerRefrigitz
                     {
                         ChessRules.CurrentOrder = CCurrentOrder;
                         //Return ObjectDanger.
-                        if ((AA.CheckGrayObjectDangour) && Order == 1)
+                        if ((AA.CheckWHITEObjectDangour) && Order == 1)
                         {
                             return true;
                         }
                         else
-                            if ((AA.CheckBrownObjectDangour) && Order == -1)
+                            if ((AA.CheckBLACKObjectDangour) && Order == -1)
                         {
                             return true;
                         }
@@ -8074,12 +8120,12 @@ namespace HybridizerRefrigitz
                     {
                         ChessRules.CurrentOrder = CCurrentOrder;
                         //Return ObjectDanger.
-                        if ((AA.CheckGray || AA.CheckMateGray) && Order == 1)
+                        if ((AA.CheckWHITE || AA.CheckMateWHITE) && Order == 1)
                         {
                             return true;
                         }
                         else
-                            if ((AA.CheckBrown || AA.CheckMateBrown) && Order == -1)
+                            if ((AA.CheckBLACK || AA.CheckMateBLACK) && Order == -1)
                         {
                             return true;
                         }
@@ -8094,7 +8140,7 @@ namespace HybridizerRefrigitz
             }
         }
         ///Supportation Determination.QC_OK
-        public bool Support(int[,] Tab, int i, int j, int ii, int jj, ConsoleColor a, int Order)
+        public bool Support(int[,] Tab, int i, int j, int ii, int jj, Color a, int Order)
         {
             Object O = new Object();
             lock (O)
@@ -8106,7 +8152,7 @@ namespace HybridizerRefrigitz
                 for (var RowS = 0; RowS < 8; RowS++)
                     for (var ColS = 0; ColS < 8; ColS++)
                         Table[RowS, ColS] = Tab[RowS, ColS];
-                ///When All Tables is Gray.
+                ///When All Tables is WHITE.
                 if (Order == 1 && Table[i, j] > 0)
                 {
                     ///When [i,j] Supporte [ii,jj].
@@ -8550,12 +8596,12 @@ namespace HybridizerRefrigitz
                     //The Index out of range exeption is not fixable.
                     if (So != null) if (So[i] != null)
                         {
-                            //When int is Gray or Brown.
-                            if (So[i].color == ConsoleColor.Gray || So[i].color == ConsoleColor.Black)
+                            //When int is WHITE or BLACK.
+                            if (So[i].color == Color.WHITE || So[i].color == Color.BLACK)
                             {
                                 if (Mi)
                                 {
-                                    if (So[i].color == ConsoleColor.Gray)
+                                    if (So[i].color == Color.WHITE)
                                         Count++;
                                 }
                                 else
@@ -8583,12 +8629,12 @@ namespace HybridizerRefrigitz
                     //The Index out of range exeption is not fixable.
                     if (So != null) if (So[i] != null)
                         {
-                            //when Elaphant int is Gray or Brown.
-                            if (So[i].color == ConsoleColor.Gray || So[i].color == ConsoleColor.Black)
+                            //when Elaphant int is WHITE or BLACK.
+                            if (So[i].color == Color.WHITE || So[i].color == Color.BLACK)
                             {
                                 if (Mi)
                                 {
-                                    if (So[i].color == ConsoleColor.Gray)
+                                    if (So[i].color == Color.WHITE)
                                         Count++;
                                 }
                                 else
@@ -8615,12 +8661,12 @@ namespace HybridizerRefrigitz
                     //The Index out of range exeption is not fixable.
                     if (So != null) if (So[i] != null)
                         {
-                            //When int is Gray or Brown.
-                            if (So[i].color == ConsoleColor.Gray || So[i].color == ConsoleColor.Black)
+                            //When int is WHITE or BLACK.
+                            if (So[i].color == Color.WHITE || So[i].color == Color.BLACK)
                             {
                                 if (Mi)
                                 {
-                                    if (So[i].color == ConsoleColor.Gray)
+                                    if (So[i].color == Color.WHITE)
                                         Count++;
                                 }
                                 else
@@ -8646,12 +8692,12 @@ namespace HybridizerRefrigitz
                     //The Index out of range exeption is not fixable.
                     if (So != null) if (So[i] != null)
                         {
-                            //When Castles int is Gray or Brown.
-                            if (So[i].color == ConsoleColor.Gray || So[i].color == ConsoleColor.Black)
+                            //When Castles int is WHITE or BLACK.
+                            if (So[i].color == Color.WHITE || So[i].color == Color.BLACK)
                             {
                                 if (Mi)
                                 {
-                                    if (So[i].color == ConsoleColor.Gray)
+                                    if (So[i].color == Color.WHITE)
                                         Count++;
                                 }
                                 else
@@ -8678,12 +8724,12 @@ namespace HybridizerRefrigitz
                     //The Index out of range exeption is not fixable.
                     if (So != null) if (So[i] != null)
                         {
-                            //When int of items is gray or Brown.
-                            if (So[i].color == ConsoleColor.Gray || So[i].color == ConsoleColor.Black)
+                            //When int of items is WHITE or BLACK.
+                            if (So[i].color == Color.WHITE || So[i].color == Color.BLACK)
                             {
                                 if (Mi)
                                 {
-                                    if (So[i].color == ConsoleColor.Gray)
+                                    if (So[i].color == Color.WHITE)
                                         Count++;
                                 }
                                 else
@@ -8709,12 +8755,12 @@ namespace HybridizerRefrigitz
                     //The Index out of range exeption is not fixable.
                     if (So != null) if (So[i] != null)
                         {
-                            //when int is Gray or Brown.
-                            if (So[i].color == ConsoleColor.Gray || So[i].color == ConsoleColor.Black)
+                            //when int is WHITE or BLACK.
+                            if (So[i].color == Color.WHITE || So[i].color == Color.BLACK)
                             {
                                 if (Mi)
                                 {
-                                    if (So[i].color == ConsoleColor.Gray)
+                                    if (So[i].color == Color.WHITE)
                                         Count++;
                                 }
                                 else
@@ -9038,7 +9084,7 @@ namespace HybridizerRefrigitz
                     Object OOO = new Object();
                     lock (OOO)
                     {
-                        //gray
+                        //WHITE
                         if (Order == -1)
                         {
                             //Repeate for Solder.
@@ -9894,7 +9940,7 @@ namespace HybridizerRefrigitz
                     Object A = new object();
                     lock (A)
                     {
-                        int[] TmpL = LoseOcuuredatChiled;int TmpW = WinOcuuredatChiled; newTask1 = Task.Factory.StartNew(() => CalculateHeuristics(TmpL, TmpW, true, Order, 0, CloneATable(TableS), RowSource, ColumnSource, RowDestination, ColumnDestination, color , ref HeuristicAttackValue, ref HeuristicMovementValue, ref HeuristicSelfSupportedValue, ref HeuristicReducedMovementValue, ref HeuristicReducedSupport, ref HeuristicReducedAttackValue, ref HeuristicDistributionValue, ref HeuristicKingSafe, ref HeuristicFromCenter, ref HeuristicKingDangour, ref HeuristicCheckedMate));
+                        int[] TmpL = LoseOcuuredatChiled;int TmpW = WinOcuuredatChiled; newTask1 = Task.Factory.StartNew(() => CalculateHeuristics(TmpL, TmpW, true, Order, 0, CloneATable(TableS), RowSource, ColumnSource, RowDestination, ColumnDestination, color, ref HeuristicAttackValue, ref HeuristicMovementValue, ref HeuristicSelfSupportedValue, ref HeuristicReducedMovementValue, ref HeuristicReducedSupport, ref HeuristicReducedAttackValue, ref HeuristicDistributionValue, ref HeuristicKingSafe, ref HeuristicFromCenter, ref HeuristicKingDangour, ref HeuristicCheckedMate));
                         newTask1.Wait(); newTask1.Dispose();
                         LoseOcuuredatChiled[0] += TmpL[0]; WinOcuuredatChiled += TmpW;
                     }
@@ -9930,7 +9976,7 @@ namespace HybridizerRefrigitz
                         //Caused this for Stachostic results.
                         if (!Sup)
                         {
-                            int[] TmpL = LoseOcuuredatChiled;int TmpW = WinOcuuredatChiled; newTask1 = Task.Factory.StartNew(() => CalculateHeuristics(TmpL, TmpW, false, Order, Killed, CloneATable(TableS), RowSource, ColumnSource, RowDestination, ColumnDestination, color , ref HeuristicAttackValue, ref HeuristicMovementValue, ref HeuristicSelfSupportedValue, ref HeuristicReducedMovementValue, ref HeuristicReducedSupport, ref HeuristicReducedAttackValue, ref HeuristicDistributionValue, ref HeuristicKingSafe, ref HeuristicFromCenter, ref HeuristicKingDangour, ref HeuristicCheckedMate));
+                            int[] TmpL = LoseOcuuredatChiled;int TmpW = WinOcuuredatChiled; newTask1 = Task.Factory.StartNew(() => CalculateHeuristics(TmpL, TmpW, false, Order, Killed, CloneATable(TableS), RowSource, ColumnSource, RowDestination, ColumnDestination, color, ref HeuristicAttackValue, ref HeuristicMovementValue, ref HeuristicSelfSupportedValue, ref HeuristicReducedMovementValue, ref HeuristicReducedSupport, ref HeuristicReducedAttackValue, ref HeuristicDistributionValue, ref HeuristicKingSafe, ref HeuristicFromCenter, ref HeuristicKingDangour, ref HeuristicCheckedMate));
                             newTask1.Wait(); newTask1.Dispose();
                             LoseOcuuredatChiled[0] += TmpL[0]; WinOcuuredatChiled += TmpW;
                         }
@@ -10014,9 +10060,9 @@ namespace HybridizerRefrigitz
                                     else
                                         if (Order == -1 && TableS[ii, jj] <= 0)
                                         continue;
-                                    ConsoleColor a = ConsoleColor.Gray;
+                                    Color a = Color.WHITE;
                                     if (Order * -1 == -1)
-                                        a = ConsoleColor.Black;
+                                        a = Color.BLACK;
                                     bool ab = false;
                                     var th = Task.Factory.StartNew(() => ab = Attack(CloneATable(TableS), ii, jj, i, j, a, Order * -1));
                                     th.Wait();
@@ -10035,9 +10081,9 @@ namespace HybridizerRefrigitz
                                                 else
                                                     if (Order == -1 && TableS[RowS, ColS] >= 0)
                                                     continue;
-                                                a = ConsoleColor.Gray;
+                                                a = Color.WHITE;
                                                 if (Order == -1)
-                                                    a = ConsoleColor.Black;
+                                                    a = Color.BLACK;
                                                 var th1 = Task.Factory.StartNew(() => ab = Support(CloneATable(TableS), RowS, ColS, i, j, a, Order));
                                                 th1.Wait();
                                                 th1.Dispose();
@@ -10148,7 +10194,7 @@ namespace HybridizerRefrigitz
                                         lock (O1)
                                         {
                                             if (!(LearningV[0] || LearningV[1] || LearningV[2]))
-                                                LearningV[0] = LearningV[0] || InAttackSelfThatNotSupportedAll(CloneATable(TableS), Order, color , i, j, RowS, ColS, ik, jk, iik, jjk);
+                                                LearningV[0] = LearningV[0] || InAttackSelfThatNotSupportedAll(CloneATable(TableS), Order, color, i, j, RowS, ColS, ik, jk, iik, jjk);
                                         }
                                     }//, () =>
                                     {
@@ -10170,7 +10216,7 @@ namespace HybridizerRefrigitz
                                         lock (O1)
                                         {
                                             if (!(LearningV[0] || LearningV[1] || LearningV[2]))
-                                                LearningV[2] = LearningV[2] || IsGardForCurrentMovmentsAndIsNotMovable(CloneATable(TableS), Order, color , i, j, RowS, ColS//, ii, jj, RowD, ColD
+                                                LearningV[2] = LearningV[2] || IsGardForCurrentMovmentsAndIsNotMovable(CloneATable(TableS), Order, color, i, j, RowS, ColS//, ii, jj, RowD, ColD
                                                     );
                                         }
                                     }
@@ -10218,7 +10264,7 @@ namespace HybridizerRefrigitz
                     //when true must penalty
                     if (!IsPrviousMovemntIsDangrousForCurr)
                     {
-                        newTask = Task.Factory.StartNew(() => SelfNotSupported = InAttackSelfThatNotSupported(CloneATable(TableS), Order, color , i, j, ii, jj));
+                        newTask = Task.Factory.StartNew(() => SelfNotSupported = InAttackSelfThatNotSupported(CloneATable(TableS), Order, color, i, j, ii, jj));
                         newTask.Wait();
                         newTask.Dispose();
                     } //when true must regard
@@ -10228,9 +10274,7 @@ namespace HybridizerRefrigitz
                     IsDangerous = false;
                     //For All Current
                     bool[] LearningVars = new bool[3];
-                    var newTask11 = Task.Factory.StartNew(() => LearningVars = SomeLearningVarsCalculator(CloneATable(TableS), ii, jj, i, j));
-                    newTask11.Wait();
-                    newTask11.Dispose();
+                    Task.Run(() => LearningVars = SomeLearningVarsCalculator(CloneATable(TableS), ii, jj, i, j));
                     Object O4 = new Object();
                     lock (O4)
                     {
@@ -10251,15 +10295,11 @@ namespace HybridizerRefrigitz
                             Depth = 0;
                             int[,] Tab = CloneATable(TableS);
                             int Ord = Order;
-                            ConsoleColor a = color;
+                            Color a = color;
                             int Ord1 = AllDraw.OrderPlate;
                             int Ord2 = AllDraw.OrderPlate * -1;
-                            var newTask111 = Task.Factory.StartNew(() => Is = IsNextMovmentIsCheckOrCheckMateForCurrentMovment(CloneATable(Tab), Ord, a, Depth, Ord1, Ord2, true));
-                            newTask111.Wait();
-                            newTask111.Dispose();
-
                             //when is true must penalty(Superposition)
-                            
+                            Task.Run(() => Is = IsNextMovmentIsCheckOrCheckMateForCurrentMovment(CloneATable(Tab), Ord, a, Depth, Ord1, Ord2, true));
                             //A
                         }
                         Object OO1 = new Object();
@@ -10292,26 +10332,26 @@ namespace HybridizerRefrigitz
                     }
                     if ((!IsNextMovemntIsCheckOrCheckMateForCurrent) && (!SelfNotSupported) && (!IsPrviousMovemntIsDangrousForCurr) && (!IsGardForCurrentMovmentsAndIsNotMova) && (!IsNotSafeToMoveAenemeyToAttackMoreThanTowObj) && (!IsDangerous))
                     {
-                        newTask = Task.Factory.StartNew(() => EnemyNotSupported = InAttackEnemyThatIsNotSupportedAll(IsTowValuableObjectEnemy, CloneATable(TableS), Order, color , i, j, ii, jj, ref ValuableEnemyNotSupported));
+                        newTask = Task.Factory.StartNew(() => EnemyNotSupported = InAttackEnemyThatIsNotSupportedAll(IsTowValuableObjectEnemy, CloneATable(TableS), Order, color, i, j, ii, jj, ref ValuableEnemyNotSupported));
                         newTask.Wait();
                         newTask.Dispose();
                     }
                     if ((!IsNextMovemntIsCheckOrCheckMateForCurrent) && (!SelfNotSupported) && (!IsPrviousMovemntIsDangrousForCurr) && (!IsGardForCurrentMovmentsAndIsNotMova) && (!IsNotSafeToMoveAenemeyToAttackMoreThanTowObj) && (!EnemyNotSupported) && (!IsDangerous))
                     {
-                        newTask = Task.Factory.StartNew(() => EnemyNotSupported = InAttackEnemyThatIsNotSupported(Killed, CloneATable(TableS), Order, color , i, j, ii, jj));
+                        newTask = Task.Factory.StartNew(() => EnemyNotSupported = InAttackEnemyThatIsNotSupported(Killed, CloneATable(TableS), Order, color, i, j, ii, jj));
                         newTask.Wait();
                         newTask.Dispose();
                     }
                     if ((!IsNextMovemntIsCheckOrCheckMateForCurrent) && (!SelfNotSupported) && (!IsPrviousMovemntIsDangrousForCurr) && (!IsGardForCurrentMovmentsAndIsNotMova) && (!IsNotSafeToMoveAenemeyToAttackMoreThanTowObj) && (!EnemyNotSupported) && (!IsDangerous))
                     {
-                        newTask = Task.Factory.StartNew(() => EnemyNotSupported = InAttackEnemyThatIsNotSupportedAll(IsTowValuableObjectEnemy, CloneATable(TableS), Order, color , i, j, ii, jj, ref ValuableEnemyNotSupported));
+                        newTask = Task.Factory.StartNew(() => EnemyNotSupported = InAttackEnemyThatIsNotSupportedAll(IsTowValuableObjectEnemy, CloneATable(TableS), Order, color, i, j, ii, jj, ref ValuableEnemyNotSupported));
                         newTask.Wait();
                         newTask.Dispose();
                     }
                     if (CurrentAStarGredyMax == 0 && (!IsNextMovemntIsCheckOrCheckMateForCurrent) && (!SelfNotSupported) && (!IsPrviousMovemntIsDangrousForCurr) && (!IsGardForCurrentMovmentsAndIsNotMova) && (!IsNotSafeToMoveAenemeyToAttackMoreThanTowObj) && (!EnemyNotSupported) && (!IsDangerous))
                     {
                         //when is true must regard.
-                        newTask = Task.Factory.StartNew(() => IsCurrentCanGardHighPriorityEne = IsCurrentCanGardHighPriorityEnemy(0, CloneATable(TableS), Order, color , i, j, ii, jj, Order));
+                        newTask = Task.Factory.StartNew(() => IsCurrentCanGardHighPriorityEne = IsCurrentCanGardHighPriorityEnemy(0, CloneATable(TableS), Order, color, i, j, ii, jj, Order));
                         newTask.Wait();
                         newTask.Dispose();
                     }
@@ -10398,7 +10438,7 @@ namespace HybridizerRefrigitz
                     Object A = new object();
                     lock (A)
                     {
-                        int[] TmpL = LoseOcuuredatChiled;int TmpW = WinOcuuredatChiled; newTask1 = Task.Factory.StartNew(() => CalculateHeuristics(TmpL, TmpW, true, Order, 0, CloneATable(TableS), RowSource, ColumnSource, RowDestination, ColumnDestination, color , ref HeuristicAttackValue, ref HeuristicMovementValue, ref HeuristicSelfSupportedValue, ref HeuristicReducedMovementValue, ref HeuristicReducedSupport, ref HeuristicReducedAttackValue, ref HeuristicDistributionValue, ref HeuristicKingSafe, ref HeuristicFromCenter, ref HeuristicKingDangour, ref HeuristicCheckedMate));
+                        int[] TmpL = LoseOcuuredatChiled;int TmpW = WinOcuuredatChiled; newTask1 = Task.Factory.StartNew(() => CalculateHeuristics(TmpL, TmpW, true, Order, 0, CloneATable(TableS), RowSource, ColumnSource, RowDestination, ColumnDestination, color, ref HeuristicAttackValue, ref HeuristicMovementValue, ref HeuristicSelfSupportedValue, ref HeuristicReducedMovementValue, ref HeuristicReducedSupport, ref HeuristicReducedAttackValue, ref HeuristicDistributionValue, ref HeuristicKingSafe, ref HeuristicFromCenter, ref HeuristicKingDangour, ref HeuristicCheckedMate));
                         newTask1.Wait(); newTask1.Dispose();
                         LoseOcuuredatChiled[0] += TmpL[0]; WinOcuuredatChiled += TmpW;
                     }
@@ -10434,7 +10474,7 @@ namespace HybridizerRefrigitz
                         //Caused this for Stachostic results.
                         if (!Sup)
                         {
-                            int[] TmpL = LoseOcuuredatChiled;int TmpW = WinOcuuredatChiled; newTask1 = Task.Factory.StartNew(() => CalculateHeuristics(TmpL, TmpW, false, Order, Killed, CloneATable(TableS), RowSource, ColumnSource, RowDestination, ColumnDestination, color , ref HeuristicAttackValue, ref HeuristicMovementValue, ref HeuristicSelfSupportedValue, ref HeuristicReducedMovementValue, ref HeuristicReducedSupport, ref HeuristicReducedAttackValue, ref HeuristicDistributionValue, ref HeuristicKingSafe, ref HeuristicFromCenter, ref HeuristicKingDangour, ref HeuristicCheckedMate));
+                            int[] TmpL = LoseOcuuredatChiled;int TmpW = WinOcuuredatChiled; newTask1 = Task.Factory.StartNew(() => CalculateHeuristics(TmpL, TmpW, false, Order, Killed, CloneATable(TableS), RowSource, ColumnSource, RowDestination, ColumnDestination, color, ref HeuristicAttackValue, ref HeuristicMovementValue, ref HeuristicSelfSupportedValue, ref HeuristicReducedMovementValue, ref HeuristicReducedSupport, ref HeuristicReducedAttackValue, ref HeuristicDistributionValue, ref HeuristicKingSafe, ref HeuristicFromCenter, ref HeuristicKingDangour, ref HeuristicCheckedMate));
                             newTask1.Wait(); newTask1.Dispose();
                             LoseOcuuredatChiled[0] += TmpL[0]; WinOcuuredatChiled += TmpW;
 
@@ -10530,7 +10570,7 @@ namespace HybridizerRefrigitz
                     Object A = new object();
                     lock (A)
                     {
-                        int[] TmpL = LoseOcuuredatChiled;int TmpW = WinOcuuredatChiled; newTask1 = Task.Factory.StartNew(() => CalculateHeuristics(TmpL, TmpW, true, Order, 0, CloneATable(TableS), RowSource, ColumnSource, RowDestination, ColumnDestination, color , ref HeuristicAttackValue, ref HeuristicMovementValue, ref HeuristicSelfSupportedValue, ref HeuristicReducedMovementValue, ref HeuristicReducedSupport, ref HeuristicReducedAttackValue, ref HeuristicDistributionValue, ref HeuristicKingSafe, ref HeuristicFromCenter, ref HeuristicKingDangour, ref HeuristicCheckedMate));
+                        int[] TmpL = LoseOcuuredatChiled;int TmpW = WinOcuuredatChiled; newTask1 = Task.Factory.StartNew(() => CalculateHeuristics(TmpL, TmpW, true, Order, 0, CloneATable(TableS), RowSource, ColumnSource, RowDestination, ColumnDestination, color, ref HeuristicAttackValue, ref HeuristicMovementValue, ref HeuristicSelfSupportedValue, ref HeuristicReducedMovementValue, ref HeuristicReducedSupport, ref HeuristicReducedAttackValue, ref HeuristicDistributionValue, ref HeuristicKingSafe, ref HeuristicFromCenter, ref HeuristicKingDangour, ref HeuristicCheckedMate));
                         newTask1.Wait(); newTask1.Dispose();
                         LoseOcuuredatChiled[0] += TmpL[0]; WinOcuuredatChiled += TmpW;
                     }
@@ -10566,7 +10606,7 @@ namespace HybridizerRefrigitz
                         //Caused this for Stachostic results.
                         if (!Sup)
                         {
-                            int[] TmpL = LoseOcuuredatChiled;int TmpW = WinOcuuredatChiled; newTask1 = Task.Factory.StartNew(() => CalculateHeuristics(TmpL, TmpW, false, Order, Killed, CloneATable(TableS), RowSource, ColumnSource, RowDestination, ColumnDestination, color , ref HeuristicAttackValue, ref HeuristicMovementValue, ref HeuristicSelfSupportedValue, ref HeuristicReducedMovementValue, ref HeuristicReducedSupport, ref HeuristicReducedAttackValue, ref HeuristicDistributionValue, ref HeuristicKingSafe, ref HeuristicFromCenter, ref HeuristicKingDangour, ref HeuristicCheckedMate));
+                            int[] TmpL = LoseOcuuredatChiled;int TmpW = WinOcuuredatChiled; newTask1 = Task.Factory.StartNew(() => CalculateHeuristics(TmpL, TmpW, false, Order, Killed, CloneATable(TableS), RowSource, ColumnSource, RowDestination, ColumnDestination, color, ref HeuristicAttackValue, ref HeuristicMovementValue, ref HeuristicSelfSupportedValue, ref HeuristicReducedMovementValue, ref HeuristicReducedSupport, ref HeuristicReducedAttackValue, ref HeuristicDistributionValue, ref HeuristicKingSafe, ref HeuristicFromCenter, ref HeuristicKingDangour, ref HeuristicCheckedMate));
                             newTask1.Wait(); newTask1.Dispose();
                             LoseOcuuredatChiled[0] += TmpL[0]; WinOcuuredatChiled += TmpW;
 
@@ -10662,7 +10702,7 @@ namespace HybridizerRefrigitz
                     Object A = new object();
                     lock (A)
                     {
-                        int[] TmpL = LoseOcuuredatChiled;int TmpW = WinOcuuredatChiled; newTask1 = Task.Factory.StartNew(() => CalculateHeuristics(TmpL, TmpW, true, Order, 0, CloneATable(TableS), RowSource, ColumnSource, RowDestination, ColumnDestination, color , ref HeuristicAttackValue, ref HeuristicMovementValue, ref HeuristicSelfSupportedValue, ref HeuristicReducedMovementValue, ref HeuristicReducedSupport, ref HeuristicReducedAttackValue, ref HeuristicDistributionValue, ref HeuristicKingSafe, ref HeuristicFromCenter, ref HeuristicKingDangour, ref HeuristicCheckedMate));
+                        int[] TmpL = LoseOcuuredatChiled;int TmpW = WinOcuuredatChiled; newTask1 = Task.Factory.StartNew(() => CalculateHeuristics(TmpL, TmpW, true, Order, 0, CloneATable(TableS), RowSource, ColumnSource, RowDestination, ColumnDestination, color, ref HeuristicAttackValue, ref HeuristicMovementValue, ref HeuristicSelfSupportedValue, ref HeuristicReducedMovementValue, ref HeuristicReducedSupport, ref HeuristicReducedAttackValue, ref HeuristicDistributionValue, ref HeuristicKingSafe, ref HeuristicFromCenter, ref HeuristicKingDangour, ref HeuristicCheckedMate));
                         newTask1.Wait(); newTask1.Dispose();
                         LoseOcuuredatChiled[0] += TmpL[0]; WinOcuuredatChiled += TmpW;
                     }
@@ -10698,7 +10738,7 @@ namespace HybridizerRefrigitz
                         //Caused this for Stachostic results.
                         if (!Sup)
                         {
-                            int[] TmpL = LoseOcuuredatChiled;int TmpW = WinOcuuredatChiled; newTask1 = Task.Factory.StartNew(() => CalculateHeuristics(TmpL, TmpW, false, Order, Killed, CloneATable(TableS), RowSource, ColumnSource, RowDestination, ColumnDestination, color , ref HeuristicAttackValue, ref HeuristicMovementValue, ref HeuristicSelfSupportedValue, ref HeuristicReducedMovementValue, ref HeuristicReducedSupport, ref HeuristicReducedAttackValue, ref HeuristicDistributionValue, ref HeuristicKingSafe, ref HeuristicFromCenter, ref HeuristicKingDangour, ref HeuristicCheckedMate));
+                            int[] TmpL = LoseOcuuredatChiled;int TmpW = WinOcuuredatChiled; newTask1 = Task.Factory.StartNew(() => CalculateHeuristics(TmpL, TmpW, false, Order, Killed, CloneATable(TableS), RowSource, ColumnSource, RowDestination, ColumnDestination, color, ref HeuristicAttackValue, ref HeuristicMovementValue, ref HeuristicSelfSupportedValue, ref HeuristicReducedMovementValue, ref HeuristicReducedSupport, ref HeuristicReducedAttackValue, ref HeuristicDistributionValue, ref HeuristicKingSafe, ref HeuristicFromCenter, ref HeuristicKingDangour, ref HeuristicCheckedMate));
                             newTask1.Wait(); newTask1.Dispose();
                             LoseOcuuredatChiled[0] += TmpL[0]; WinOcuuredatChiled += TmpW;
                         }
@@ -10889,7 +10929,7 @@ namespace HybridizerRefrigitz
                     //if (!UsePenaltyRegardMechnisamT)
                     AA.CheckMate(CloneATable(TableS), Order);
                     {
-                        if (AllDraw.OrderPlateDraw == 1 && AA.CheckMateBrown)
+                        if (AllDraw.OrderPlateDraw == 1 && AA.CheckMateBLACK)
                         {
                             Object A = new Object();
                             lock (A)
@@ -10918,7 +10958,7 @@ namespace HybridizerRefrigitz
                             }
 
                         }
-                        if (AllDraw.OrderPlateDraw == -1 && AA.CheckMateGray)
+                        if (AllDraw.OrderPlateDraw == -1 && AA.CheckMateWHITE)
                         {
                             DoEnemySelf = false;
                             Object A = new Object();
@@ -10947,8 +10987,8 @@ namespace HybridizerRefrigitz
                                 RETURN = true; return;
                             }
                         }
-                        if (//(AllDraw.OrderPlateDraw == -1 && AA.CheckBrown)|| 
-                            (AllDraw.OrderPlateDraw == -1 && AA.CheckMateBrown))
+                        if (//(AllDraw.OrderPlateDraw == -1 && AA.CheckBLACK)|| 
+                            (AllDraw.OrderPlateDraw == -1 && AA.CheckMateBLACK))
                         {
                             Object A = new Object();
                             lock (A)
@@ -10977,8 +11017,8 @@ namespace HybridizerRefrigitz
                             }
 
                         }
-                        if (//(AllDraw.OrderPlateDraw == 1 && AA.CheckGray) ||
-                            (AllDraw.OrderPlateDraw == 1 && AA.CheckMateGray))
+                        if (//(AllDraw.OrderPlateDraw == 1 && AA.CheckWHITE) ||
+                            (AllDraw.OrderPlateDraw == 1 && AA.CheckMateWHITE))
                         {
                             DoEnemySelf = false;
                             Object A = new Object();
@@ -11007,7 +11047,7 @@ namespace HybridizerRefrigitz
                                 RETURN = true; return;
                             }
                         }
-                        /*  if (Order == 1 && AA.CheckMateBrown)
+                        /*  if (Order == 1 && AA.CheckMateBLACK)
                           {
                               IsThereCheckOfEnemy.Add(true);
                               IsThereMateOfEnemy.Add(false);
@@ -11019,7 +11059,7 @@ namespace HybridizerRefrigitz
                               EnemyCheckMateActionsString = true;
                               CheckedM = -2;
                           }
-                          if (Order == -1 && AA.CheckMateGray)
+                          if (Order == -1 && AA.CheckMateWHITE)
                           {
 
                               IsThereCheckOfEnemy.Add(true);
@@ -11032,7 +11072,7 @@ namespace HybridizerRefrigitz
                               EnemyCheckMateActionsString = true;
                               CheckedM = -2;
                           }
-                          if (Order == 1 && AA.CheckMateGray)
+                          if (Order == 1 && AA.CheckMateWHITE)
                           {
                               IsThereCheckOfEnemy.Add(false);
                               IsThereMateOfEnemy.Add(false);
@@ -11043,7 +11083,7 @@ namespace HybridizerRefrigitz
                               EnemyCheckMateActionsString = false;
                               CheckedM = -2;
                           }
-                          if (Order == -1 && AA.CheckMateBrown)
+                          if (Order == -1 && AA.CheckMateBLACK)
                           {
                               IsThereCheckOfEnemy.Add(false);
                               IsThereMateOfEnemy.Add(false);
@@ -11055,7 +11095,7 @@ namespace HybridizerRefrigitz
                               CheckedM = -2;
                           }
                         */
-                        if (AllDraw.OrderPlateDraw == 1 && AA.CheckGray)
+                        if (AllDraw.OrderPlateDraw == 1 && AA.CheckWHITE)
                         {
                             IsThereCheckOfEnemy.Add(false);
                             IsThereMateOfEnemy.Add(false);
@@ -11072,7 +11112,7 @@ namespace HybridizerRefrigitz
                             CheckedM = -1;
                         }
                         else
-                            if (AllDraw.OrderPlateDraw == -1 && AA.CheckBrown)
+                            if (AllDraw.OrderPlateDraw == -1 && AA.CheckBLACK)
                         {
                             IsThereCheckOfEnemy.Add(false);
                             IsThereMateOfEnemy.Add(false);
@@ -11087,7 +11127,7 @@ namespace HybridizerRefrigitz
                             }
                             CheckedM = -1;
                         }
-                        if (AllDraw.OrderPlateDraw == 1 && AA.CheckBrown)
+                        if (AllDraw.OrderPlateDraw == 1 && AA.CheckBLACK)
                         {
                             IsThereCheckOfEnemy.Add(false);
                             IsThereMateOfEnemy.Add(false);
@@ -11102,7 +11142,7 @@ namespace HybridizerRefrigitz
                             }
                             CheckedM = -1;
                         }
-                        if (AllDraw.OrderPlateDraw == -1 && AA.CheckGray)
+                        if (AllDraw.OrderPlateDraw == -1 && AA.CheckWHITE)
                         {
                             IsThereCheckOfEnemy.Add(false);
                             IsThereMateOfEnemy.Add(false);
@@ -11232,13 +11272,13 @@ namespace HybridizerRefrigitz
                         ChessRules A = new ChessRules(CurrentAStarGredyMax, MovementsAStarGreedyHeuristicFoundT, IgnoreSelfObjectsT, UsePenaltyRegardMechnisamT, BestMovmentsT, PredictHeuristicT, OnlySelfT, AStarGreedyHeuristicT, ArrangmentsChanged, TableS[ii, jj], CloneATable(TableS), Order, Row, Column);
                         if (A.Check(CloneATable(TableS), Order))
                         {
-                            if (Order == 1 && (A.CheckGray))
+                            if (Order == 1 && (A.CheckWHITE))
                             {
                                 NumberOfPenalties++;
                                 Current.LearningAlgorithmPenalty();
                             }
                             else
-                                if (Order == -1 && (A.CheckBrown))
+                                if (Order == -1 && (A.CheckBLACK))
                             {
                                 NumberOfPenalties++;
                                 Current.LearningAlgorithmPenalty();
@@ -11247,7 +11287,7 @@ namespace HybridizerRefrigitz
                         }
                         else
                         {
-                            if (IsCurrentStateIsDangreousForCurrentOrder(CloneATable(TableS), Order, color , i, j) && DoEnemySelf)
+                            if (IsCurrentStateIsDangreousForCurrentOrder(CloneATable(TableS), Order, color, i, j) && DoEnemySelf)
                             {
                                 NumberOfPenalties++;
                                 Current.LearningAlgorithmPenalty();
@@ -11471,7 +11511,7 @@ namespace HybridizerRefrigitz
             Object O = new Object();
             lock (O)
             {
-                t.ConvertOperation((int)RowSource, (int)ColumnSource, color , CloneATable(TableS), Order, false, 0);
+                t.ConvertOperation((int)RowSource, (int)ColumnSource, color, CloneATable(TableS), Order, false, 0);
                 int[,] TableCon = new int[8, 8];
                 if (t.Convert)
                 {
@@ -11778,7 +11818,7 @@ namespace HybridizerRefrigitz
             Object O = new Object();
             lock (O)
             {
-                return (new ChessRules(CurrentAStarGredyMax, MovementsAStarGreedyHeuristicFoundT, IgnoreSelfObjectsT, UsePenaltyRegardMechnisamT, BestMovmentsT, PredictHeuristicT, OnlySelfT, AStarGreedyHeuristicT, ArrangmentsChanged, TableS[RowSource, ColumnSource], CloneATable(TableS), Order, RowSource, ColumnSource)).Rules(RowSource, ColumnSource, RowDestination, ColumnDestination, color , TableS[RowSource, ColumnSource], false);
+                return (new ChessRules(CurrentAStarGredyMax, MovementsAStarGreedyHeuristicFoundT, IgnoreSelfObjectsT, UsePenaltyRegardMechnisamT, BestMovmentsT, PredictHeuristicT, OnlySelfT, AStarGreedyHeuristicT, ArrangmentsChanged, TableS[RowSource, ColumnSource], CloneATable(TableS), Order, RowSource, ColumnSource)).Rules(RowSource, ColumnSource, RowDestination, ColumnDestination, color, TableS[RowSource, ColumnSource], false);
             }
         }
         void SolderThinkingHybridizerRefrigitz(ref int[] LoseOcuuredatChiled, ref int WinOcuuredatChiled, int DummyOrder, int DummyCurrentOrder, int[,] TableS, int RowSource, int ColumnSource, bool DoEnemySelf, bool PenRegStrore, bool EnemyCheckMateActionsString, int RowDestination, int ColumnDestination, bool Castle)
@@ -11806,7 +11846,7 @@ namespace HybridizerRefrigitz
                 th.Dispose();
                 if (ab)
                 {
-                    ThingsConverter t = new ThingsConverter(ArrangmentsChanged, RowSource, ColumnSource, color , CloneATable(TableS), Order, false, 0);
+                    ThingsConverter t = new ThingsConverter(ArrangmentsChanged, RowSource, ColumnSource, color, CloneATable(TableS), Order, false, 0);
                     QuantumAtamata Current = new QuantumAtamata(3, 3, 3);
                     ThinkingAtRun = true; int CheckedM = 0; bool PenaltyVCar = false;
                     bool Sup = false;
@@ -11829,7 +11869,7 @@ namespace HybridizerRefrigitz
                     Object A = new object();
                     lock (A)
                     {
-                        int[] TmpL = LoseOcuuredatChiled;int TmpW = WinOcuuredatChiled; newTask1 = Task.Factory.StartNew(() => CalculateHeuristics(TmpL, TmpW, true, Order, 0, CloneATable(TableS), RowSource, ColumnSource, RowDestination, ColumnDestination, color , ref HeuristicAttackValue, ref HeuristicMovementValue, ref HeuristicSelfSupportedValue, ref HeuristicReducedMovementValue, ref HeuristicReducedSupport, ref HeuristicReducedAttackValue, ref HeuristicDistributionValue, ref HeuristicKingSafe, ref HeuristicFromCenter, ref HeuristicKingDangour, ref HeuristicCheckedMate));
+                        int[] TmpL = LoseOcuuredatChiled;int TmpW = WinOcuuredatChiled; newTask1 = Task.Factory.StartNew(() => CalculateHeuristics(TmpL, TmpW, true, Order, 0, CloneATable(TableS), RowSource, ColumnSource, RowDestination, ColumnDestination, color, ref HeuristicAttackValue, ref HeuristicMovementValue, ref HeuristicSelfSupportedValue, ref HeuristicReducedMovementValue, ref HeuristicReducedSupport, ref HeuristicReducedAttackValue, ref HeuristicDistributionValue, ref HeuristicKingSafe, ref HeuristicFromCenter, ref HeuristicKingDangour, ref HeuristicCheckedMate));
                         newTask1.Wait(); newTask1.Dispose();
                         LoseOcuuredatChiled[0] += TmpL[0]; WinOcuuredatChiled += TmpW;
                     }
@@ -11865,7 +11905,7 @@ namespace HybridizerRefrigitz
                         //Caused this for Stachostic results.
                         if (!Sup)
                         {
-                            int[] TmpL = LoseOcuuredatChiled;int TmpW = WinOcuuredatChiled; newTask1 = Task.Factory.StartNew(() => CalculateHeuristics(TmpL, TmpW, false, Order, Killed, CloneATable(TableS), RowSource, ColumnSource, RowDestination, ColumnDestination, color , ref HeuristicAttackValue, ref HeuristicMovementValue, ref HeuristicSelfSupportedValue, ref HeuristicReducedMovementValue, ref HeuristicReducedSupport, ref HeuristicReducedAttackValue, ref HeuristicDistributionValue, ref HeuristicKingSafe, ref HeuristicFromCenter, ref HeuristicKingDangour, ref HeuristicCheckedMate));
+                            int[] TmpL = LoseOcuuredatChiled;int TmpW = WinOcuuredatChiled; newTask1 = Task.Factory.StartNew(() => CalculateHeuristics(TmpL, TmpW, false, Order, Killed, CloneATable(TableS), RowSource, ColumnSource, RowDestination, ColumnDestination, color, ref HeuristicAttackValue, ref HeuristicMovementValue, ref HeuristicSelfSupportedValue, ref HeuristicReducedMovementValue, ref HeuristicReducedSupport, ref HeuristicReducedAttackValue, ref HeuristicDistributionValue, ref HeuristicKingSafe, ref HeuristicFromCenter, ref HeuristicKingDangour, ref HeuristicCheckedMate));
                             newTask1.Wait(); newTask1.Dispose();
                             LoseOcuuredatChiled[0] += TmpL[0]; WinOcuuredatChiled += TmpW;
 
@@ -11918,7 +11958,7 @@ namespace HybridizerRefrigitz
             ThinkingAtRun = false;
         }
         //specific determination for thinking main method
-        void CastleThinkingBrown(ref int[] LoseOcuuredatChiled, ref int WinOcuuredatChiled, int DummyOrder, int DummyCurrentOrder, int[,] TableS, int RowSource, int ColumnSource, bool DoEnemySelf, bool PenRegStrore, bool EnemyCheckMateActionsString, int RowDestination, int ColumnDestination, bool Castle)
+        void CastleThinkingBLACK(ref int[] LoseOcuuredatChiled, ref int WinOcuuredatChiled, int DummyOrder, int DummyCurrentOrder, int[,] TableS, int RowSource, int ColumnSource, bool DoEnemySelf, bool PenRegStrore, bool EnemyCheckMateActionsString, int RowDestination, int ColumnDestination, bool Castle)
         {
             Object O1 = new Object();
             lock (O1)
@@ -11938,7 +11978,7 @@ namespace HybridizerRefrigitz
                 ThinkingAtRun = true; int CheckedM = 0; bool PenaltyVCar = false;
                 Order = DummyOrder;
                 ChessRules.CurrentOrder = DummyCurrentOrder;
-                //When is Brown Castles King.
+                //When is BLACK Castles King.
 
                 if (TableS[RowDestination, ColumnDestination] > 0 && TableS[RowSource, ColumnSource] > 0)
                 {
@@ -11962,7 +12002,7 @@ namespace HybridizerRefrigitz
                 {
                     ThinkingRun = true;
                 }
-                int[] TmpL = LoseOcuuredatChiled;int TmpW = WinOcuuredatChiled; var newTask1 = Task.Factory.StartNew(() => CalculateHeuristics(TmpL, TmpW, true, Order, 0, CloneATable(TableS), RowSource, ColumnSource, RowDestination, ColumnDestination, color , ref HeuristicAttackValue, ref HeuristicMovementValue, ref HeuristicSelfSupportedValue, ref HeuristicReducedMovementValue, ref HeuristicReducedSupport, ref HeuristicReducedAttackValue, ref HeuristicDistributionValue, ref HeuristicKingSafe, ref HeuristicFromCenter, ref HeuristicKingDangour, ref HeuristicCheckedMate));
+                int[] TmpL = LoseOcuuredatChiled;int TmpW = WinOcuuredatChiled; var newTask1 = Task.Factory.StartNew(() => CalculateHeuristics(TmpL, TmpW, true, Order, 0, CloneATable(TableS), RowSource, ColumnSource, RowDestination, ColumnDestination, color, ref HeuristicAttackValue, ref HeuristicMovementValue, ref HeuristicSelfSupportedValue, ref HeuristicReducedMovementValue, ref HeuristicReducedSupport, ref HeuristicReducedAttackValue, ref HeuristicDistributionValue, ref HeuristicKingSafe, ref HeuristicFromCenter, ref HeuristicKingDangour, ref HeuristicCheckedMate));
                 newTask1.Wait(); newTask1.Dispose();
                 LoseOcuuredatChiled[0] += TmpL[0]; WinOcuuredatChiled += TmpW;
                 Object A = new object();
@@ -12032,7 +12072,7 @@ namespace HybridizerRefrigitz
             ThinkingAtRun = false;
 
         }
-        int HeuristicBetterSpace(int[,] TableSS, ConsoleColor colorS, ConsoleColor colorE, int OrderS, int OrderE)
+        int HeuristicBetterSpace(int[,] TableSS, Color colorS, Color colorE, int OrderS, int OrderE)
         {
             Object OO = new Object();
             lock (OO)
@@ -12078,7 +12118,7 @@ namespace HybridizerRefrigitz
                 Is = false;
             return Is;
         }
-        public int[] CalculateHeuristicsParallel(bool Before, int Killed, int[,] TableS, int RowS, int ColS, int RowD, int ColD, ConsoleColor color
+        public int[] CalculateHeuristicsParallel(bool Before, int Killed, int[,] TableS, int RowS, int ColS, int RowD, int ColD, Color color
     )
         {
             Object OO = new Object();
@@ -12100,7 +12140,7 @@ namespace HybridizerRefrigitz
                                     return;
                                 int[,] TableSS = CloneATable(TableS);
                                 int RoS = RowS, CoS = ColS, RoD = RowD, CoD = ColD;
-                                var H = Task.Factory.StartNew(() => Heuristic = HeuristicAll(Before, Killed, TableSS, color , Order));
+                                var H = Task.Factory.StartNew(() => Heuristic = HeuristicAll(Before, Killed, TableSS, color, Order));
                                 H.Wait();
                                 H.Dispose();
                             }
@@ -12113,7 +12153,7 @@ namespace HybridizerRefrigitz
                                     return;
                                 int[,] TableSS = CloneATable(TableS);
                                 int RoS = RowS, CoS = ColS, RoD = RowD, CoD = ColD;
-                                var H = Task.Factory.StartNew(() => Exchange = HeuristicExchange(Before, Killed, TableSS, color , Order, RowS, ColS, RowD, ColD));
+                                var H = Task.Factory.StartNew(() => Exchange = HeuristicExchange(Before, Killed, TableSS, color, Order, RowS, ColS, RowD, ColD));
                                 H.Wait();
                                 H.Dispose();
                             }
@@ -12154,7 +12194,7 @@ namespace HybridizerRefrigitz
                                         return;
                                     int RoS = RowS, CoS = ColS, RoD = RowD, CoD = ColD;
                                     int[,] TableSS = CloneATable(TableS);
-                                    var H = Task.Factory.StartNew(() => HeuristicRemain[1] = HeuristicDistribution(Before, TableSS, Order, color , RowS, ColS, RowD, ColD//, ref HeuristicDistributionValue
+                                    var H = Task.Factory.StartNew(() => HeuristicRemain[1] = HeuristicDistribution(Before, TableSS, Order, color, RowS, ColS, RowD, ColD//, ref HeuristicDistributionValue
                                          ));
                                     H.Wait();
                                     H.Dispose();
@@ -12169,7 +12209,7 @@ namespace HybridizerRefrigitz
                                     return;
                                 int RoS = RowS, CoS = ColS, RoD = RowD, CoD = ColD;
                                 int[,] TableSS = CloneATable(TableS);
-                                var H = Task.Factory.StartNew(() => HeuristicRemain[2] = HeuristicKingSafety(TableSS, Order, color , CurrentAStarGredyMax, RoS, CoS, RoD, CoD//, ref HeuristicKingSafe
+                                var H = Task.Factory.StartNew(() => HeuristicRemain[2] = HeuristicKingSafety(TableSS, Order, color, CurrentAStarGredyMax, RoS, CoS, RoD, CoD//, ref HeuristicKingSafe
                                      ));
                                 H.Wait();
                                 H.Dispose();
@@ -12183,7 +12223,7 @@ namespace HybridizerRefrigitz
                                     return;
                                 int RoS = RowS, CoS = ColS, RoD = RowD, CoD = ColD;
                                 int[,] TableSS = CloneATable(TableS);
-                                var H = Task.Factory.StartNew(() => HeuristicRemain[3] = HeuristicKingPreventionOfCheckedAtBegin(TableSS, Order, color , CurrentAStarGredyMax, RoS, CoS, RoD, CoD//, ref HeuristicKingSafe
+                                var H = Task.Factory.StartNew(() => HeuristicRemain[3] = HeuristicKingPreventionOfCheckedAtBegin(TableSS, Order, color, CurrentAStarGredyMax, RoS, CoS, RoD, CoD//, ref HeuristicKingSafe
                                 ));
                                 H.Wait();
                                 H.Dispose();
@@ -12199,7 +12239,7 @@ namespace HybridizerRefrigitz
                                         return;
                                     int RoS = RowS, CoS = ColS, RoD = RowD, CoD = ColD;
                                     int[,] TableSS = CloneATable(TableS);
-                                    var H = Task.Factory.StartNew(() => HeuristicRemain[4] = HeuristicObjectAtCenterAndPawnAttackTraversalObjectsAndDangourForEnemy(TableSS, color , Order, RoS, CoS, RoD, CoD));
+                                    var H = Task.Factory.StartNew(() => HeuristicRemain[4] = HeuristicObjectAtCenterAndPawnAttackTraversalObjectsAndDangourForEnemy(TableSS, color, Order, RoS, CoS, RoD, CoD));
                                     H.Wait();
                                     H.Dispose();
                                 }
@@ -12215,12 +12255,12 @@ namespace HybridizerRefrigitz
                                         return;
                                     int RoS = RowS, CoS = ColS, RoD = RowD, CoD = ColD;
                                     int[,] TableSS = CloneATable(TableS);
-                                    ConsoleColor colorE = ConsoleColor.Gray;
+                                    Color colorE = Color.WHITE;
                                     if (Order == -1)
-                                        colorE = ConsoleColor.Gray;
+                                        colorE = Color.WHITE;
                                     else
-                                        colorE = ConsoleColor.Black;
-                                    var H = Task.Factory.StartNew(() => HeuristicRemain[5] = HeuristicBetterSpace(TableSS, color , colorE, Order, Order * -1));
+                                        colorE = Color.BLACK;
+                                    var H = Task.Factory.StartNew(() => HeuristicRemain[5] = HeuristicBetterSpace(TableSS, color, colorE, Order, Order * -1));
                                     H.Wait();
                                     H.Dispose();
                                 }
@@ -12303,7 +12343,7 @@ namespace HybridizerRefrigitz
                         if (Order == 1)
                         {
                             List<int[]> Valuable = new List<int[]>();
-                            bool DD = InAttackEnemyThatIsNotSupported(Killded, CloneATable(TableS), Order, OrderConsoleColor(Order), HeuristicAllReducedAttacked[i][0], HeuristicAllReducedAttacked[i][1], HeuristicAllReducedAttacked[i][2], HeuristicAllReducedAttacked[i][3]);
+                            bool DD = InAttackEnemyThatIsNotSupported(Killded, CloneATable(TableS), Order, OrderColor(Order), HeuristicAllReducedAttacked[i][0], HeuristicAllReducedAttacked[i][1], HeuristicAllReducedAttacked[i][2], HeuristicAllReducedAttacked[i][3]);
                             if (DD || (System.Math.Abs(TableS[HeuristicAllReducedAttacked[i][2], HeuristicAllReducedAttacked[i][3]]) > System.Math.Abs(TableS[HeuristicAllReducedAttacked[i][0], HeuristicAllReducedAttacked[i][1]]) && TableS[HeuristicAllReducedAttacked[i][0], HeuristicAllReducedAttacked[i][1]] < 0))
                             {
                                 HeuristicReducedAttackedIndexInOnGame.Add(i);
@@ -12313,7 +12353,7 @@ namespace HybridizerRefrigitz
                         else
                         {
                             List<int[]> Valuable = new List<int[]>();
-                            bool DD = InAttackEnemyThatIsNotSupported(Killded, CloneATable(TableS), Order, OrderConsoleColor(Order), HeuristicAllReducedAttacked[i][0], HeuristicAllReducedAttacked[i][1], HeuristicAllReducedAttacked[i][2], HeuristicAllReducedAttacked[i][3]);
+                            bool DD = InAttackEnemyThatIsNotSupported(Killded, CloneATable(TableS), Order, OrderColor(Order), HeuristicAllReducedAttacked[i][0], HeuristicAllReducedAttacked[i][1], HeuristicAllReducedAttacked[i][2], HeuristicAllReducedAttacked[i][3]);
                             if (DD || (System.Math.Abs(TableS[HeuristicAllReducedAttacked[i][2], HeuristicAllReducedAttacked[i][3]]) > System.Math.Abs(TableS[HeuristicAllReducedAttacked[i][0], HeuristicAllReducedAttacked[i][1]]) && TableS[HeuristicAllReducedAttacked[i][0], HeuristicAllReducedAttacked[i][1]] > 0))
                             {
                                 HeuristicReducedAttackedIndexInOnGame.Add(i);
@@ -12346,12 +12386,12 @@ namespace HybridizerRefrigitz
                                 int[,] Tab = CloneATable(Table);
                                 if ((Tab[AchmazPure[0][i][j][0], AchmazPure[0][i][j][1]] > 0 && Tab[AchmazPure[0][i][j][2], AchmazPure[0][i][j][3]] < 0))
                                 {
-                                    ThinkingHybridizerRefrigitz t = new ThinkingHybridizerRefrigitz(0, Kind, CurrentAStarGredyMax, MovementsAStarGreedyHeuristicFoundT, IgnoreSelfObjectsT, UsePenaltyRegardMechnisamT, BestMovmentsT, PredictHeuristicT, OnlySelfT, AStarGreedyHeuristicT, ArrangmentsChanged, AchmazPure[0][i][j][0], AchmazPure[0][i][j][1], OrderConsoleColor(Order), CloneATable(Table), 0, Order, false, 0, 0, Kind);
+                                    ThinkingHybridizerRefrigitz t = new ThinkingHybridizerRefrigitz(0, Kind, CurrentAStarGredyMax, MovementsAStarGreedyHeuristicFoundT, IgnoreSelfObjectsT, UsePenaltyRegardMechnisamT, BestMovmentsT, PredictHeuristicT, OnlySelfT, AStarGreedyHeuristicT, ArrangmentsChanged, AchmazPure[0][i][j][0], AchmazPure[0][i][j][1], OrderColor(Order), CloneATable(Table), 0, Order, false, 0, 0, Kind);
                                     if (Scop(AchmazPure[0][i][j][0], AchmazPure[0][i][j][1], AchmazPure[0][i][j][2], AchmazPure[0][i][j][3]))
                                     {
                                         int Killed = Math.Abs(Tab[AchmazPure[0][i][j][2], AchmazPure[0][i][j][3]]);
                                         Tab[AchmazPure[0][i][j][2], AchmazPure[0][i][j][3]] = 0;
-                                        var th1 = Task.Factory.StartNew(() => t.HeuristicExchange(Before, Killed, CloneATable(Tab), OrderConsoleColor(Order), Order, AchmazPure[0][i][j][0], AchmazPure[0][i][j][1], AchmazPure[0][i][j][2], AchmazPure[0][i][j][3]));
+                                        var th1 = Task.Factory.StartNew(() => t.HeuristicExchange(Before, Killed, CloneATable(Tab), OrderColor(Order), Order, AchmazPure[0][i][j][0], AchmazPure[0][i][j][1], AchmazPure[0][i][j][2], AchmazPure[0][i][j][3]));
                                         th1.Wait();
                                         th1.Dispose();
                                         var th2 = Task.Factory.StartNew(() => t.Achmaz(CloneATable(Tab), Before, AchmazPure[0][i][j][0], AchmazPure[0][i][j][1], AchmazPure[0][i][j][2], AchmazPure[0][i][j][3], Order));
@@ -12380,12 +12420,12 @@ namespace HybridizerRefrigitz
                                 int[,] Tab = CloneATable(Table);
                                 if ((Tab[AchmazPure[0][i][j][0], AchmazPure[0][i][j][1]] < 0 && Tab[AchmazPure[0][i][j][2], AchmazPure[0][i][j][3]] > 0))
                                 {
-                                    ThinkingHybridizerRefrigitz t = new ThinkingHybridizerRefrigitz(0, Kind, CurrentAStarGredyMax, MovementsAStarGreedyHeuristicFoundT, IgnoreSelfObjectsT, UsePenaltyRegardMechnisamT, BestMovmentsT, PredictHeuristicT, OnlySelfT, AStarGreedyHeuristicT, ArrangmentsChanged, AchmazPure[0][i][j][0], AchmazPure[0][i][j][1], OrderConsoleColor(Order), CloneATable(Table), 0, Order, false, 0, 0, Kind);
+                                    ThinkingHybridizerRefrigitz t = new ThinkingHybridizerRefrigitz(0, Kind, CurrentAStarGredyMax, MovementsAStarGreedyHeuristicFoundT, IgnoreSelfObjectsT, UsePenaltyRegardMechnisamT, BestMovmentsT, PredictHeuristicT, OnlySelfT, AStarGreedyHeuristicT, ArrangmentsChanged, AchmazPure[0][i][j][0], AchmazPure[0][i][j][1], OrderColor(Order), CloneATable(Table), 0, Order, false, 0, 0, Kind);
                                     if (Scop(AchmazPure[0][i][j][0], AchmazPure[0][i][j][1], AchmazPure[0][i][j][2], AchmazPure[0][i][j][3]))
                                     {
                                         int Killed = Math.Abs(Tab[AchmazPure[0][i][j][2], AchmazPure[0][i][j][3]]);
                                         Tab[AchmazPure[0][i][j][2], AchmazPure[0][i][j][3]] = 0;
-                                        var th1 = Task.Factory.StartNew(() => t.HeuristicExchange(Before, Killed, CloneATable(Tab), OrderConsoleColor(Order), Order, AchmazPure[0][i][j][0], AchmazPure[0][i][j][1], AchmazPure[0][i][j][2], AchmazPure[0][i][j][3]));
+                                        var th1 = Task.Factory.StartNew(() => t.HeuristicExchange(Before, Killed, CloneATable(Tab), OrderColor(Order), Order, AchmazPure[0][i][j][0], AchmazPure[0][i][j][1], AchmazPure[0][i][j][2], AchmazPure[0][i][j][3]));
                                         th1.Wait();
                                         th1.Dispose();
                                         var th2 = Task.Factory.StartNew(() => t.Achmaz(CloneATable(Tab), Before, AchmazPure[0][i][j][0], AchmazPure[0][i][j][1], AchmazPure[0][i][j][2], AchmazPure[0][i][j][3], Order));
@@ -12463,12 +12503,12 @@ namespace HybridizerRefrigitz
                                 int[,] Tab = CloneATable(Table);
                                 if ((Tab[AchmazPure[1][i][j][0], AchmazPure[1][i][j][1]] > 0 && Tab[AchmazPure[1][i][j][2], AchmazPure[1][i][j][3]] < 0))
                                 {
-                                    ThinkingHybridizerRefrigitz t = new ThinkingHybridizerRefrigitz(0, Kind, CurrentAStarGredyMax, MovementsAStarGreedyHeuristicFoundT, IgnoreSelfObjectsT, UsePenaltyRegardMechnisamT, BestMovmentsT, PredictHeuristicT, OnlySelfT, AStarGreedyHeuristicT, ArrangmentsChanged, AchmazPure[1][i][j][0], AchmazPure[1][i][j][1], OrderConsoleColor(Order), CloneATable(Table), 0, Order, false, 0, 0, Kind);
+                                    ThinkingHybridizerRefrigitz t = new ThinkingHybridizerRefrigitz(0, Kind, CurrentAStarGredyMax, MovementsAStarGreedyHeuristicFoundT, IgnoreSelfObjectsT, UsePenaltyRegardMechnisamT, BestMovmentsT, PredictHeuristicT, OnlySelfT, AStarGreedyHeuristicT, ArrangmentsChanged, AchmazPure[1][i][j][0], AchmazPure[1][i][j][1], OrderColor(Order), CloneATable(Table), 0, Order, false, 0, 0, Kind);
                                     if (Scop(AchmazPure[0][i][j][0], AchmazPure[0][i][j][1], AchmazPure[0][i][j][2], AchmazPure[0][i][j][3]))
                                     {
                                         int Killed = Math.Abs(Tab[AchmazPure[1][i][j][2], AchmazPure[1][i][j][3]]);
                                         Tab[AchmazPure[0][i][j][2], AchmazPure[0][i][j][3]] = 0;
-                                        var th1 = Task.Factory.StartNew(() => t.HeuristicExchange(Before, Killed, CloneATable(Tab), OrderConsoleColor(Order), Order, AchmazPure[1][i][j][0], AchmazPure[1][i][j][1], AchmazPure[1][i][j][2], AchmazPure[1][i][j][3]));
+                                        var th1 = Task.Factory.StartNew(() => t.HeuristicExchange(Before, Killed, CloneATable(Tab), OrderColor(Order), Order, AchmazPure[1][i][j][0], AchmazPure[1][i][j][1], AchmazPure[1][i][j][2], AchmazPure[1][i][j][3]));
                                         th1.Wait();
                                         th1.Dispose();
                                         var th2 = Task.Factory.StartNew(() => t.Achmaz(CloneATable(Tab), Before, AchmazPure[1][i][j][0], AchmazPure[1][i][j][1], AchmazPure[1][i][j][2], AchmazPure[1][i][j][3], Order));
@@ -12495,12 +12535,12 @@ namespace HybridizerRefrigitz
                                 int[,] Tab = CloneATable(Table);
                                 if ((Tab[AchmazPure[1][i][j][0], AchmazPure[1][i][j][1]] > 0 && Tab[AchmazPure[1][i][j][2], AchmazPure[1][i][j][3]] < 0))
                                 {
-                                    ThinkingHybridizerRefrigitz t = new ThinkingHybridizerRefrigitz(0, Kind, CurrentAStarGredyMax, MovementsAStarGreedyHeuristicFoundT, IgnoreSelfObjectsT, UsePenaltyRegardMechnisamT, BestMovmentsT, PredictHeuristicT, OnlySelfT, AStarGreedyHeuristicT, ArrangmentsChanged, AchmazPure[1][i][j][0], AchmazPure[1][i][j][1], OrderConsoleColor(Order), CloneATable(Table), 0, Order, false, 0, 0, Kind);
+                                    ThinkingHybridizerRefrigitz t = new ThinkingHybridizerRefrigitz(0, Kind, CurrentAStarGredyMax, MovementsAStarGreedyHeuristicFoundT, IgnoreSelfObjectsT, UsePenaltyRegardMechnisamT, BestMovmentsT, PredictHeuristicT, OnlySelfT, AStarGreedyHeuristicT, ArrangmentsChanged, AchmazPure[1][i][j][0], AchmazPure[1][i][j][1], OrderColor(Order), CloneATable(Table), 0, Order, false, 0, 0, Kind);
                                     if (Scop(AchmazPure[0][i][j][0], AchmazPure[0][i][j][1], AchmazPure[0][i][j][2], AchmazPure[0][i][j][3]))
                                     {
                                         int Killed = Math.Abs(Tab[AchmazPure[1][i][j][2], AchmazPure[1][i][j][3]]);
                                         Tab[AchmazPure[0][i][j][2], AchmazPure[0][i][j][3]] = 0;
-                                        var th1 = Task.Factory.StartNew(() => t.HeuristicExchange(Before, Killed, CloneATable(Tab), OrderConsoleColor(Order), Order, AchmazPure[1][i][j][0], AchmazPure[1][i][j][1], AchmazPure[1][i][j][2], AchmazPure[1][i][j][3]));
+                                        var th1 = Task.Factory.StartNew(() => t.HeuristicExchange(Before, Killed, CloneATable(Tab), OrderColor(Order), Order, AchmazPure[1][i][j][0], AchmazPure[1][i][j][1], AchmazPure[1][i][j][2], AchmazPure[1][i][j][3]));
                                         th1.Wait();
                                         th1.Dispose();
                                         var th2 = Task.Factory.StartNew(() => t.Achmaz(CloneATable(Tab), Before, AchmazPure[1][i][j][0], AchmazPure[1][i][j][1], AchmazPure[1][i][j][2], AchmazPure[1][i][j][3], Order));
@@ -12578,12 +12618,12 @@ namespace HybridizerRefrigitz
                                 int[,] Tab = CloneATable(Table);
                                 if ((Tab[AchmazReduced[0][i][j][0], AchmazReduced[0][i][j][1]] < 0 && Tab[AchmazReduced[0][i][j][2], AchmazReduced[0][i][j][3]] > 0))
                                 {
-                                    ThinkingHybridizerRefrigitz t = new ThinkingHybridizerRefrigitz(0, Kind, CurrentAStarGredyMax, MovementsAStarGreedyHeuristicFoundT, IgnoreSelfObjectsT, UsePenaltyRegardMechnisamT, BestMovmentsT, PredictHeuristicT, OnlySelfT, AStarGreedyHeuristicT, ArrangmentsChanged, AchmazReduced[0][i][j][0], AchmazReduced[0][i][j][1], OrderConsoleColor(Order), CloneATable(Table), 0, Order, false, 0, 0, Kind);
+                                    ThinkingHybridizerRefrigitz t = new ThinkingHybridizerRefrigitz(0, Kind, CurrentAStarGredyMax, MovementsAStarGreedyHeuristicFoundT, IgnoreSelfObjectsT, UsePenaltyRegardMechnisamT, BestMovmentsT, PredictHeuristicT, OnlySelfT, AStarGreedyHeuristicT, ArrangmentsChanged, AchmazReduced[0][i][j][0], AchmazReduced[0][i][j][1], OrderColor(Order), CloneATable(Table), 0, Order, false, 0, 0, Kind);
                                     if (Scop(AchmazReduced[0][i][j][2], AchmazReduced[0][i][j][3], AchmazReduced[0][i][j][0], AchmazReduced[0][i][j][1]))
                                     {
                                         int Killed = Math.Abs(Tab[AchmazReduced[0][i][j][2], AchmazReduced[0][i][j][3]]);
                                         Tab[AchmazReduced[0][i][j][2], AchmazReduced[0][i][j][3]] = 0;
-                                        var th1 = Task.Factory.StartNew(() => t.HeuristicExchange(Before, Math.Abs(Tab[AchmazReduced[0][i][j][2], AchmazReduced[0][i][j][3]]), CloneATable(Tab), OrderConsoleColor(Order * -1), Order * -1, AchmazReduced[0][i][j][0], AchmazReduced[0][i][j][1], AchmazReduced[0][i][j][2], AchmazReduced[0][i][j][3]));
+                                        var th1 = Task.Factory.StartNew(() => t.HeuristicExchange(Before, Math.Abs(Tab[AchmazReduced[0][i][j][2], AchmazReduced[0][i][j][3]]), CloneATable(Tab), OrderColor(Order * -1), Order * -1, AchmazReduced[0][i][j][0], AchmazReduced[0][i][j][1], AchmazReduced[0][i][j][2], AchmazReduced[0][i][j][3]));
                                         th1.Wait();
                                         th1.Dispose();
                                         var th2 = Task.Factory.StartNew(() => t.Achmaz(CloneATable(Tab), Before, AchmazReduced[0][i][j][0], AchmazReduced[0][i][j][1], AchmazReduced[0][i][j][2], AchmazReduced[0][i][j][3], Order));
@@ -12610,12 +12650,12 @@ namespace HybridizerRefrigitz
                                 int[,] Tab = CloneATable(Table);
                                 if ((Tab[AchmazReduced[0][i][j][0], AchmazReduced[0][i][j][1]] > 0 && Tab[AchmazReduced[0][i][j][2], AchmazReduced[0][i][j][3]] < 0))
                                 {
-                                    ThinkingHybridizerRefrigitz t = new ThinkingHybridizerRefrigitz(0, Kind, CurrentAStarGredyMax, MovementsAStarGreedyHeuristicFoundT, IgnoreSelfObjectsT, UsePenaltyRegardMechnisamT, BestMovmentsT, PredictHeuristicT, OnlySelfT, AStarGreedyHeuristicT, ArrangmentsChanged, AchmazReduced[0][i][j][0], AchmazReduced[0][i][j][1], OrderConsoleColor(Order), CloneATable(Table), 0, Order, false, 0, 0, Kind);
+                                    ThinkingHybridizerRefrigitz t = new ThinkingHybridizerRefrigitz(0, Kind, CurrentAStarGredyMax, MovementsAStarGreedyHeuristicFoundT, IgnoreSelfObjectsT, UsePenaltyRegardMechnisamT, BestMovmentsT, PredictHeuristicT, OnlySelfT, AStarGreedyHeuristicT, ArrangmentsChanged, AchmazReduced[0][i][j][0], AchmazReduced[0][i][j][1], OrderColor(Order), CloneATable(Table), 0, Order, false, 0, 0, Kind);
                                     if (Scop(AchmazReduced[0][i][j][2], AchmazReduced[0][i][j][3], AchmazReduced[0][i][j][0], AchmazReduced[0][i][j][1]))
                                     {
                                         int Killed = Math.Abs(Tab[AchmazReduced[0][i][j][2], AchmazReduced[0][i][j][3]]);
                                         Tab[AchmazReduced[0][i][j][2], AchmazReduced[0][i][j][3]] = 0;
-                                        var th1 = Task.Factory.StartNew(() => t.HeuristicExchange(Before, Math.Abs(Tab[AchmazReduced[0][i][j][2], AchmazReduced[0][i][j][3]]), CloneATable(Tab), OrderConsoleColor(Order * -1), Order * -1, AchmazReduced[0][i][j][0], AchmazReduced[0][i][j][1], AchmazReduced[0][i][j][2], AchmazReduced[0][i][j][3]));
+                                        var th1 = Task.Factory.StartNew(() => t.HeuristicExchange(Before, Math.Abs(Tab[AchmazReduced[0][i][j][2], AchmazReduced[0][i][j][3]]), CloneATable(Tab), OrderColor(Order * -1), Order * -1, AchmazReduced[0][i][j][0], AchmazReduced[0][i][j][1], AchmazReduced[0][i][j][2], AchmazReduced[0][i][j][3]));
                                         th1.Wait();
                                         th1.Dispose();
                                         var th2 = Task.Factory.StartNew(() => t.Achmaz(CloneATable(Tab), Before, AchmazReduced[0][i][j][0], AchmazReduced[0][i][j][1], AchmazReduced[0][i][j][2], AchmazReduced[0][i][j][3], Order));
@@ -12693,12 +12733,12 @@ namespace HybridizerRefrigitz
                                 int[,] Tab = CloneATable(Table);
                                 if ((Tab[AchmazReduced[1][i][j][2], AchmazReduced[1][i][j][3]] < 0 && Tab[AchmazReduced[1][i][j][0], AchmazReduced[1][i][j][1]] > 0))
                                 {
-                                    ThinkingHybridizerRefrigitz t = new ThinkingHybridizerRefrigitz(0, Kind, CurrentAStarGredyMax, MovementsAStarGreedyHeuristicFoundT, IgnoreSelfObjectsT, UsePenaltyRegardMechnisamT, BestMovmentsT, PredictHeuristicT, OnlySelfT, AStarGreedyHeuristicT, ArrangmentsChanged, AchmazReduced[1][i][j][2], AchmazReduced[1][i][j][3], OrderConsoleColor(Order), CloneATable(Table), 0, Order, false, 0, 0, Kind);
+                                    ThinkingHybridizerRefrigitz t = new ThinkingHybridizerRefrigitz(0, Kind, CurrentAStarGredyMax, MovementsAStarGreedyHeuristicFoundT, IgnoreSelfObjectsT, UsePenaltyRegardMechnisamT, BestMovmentsT, PredictHeuristicT, OnlySelfT, AStarGreedyHeuristicT, ArrangmentsChanged, AchmazReduced[1][i][j][2], AchmazReduced[1][i][j][3], OrderColor(Order), CloneATable(Table), 0, Order, false, 0, 0, Kind);
                                     if (Scop(AchmazReduced[1][i][j][2], AchmazReduced[1][i][j][3], AchmazReduced[1][i][j][0], AchmazReduced[1][i][j][1]))
                                     {
                                         int Killed = Math.Abs(Tab[AchmazReduced[1][i][j][2], AchmazReduced[1][i][j][3]]);
                                         Tab[AchmazReduced[1][i][j][2], AchmazReduced[1][i][j][3]] = 0;
-                                        var th1 = Task.Factory.StartNew(() => t.HeuristicExchange(Before, Killed, CloneATable(Tab), OrderConsoleColor(Order * -1), Order * -1, AchmazReduced[0][i][j][0], AchmazReduced[0][i][j][1], AchmazReduced[0][i][j][2], AchmazReduced[0][i][j][3]));
+                                        var th1 = Task.Factory.StartNew(() => t.HeuristicExchange(Before, Killed, CloneATable(Tab), OrderColor(Order * -1), Order * -1, AchmazReduced[0][i][j][0], AchmazReduced[0][i][j][1], AchmazReduced[0][i][j][2], AchmazReduced[0][i][j][3]));
                                         th1.Wait();
                                         th1.Dispose();
                                         var th2 = Task.Factory.StartNew(() => t.Achmaz(CloneATable(Tab), Before, AchmazReduced[1][i][j][0], AchmazReduced[1][i][j][1], AchmazReduced[1][i][j][2], AchmazReduced[1][i][j][3], Order * -1));
@@ -12725,12 +12765,12 @@ namespace HybridizerRefrigitz
                                 int[,] Tab = CloneATable(Table);
                                 if ((Tab[AchmazReduced[1][i][j][2], AchmazReduced[1][i][j][3]] > 0 && Tab[AchmazReduced[1][i][j][0], AchmazReduced[1][i][j][1]] < 0))
                                 {
-                                    ThinkingHybridizerRefrigitz t = new ThinkingHybridizerRefrigitz(0, Kind, CurrentAStarGredyMax, MovementsAStarGreedyHeuristicFoundT, IgnoreSelfObjectsT, UsePenaltyRegardMechnisamT, BestMovmentsT, PredictHeuristicT, OnlySelfT, AStarGreedyHeuristicT, ArrangmentsChanged, AchmazReduced[1][i][j][2], AchmazReduced[1][i][j][3], OrderConsoleColor(Order), CloneATable(Table), 0, Order, false, 0, 0, Kind);
+                                    ThinkingHybridizerRefrigitz t = new ThinkingHybridizerRefrigitz(0, Kind, CurrentAStarGredyMax, MovementsAStarGreedyHeuristicFoundT, IgnoreSelfObjectsT, UsePenaltyRegardMechnisamT, BestMovmentsT, PredictHeuristicT, OnlySelfT, AStarGreedyHeuristicT, ArrangmentsChanged, AchmazReduced[1][i][j][2], AchmazReduced[1][i][j][3], OrderColor(Order), CloneATable(Table), 0, Order, false, 0, 0, Kind);
                                     if (Scop(AchmazReduced[1][i][j][2], AchmazReduced[1][i][j][3], AchmazReduced[1][i][j][0], AchmazReduced[1][i][j][1]))
                                     {
                                         int Killed = Math.Abs(Tab[AchmazReduced[1][i][j][2], AchmazReduced[1][i][j][3]]);
                                         Tab[AchmazReduced[1][i][j][2], AchmazReduced[1][i][j][3]] = 0;
-                                        var th1 = Task.Factory.StartNew(() => t.HeuristicExchange(Before, Killed, CloneATable(Tab), OrderConsoleColor(Order * -1), Order * -1, AchmazReduced[0][i][j][0], AchmazReduced[0][i][j][1], AchmazReduced[0][i][j][2], AchmazReduced[0][i][j][3]));
+                                        var th1 = Task.Factory.StartNew(() => t.HeuristicExchange(Before, Killed, CloneATable(Tab), OrderColor(Order * -1), Order * -1, AchmazReduced[0][i][j][0], AchmazReduced[0][i][j][1], AchmazReduced[0][i][j][2], AchmazReduced[0][i][j][3]));
                                         th1.Wait();
                                         th1.Dispose();
                                         var th2 = Task.Factory.StartNew(() => t.Achmaz(CloneATable(Tab), Before, AchmazReduced[1][i][j][0], AchmazReduced[1][i][j][1], AchmazReduced[1][i][j][2], AchmazReduced[1][i][j][3], Order * -1));
@@ -13774,7 +13814,7 @@ namespace HybridizerRefrigitz
             return Is;
         }
         //heuristic main method
-        public void CalculateHeuristics(int[] LoseOcuuredatChiled, int WinOcuuredatChiled, bool Before, int Order, int Killed, int[,] TableS, int RowS, int ColS, int RowD, int ColD, ConsoleColor color
+        public void CalculateHeuristics(int[] LoseOcuuredatChiled, int WinOcuuredatChiled, bool Before, int Order, int Killed, int[,] TableS, int RowS, int ColS, int RowD, int ColD, Color color
             , ref int HeuristicAttackValue
                 , ref int HeuristicMovementValue
                 , ref int HeuristicSelfSupportedValue
@@ -13875,7 +13915,7 @@ namespace HybridizerRefrigitz
                                 bool A = false, B = false, C = false;
                                 if (Order == 1)
                                 {
-                                    A = ColleralationGray < 30;
+                                    A = ColleralationWHITE < 30;
                                     if (Order == AllDraw.OrderPlateDraw)
                                     {
                                         B = NoOfExistInAttackList(Before, RowS, ColS, RowD, ColD) > 0 && (System.Math.Abs(TableS[RowD, ColD]) != 0 && System.Math.Abs(TableS[RowS, ColS]) > 1);
@@ -13884,7 +13924,7 @@ namespace HybridizerRefrigitz
                                 }
                                 else
                                 {
-                                    A = ColleralationBrown < 30;
+                                    A = ColleralationBLACK < 30;
                                     if (Order == AllDraw.OrderPlateDraw)
                                     {
                                         B = NoOfExistInAttackList(Before, RowS, ColS, RowD, ColD) > 0 && (System.Math.Abs(TableS[RowD, ColD]) != 0 && System.Math.Abs(TableS[RowS, ColS]) > 1);
@@ -13899,7 +13939,7 @@ namespace HybridizerRefrigitz
                                 //Every objects one move at game begin
                                 int Total = 0;
                                 int Is = 0;
-                                NoOfObjectNotMovable(CloneATable(TableS), Order, OrderConsoleColor(Order), ref Total, ref Is);
+                                NoOfObjectNotMovable(CloneATable(TableS), Order, OrderColor(Order), ref Total, ref Is);
                                 if (Order == 1)
                                 {
                                     if (
@@ -13927,14 +13967,14 @@ namespace HybridizerRefrigitz
                                 //Empire more
                                 if (A)
                                 {
-                                    if (ColleralationGray < 16)
+                                    if (ColleralationWHITE < 16)
                                     {
-                                        if (NoOfExistInSupportList(Before, RowS, ColS, RowD, ColD) + NoOfExistInMoveList(Before, RowS, ColS, RowD, ColD) + NoOfExistInAttackList(Before, RowS, ColS, RowD, ColD) - NoOfExistInReducedSupportList(Before, RowD, ColD, RowS, ColS) - NoOfExistInReducedMoveList(Before, RowD, ColD, RowS, ColS) - NoOfExistInReducedAttackList(Before, RowD, ColD, RowS, ColS) >= DifOfNoOfSupporteAndReducedSupportGray)
+                                        if (NoOfExistInSupportList(Before, RowS, ColS, RowD, ColD) + NoOfExistInMoveList(Before, RowS, ColS, RowD, ColD) + NoOfExistInAttackList(Before, RowS, ColS, RowD, ColD) - NoOfExistInReducedSupportList(Before, RowD, ColD, RowS, ColS) - NoOfExistInReducedMoveList(Before, RowD, ColD, RowS, ColS) - NoOfExistInReducedAttackList(Before, RowD, ColD, RowS, ColS) >= DifOfNoOfSupporteAndReducedSupportWHITE)
                                         {
-                                            DifOfNoOfSupporteAndReducedSupportGray = NoOfExistInSupportList(Before, RowS, ColS, RowD, ColD) + NoOfExistInMoveList(Before, RowS, ColS, RowD, ColD) + NoOfExistInAttackList(Before, RowS, ColS, RowD, ColD) - NoOfExistInReducedSupportList(Before, RowD, ColD, RowS, ColS) - NoOfExistInReducedMoveList(Before, RowD, ColD, RowS, ColS) - NoOfExistInReducedAttackList(Before, RowD, ColD, RowS, ColS);
+                                            DifOfNoOfSupporteAndReducedSupportWHITE = NoOfExistInSupportList(Before, RowS, ColS, RowD, ColD) + NoOfExistInMoveList(Before, RowS, ColS, RowD, ColD) + NoOfExistInAttackList(Before, RowS, ColS, RowD, ColD) - NoOfExistInReducedSupportList(Before, RowD, ColD, RowS, ColS) - NoOfExistInReducedMoveList(Before, RowD, ColD, RowS, ColS) - NoOfExistInReducedAttackList(Before, RowD, ColD, RowS, ColS);
                                         }
                                         else
-                                        if (DifOfNoOfSupporteAndReducedSupportGray < 64)
+                                        if (DifOfNoOfSupporteAndReducedSupportWHITE < 64)
                                         {
                                             IsS = true;
                                             SetSupHuTrue();
@@ -13944,9 +13984,9 @@ namespace HybridizerRefrigitz
                                 //Hourse before elephants
                                 if (((RowS == 2 && ColS == 7 && TableInitiation[RowS, ColS] == TableS[2, 7] && TableS[2, 7] == 2) && TableInitiationPreventionOfMultipleMove[2, 7] == 0) || ((RowS == 5 && ColS == 7 && TableInitiation[RowS, ColS] == TableS[5, 7] && TableS[5, 7] == 2) && TableInitiationPreventionOfMultipleMove[5, 7] == 0))
                                 {
-                                    ConsoleColor a = ConsoleColor.Gray;
+                                    Color a = Color.WHITE;
                                     if (Order == -1)
-                                        a = ConsoleColor.Black;
+                                        a = Color.BLACK;
                                     if (((TableInitiation[1, 7] == TableS[1, 7] && TableS[1, 7] == 3) && TableInitiationPreventionOfMultipleMove[1, 7] == 0 && ObjectMovable(1, 7, CloneATable(TableS), Order, a)) || ((TableInitiation[6, 7] == TableS[6, 7] && TableS[6, 7] == 3) && TableInitiationPreventionOfMultipleMove[6, 7] == 0 && ObjectMovable(6, 7, CloneATable(TableS), Order, a)))
                                     {
                                         IsS = true;
@@ -14002,7 +14042,7 @@ namespace HybridizerRefrigitz
                                 bool A = false, B = false, C = false;
                                 if (Order == 1)
                                 {
-                                    A = ColleralationGray < 30;
+                                    A = ColleralationWHITE < 30;
                                     if (Order == AllDraw.OrderPlateDraw)
                                     {
                                         B = NoOfExistInAttackList(Before, RowS, ColS, RowD, ColD) > 0 && (Killed != 0 && Killed < TableS[RowD, ColD]);
@@ -14011,7 +14051,7 @@ namespace HybridizerRefrigitz
                                 }
                                 else
                                 {
-                                    A = ColleralationBrown < 30;
+                                    A = ColleralationBLACK < 30;
                                     if (Order == AllDraw.OrderPlateDraw)
                                     {
                                         B = NoOfExistInAttackList(Before, RowS, ColS, RowD, ColD) > 0 && (Killed != 0 && Killed < TableS[RowD, ColD]);
@@ -14031,14 +14071,14 @@ namespace HybridizerRefrigitz
                                         //Empire more
                                         if (A)
                                         {
-                                            if (ColleralationBrown < 16)
+                                            if (ColleralationBLACK < 16)
                                             {
-                                                if (NoOfExistInSupportList(Before, RowS, ColS, RowD, ColD) + NoOfExistInMoveList(Before, RowS, ColS, RowD, ColD) + NoOfExistInAttackList(Before, RowS, ColS, RowD, ColD) - NoOfExistInReducedSupportList(Before, RowD, ColD, RowS, ColS) - NoOfExistInReducedMoveList(Before, RowD, ColD, RowS, ColS) - NoOfExistInReducedAttackList(Before, RowD, ColD, RowS, ColS) >= DifOfNoOfSupporteAndReducedSupportBrown)
+                                                if (NoOfExistInSupportList(Before, RowS, ColS, RowD, ColD) + NoOfExistInMoveList(Before, RowS, ColS, RowD, ColD) + NoOfExistInAttackList(Before, RowS, ColS, RowD, ColD) - NoOfExistInReducedSupportList(Before, RowD, ColD, RowS, ColS) - NoOfExistInReducedMoveList(Before, RowD, ColD, RowS, ColS) - NoOfExistInReducedAttackList(Before, RowD, ColD, RowS, ColS) >= DifOfNoOfSupporteAndReducedSupportBLACK)
                                                 {
-                                                    DifOfNoOfSupporteAndReducedSupportBrown = NoOfExistInSupportList(Before, RowS, ColS, RowD, ColD) + NoOfExistInMoveList(Before, RowS, ColS, RowD, ColD) + NoOfExistInAttackList(Before, RowS, ColS, RowD, ColD) - NoOfExistInReducedSupportList(Before, RowD, ColD, RowS, ColS) - NoOfExistInReducedMoveList(Before, RowD, ColD, RowS, ColS) - NoOfExistInReducedAttackList(Before, RowD, ColD, RowS, ColS);
+                                                    DifOfNoOfSupporteAndReducedSupportBLACK = NoOfExistInSupportList(Before, RowS, ColS, RowD, ColD) + NoOfExistInMoveList(Before, RowS, ColS, RowD, ColD) + NoOfExistInAttackList(Before, RowS, ColS, RowD, ColD) - NoOfExistInReducedSupportList(Before, RowD, ColD, RowS, ColS) - NoOfExistInReducedMoveList(Before, RowD, ColD, RowS, ColS) - NoOfExistInReducedAttackList(Before, RowD, ColD, RowS, ColS);
                                                 }
                                                 else
-                                                if (DifOfNoOfSupporteAndReducedSupportBrown < 64)
+                                                if (DifOfNoOfSupporteAndReducedSupportBLACK < 64)
                                                 {
                                                     {
                                                         SetSupHuTrue();
@@ -14050,9 +14090,9 @@ namespace HybridizerRefrigitz
                                         //Hourse before elephants
                                         if (((RowS == 2 && ColS == 0 && TableInitiation[RowS, ColS] == TableS[RowS, ColS] && TableS[RowS, ColS] == -2) && TableInitiationPreventionOfMultipleMove[2, 0] == 0) || ((RowS == 5 && ColS == 0 && TableInitiation[RowS, ColS] == TableS[RowS, ColS] && TableConst[RowS, ColS] == -2) && TableInitiationPreventionOfMultipleMove[5, 0] == 0))
                                         {
-                                            ConsoleColor a = ConsoleColor.Gray;
+                                            Color a = Color.WHITE;
                                             if (Order == -1)
-                                                a = ConsoleColor.Black;
+                                                a = Color.BLACK;
                                             if (((TableInitiation[1, 0] == TableS[1, 0] && TableS[1, 0] == -3) && TableInitiationPreventionOfMultipleMove[1, 0] == 0 && ObjectMovable(1, 0, CloneATable(TableS), Order, a)) || ((TableInitiation[6, 0] == TableS[6, 0] && TableS[6, 0] == -3) && TableInitiationPreventionOfMultipleMove[6, 0] == 0 && ObjectMovable(6, 0, CloneATable(TableS), Order, a)))
                                             {
                                                 SetSupHuTrue();
@@ -14062,7 +14102,7 @@ namespace HybridizerRefrigitz
                                         //Every objects one move at game begin
                                         int Total = 0;
                                         int Is = 0;
-                                        NoOfObjectNotMovable(CloneATable(TableS), Order, OrderConsoleColor(Order), ref Total, ref Is);
+                                        NoOfObjectNotMovable(CloneATable(TableS), Order, OrderColor(Order), ref Total, ref Is);
                                         if (Order == 1)
                                         {
                                             if (
@@ -14123,8 +14163,8 @@ namespace HybridizerRefrigitz
                         {
                             int TotalS = 0;
                             int IsSC = 0;
-                            NoOfObjectNotMovable(CloneATable(TableS), Order, OrderConsoleColor(Order), ref TotalS, ref IsSC);
-                            if ((16 - ColleralationGray) + IsSC >= TotalS)
+                            NoOfObjectNotMovable(CloneATable(TableS), Order, OrderColor(Order), ref TotalS, ref IsSC);
+                            if ((16 - ColleralationWHITE) + IsSC >= TotalS)
                                 GoldenFinished = true;
                             HAchmaz = (RationalPenalty * (AchmazReducedBefore(Before, CloneATable(TableS)))) + (RationalRegard * (AchmazPuredBefore(Before, CloneATable(TableS))));
                         }
@@ -14132,8 +14172,8 @@ namespace HybridizerRefrigitz
                         {
                             int TotalS = 0;
                             int IsSC = 0;
-                            NoOfObjectNotMovable(CloneATable(TableS), Order, OrderConsoleColor(Order), ref TotalS, ref IsSC);
-                            if ((16 - ColleralationBrown) + IsSC >= TotalS)
+                            NoOfObjectNotMovable(CloneATable(TableS), Order, OrderColor(Order), ref TotalS, ref IsSC);
+                            if ((16 - ColleralationBLACK) + IsSC >= TotalS)
                                 GoldenFinished = true;
                             HAchmaz = (RationalPenalty * (AchmazReducedAfter(Before, CloneATable(TableS)))) + (RationalRegard * (AchmazPuredAfter(Before, CloneATable(TableS))));
                         }
@@ -14237,7 +14277,7 @@ namespace HybridizerRefrigitz
             return IsNo;
         }
         //determine if source objects is movable on board
-        bool ObjectMovable(int Row, int Col, int[,] Tab, int Order, ConsoleColor a)
+        bool ObjectMovable(int Row, int Col, int[,] Tab, int Order, Color a)
         {
             bool Is = false;
             for (int i = 0; i < 8; i++)
@@ -14303,7 +14343,7 @@ namespace HybridizerRefrigitz
             return Is;
         }
         //return number of un movable objects on board
-        int NoOfObjectNotMovable(int[,] Tab, int Order, ConsoleColor a, ref int Total, ref int Is)
+        int NoOfObjectNotMovable(int[,] Tab, int Order, Color a, ref int Total, ref int Is)
         {
             List<int[]> IsThere = new List<int[]>();
             for (int Row = 0; Row < 8; Row++)
@@ -14359,7 +14399,7 @@ namespace HybridizerRefrigitz
             return Is;
         }
         //specific determination for ThinkingQuantum main method
-        void CastleThinkingGray(ref int[] LoseOcuuredatChiled, ref int WinOcuuredatChiled, int DummyOrder, int DummyCurrentOrder, int[,] TableS, int RowSource, int ColumnSource, bool DoEnemySelf, bool PenRegStrore, bool EnemyCheckMateActionsString, int RowDestination, int ColumnDestination, bool Castle)
+        void CastleThinkingWHITE(ref int[] LoseOcuuredatChiled, ref int WinOcuuredatChiled, int DummyOrder, int DummyCurrentOrder, int[,] TableS, int RowSource, int ColumnSource, bool DoEnemySelf, bool PenRegStrore, bool EnemyCheckMateActionsString, int RowDestination, int ColumnDestination, bool Castle)
         {
             Object O1 = new Object();
             lock (O1)
@@ -14379,14 +14419,14 @@ namespace HybridizerRefrigitz
                 ThinkingAtRun = true; int CheckedM = 0; bool PenaltyVCar = false;
                 Order = DummyOrder;
                 ChessRules.CurrentOrder = DummyCurrentOrder;
-                //When is Castles Gray King.
+                //When is Castles WHITE King.
                 //Predict Heuristic Caluculatio Before Movments.
                 Object O = new Object();
                 lock (O)
                 {
                     ThinkingRun = true;
                 }
-                int[] TmpL = LoseOcuuredatChiled;int TmpW = WinOcuuredatChiled;  var newTask1 = Task.Factory.StartNew(() => CalculateHeuristics(TmpL, TmpW, true, Order, 0, CloneATable(TableS), RowSource, ColumnSource, RowDestination, ColumnDestination, color , ref HeuristicAttackValue, ref HeuristicMovementValue, ref HeuristicSelfSupportedValue, ref HeuristicReducedMovementValue, ref HeuristicReducedSupport, ref HeuristicReducedAttackValue, ref HeuristicDistributionValue, ref HeuristicKingSafe, ref HeuristicFromCenter, ref HeuristicKingDangour, ref HeuristicCheckedMate));
+                int[] TmpL = LoseOcuuredatChiled;int TmpW = WinOcuuredatChiled;  var newTask1 = Task.Factory.StartNew(() => CalculateHeuristics(TmpL, TmpW, true, Order, 0, CloneATable(TableS), RowSource, ColumnSource, RowDestination, ColumnDestination, color, ref HeuristicAttackValue, ref HeuristicMovementValue, ref HeuristicSelfSupportedValue, ref HeuristicReducedMovementValue, ref HeuristicReducedSupport, ref HeuristicReducedAttackValue, ref HeuristicDistributionValue, ref HeuristicKingSafe, ref HeuristicFromCenter, ref HeuristicKingDangour, ref HeuristicCheckedMate));
                 newTask1.Wait(); newTask1.Dispose();
                 LoseOcuuredatChiled[0] += TmpL[0]; WinOcuuredatChiled += TmpW;
 
@@ -14442,7 +14482,7 @@ namespace HybridizerRefrigitz
                 //Calculate Movment Heuristic After Movments.
                 //Caused this for Stachostic results.
                 TmpL = LoseOcuuredatChiled; TmpW = WinOcuuredatChiled;
-                newTask1 = Task.Factory.StartNew(() => CalculateHeuristics(TmpL, TmpW, false, Order, Killed, CloneATable(TableS), RowSource, ColumnSource, RowDestination, ColumnDestination, color , ref HeuristicAttackValue, ref HeuristicMovementValue, ref HeuristicSelfSupportedValue, ref HeuristicReducedMovementValue, ref HeuristicReducedSupport, ref HeuristicReducedAttackValue, ref HeuristicDistributionValue, ref HeuristicKingSafe, ref HeuristicFromCenter, ref HeuristicKingDangour, ref HeuristicCheckedMate));
+                newTask1 = Task.Factory.StartNew(() => CalculateHeuristics(TmpL, TmpW, false, Order, Killed, CloneATable(TableS), RowSource, ColumnSource, RowDestination, ColumnDestination, color, ref HeuristicAttackValue, ref HeuristicMovementValue, ref HeuristicSelfSupportedValue, ref HeuristicReducedMovementValue, ref HeuristicReducedSupport, ref HeuristicReducedAttackValue, ref HeuristicDistributionValue, ref HeuristicKingSafe, ref HeuristicFromCenter, ref HeuristicKingDangour, ref HeuristicCheckedMate));
                 newTask1.Wait(); newTask1.Dispose();
                 LoseOcuuredatChiled[0] += TmpL[0]; WinOcuuredatChiled += TmpW;
 
@@ -15117,7 +15157,7 @@ namespace HybridizerRefrigitz
             }
         }
         //specific determination for thinking main method
-        public void ThinkingCastleBrown(ref int[] LoseOcuuredatChiled, ref int WinOcuuredatChiled, int ord, int ii, int jj, int DummyOrder, int DummyCurrentOrder, bool DoEnemySelf, bool PenRegStrore, bool EnemyCheckMateActionsString, bool Castle)
+        public void ThinkingCastleBLACK(ref int[] LoseOcuuredatChiled, ref int WinOcuuredatChiled, int ord, int ii, int jj, int DummyOrder, int DummyCurrentOrder, bool DoEnemySelf, bool PenRegStrore, bool EnemyCheckMateActionsString, bool Castle)
         {
             Object O = new Object();
             lock (O)
@@ -15132,11 +15172,11 @@ namespace HybridizerRefrigitz
                     ///"Inizialization of This New Class (Current is Dynamic class Object) is MalFunction (Constant Variable Count).
                     QuantumAtamata Current = new QuantumAtamata(3, 3, 3);
 
-                    ///Calculate of Castles of Brown.
-                    if ((new ChessRules(CurrentAStarGredyMax, MovementsAStarGreedyHeuristicFoundT, IgnoreSelfObjectsT, UsePenaltyRegardMechnisamT, BestMovmentsT, PredictHeuristicT, OnlySelfT, AStarGreedyHeuristicT, ArrangmentsChanged, -7, CloneATable(TableS), Order, ii, jj)).Rules(ii, jj, i, jj, color , -7) && (ChessRules.CastleKingAllowedBrown))
+                    ///Calculate of Castles of BLACK.
+                    if ((new ChessRules(CurrentAStarGredyMax, MovementsAStarGreedyHeuristicFoundT, IgnoreSelfObjectsT, UsePenaltyRegardMechnisamT, BestMovmentsT, PredictHeuristicT, OnlySelfT, AStarGreedyHeuristicT, ArrangmentsChanged, -7, CloneATable(TableS), Order, ii, jj)).Rules(ii, jj, i, jj, color, -7) && (ChessRules.CastleKingAllowedBLACK))
                     {
                         int[] TmpL = LoseOcuuredatChiled;int TmpW = WinOcuuredatChiled;
-                        var newTask = Task.Factory.StartNew(() => CastleThinkingBrown(ref TmpL, ref TmpW, DummyOrder, DummyCurrentOrder, CloneATable(TableS), ii, jj, DoEnemySelf, PenRegStrore, EnemyCheckMateActionsString, i, jj, Castle));
+                        var newTask = Task.Factory.StartNew(() => CastleThinkingBLACK(ref TmpL, ref TmpW, DummyOrder, DummyCurrentOrder, CloneATable(TableS), ii, jj, DoEnemySelf, PenRegStrore, EnemyCheckMateActionsString, i, jj, Castle));
 
 
                         newTask.Wait(); newTask.Dispose();
@@ -15148,7 +15188,7 @@ namespace HybridizerRefrigitz
 
         }
         //specific determination for thinking main method
-        public void ThinkingCastleGray(ref int[] LoseOcuuredatChiled, ref int WinOcuuredatChiled, int ord, int ii, int jj, int DummyOrder, int DummyCurrentOrder, bool DoEnemySelf, bool PenRegStrore, bool EnemyCheckMateActionsString, bool Castle)
+        public void ThinkingCastleWHITE(ref int[] LoseOcuuredatChiled, ref int WinOcuuredatChiled, int ord, int ii, int jj, int DummyOrder, int DummyCurrentOrder, bool DoEnemySelf, bool PenRegStrore, bool EnemyCheckMateActionsString, bool Castle)
         {
             Object O = new Object();
             lock (O)
@@ -15162,10 +15202,10 @@ namespace HybridizerRefrigitz
                     ///"Inizialization of This New Class (Current is Dynamic class Object) is MalFunction (Constant Variable Count).
                     QuantumAtamata Current = new QuantumAtamata(3, 3, 3);
 
-                    if ((new ChessRules(CurrentAStarGredyMax, MovementsAStarGreedyHeuristicFoundT, IgnoreSelfObjectsT, UsePenaltyRegardMechnisamT, BestMovmentsT, PredictHeuristicT, OnlySelfT, AStarGreedyHeuristicT, ArrangmentsChanged, 7, CloneATable(TableS), Order, ii, jj)).Rules(ii, jj, i, jj, color , 7) && (ChessRules.CastleKingAllowedGray))
+                    if ((new ChessRules(CurrentAStarGredyMax, MovementsAStarGreedyHeuristicFoundT, IgnoreSelfObjectsT, UsePenaltyRegardMechnisamT, BestMovmentsT, PredictHeuristicT, OnlySelfT, AStarGreedyHeuristicT, ArrangmentsChanged, 7, CloneATable(TableS), Order, ii, jj)).Rules(ii, jj, i, jj, color, 7) && (ChessRules.CastleKingAllowedWHITE))
                     {
                         int[] TmpL = LoseOcuuredatChiled;int TmpW = WinOcuuredatChiled;
-                        var newTask = Task.Factory.StartNew(() => CastleThinkingGray(ref TmpL, ref TmpW, DummyOrder, DummyCurrentOrder, CloneATable(TableS), ii, jj, DoEnemySelf, PenRegStrore, EnemyCheckMateActionsString, i, jj, Castle));
+                        var newTask = Task.Factory.StartNew(() => CastleThinkingWHITE(ref TmpL, ref TmpW, DummyOrder, DummyCurrentOrder, CloneATable(TableS), ii, jj, DoEnemySelf, PenRegStrore, EnemyCheckMateActionsString, i, jj, Castle));
 
 
                         newTask.Wait(); newTask.Dispose();
@@ -15330,7 +15370,7 @@ namespace HybridizerRefrigitz
                         Parallel.For(0, TableListSolder.Count, i =>
                         {
                             FullGameThinkingTreeInitialization(THIS, iIndex, i, Order, Kind);
-                            AStarGreedy[i].InitiateAStarGreedyt(iAStarGreedy, 0, 0,colorOpposite(color), TableListSolder[i], Order * -1, false, false, 0);
+                            AStarGreedy[i].InitiateAStarGreedyt(iAStarGreedy, 0, 0, ColorOpposite(color), TableListSolder[i], Order * -1, false, false, 0);
                         });
                     }
                     else
@@ -15339,7 +15379,7 @@ namespace HybridizerRefrigitz
                         Parallel.For(0, TableListElefant.Count, i =>
                         {
                             FullGameThinkingTreeInitialization(THIS, iIndex, i, Order, Kind);
-                            AStarGreedy[i].InitiateAStarGreedyt(iAStarGreedy, 0, 0,colorOpposite(color), TableListElefant[i], Order * -1, false, false, 0);
+                            AStarGreedy[i].InitiateAStarGreedyt(iAStarGreedy, 0, 0, ColorOpposite(color), TableListElefant[i], Order * -1, false, false, 0);
                         });
                     }
                     else
@@ -15348,7 +15388,7 @@ namespace HybridizerRefrigitz
                         Parallel.For(0, TableListHourse.Count, i =>
                         {
                             FullGameThinkingTreeInitialization(THIS, iIndex, i, Order, Kind);
-                            AStarGreedy[i].InitiateAStarGreedyt(iAStarGreedy, 0, 0,colorOpposite(color), TableListHourse[i], Order * -1, false, false, 0);
+                            AStarGreedy[i].InitiateAStarGreedyt(iAStarGreedy, 0, 0, ColorOpposite(color), TableListHourse[i], Order * -1, false, false, 0);
                         });
                     }
                     else
@@ -15357,7 +15397,7 @@ namespace HybridizerRefrigitz
                         Parallel.For(0, TableListCastle.Count, i =>
                         {
                             FullGameThinkingTreeInitialization(THIS, iIndex, i, Order, Kind);
-                            AStarGreedy[i].InitiateAStarGreedyt(iAStarGreedy, 0, 0,colorOpposite(color), TableListCastle[i], Order * -1, false, false, 0);
+                            AStarGreedy[i].InitiateAStarGreedyt(iAStarGreedy, 0, 0, ColorOpposite(color), TableListCastle[i], Order * -1, false, false, 0);
                         });
                     }
                     else
@@ -15366,7 +15406,7 @@ namespace HybridizerRefrigitz
                         Parallel.For(0, TableListMinister.Count, i =>
                         {
                             FullGameThinkingTreeInitialization(THIS, iIndex, i, Order, Kind);
-                            AStarGreedy[i].InitiateAStarGreedyt(iAStarGreedy, 0, 0,colorOpposite(color), TableListMinister[i], Order * -1, false, false, 0);
+                            AStarGreedy[i].InitiateAStarGreedyt(iAStarGreedy, 0, 0, ColorOpposite(color), TableListMinister[i], Order * -1, false, false, 0);
                         });
                     }
                     else
@@ -15375,18 +15415,18 @@ namespace HybridizerRefrigitz
                         Parallel.For(0, TableListKing.Count, i =>
                         {
                             FullGameThinkingTreeInitialization(THIS, iIndex, i, Order, Kind);
-                            AStarGreedy[i].InitiateAStarGreedyt(iAStarGreedy, 0, 0,colorOpposite(color), TableListKing[i], Order * -1, false, false, 0);
+                            AStarGreedy[i].InitiateAStarGreedyt(iAStarGreedy, 0, 0, ColorOpposite(color), TableListKing[i], Order * -1, false, false, 0);
                         });
                     }
                     FullGameAllow = false;
                 }
             }
         }
-        ConsoleColor colorOpposite(ConsoleColor a)
+        Color ColorOpposite(Color a)
         {
-            if (a == ConsoleColor.Gray)
-                return ConsoleColor.Black;
-            return ConsoleColor.Gray;
+            if (a == Color.WHITE)
+                return Color.BLACK;
+            return Color.WHITE;
         }
         bool MovableAllObjectsListMethos(int RowS, int ColS)
         {
@@ -15618,22 +15658,22 @@ namespace HybridizerRefrigitz
                     ChessRules AAA = new ChessRules(CurrentAStarGredyMax, MovementsAStarGreedyHeuristicFoundT, IgnoreSelfObjectsT, UsePenaltyRegardMechnisamT, BestMovmentsT, PredictHeuristicT, OnlySelfT, AStarGreedyHeuristicT, ArrangmentsChanged, TableS[ii, jj], CloneATable(TableS), Order, ii, jj);
                     if (AAA.CheckMate(CloneATable(TableS), Order))
                     {
-                        if (AAA.CheckMateGray || AAA.CheckMateBrown)
+                        if (AAA.CheckMateWHITE || AAA.CheckMateBLACK)
                         {
                             Object O2 = new Object();
                             lock (O2)
                             {
                                 ThinkingFinished = true;
                                 CheckMateOcuured = true;
-                                if (//(AAA.CheckGray && AllDraw.OrderPlateDraw == 1) || (AAA.CheckBrown && AllDraw.OrderPlateDraw == -1) || 
-                                (AAA.CheckMateGray && AllDraw.OrderPlateDraw == 1) || (AAA.CheckMateBrown && AllDraw.OrderPlateDraw == -1))
+                                if (//(AAA.CheckWHITE && AllDraw.OrderPlateDraw == 1) || (AAA.CheckBLACK && AllDraw.OrderPlateDraw == -1) || 
+                                (AAA.CheckMateWHITE && AllDraw.OrderPlateDraw == 1) || (AAA.CheckMateBLACK && AllDraw.OrderPlateDraw == -1))
                                 {
                                     FoundFirstSelfMating++;
                                     if (Order == AllDraw.OrderPlateDraw)
                                         LoseOcuuredatChiled[0] = -2;
                                     IsThereMateOfSelf.Add(true);
                                 }
-                                if ((AAA.CheckMateGray && AllDraw.OrderPlateDraw == -1) || (AAA.CheckMateBrown && AllDraw.OrderPlateDraw == 1))
+                                if ((AAA.CheckMateWHITE && AllDraw.OrderPlateDraw == -1) || (AAA.CheckMateBLACK && AllDraw.OrderPlateDraw == 1))
                                 {
                                     if (Order == AllDraw.OrderPlateDraw)
                                         WinOcuuredatChiled = 3;
@@ -15645,25 +15685,25 @@ namespace HybridizerRefrigitz
                             return;
                         }
                     }
-                    if (Order == -1 && AAA.CheckBrown)
+                    if (Order == -1 && AAA.CheckBLACK)
                     {
                         IgnoreObjectDangour = 0;
                         IsCheck = true;
                         DoEnemySelf = false;
                     }
-                    if (Order == -1 && AAA.CheckGray)
+                    if (Order == -1 && AAA.CheckWHITE)
                     {
                         IgnoreObjectDangour = 0;
                         IsCheck = true;
                         DoEnemySelf = false;
                     }
-                    if (Order == -1 && AAA.CheckGray)
+                    if (Order == -1 && AAA.CheckWHITE)
                     {
                         IgnoreObjectDangour = 0;
                         IsCheck = true;
                         DoEnemySelf = false;
                     }
-                    if (Order == 1 && AAA.CheckBrown)
+                    if (Order == 1 && AAA.CheckBLACK)
                     {
                         IgnoreObjectDangour = 0;
                         IsCheck = true;
@@ -15675,21 +15715,21 @@ namespace HybridizerRefrigitz
                     DummyOrder = Order;
                     DummyCurrentOrder = Order;
                     ChessRules.CurrentOrder = DummyCurrentOrder;
-                    ///Calculate Castles of Gray King.
+                    ///Calculate Castles of WHITE King.
                     ///
                     int[] TmpL = LoseOcuuredatChiled;int TmpW = WinOcuuredatChiled;
                     switch (Kind)
                     {
                         case 7:
 
-                            var newTask = Task.Factory.StartNew(() => this.ThinkingCastleGray(ref TmpL, ref TmpW, ord, ii, jj, DummyOrder, DummyCurrentOrder, DoEnemySelf, PenRegStrore, EnemyCheckMateActionsString, Castle));
+                            var newTask = Task.Factory.StartNew(() => this.ThinkingCastleWHITE(ref TmpL, ref TmpW, ord, ii, jj, DummyOrder, DummyCurrentOrder, DoEnemySelf, PenRegStrore, EnemyCheckMateActionsString, Castle));
 
 
                             newTask.Wait(); newTask.Dispose();
                             break;
                         case -7:
 
-                            newTask = Task.Factory.StartNew(() => this.ThinkingCastleBrown(ref TmpL, ref TmpW, ord, ii, jj, DummyOrder, DummyCurrentOrder, DoEnemySelf, PenRegStrore, EnemyCheckMateActionsString, Castle));
+                            newTask = Task.Factory.StartNew(() => this.ThinkingCastleBLACK(ref TmpL, ref TmpW, ord, ii, jj, DummyOrder, DummyCurrentOrder, DoEnemySelf, PenRegStrore, EnemyCheckMateActionsString, Castle));
 
 
                             newTask.Wait(); newTask.Dispose();
@@ -16241,7 +16281,7 @@ namespace HybridizerRefrigitz
                     return Val;
                 }
                 //objects value main method determination
-                bool SignSelfEmpty(int Obj1, int Obj2, int Order, ref int Ord, ref ConsoleColor A)
+                bool SignSelfEmpty(int Obj1, int Obj2, int Order, ref int Ord, ref Color A)
                 {
                     Object O = new Object();
                     lock (O)
@@ -16252,7 +16292,7 @@ namespace HybridizerRefrigitz
                             if (Obj1 > 0 && Obj2 == 0)
                             {
                                 Is = true;
-                                A = ConsoleColor.Gray;
+                                A = Color.WHITE;
                                 Ord = 1;
                             }
                         }
@@ -16261,7 +16301,7 @@ namespace HybridizerRefrigitz
                             if (Obj1 < 0 && Obj2 == 0)
                             {
                                 Is = true;
-                                A = ConsoleColor.Black;
+                                A = Color.BLACK;
                                 Ord = -1;
                             }
                         }
@@ -16269,7 +16309,7 @@ namespace HybridizerRefrigitz
                     }
                 }
                 //objects value main method determination
-                bool SignEnemyEmpty(int Obj1, int Obj2, int Order, ref int Ord, ref ConsoleColor A)
+                bool SignEnemyEmpty(int Obj1, int Obj2, int Order, ref int Ord, ref Color A)
                 {
                     Object O = new Object();
                     lock (O)
@@ -16280,7 +16320,7 @@ namespace HybridizerRefrigitz
                             if (Obj1 < 0 && Obj2 == 0)
                             {
                                 Is = true;
-                                A = ConsoleColor.Black;
+                                A = Color.BLACK;
                                 Ord = -1;
                             }
                         }
@@ -16289,7 +16329,7 @@ namespace HybridizerRefrigitz
                             if (Obj1 > 0 && Obj2 == 0)
                             {
                                 Is = true;
-                                A = ConsoleColor.Gray;
+                                A = Color.WHITE;
                                 Ord = 1;
                             }
                         }
@@ -16297,7 +16337,7 @@ namespace HybridizerRefrigitz
                     }
                 }
                 //objects value main method determination
-                bool SignNotEqualEnemy(int Obj1, int Obj2, int Order, ref int Ord, ref ConsoleColor A)
+                bool SignNotEqualEnemy(int Obj1, int Obj2, int Order, ref int Ord, ref Color A)
                 {
                     Object O = new Object();
                     lock (O)
@@ -16309,7 +16349,7 @@ namespace HybridizerRefrigitz
                             if (Obj1 < 0 && Obj2 > 0)
                             {
                                 Is = true;
-                                A = ConsoleColor.Black;
+                                A = Color.BLACK;
                                 Ord = -1;
                             }
                         }
@@ -16318,7 +16358,7 @@ namespace HybridizerRefrigitz
                             if (Obj1 > 0 && Obj2 < 0)
                             {
                                 Is = true;
-                                A = ConsoleColor.Gray;
+                                A = Color.WHITE;
                                 Ord = 1;
                             }
                         }
@@ -16326,7 +16366,7 @@ namespace HybridizerRefrigitz
                     }
                 }
                 //objects value main method determination
-                bool SignEqualSelf(int Obj1, int Obj2, int Order, ref int Ord, ref ConsoleColor A)
+                bool SignEqualSelf(int Obj1, int Obj2, int Order, ref int Ord, ref Color A)
                 {
                     Object O = new Object();
                     lock (O)
@@ -16338,7 +16378,7 @@ namespace HybridizerRefrigitz
                             if (Obj1 > 0 && Obj2 > 0)
                             {
                                 Is = true;
-                                A = ConsoleColor.Gray;
+                                A = Color.WHITE;
                                 Ord = 1;
                             }
                         }
@@ -16347,7 +16387,7 @@ namespace HybridizerRefrigitz
                             if (Obj1 < 0 && Obj2 < 0)
                             {
                                 Is = true;
-                                A = ConsoleColor.Black;
+                                A = Color.BLACK;
                                 Ord = -1;
                             }
                         }
@@ -16355,7 +16395,7 @@ namespace HybridizerRefrigitz
                     }
                 }
                 //objects value main method determination
-                bool SignNotEqualSelf(int Obj1, int Obj2, int Order, ref int Ord, ref ConsoleColor A)
+                bool SignNotEqualSelf(int Obj1, int Obj2, int Order, ref int Ord, ref Color A)
                 {
                     Object O = new Object();
                     lock (O)
@@ -16366,7 +16406,7 @@ namespace HybridizerRefrigitz
                             if (Obj1 > 0 && Obj2 < 0)
                             {
                                 Is = true;
-                                A = ConsoleColor.Gray;
+                                A = Color.WHITE;
                                 Ord = 1;
                             }
                         }
@@ -16375,7 +16415,7 @@ namespace HybridizerRefrigitz
                             if (Obj1 < 0 && Obj2 > 0)
                             {
                                 Is = true;
-                                A = ConsoleColor.Black;
+                                A = Color.BLACK;
                                 Ord = -1;
                             }
                         }

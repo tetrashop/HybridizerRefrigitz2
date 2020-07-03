@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-
+using System.Drawing;
 using System.IO;
 namespace HybridizerRefrigitz
 {
@@ -30,44 +30,44 @@ namespace HybridizerRefrigitz
         public bool PredictHeuristicT = true;
         public bool OnlySelfT = false;
         public bool AStarGreedyHeuristicT = false;
-        static int NumbersofKingMovesToPatGray = 0;
-        static int NumbersofKingMovesToPatBrown = 0;
+        static int NumbersofKingMovesToPatWHITE = 0;
+        static int NumbersofKingMovesToPatBLACK = 0;
         public static bool PatCheckedInKingRule = false;
-        public static bool CastleKingAllowedGray = true;
-        public static bool CastleKingAllowedBrown = true;
+        public static bool CastleKingAllowedWHITE = true;
+        public static bool CastleKingAllowedBLACK = true;
         public static bool KingAttacker = false;
-        public static bool SmallKingCastleBrown = false;
-        public static bool KingCastleBrown = false;
-        public static bool SmallKingCastleGray = false;
-        public static bool KingCastleGray = false;
-        public static bool BigKingCastleBrown = false;
-        public static bool BigKingCastleGray = false;
+        public static bool SmallKingCastleBLACK = false;
+        public static bool KingCastleBLACK = false;
+        public static bool SmallKingCastleWHITE = false;
+        public static bool KingCastleWHITE = false;
+        public static bool BigKingCastleBLACK = false;
+        public static bool BigKingCastleWHITE = false;
         public static bool CheckObjectDangourIgnoreSelfThingBetweenTowEnemyKingHaveSupporter = false;
         public static int CheckObjectDangourIgnoreSelfThingBetweenTowEnemyKingHaveSupporterNumber = 0;
         public static bool CheckObjectDangourIgnoreSelfThingBetweenTowEnemyKing = false;
-        public bool CheckGrayObjectDangour = false;
-        public bool CheckBrownObjectDangour = false;
-        public static bool CheckGrayObjectDangourFirstTimesOcured = false;
-        public static bool CheckBrownObjectDangourFirstTimesOcured = false;
-        public static bool CastleActGray = false;
-        public static bool CastleActBrown = false;
+        public bool CheckWHITEObjectDangour = false;
+        public bool CheckBLACKObjectDangour = false;
+        public static bool CheckWHITEObjectDangourFirstTimesOcured = false;
+        public static bool CheckBLACKObjectDangourFirstTimesOcured = false;
+        public static bool CastleActWHITE = false;
+        public static bool CastleActBLACK = false;
         public static int CurrentOrder = 1;
-        public bool PatkGray = false;
-        public bool PatBrown = false;
-        public bool CheckGray = false;
-        public bool CheckBrown = false;
-        public bool CheckMateGray = false;
-        public bool CheckMateBrown = false;
-        public static bool CheckGrayRemovable = true;
-        public static bool CheckBrownRemovable = true;
-        public static int CheckGrayRemovableValueRowi = 0;
-        public static int CheckGrayRemovableValueColumni = 0;
-        public static int CheckGrayRemovableValueRowii = 0;
-        public static int CheckGrayRemovableValueColumnjj = 0;
-        public static int CheckBrownRemovableValueRowi = 0;
-        public static int CheckBrownRemovableValueColumnj = 0;
-        public static int CheckBrownRemovableValueRowii = 0;
-        public static int CheckBrownRemovableValueColumnjj = 0;
+        public bool PatkWHITE = false;
+        public bool PatBLACK = false;
+        public bool CheckWHITE = false;
+        public bool CheckBLACK = false;
+        public bool CheckMateWHITE = false;
+        public bool CheckMateBLACK = false;
+        public static bool CheckWHITERemovable = true;
+        public static bool CheckBLACKRemovable = true;
+        public static int CheckWHITERemovableValueRowi = 0;
+        public static int CheckWHITERemovableValueColumni = 0;
+        public static int CheckWHITERemovableValueRowii = 0;
+        public static int CheckWHITERemovableValueColumnjj = 0;
+        public static int CheckBLACKRemovableValueRowi = 0;
+        public static int CheckBLACKRemovableValueColumnj = 0;
+        public static int CheckBLACKRemovableValueRowii = 0;
+        public static int CheckBLACKRemovableValueColumnjj = 0;
         int Kind;
         int KindNA;
         int Row, Column;
@@ -157,7 +157,7 @@ namespace HybridizerRefrigitz
             int ColumnFirst, //The First Click Column.
             int RowSecond, //The Destination Click Row
             int ColumnSecond, //The Destination Click Column
-            ConsoleColor color,//int.  
+            Color color,//int.  
             int Ki//Current Kind.
             , bool SelfHomeStatCP = true
             )
@@ -209,13 +209,13 @@ namespace HybridizerRefrigitz
                 //When Order is Non Detectable Continue Traversal Back.
                 //if (Order != CurrentOrder)
                 //  return false;
-                //Found Location of Tow Gray and Brown Kings. 
+                //Found Location of Tow WHITE and BLACK Kings. 
                 int RowB = 0, ColumnB = 0;
                 int RowG = 0, ColumnG = 0;
-                FindBrownKing(CloneATable(TableS), ref RowB, ref ColumnB);
-                FindGrayKing(CloneATable(TableS), ref RowG, ref ColumnG);
+                FindBLACKKing(CloneATable(TableS), ref RowB, ref ColumnB);
+                FindWHITEKing(CloneATable(TableS), ref RowG, ref ColumnG);
 
-                //Gray Order.
+                //WHITE Order.
                 if ((Order == 1))
                 {
                     if (Table[RowFirst, ColumnFirst] == 6)
@@ -232,7 +232,7 @@ namespace HybridizerRefrigitz
                         ////{ //AllDraw.OutPut.Append("\r\n");for (int l = 0; l < Spaces; l++) //AllDraw.OutPut.Append(Space);  //AllDraw.OutPut.Append("Rules:" + (TimeElapced.TimeNow() - Time).ToString());}Spaces--;
                         return false;
                     }
-                }//Brown Order.
+                }//BLACK Order.
                 else
                 {
                     if (Table[RowFirst, ColumnFirst] == -6)
@@ -267,55 +267,55 @@ namespace HybridizerRefrigitz
                 {
                     if (!(ArrangmentsBoard))
                     {
-                        //Solders of Gray at Begining.
+                        //Solders of WHITE at Begining.
                         if (ColumnFirst == 1 && (Order == 1))
                         {
 
                             ////{ //AllDraw.OutPut.Append("\r\n");for (int l = 0; l < Spaces; l++) //AllDraw.OutPut.Append(Space);  //AllDraw.OutPut.Append("Rules:" + (TimeElapced.TimeNow() - Time).ToString());}Spaces--;
-                            return Rule(RowFirst, ColumnFirst, RowSecond, ColumnSecond, true, color , ExistInDestinationEnemy, Ki, SelfHomeStatCP);
+                            return Rule(RowFirst, ColumnFirst, RowSecond, ColumnSecond, true, color, ExistInDestinationEnemy, Ki, SelfHomeStatCP);
                         }
-                        else//Solder of Brown At Begining.
+                        else//Solder of BLACK At Begining.
                             if (ColumnFirst == 6 && (Order == -1))
                         {
                             ////{ //AllDraw.OutPut.Append("\r\n");for (int l = 0; l < Spaces; l++) //AllDraw.OutPut.Append(Space);  //AllDraw.OutPut.Append("Rules:" + (TimeElapced.TimeNow() - Time).ToString());}Spaces--;
-                            return Rule(RowFirst, ColumnFirst, RowSecond, ColumnSecond, true, color , ExistInDestinationEnemy, Ki, SelfHomeStatCP);
+                            return Rule(RowFirst, ColumnFirst, RowSecond, ColumnSecond, true, color, ExistInDestinationEnemy, Ki, SelfHomeStatCP);
                         }
                         else//Another Solder Movments.
                         {
                             ////{ //AllDraw.OutPut.Append("\r\n");for (int l = 0; l < Spaces; l++) //AllDraw.OutPut.Append(Space);  //AllDraw.OutPut.Append("Rules:" + (TimeElapced.TimeNow() - Time).ToString());}Spaces--;
-                            return Rule(RowFirst, ColumnFirst, RowSecond, ColumnSecond, false, color , ExistInDestinationEnemy, Ki, SelfHomeStatCP);
+                            return Rule(RowFirst, ColumnFirst, RowSecond, ColumnSecond, false, color, ExistInDestinationEnemy, Ki, SelfHomeStatCP);
                         }
                     }
                     else
                     {
-                        //Solders of Gray at Begining.
+                        //Solders of WHITE at Begining.
                         if (ColumnFirst == 6 && (Order == 1))
                         {
                             ////{ //AllDraw.OutPut.Append("\r\n");for (int l = 0; l < Spaces; l++) //AllDraw.OutPut.Append(Space);  //AllDraw.OutPut.Append("Rules:" + (TimeElapced.TimeNow() - Time).ToString());}Spaces--;
-                            return Rule(RowFirst, ColumnFirst, RowSecond, ColumnSecond, true, color , ExistInDestinationEnemy, Ki, SelfHomeStatCP);
+                            return Rule(RowFirst, ColumnFirst, RowSecond, ColumnSecond, true, color, ExistInDestinationEnemy, Ki, SelfHomeStatCP);
                         }
-                        else//Solder of Brown At Begining.
+                        else//Solder of BLACK At Begining.
                             if (ColumnFirst == 1 && (Order == -1))
                         {
                             ////{ //AllDraw.OutPut.Append("\r\n");for (int l = 0; l < Spaces; l++) //AllDraw.OutPut.Append(Space);  //AllDraw.OutPut.Append("Rules:" + (TimeElapced.TimeNow() - Time).ToString());}Spaces--;
-                            return Rule(RowFirst, ColumnFirst, RowSecond, ColumnSecond, true, color , ExistInDestinationEnemy, Ki, SelfHomeStatCP);
+                            return Rule(RowFirst, ColumnFirst, RowSecond, ColumnSecond, true, color, ExistInDestinationEnemy, Ki, SelfHomeStatCP);
                         }
                         else//Another Solder Movments.
                         {
                             ////{ //AllDraw.OutPut.Append("\r\n");for (int l = 0; l < Spaces; l++) //AllDraw.OutPut.Append(Space);  //AllDraw.OutPut.Append("Rules:" + (TimeElapced.TimeNow() - Time).ToString());}Spaces--;
-                            return Rule(RowFirst, ColumnFirst, RowSecond, ColumnSecond, false, color , ExistInDestinationEnemy, Ki, SelfHomeStatCP);
+                            return Rule(RowFirst, ColumnFirst, RowSecond, ColumnSecond, false, color, ExistInDestinationEnemy, Ki, SelfHomeStatCP);
                         }
                     }
                 }
                 else//For another Kind of Objects.
                 {
                     ////{ //AllDraw.OutPut.Append("\r\n");for (int l = 0; l < Spaces; l++) //AllDraw.OutPut.Append(Space);  //AllDraw.OutPut.Append("Rules:" + (TimeElapced.TimeNow() - Time).ToString());}Spaces--;
-                    return Rule(RowFirst, ColumnFirst, RowSecond, ColumnSecond, false, color , ExistInDestinationEnemy, Ki, SelfHomeStatCP);
+                    return Rule(RowFirst, ColumnFirst, RowSecond, ColumnSecond, false, color, ExistInDestinationEnemy, Ki, SelfHomeStatCP);
                 }
             }
         }
         //Castle King Movment Consideration.
-        public bool CastleKing(int RowFirst, int ColumnFirst, int RowSecond, int ColumnSecond, bool NotMoved, ConsoleColor color, int Ki)
+        public bool CastleKing(int RowFirst, int ColumnFirst, int RowSecond, int ColumnSecond, bool NotMoved, Color color, int Ki)
         {
             Object O = new Object();
             lock (O)
@@ -324,11 +324,11 @@ namespace HybridizerRefrigitz
 
                 //long Time = TimeElapced.TimeNow();Spaces++;
                 if (!(ArrangmentsBoard))
-                {             //Gray Order.
+                {             //WHITE Order.
                     if (Order == 1)
                     {
-                        //When Gray Castles Not Act.
-                        if (HybridizerRefrigitz.ChessRules.CastleKingAllowedGray)
+                        //When WHITE Castles Not Act.
+                        if (HybridizerRefrigitz.ChessRules.CastleKingAllowedWHITE)
                         {
                             //If Column is At First Location.
                             if (ColumnFirst == 0 && ColumnSecond == 0)
@@ -336,15 +336,15 @@ namespace HybridizerRefrigitz
                                 //When Kings Moves for Small Kings Castles Movments.
                                 if (RowFirst == RowSecond - 2 && ((RowSecond - 2) >= 0))
                                 {
-                                    //Consideration of Castles King of Gray King.
+                                    //Consideration of Castles King of WHITE King.
 
                                     if (((RowSecond - 1) >= 0) && ((RowSecond + 1) < 8) && ((RowSecond - 2) >= 0) && Table[RowSecond - 2, ColumnSecond] == 6 && Table[RowSecond - 1, ColumnSecond] == 0 && Table[RowSecond, ColumnSecond] == 0 && Table[RowSecond + 1, ColumnSecond] == 4)
                                     {
                                         Object OO = new Object();
                                         lock (OO)
                                         {
-                                            CastleActGray = true;
-                                            SmallKingCastleGray = true;
+                                            CastleActWHITE = true;
+                                            SmallKingCastleWHITE = true;
                                         }
                                         ////{ //AllDraw.OutPut.Append("\r\n");for (int l = 0; l < Spaces; l++) //AllDraw.OutPut.Append(Space);  //AllDraw.OutPut.Append("CastleKing:" + (TimeElapced.TimeNow() - Time).ToString());}Spaces--;
                                         return true;
@@ -362,8 +362,8 @@ namespace HybridizerRefrigitz
                                         Object OO = new Object();
                                         lock (OO)
                                         {
-                                            CastleActGray = true;
-                                            BigKingCastleGray = true;
+                                            CastleActWHITE = true;
+                                            BigKingCastleWHITE = true;
                                         }
                                         ////{ //AllDraw.OutPut.Append("\r\n");for (int l = 0; l < Spaces; l++) //AllDraw.OutPut.Append(Space);  //AllDraw.OutPut.Append("CastleKing:" + (TimeElapced.TimeNow() - Time).ToString());}Spaces--;
                                         return true;
@@ -374,26 +374,26 @@ namespace HybridizerRefrigitz
                             }
                         }
                     }
-                    else//Order of Brown.
+                    else//Order of BLACK.
                     {
-                        //When Brown Castles King Not Occured.
-                        if (HybridizerRefrigitz.ChessRules.CastleKingAllowedBrown)
+                        //When BLACK Castles King Not Occured.
+                        if (HybridizerRefrigitz.ChessRules.CastleKingAllowedBLACK)
                         {
                             //Column Situation.
                             if (ColumnFirst == 7 && ColumnSecond == 7)
                             {
-                                //Small Brown King Castles Consideration.
+                                //Small BLACK King Castles Consideration.
                                 if (RowFirst == RowSecond - 2 && ((RowSecond - 2) < 8))
                                 {
 
 
                                     if (((RowSecond - 1) >= 0) && ((RowSecond + 1) < 8) && Table[RowSecond - 2, ColumnSecond] == -6 && Table[RowSecond - 1, ColumnSecond] == 0 && Table[RowSecond, ColumnSecond] == 0 && Table[RowSecond + 1, ColumnSecond] == -4)
                                     {
-                                        //CastleActBrown = true;
+                                        //CastleActBLACK = true;
                                         Object O1 = new Object();
                                         lock (O1)
                                         {
-                                            SmallKingCastleBrown = true;
+                                            SmallKingCastleBLACK = true;
                                         }
                                         ////{ //AllDraw.OutPut.Append("\r\n");for (int l = 0; l < Spaces; l++) //AllDraw.OutPut.Append(Space);  //AllDraw.OutPut.Append("CastleKing:" + (TimeElapced.TimeNow() - Time).ToString());}Spaces--;
                                         return true;
@@ -403,16 +403,16 @@ namespace HybridizerRefrigitz
                                 }
                                 else
                                     if (RowFirst == RowSecond + 2 && ((RowSecond + 2) < 8))
-                                //Brown Kings.Big King Castles Consideration.
+                                //BLACK Kings.Big King Castles Consideration.
                                 {
 
                                     if (((RowSecond + 2) < 8) && ((RowSecond - 1) >= 0) && ((RowSecond + 1) < 8) && ((RowSecond - 2) >= 0) && Table[RowSecond + 2, ColumnSecond] == -6 && Table[RowSecond + 1, ColumnSecond] == 0 && Table[RowSecond, ColumnSecond] == 0 && Table[RowSecond - 1, ColumnSecond] == 0 && Table[RowSecond - 2, ColumnSecond] == -4)
                                     {
-                                        //CastleActBrown = true;
+                                        //CastleActBLACK = true;
                                         Object OO = new Object();
                                         lock (OO)
                                         {
-                                            BigKingCastleBrown = true;
+                                            BigKingCastleBLACK = true;
                                         }
                                         ////{ //AllDraw.OutPut.Append("\r\n");for (int l = 0; l < Spaces; l++) //AllDraw.OutPut.Append(Space);  //AllDraw.OutPut.Append("CastleKing:" + (TimeElapced.TimeNow() - Time).ToString());}Spaces--;
                                         return true;
@@ -425,11 +425,11 @@ namespace HybridizerRefrigitz
                 }
                 else
                 {
-                    //Gray Order.
+                    //WHITE Order.
                     if (Order == 1)
                     {
-                        //When Gray Castles Not Act.
-                        if (HybridizerRefrigitz.ChessRules.CastleKingAllowedGray)
+                        //When WHITE Castles Not Act.
+                        if (HybridizerRefrigitz.ChessRules.CastleKingAllowedWHITE)
                         {
                             //If Column is At First Location.
                             if (ColumnFirst == 7 && ColumnSecond == 7)
@@ -437,14 +437,14 @@ namespace HybridizerRefrigitz
                                 //When Kings Moves for Small Kings Castles Movments.
                                 if (RowFirst == RowSecond - 2 && ((RowSecond - 2) >= 0))
                                 {
-                                    //Consideration of Castles King of Gray King.
+                                    //Consideration of Castles King of WHITE King.
 
 
                                     if (((RowSecond - 2) >= 0) && ((RowSecond - 1) >= 0) && ((RowSecond + 1) < 8) && Table[RowSecond - 2, ColumnSecond] == 6 && Table[RowSecond - 1, ColumnSecond] == 0 && Table[RowSecond, ColumnSecond] == 0 && Table[RowSecond + 1, ColumnSecond] == 4)
                                     {
                                         ////{ //AllDraw.OutPut.Append("\r\n");for (int l = 0; l < Spaces; l++) //AllDraw.OutPut.Append(Space);  //AllDraw.OutPut.Append("CastleKing:" + (TimeElapced.TimeNow() - Time).ToString());}Spaces--;
-                                        //CastleActGray = true;
-                                        //SmallKingCastleGray = true;
+                                        //CastleActWHITE = true;
+                                        //SmallKingCastleWHITE = true;
                                         return true;
                                     }
 
@@ -458,8 +458,8 @@ namespace HybridizerRefrigitz
                                     if (((RowSecond + 2) < 8) && ((RowSecond - 1) >= 0) && ((RowSecond + 1) < 8) && ((RowSecond - 2) >= 0) && Table[RowSecond + 2, ColumnSecond] == 6 && Table[RowSecond + 1, ColumnSecond] == 0 && Table[RowSecond, ColumnSecond] == 0 && Table[RowSecond - 1, ColumnSecond] == 0 && Table[RowSecond - 2, ColumnSecond] == 4)
                                     {
                                         ////{ //AllDraw.OutPut.Append("\r\n");for (int l = 0; l < Spaces; l++) //AllDraw.OutPut.Append(Space);  //AllDraw.OutPut.Append("CastleKing:" + (TimeElapced.TimeNow() - Time).ToString());}Spaces--;
-                                        //CastleActGray = true;
-                                        //BigKingCastleGray = true;
+                                        //CastleActWHITE = true;
+                                        //BigKingCastleWHITE = true;
                                         return true;
                                     }
 
@@ -468,15 +468,15 @@ namespace HybridizerRefrigitz
                             }
                         }
                     }
-                    else//Order of Brown.
+                    else//Order of BLACK.
                     {
-                        //When Brown Castles King Not Occured.
-                        if (HybridizerRefrigitz.ChessRules.CastleKingAllowedBrown)
+                        //When BLACK Castles King Not Occured.
+                        if (HybridizerRefrigitz.ChessRules.CastleKingAllowedBLACK)
                         {
                             //Column Situation.
                             if (ColumnFirst == 0 && ColumnSecond == 0)
                             {
-                                //Small Brown King Castles Consideration.
+                                //Small BLACK King Castles Consideration.
                                 if (RowFirst == RowSecond - 2 && ((RowSecond - 2) > 0))
                                 {
 
@@ -484,8 +484,8 @@ namespace HybridizerRefrigitz
                                     if (((RowSecond - 2) >= 0) && ((RowSecond - 1) >= 0) && ((RowSecond + 1) < 8) && Table[RowSecond - 2, ColumnSecond] == -6 && Table[RowSecond - 1, ColumnSecond] == 0 && Table[RowSecond, ColumnSecond] == 0 && Table[RowSecond + 1, ColumnSecond] == -4)
                                     {
                                         ////{ //AllDraw.OutPut.Append("\r\n");for (int l = 0; l < Spaces; l++) //AllDraw.OutPut.Append(Space);  //AllDraw.OutPut.Append("CastleKing:" + (TimeElapced.TimeNow() - Time).ToString());}Spaces--;
-                                        //CastleActBrown = true;
-                                        //SmallKingCastleBrown = true;
+                                        //CastleActBLACK = true;
+                                        //SmallKingCastleBLACK = true;
                                         return true;
                                     }
 
@@ -493,14 +493,14 @@ namespace HybridizerRefrigitz
                                 }
                                 else
                                     if (RowFirst == RowSecond + 2 && ((RowSecond + 2) < 8))
-                                //Brown Kings.Big King Castles Consideration.
+                                //BLACK Kings.Big King Castles Consideration.
                                 {
 
                                     if (((RowSecond + 2) < 8) && ((RowSecond - 1) >= 0) && ((RowSecond + 1) < 8) && ((RowSecond - 2) >= 0) && Table[RowSecond + 2, ColumnSecond] == -6 && Table[RowSecond + 1, ColumnSecond] == 0 && Table[RowSecond, ColumnSecond] == 0 && Table[RowSecond - 1, ColumnSecond] == 0 && Table[RowSecond - 2, ColumnSecond] == -4)
                                     {
                                         ////{ //AllDraw.OutPut.Append("\r\n");for (int l = 0; l < Spaces; l++) //AllDraw.OutPut.Append(Space);  //AllDraw.OutPut.Append("CastleKing:" + (TimeElapced.TimeNow() - Time).ToString());}Spaces--;
-                                        //  CastleActBrown = true;
-                                        //BigKingCastleBrown = true;
+                                        //  CastleActBLACK = true;
+                                        //BigKingCastleBLACK = true;
                                         return true;
                                     }
 
@@ -514,7 +514,7 @@ namespace HybridizerRefrigitz
             }
         }
         //Simulation and Consdtruction of Check.
-        public bool CheckConstructor(ConsoleColor color, int RowFirst, int ColumnFirst, int RowSecond, int ColumnSecond, int Ki, int Order)
+        public bool CheckConstructor(Color color, int RowFirst, int ColumnFirst, int RowSecond, int ColumnSecond, int Ki, int Order)
         {
             Object O = new Object();
             lock (O)
@@ -530,16 +530,16 @@ namespace HybridizerRefrigitz
                 //If There is Check State.
                 if (Check(tab, Order))
                 {
-                    //When int of Order is Gray Check return Check State.
+                    //When int of Order is WHITE Check return Check State.
                     if (Order == 1)
-                        if (CheckGray)
+                        if (CheckWHITE)
                         {
                             ////{ //AllDraw.OutPut.Append("\r\n");for (int l = 0; l < Spaces; l++) //AllDraw.OutPut.Append(Space);  //AllDraw.OutPut.Append("CheckConstructor:" + (TimeElapced.TimeNow() - Time).ToString());}Spaces--;
                             return true;
                         }
-                    //When int is Brown State  there is Check State return Check State.
+                    //When int is BLACK State  there is Check State return Check State.
                     if (Order == -1)
-                        if (CheckBrown)
+                        if (CheckBLACK)
                         {
                             ////{ //AllDraw.OutPut.Append("\r\n");for (int l = 0; l < Spaces; l++) //AllDraw.OutPut.Append(Space);  //AllDraw.OutPut.Append("CheckConstructor:" + (TimeElapced.TimeNow() - Time).ToString());}Spaces--;
                             return true;
@@ -551,7 +551,7 @@ namespace HybridizerRefrigitz
             }
         }
         //Method of Self Home int Objects Consideration.
-        private bool ExistSelfHome(int RowFirst, int ColumnFirst, int RowSecond, int ColumnSecond, bool NotMoved, ConsoleColor color, int Ki)
+        private bool ExistSelfHome(int RowFirst, int ColumnFirst, int RowSecond, int ColumnSecond, bool NotMoved, Color color, int Ki)
         {
             Object O = new Object();
             lock (O)
@@ -564,10 +564,10 @@ namespace HybridizerRefrigitz
                 //When There is Not Source and Destination is the Same Home Location. 
                 if (RowFirst != RowSecond || ColumnFirst != ColumnSecond)
                 {
-                    //If the Same Gray int Return Self Home. 
+                    //If the Same WHITE int Return Self Home. 
                     if (Table[RowSecond, ColumnSecond] > 0 && Table[RowFirst, ColumnFirst] > 0)
                         NotExistInDestinationSelfHome = true;
-                    else//If The Same int Brown Return Self Home.
+                    else//If The Same int BLACK Return Self Home.
                         if (Table[RowSecond, ColumnSecond] < 0 && Table[RowFirst, ColumnFirst] < 0)
                         NotExistInDestinationSelfHome = true;
                 }
@@ -588,10 +588,10 @@ namespace HybridizerRefrigitz
                     for (var j = 0; j < 8; j++)
                         Tab[i, j] = Table[i, j];
                 //Initiate Variables.
-                CheckGray = false;
-                CheckBrown = false;
-                CheckGrayObjectDangour = false;
-                CheckBrownObjectDangour = false;
+                CheckWHITE = false;
+                CheckBLACK = false;
+                CheckWHITEObjectDangour = false;
+                CheckBLACKObjectDangour = false;
                 int RowG = 0, ColumnG = 0;
                 int RowB = 0, ColumnB = 0;
                 //Object O = new Object();
@@ -602,8 +602,8 @@ namespace HybridizerRefrigitz
                 // }
                 //Check identification.
                 //Check(CloneATable(Tab), Order);
-                bool CheckGrayDummy = CheckGray;
-                bool CheckBrownDummy = CheckBrown;
+                bool CheckWHITEDummy = CheckWHITE;
+                bool CheckBLACKDummy = CheckBLACK;
                 //If There is Check on Tow Side.
                 
                 int CDummy = HybridizerRefrigitz.ChessRules.CurrentOrder;
@@ -611,18 +611,18 @@ namespace HybridizerRefrigitz
                 if (Order == 1)
                 {
                     //Location of King Gary
-                    if (FindGrayKing(CloneATable(Tab), ref RowG, ref ColumnG))
+                    if (FindWHITEKing(CloneATable(Tab), ref RowG, ref ColumnG))
                     {
-                        //For Enemy Brown.
+                        //For Enemy BLACK.
                         for (var ii = 0; ii < 8; ii++)
                         {
                             for (var jj = 0; jj < 8; jj++)
                             {
 
-                                //Ignore Gray.
+                                //Ignore WHITE.
                                 if (Tab[ii, jj] >= 0)
                                     continue;
-                                //For Current Gray and Empty.
+                                //For Current WHITE and Empty.
                                 for (var iii = 0; iii < 8; iii++)
                                 {
                                     for (var jjj = 0; jjj < 8; jjj++)
@@ -630,12 +630,12 @@ namespace HybridizerRefrigitz
                                         for (var i = 0; i < 8; i++)
                                             for (var j = 0; j < 8; j++)
                                                 Tab[i, j] = Table[i, j];
-                                        //Ignore Brown.
+                                        //Ignore BLACK.
                                         if (Tab[iii, jjj] < 0)
                                             continue;
                                         HybridizerRefrigitz.ThinkingHybridizerRefrigitz AA = new HybridizerRefrigitz.ThinkingHybridizerRefrigitz(-1, 0, CurrentAStarGredyMax, MovementsAStarGreedyHeuristicFoundT, IgnoreSelfObjectsT, UsePenaltyRegardMechnisamT, BestMovmentsT, PredictHeuristicT, OnlySelfT, AStarGreedyHeuristicT, ArrangmentsBoard, ii, jj);
-                                        //When There is Attacked to Gray from Brown.
-                                        if (AA.Attack(CloneATable(Tab), ii, jj, iii, jjj, ConsoleColor.Black, Order * -1))
+                                        //When There is Attacked to WHITE from BLACK.
+                                        if (AA.Attack(CloneATable(Tab), ii, jj, iii, jjj, Color.BLACK, Order * -1))
                                         {
                                             //Move.
                                             int a = Tab[iii, jjj];
@@ -649,27 +649,27 @@ namespace HybridizerRefrigitz
                                             //When there is checked or checkmate.
                                             if (AAA.CheckMate(Tabl, Order))
                                             {
-                                                //if (AAA.CheckMateGray)
-                                                if (AAA.CheckMateGray)
+                                                //if (AAA.CheckMateWHITE)
+                                                if (AAA.CheckMateWHITE)
                                                 {
-                                                    CheckGrayObjectDangour = true;
+                                                    CheckWHITEObjectDangour = true;
                                                     break;
                                                 }
                                             }
-                                            //CheckGrayObjectDangour = true;
+                                            //CheckWHITEObjectDangour = true;
                                         }
-                                        if (CheckGrayObjectDangour)
+                                        if (CheckWHITEObjectDangour)
                                             break;
 
                                     }
-                                    if (CheckGrayObjectDangour)
+                                    if (CheckWHITEObjectDangour)
                                         break;
                                 }
-                                if (CheckGrayObjectDangour)
+                                if (CheckWHITEObjectDangour)
                                     break;
 
                             }
-                            if (CheckGrayObjectDangour)
+                            if (CheckWHITEObjectDangour)
                                 break;
 
                         }
@@ -677,19 +677,19 @@ namespace HybridizerRefrigitz
                 }
                 else
                 {
-                    //Location of King Brown
-                    if (FindBrownKing(CloneATable(Tab), ref RowB, ref ColumnB))
+                    //Location of King BLACK
+                    if (FindBLACKKing(CloneATable(Tab), ref RowB, ref ColumnB))
                     {
 
-                        //For Gray Enemy.
+                        //For WHITE Enemy.
                         for (var ii = 0; ii < 8; ii++)
                         {
                             for (var jj = 0; jj < 8; jj++)
                             {
-                                //Ignore Brown
+                                //Ignore BLACK
                                 if (Tab[ii, jj] <= 0)
                                     continue;
-                                //For Current Brown.
+                                //For Current BLACK.
                                 for (var iii = 0; iii < 8; iii++)
                                 {
                                     for (var jjj = 0; jjj < 8; jjj++)
@@ -697,13 +697,13 @@ namespace HybridizerRefrigitz
                                         for (var i = 0; i < 8; i++)
                                             for (var j = 0; j < 8; j++)
                                                 Tab[i, j] = Table[i, j];
-                                        //Ignore Gray.
+                                        //Ignore WHITE.
                                         if (Tab[iii, jjj] > 0)
                                             continue;
 
                                         HybridizerRefrigitz.ThinkingHybridizerRefrigitz AA = new HybridizerRefrigitz.ThinkingHybridizerRefrigitz(-1, 0, CurrentAStarGredyMax, MovementsAStarGreedyHeuristicFoundT, IgnoreSelfObjectsT, UsePenaltyRegardMechnisamT, BestMovmentsT, PredictHeuristicT, OnlySelfT, AStarGreedyHeuristicT, ArrangmentsBoard, ii, jj);
-                                        //When There is Attack to Brown.
-                                        if (AA.Attack(CloneATable(Tab), ii, jj, iii, jjj, ConsoleColor.Gray, Order * -1))
+                                        //When There is Attack to BLACK.
+                                        if (AA.Attack(CloneATable(Tab), ii, jj, iii, jjj, Color.WHITE, Order * -1))
                                         {
                                             //Move
                                             int a = Tab[iii, jjj];
@@ -717,29 +717,29 @@ namespace HybridizerRefrigitz
                                             //When There is Check or Checkedmate
                                             if (AAA.CheckMate(Tabl, Order))
                                             {
-                                                //if (AAA.CheckMateBrown)
-                                                if (AAA.CheckMateBrown)
+                                                //if (AAA.CheckMateBLACK)
+                                                if (AAA.CheckMateBLACK)
                                                 {
-                                                    CheckBrownObjectDangour = true;
+                                                    CheckBLACKObjectDangour = true;
                                                     break;
                                                 }
 
                                             }
 
-                                            //CheckBrownObjectDangour = true;
+                                            //CheckBLACKObjectDangour = true;
 
                                         }
-                                        if (CheckBrownObjectDangour)
+                                        if (CheckBLACKObjectDangour)
                                             break;
                                     }
-                                    if (CheckBrownObjectDangour)
+                                    if (CheckBLACKObjectDangour)
                                         break;
                                 }
-                                if (CheckBrownObjectDangour)
+                                if (CheckBLACKObjectDangour)
                                     break;
 
                             }
-                            if (CheckBrownObjectDangour)
+                            if (CheckBLACKObjectDangour)
                                 break;
 
                         }
@@ -751,14 +751,14 @@ namespace HybridizerRefrigitz
                 //{
                 //HybridizerRefrigitz.ChessRules.CheckObjectDangourIgnoreSelfThingBetweenTowEnemyKing = false;
                 //}
-                //If There is Brown ObjectDanger Or Gray ObjectDanger.
-                if (CheckBrownObjectDangour || CheckGrayObjectDangour)
+                //If There is BLACK ObjectDanger Or WHITE ObjectDanger.
+                if (CheckBLACKObjectDangour || CheckWHITEObjectDangour)
                 {
                     //Iniaate Global Check Variable By Local Variables.
                     HybridizerRefrigitz.ChessRules.CurrentOrder = CDummy;
                     Order = COrder;
-                    CheckGray = CheckGrayDummy;
-                    CheckBrown = CheckBrownDummy;
+                    CheckWHITE = CheckWHITEDummy;
+                    CheckBLACK = CheckBLACKDummy;
                     //Achamz is Validity.
                     ////{ //AllDraw.OutPut.Append("\r\n");for (int l = 0; l < Spaces; l++) //AllDraw.OutPut.Append(Space);  //AllDraw.OutPut.Append("ObjectDangourKingMove:" + (TimeElapced.TimeNow() - Time).ToString());}Spaces--;
                     return true;
@@ -767,8 +767,8 @@ namespace HybridizerRefrigitz
                 Order = COrder;
 
                 //Iniatiate Of Global Varibales By Local Variables.
-                CheckGray = CheckGrayDummy;
-                CheckBrown = CheckBrownDummy;
+                CheckWHITE = CheckWHITEDummy;
+                CheckBLACK = CheckBLACKDummy;
                 //Return Not Validiy.
                 ////{ //AllDraw.OutPut.Append("\r\n");for (int l = 0; l < Spaces; l++) //AllDraw.OutPut.Append(Space);  //AllDraw.OutPut.Append("ObjectDangourKingMove:" + (TimeElapced.TimeNow() - Time).ToString());}Spaces--;
                 return false;
@@ -785,10 +785,10 @@ namespace HybridizerRefrigitz
                     for (var j = 0; j < 8; j++)
                         Tab[i, j] = Table[i, j];
                 //Initiate Variables.
-                CheckGray = false;
-                CheckBrown = false;
-                CheckGrayObjectDangour = false;
-                CheckBrownObjectDangour = false;
+                CheckWHITE = false;
+                CheckBLACK = false;
+                CheckWHITEObjectDangour = false;
+                CheckBLACKObjectDangour = false;
                 int RowG = 0, ColumnG = 0;
                 int RowB = 0, ColumnB = 0;
                 //Object O = new Object();
@@ -799,8 +799,8 @@ namespace HybridizerRefrigitz
                 // }
                 //Check identification.
                 //Check(CloneATable(Tab), Order);
-                bool CheckGrayDummy = CheckGray;
-                bool CheckBrownDummy = CheckBrown;
+                bool CheckWHITEDummy = CheckWHITE;
+                bool CheckBLACKDummy = CheckBLACK;
                 //If There is Check on Tow Side.
                 
                 int CDummy = HybridizerRefrigitz.ChessRules.CurrentOrder;
@@ -808,18 +808,18 @@ namespace HybridizerRefrigitz
                 if (Order == 1)
                 {
                     //Location of King Gary
-                    if (FindGrayKing(CloneATable(Tab), ref RowG, ref ColumnG))
+                    if (FindWHITEKing(CloneATable(Tab), ref RowG, ref ColumnG))
                     {
-                        //For Enemy Brown.
+                        //For Enemy BLACK.
                         for (var ii = 0; ii < 8; ii++)
                         {
                             for (var jj = 0; jj < 8; jj++)
                             {
 
-                                //Ignore Gray.
+                                //Ignore WHITE.
                                 if (Tab[ii, jj] >= 0)
                                     continue;
-                                //For Current Gray and Empty.
+                                //For Current WHITE and Empty.
                                 for (var iii = 0; iii < 8; iii++)
                                 {
                                     for (var jjj = 0; jjj < 8; jjj++)
@@ -827,12 +827,12 @@ namespace HybridizerRefrigitz
                                         for (var i = 0; i < 8; i++)
                                             for (var j = 0; j < 8; j++)
                                                 Tab[i, j] = Table[i, j];
-                                        //Ignore Brown.
+                                        //Ignore BLACK.
                                         if (Tab[iii, jjj] < 0)
                                             continue;
                                         HybridizerRefrigitz.ThinkingHybridizerRefrigitz AA = new HybridizerRefrigitz.ThinkingHybridizerRefrigitz(-1, 0, CurrentAStarGredyMax, MovementsAStarGreedyHeuristicFoundT, IgnoreSelfObjectsT, UsePenaltyRegardMechnisamT, BestMovmentsT, PredictHeuristicT, OnlySelfT, AStarGreedyHeuristicT, ArrangmentsBoard, ii, jj);
-                                        //When There is Attacked to Gray from Brown.
-                                        if (AA.Attack(CloneATable(Tab), ii, jj, iii, jjj, ConsoleColor.Black, Order * -1))
+                                        //When There is Attacked to WHITE from BLACK.
+                                        if (AA.Attack(CloneATable(Tab), ii, jj, iii, jjj, Color.BLACK, Order * -1))
                                         {
                                             //Move.
                                             int a = Tab[iii, jjj];
@@ -846,27 +846,27 @@ namespace HybridizerRefrigitz
                                             //When there is checked or checkmate.
                                             if (AAA.Check(Tabl, Order))
                                             {
-                                                //if (AAA.CheckMateGray)
-                                                if (AAA.CheckGray)
+                                                //if (AAA.CheckMateWHITE)
+                                                if (AAA.CheckWHITE)
                                                 {
-                                                    CheckGrayObjectDangour = true;
+                                                    CheckWHITEObjectDangour = true;
                                                     break;
                                                 }
                                             }
-                                            //CheckGrayObjectDangour = true;
+                                            //CheckWHITEObjectDangour = true;
                                         }
-                                        if (CheckGrayObjectDangour)
+                                        if (CheckWHITEObjectDangour)
                                             break;
 
                                     }
-                                    if (CheckGrayObjectDangour)
+                                    if (CheckWHITEObjectDangour)
                                         break;
                                 }
-                                if (CheckGrayObjectDangour)
+                                if (CheckWHITEObjectDangour)
                                     break;
 
                             }
-                            if (CheckGrayObjectDangour)
+                            if (CheckWHITEObjectDangour)
                                 break;
 
                         }
@@ -874,19 +874,19 @@ namespace HybridizerRefrigitz
                 }
                 else
                 {
-                    //Location of King Brown
-                    if (FindBrownKing(CloneATable(Tab), ref RowB, ref ColumnB))
+                    //Location of King BLACK
+                    if (FindBLACKKing(CloneATable(Tab), ref RowB, ref ColumnB))
                     {
 
-                        //For Gray Enemy.
+                        //For WHITE Enemy.
                         for (var ii = 0; ii < 8; ii++)
                         {
                             for (var jj = 0; jj < 8; jj++)
                             {
-                                //Ignore Brown
+                                //Ignore BLACK
                                 if (Tab[ii, jj] <= 0)
                                     continue;
-                                //For Current Brown.
+                                //For Current BLACK.
                                 for (var iii = 0; iii < 8; iii++)
                                 {
                                     for (var jjj = 0; jjj < 8; jjj++)
@@ -894,13 +894,13 @@ namespace HybridizerRefrigitz
                                         for (var i = 0; i < 8; i++)
                                             for (var j = 0; j < 8; j++)
                                                 Tab[i, j] = Table[i, j];
-                                        //Ignore Gray.
+                                        //Ignore WHITE.
                                         if (Tab[iii, jjj] > 0)
                                             continue;
 
                                         HybridizerRefrigitz.ThinkingHybridizerRefrigitz AA = new HybridizerRefrigitz.ThinkingHybridizerRefrigitz(-1, 0, CurrentAStarGredyMax, MovementsAStarGreedyHeuristicFoundT, IgnoreSelfObjectsT, UsePenaltyRegardMechnisamT, BestMovmentsT, PredictHeuristicT, OnlySelfT, AStarGreedyHeuristicT, ArrangmentsBoard, ii, jj);
-                                        //When There is Attack to Brown.
-                                        if (AA.Attack(CloneATable(Tab), ii, jj, iii, jjj, ConsoleColor.Gray, Order * -1))
+                                        //When There is Attack to BLACK.
+                                        if (AA.Attack(CloneATable(Tab), ii, jj, iii, jjj, Color.WHITE, Order * -1))
                                         {
                                             //Move
                                             int a = Tab[iii, jjj];
@@ -914,29 +914,29 @@ namespace HybridizerRefrigitz
                                             //When There is Check or Checkedmate
                                             if (AAA.Check(Tabl, Order))
                                             {
-                                                //if (AAA.CheckMateBrown)
-                                                if (AAA.CheckBrown)
+                                                //if (AAA.CheckMateBLACK)
+                                                if (AAA.CheckBLACK)
                                                 {
-                                                    CheckBrownObjectDangour = true;
+                                                    CheckBLACKObjectDangour = true;
                                                     break;
                                                 }
 
                                             }
 
-                                            //CheckBrownObjectDangour = true;
+                                            //CheckBLACKObjectDangour = true;
 
                                         }
-                                        if (CheckBrownObjectDangour)
+                                        if (CheckBLACKObjectDangour)
                                             break;
                                     }
-                                    if (CheckBrownObjectDangour)
+                                    if (CheckBLACKObjectDangour)
                                         break;
                                 }
-                                if (CheckBrownObjectDangour)
+                                if (CheckBLACKObjectDangour)
                                     break;
 
                             }
-                            if (CheckBrownObjectDangour)
+                            if (CheckBLACKObjectDangour)
                                 break;
 
                         }
@@ -948,14 +948,14 @@ namespace HybridizerRefrigitz
                 //{
                 //HybridizerRefrigitz.ChessRules.CheckObjectDangourIgnoreSelfThingBetweenTowEnemyKing = false;
                 //}
-                //If There is Brown ObjectDanger Or Gray ObjectDanger.
-                if (CheckBrownObjectDangour || CheckGrayObjectDangour)
+                //If There is BLACK ObjectDanger Or WHITE ObjectDanger.
+                if (CheckBLACKObjectDangour || CheckWHITEObjectDangour)
                 {
                     //Iniaate Global Check Variable By Local Variables.
                     HybridizerRefrigitz.ChessRules.CurrentOrder = CDummy;
                     Order = COrder;
-                    CheckGray = CheckGrayDummy;
-                    CheckBrown = CheckBrownDummy;
+                    CheckWHITE = CheckWHITEDummy;
+                    CheckBLACK = CheckBLACKDummy;
                     //Achamz is Validity.
                     ////{ //AllDraw.OutPut.Append("\r\n");for (int l = 0; l < Spaces; l++) //AllDraw.OutPut.Append(Space);  //AllDraw.OutPut.Append("ObjectDangourKingMove:" + (TimeElapced.TimeNow() - Time).ToString());}Spaces--;
                     return true;
@@ -964,8 +964,8 @@ namespace HybridizerRefrigitz
                 Order = COrder;
 
                 //Iniatiate Of Global Varibales By Local Variables.
-                CheckGray = CheckGrayDummy;
-                CheckBrown = CheckBrownDummy;
+                CheckWHITE = CheckWHITEDummy;
+                CheckBLACK = CheckBLACKDummy;
                 //Return Not Validiy.
                 return false;
             }
@@ -984,9 +984,9 @@ namespace HybridizerRefrigitz
                 Table[RowF, ColumnF] = 0;
                 if (Check(CloneATable(Table), Order))
                 {
-                    if (Order == 1 && CheckGray)
+                    if (Order == 1 && CheckWHITE)
                         Achmaz = true;
-                    if (Order == -1 && CheckBrown)
+                    if (Order == -1 && CheckBLACK)
                         Achmaz = true;
 
                 }
@@ -1005,10 +1005,10 @@ namespace HybridizerRefrigitz
                     for (var j = 0; j < 8; j++)
                         Tab[i, j] = Table[i, j];
                 //Initiate Variables.
-                CheckGray = false;
-                CheckBrown = false;
-                CheckGrayObjectDangour = false;
-                CheckBrownObjectDangour = false;
+                CheckWHITE = false;
+                CheckBLACK = false;
+                CheckWHITEObjectDangour = false;
+                CheckBLACKObjectDangour = false;
                 Object OO = new Object();
                 lock (OO)
                 {
@@ -1018,16 +1018,16 @@ namespace HybridizerRefrigitz
 
                 //Check identification.
                 Check(CloneATable(Tab), Order);
-                bool CheckGrayDummy = CheckGray;
-                bool CheckBrownDummy = CheckBrown;
+                bool CheckWHITEDummy = CheckWHITE;
+                bool CheckBLACKDummy = CheckBLACK;
                 //If There is Check on Tow Side.
-                if (CheckBrown || CheckGray)
+                if (CheckBLACK || CheckWHITE)
                 {
                     //Check meand achmaz.
-                    if (CheckBrown)
-                        CheckBrownObjectDangour = true;
-                    if (CheckGray)
-                        CheckGrayObjectDangour = true;
+                    if (CheckBLACK)
+                        CheckBLACKObjectDangour = true;
+                    if (CheckWHITE)
+                        CheckWHITEObjectDangour = true;
                     ////{ //AllDraw.OutPut.Append("\r\n");for (int l = 0; l < Spaces; l++) //AllDraw.OutPut.Append(Space);  //AllDraw.OutPut.Append("ObjectDangourKingMove:" + (TimeElapced.TimeNow() - Time).ToString());}Spaces--;
                     return true;
 
@@ -1068,9 +1068,9 @@ namespace HybridizerRefrigitz
                                         for (var jk = 0; jk < 8; jk++)
                                             Tab[ik, jk] = Table[ik, jk];
                                     HybridizerRefrigitz.ChessRules A = new HybridizerRefrigitz.ChessRules(CurrentAStarGredyMax, MovementsAStarGreedyHeuristicFoundT, IgnoreSelfObjectsT, UsePenaltyRegardMechnisamT, BestMovmentsT, PredictHeuristicT, OnlySelfT, AStarGreedyHeuristicT, ArrangmentsBoard, Tab[i, j], CloneATable(Tab), Order * -1, i, j);
-                                    ConsoleColor a = ConsoleColor.Gray;
+                                    Color a = Color.WHITE;
                                     if (Order * -1 == -1)
-                                        a = ConsoleColor.Black;
+                                        a = Color.BLACK;
                                     //When Enemies can gard King
                                     if (A.Rules(i, j, iii, jjj, a, Tab[i, j]))
                                     {
@@ -1078,7 +1078,7 @@ namespace HybridizerRefrigitz
                                         Tab[i, j] = 0;
                                         if (A.CheckMate(CloneATable(Tab), Order))
                                         {
-                                            if (Order == 1 && A.CheckMateGray)
+                                            if (Order == 1 && A.CheckMateWHITE)
                                             {
                                                 //For Current.
                                                 for (var iiii = 0; iiii < 8; iiii++)
@@ -1113,12 +1113,12 @@ namespace HybridizerRefrigitz
                                                                     Tab[iiii, jjjj] = 0;
                                                                     if (A.CheckMate(CloneATable(Tab), Order))
                                                                     {
-                                                                        CheckBrown = A.CheckBrown;
-                                                                        CheckGray = A.CheckGray;
-                                                                        CheckMateGray = A.CheckMateGray;
-                                                                        CheckMateBrown = A.CheckMateBrown;
-                                                                        CheckGrayObjectDangour = A.CheckGrayObjectDangour;
-                                                                        CheckBrownObjectDangour = A.CheckBrownObjectDangour;
+                                                                        CheckBLACK = A.CheckBLACK;
+                                                                        CheckWHITE = A.CheckWHITE;
+                                                                        CheckMateWHITE = A.CheckMateWHITE;
+                                                                        CheckMateBLACK = A.CheckMateBLACK;
+                                                                        CheckWHITEObjectDangour = A.CheckWHITEObjectDangour;
+                                                                        CheckBLACKObjectDangour = A.CheckBLACKObjectDangour;
                                                                         HybridizerRefrigitz.ChessRules.CurrentOrder = CDummy;
                                                                         Order = COrder;
                                                                         ////{ //AllDraw.OutPut.Append("\r\n");for (int l = 0; l < Spaces; l++) //AllDraw.OutPut.Append(Space);  //AllDraw.OutPut.Append("ObjectDangourKingMove:" + (TimeElapced.TimeNow() - Time).ToString());}Spaces--;
@@ -1132,7 +1132,7 @@ namespace HybridizerRefrigitz
 
                                             }
                                             else
-                                                if (Order == -1 && A.CheckMateBrown)
+                                                if (Order == -1 && A.CheckMateBLACK)
                                             {
 
                                                 //For Current.
@@ -1168,12 +1168,12 @@ namespace HybridizerRefrigitz
                                                                     Tab[iiii, jjjj] = 0;
                                                                     if (A.CheckMate(CloneATable(Tab), Order))
                                                                     {
-                                                                        CheckBrown = A.CheckBrown;
-                                                                        CheckGray = A.CheckGray;
-                                                                        CheckMateGray = A.CheckMateGray;
-                                                                        CheckMateBrown = A.CheckMateBrown;
-                                                                        CheckGrayObjectDangour = A.CheckGrayObjectDangour;
-                                                                        CheckBrownObjectDangour = A.CheckBrownObjectDangour;
+                                                                        CheckBLACK = A.CheckBLACK;
+                                                                        CheckWHITE = A.CheckWHITE;
+                                                                        CheckMateWHITE = A.CheckMateWHITE;
+                                                                        CheckMateBLACK = A.CheckMateBLACK;
+                                                                        CheckWHITEObjectDangour = A.CheckWHITEObjectDangour;
+                                                                        CheckBLACKObjectDangour = A.CheckBLACKObjectDangour;
                                                                         HybridizerRefrigitz.ChessRules.CurrentOrder = CDummy;
                                                                         Order = COrder;
                                                                         ////{ //AllDraw.OutPut.Append("\r\n");for (int l = 0; l < Spaces; l++) //AllDraw.OutPut.Append(Space);  //AllDraw.OutPut.Append("ObjectDangourKingMove:" + (TimeElapced.TimeNow() - Time).ToString());}Spaces--;
@@ -1206,8 +1206,8 @@ namespace HybridizerRefrigitz
                 return false;
             }
         }
-        //Gray King Founder.
-        public bool FindGrayKing(int[,] Table, ref int Row, ref int Column)
+        //WHITE King Founder.
+        public bool FindWHITEKing(int[,] Table, ref int Row, ref int Column)
         {
             Object O = new Object();
             lock (O)
@@ -1216,17 +1216,17 @@ namespace HybridizerRefrigitz
                 for (var i = 0; i < 8; i++)
                     for (var j = 0; j < 8; j++)
                     {
-                        //If Current is Gray Home 
+                        //If Current is WHITE Home 
                         if (Table[i, j] == 6)
                         {
                             //Initiate Refreable Parameters.
                             Row = i;
                             Column = j;
-                            ////{ //AllDraw.OutPut.Append("\r\n");for (int l = 0; l < Spaces; l++) //AllDraw.OutPut.Append(Space);  //AllDraw.OutPut.Append("FindGrayKing:" + (TimeElapced.TimeNow() - Time).ToString());}Spaces--;
+                            ////{ //AllDraw.OutPut.Append("\r\n");for (int l = 0; l < Spaces; l++) //AllDraw.OutPut.Append(Space);  //AllDraw.OutPut.Append("FindWHITEKing:" + (TimeElapced.TimeNow() - Time).ToString());}Spaces--;
                             return true;
                         }
                     }
-                ////{ //AllDraw.OutPut.Append("\r\n");for (int l = 0; l < Spaces; l++) //AllDraw.OutPut.Append(Space);  //AllDraw.OutPut.Append("FindGrayKing:" + (TimeElapced.TimeNow() - Time).ToString());}Spaces--;
+                ////{ //AllDraw.OutPut.Append("\r\n");for (int l = 0; l < Spaces; l++) //AllDraw.OutPut.Append(Space);  //AllDraw.OutPut.Append("FindWHITEKing:" + (TimeElapced.TimeNow() - Time).ToString());}Spaces--;
                 //Not Found.
                 return false;
             }
@@ -1239,11 +1239,11 @@ namespace HybridizerRefrigitz
             { //long Time = TimeElapced.TimeNow();
               //Initiate a Local Varibale. 
                 String A = "";
-                //Determinbe Gray Or Brown Movment.
+                //Determinbe WHITE Or BLACK Movment.
                 if (i < 0)
-                    A = "Brown:";
+                    A = "BLACK:";
                 if (i > 0)
-                    A = "Gray:";
+                    A = "WHITE:";
                 //Determine Object Alhpabet. 
                 if (System.Math.Abs(i) == 1)
                     A += "(S)";
@@ -1323,36 +1323,36 @@ namespace HybridizerRefrigitz
                 HybridizerRefrigitz.ChessRules AAA = new HybridizerRefrigitz.ChessRules(CurrentAStarGredyMax, MovementsAStarGreedyHeuristicFoundT, IgnoreSelfObjectsT, UsePenaltyRegardMechnisamT, BestMovmentsT, PredictHeuristicT, OnlySelfT, AStarGreedyHeuristicT, Arrange, 1, CloneATable(Tab), 1, Row, Column);
                 A.CheckMate(CloneATable(Tab), Order);
                 AA.ObjectDangourKingMove(Order, CloneATable(Tab), false);
-                ConsoleColor a = ConsoleColor.Gray;
+                Color a = Color.WHITE;
                 if (Order == -1)
-                    a = ConsoleColor.Black;
+                    a = Color.BLACK;
                 AAA.Pat(CloneATable(Tab), Order, a);
-                if (A.CheckGray)
+                if (A.CheckWHITE)
                 {
                     Object O2 = new Object();
                     lock (O2)
                     {
-                        HybridizerRefrigitz.ChessRules.CastleKingAllowedGray = false;
-                        HybridizerRefrigitz.ChessRules.CastleActGray = true;
-                        HybridizerRefrigitz.ThinkingHybridizerRefrigitz.KingMaovableGray = true;
+                        HybridizerRefrigitz.ChessRules.CastleKingAllowedWHITE = false;
+                        HybridizerRefrigitz.ChessRules.CastleActWHITE = true;
+                        HybridizerRefrigitz.ThinkingHybridizerRefrigitz.KingMaovableWHITE = true;
                     }
                 }
-                else if (A.CheckBrown)
+                else if (A.CheckBLACK)
                 {
                     Object O2 = new Object();
                     lock (O2)
                     {
-                        HybridizerRefrigitz.ChessRules.CastleActBrown = true;
-                        HybridizerRefrigitz.ChessRules.CastleKingAllowedBrown = false;
-                        HybridizerRefrigitz.ThinkingHybridizerRefrigitz.KingMaovableBrown = true;
+                        HybridizerRefrigitz.ChessRules.CastleActBLACK = true;
+                        HybridizerRefrigitz.ChessRules.CastleKingAllowedBLACK = false;
+                        HybridizerRefrigitz.ThinkingHybridizerRefrigitz.KingMaovableBLACK = true;
                     }
                 }
                 bool Castles = false;
                 if (Order == 1)
-                    if (HybridizerRefrigitz.ChessRules.SmallKingCastleGray || HybridizerRefrigitz.ChessRules.BigKingCastleGray)
+                    if (HybridizerRefrigitz.ChessRules.SmallKingCastleWHITE || HybridizerRefrigitz.ChessRules.BigKingCastleWHITE)
                         Castles = true;
                 if (Order == -1)
-                    if (HybridizerRefrigitz.ChessRules.SmallKingCastleBrown || HybridizerRefrigitz.ChessRules.BigKingCastleBrown)
+                    if (HybridizerRefrigitz.ChessRules.SmallKingCastleBLACK || HybridizerRefrigitz.ChessRules.BigKingCastleBLACK)
                         Castles = true;
                 //When Solder Converted or Castles King Acts.
                 if (SodierConvert || (CastleKing && Castles))
@@ -1360,89 +1360,89 @@ namespace HybridizerRefrigitz
                     //When Castles Acts.
                     if (CastleKing)
                     {
-                        //Castles Brown King.
-                        if (HybridizerRefrigitz.ChessRules.SmallKingCastleGray)
+                        //Castles BLACK King.
+                        if (HybridizerRefrigitz.ChessRules.SmallKingCastleWHITE)
                         {
                             Object O2 = new Object();
                             lock (O2)
                             {
-                                HybridizerRefrigitz.ThinkingHybridizerRefrigitz.KingMaovableGray = true;
-                                S += "Gray-BK-S";
+                                HybridizerRefrigitz.ThinkingHybridizerRefrigitz.KingMaovableWHITE = true;
+                                S += "WHITE-BK-S";
                                 Object O = new Object();
                                 lock (O)
                                 {
                                     if (!AllDraw.Stockfish)
                                     {
-                                        HybridizerRefrigitz.ChessRules.SmallKingCastleGray = false;
-                                        HybridizerRefrigitz.ChessRules.CastleKingAllowedGray = false;
+                                        HybridizerRefrigitz.ChessRules.SmallKingCastleWHITE = false;
+                                        HybridizerRefrigitz.ChessRules.CastleKingAllowedWHITE = false;
                                     }
                                 }
                             }
                         }
                         else
-                            if (HybridizerRefrigitz.ChessRules.BigKingCastleGray)
-                        //Castles Brown King.                    
+                            if (HybridizerRefrigitz.ChessRules.BigKingCastleWHITE)
+                        //Castles BLACK King.                    
                         {
                             Object O2 = new Object();
                             lock (O2)
                             {
-                                S += "Gray-BK-B";
-                                HybridizerRefrigitz.ThinkingHybridizerRefrigitz.KingMaovableGray = true;
+                                S += "WHITE-BK-B";
+                                HybridizerRefrigitz.ThinkingHybridizerRefrigitz.KingMaovableWHITE = true;
                                 Object O = new Object();
                                 lock (O)
                                 {
                                     if (!AllDraw.Stockfish)
                                     {
-                                        HybridizerRefrigitz.ChessRules.BigKingCastleGray = false;
-                                        HybridizerRefrigitz.ChessRules.CastleKingAllowedGray = false;
+                                        HybridizerRefrigitz.ChessRules.BigKingCastleWHITE = false;
+                                        HybridizerRefrigitz.ChessRules.CastleKingAllowedWHITE = false;
                                     }
                                 }
                             }
                         }
                         else
-                                if (HybridizerRefrigitz.ChessRules.SmallKingCastleBrown)
-                        //Castles Brown King.                    
+                                if (HybridizerRefrigitz.ChessRules.SmallKingCastleBLACK)
+                        //Castles BLACK King.                    
                         {
                             Object O2 = new Object();
                             lock (O2)
                             {
-                                S += "Brown-BK-S";
-                                HybridizerRefrigitz.ThinkingHybridizerRefrigitz.KingMaovableBrown = true;
+                                S += "BLACK-BK-S";
+                                HybridizerRefrigitz.ThinkingHybridizerRefrigitz.KingMaovableBLACK = true;
                                 Object O = new Object();
                                 lock (O)
                                 {
                                     if (!AllDraw.Stockfish)
                                     {
-                                        HybridizerRefrigitz.ChessRules.SmallKingCastleBrown = false;
-                                        HybridizerRefrigitz.ChessRules.CastleKingAllowedBrown = false;
+                                        HybridizerRefrigitz.ChessRules.SmallKingCastleBLACK = false;
+                                        HybridizerRefrigitz.ChessRules.CastleKingAllowedBLACK = false;
                                     }
                                 }
                             }
                         }
                         else
-                                    if (HybridizerRefrigitz.ChessRules.BigKingCastleBrown)
-                        //Castles Brown King.                    
+                                    if (HybridizerRefrigitz.ChessRules.BigKingCastleBLACK)
+                        //Castles BLACK King.                    
                         {
 
                             Object O2 = new Object();
                             lock (O2)
                             {
-                                S += "Brown-BK-B";
-                                HybridizerRefrigitz.ThinkingHybridizerRefrigitz.KingMaovableBrown = true;
+                                S += "BLACK-BK-B";
+                                HybridizerRefrigitz.ThinkingHybridizerRefrigitz.KingMaovableBLACK = true;
                                 Object O = new Object();
                                 lock (O)
                                 {
                                     if (!AllDraw.Stockfish)
                                     {
-                                        HybridizerRefrigitz.ChessRules.BigKingCastleBrown = false;
-                                        HybridizerRefrigitz.ChessRules.CastleKingAllowedBrown = false;
+                                        HybridizerRefrigitz.ChessRules.BigKingCastleBLACK = false;
+                                        HybridizerRefrigitz.ChessRules.CastleKingAllowedBLACK = false;
                                     }
                                 }
                             }
                         }
-                        //Castles Brown King.                    
+                        //Castles BLACK King.                    
 
-                        //Great Castles Gray King.
+                        //Great Castles WHITE King.
 
                     }
                     //Soldier Converted.
@@ -1464,60 +1464,60 @@ namespace HybridizerRefrigitz
                             S += "x";
                         }
                         S += Column.ToString();
-                        //CheckMate of Gray Or Brown
-                        if (AAA.PatkGray || AAA.PatBrown)
+                        //CheckMate of WHITE Or BLACK
+                        if (AAA.PatkWHITE || AAA.PatBLACK)
                         {
                             S += "-O-";
                         }
                         else
-                            if (A.CheckMateGray || A.CheckMateBrown)
+                            if (A.CheckMateWHITE || A.CheckMateBLACK)
                         {
                             S += "++";
                         }
-                        //Check Of Gray Or Brown.
-                        else if (A.CheckBrown || A.CheckGray)
+                        //Check Of WHITE Or BLACK.
+                        else if (A.CheckBLACK || A.CheckWHITE)
                         {
 
                             S += "+";
-                            if (A.CheckBrown && Order == -1)
+                            if (A.CheckBLACK && Order == -1)
                             {
                                 Object O2 = new Object();
                                 lock (O2)
                                 {
-                                    HybridizerRefrigitz.ThinkingHybridizerRefrigitz.KingMaovableBrown = true;
-                                    HybridizerRefrigitz.ChessRules.BigKingCastleBrown = false;
-                                    HybridizerRefrigitz.ChessRules.CastleKingAllowedBrown = false;
+                                    HybridizerRefrigitz.ThinkingHybridizerRefrigitz.KingMaovableBLACK = true;
+                                    HybridizerRefrigitz.ChessRules.BigKingCastleBLACK = false;
+                                    HybridizerRefrigitz.ChessRules.CastleKingAllowedBLACK = false;
                                 }
                             }
-                            if (A.CheckGray && Order == 1)
+                            if (A.CheckWHITE && Order == 1)
                             {
                                 Object O2 = new Object();
                                 lock (O2)
                                 {
-                                    HybridizerRefrigitz.ThinkingHybridizerRefrigitz.KingMaovableGray = true;
-                                    HybridizerRefrigitz.ChessRules.BigKingCastleGray = false;
-                                    HybridizerRefrigitz.ChessRules.CastleKingAllowedGray = false;
+                                    HybridizerRefrigitz.ThinkingHybridizerRefrigitz.KingMaovableWHITE = true;
+                                    HybridizerRefrigitz.ChessRules.BigKingCastleWHITE = false;
+                                    HybridizerRefrigitz.ChessRules.CastleKingAllowedWHITE = false;
                                 }
                             }
                         }
-                        else if (AA.CheckGrayObjectDangour || AA.CheckBrownObjectDangour)
+                        else if (AA.CheckWHITEObjectDangour || AA.CheckBLACKObjectDangour)
                         {
 
-                            if (AA.CheckGrayObjectDangour && Order == -1)
+                            if (AA.CheckWHITEObjectDangour && Order == -1)
                             {
                                 Object O2 = new Object();
                                 lock (O2)
                                 {
-                                    HybridizerRefrigitz.ThinkingHybridizerRefrigitz.KingMaovableBrown = true;
+                                    HybridizerRefrigitz.ThinkingHybridizerRefrigitz.KingMaovableBLACK = true;
 
                                 }
                             }
-                            if (AA.CheckBrownObjectDangour && Order == 1)
+                            if (AA.CheckBLACKObjectDangour && Order == 1)
                             {
                                 Object O2 = new Object();
                                 lock (O2)
                                 {
-                                    HybridizerRefrigitz.ThinkingHybridizerRefrigitz.KingMaovableGray = true;
+                                    HybridizerRefrigitz.ThinkingHybridizerRefrigitz.KingMaovableWHITE = true;
 
                                 }
                             }
@@ -1525,7 +1525,7 @@ namespace HybridizerRefrigitz
 
                     }
                 }
-                else//Brown Order.
+                else//BLACK Order.
                 {
                     //Object of Kind.
                     S += ThingsAlphabet(SourceThings);
@@ -1545,61 +1545,61 @@ namespace HybridizerRefrigitz
                     S += RowAlphabet(Row);
                     S += Column.ToString();
                     //CheckMate Consideration.
-                    if (AAA.PatkGray || AAA.PatBrown)
+                    if (AAA.PatkWHITE || AAA.PatBLACK)
                     {
                         S += "-O-";
                     }
                     else
 
-                        if (A.CheckMateGray || A.CheckMateBrown)
+                        if (A.CheckMateWHITE || A.CheckMateBLACK)
                     {
                         S += "++";
                     }
-                    //Gray Consideration.
-                    else if (A.CheckBrown || A.CheckGray)
+                    //WHITE Consideration.
+                    else if (A.CheckBLACK || A.CheckWHITE)
                     {
                         S += "+";
-                        if (A.CheckBrown && Order == -1)
+                        if (A.CheckBLACK && Order == -1)
                         {
                             Object O2 = new Object();
                             lock (O2)
                             {
-                                HybridizerRefrigitz.ChessRules.BigKingCastleBrown = false;
-                                HybridizerRefrigitz.ChessRules.CastleKingAllowedBrown = false;
-                                HybridizerRefrigitz.ThinkingHybridizerRefrigitz.KingMaovableGray = true;
+                                HybridizerRefrigitz.ChessRules.BigKingCastleBLACK = false;
+                                HybridizerRefrigitz.ChessRules.CastleKingAllowedBLACK = false;
+                                HybridizerRefrigitz.ThinkingHybridizerRefrigitz.KingMaovableWHITE = true;
 
                             }
                         }
-                        if (A.CheckGray && Order == 1)
+                        if (A.CheckWHITE && Order == 1)
                         {
                             Object O2 = new Object();
                             lock (O2)
                             {
-                                HybridizerRefrigitz.ChessRules.BigKingCastleGray = false;
-                                HybridizerRefrigitz.ChessRules.CastleKingAllowedGray = false;
-                                HybridizerRefrigitz.ThinkingHybridizerRefrigitz.KingMaovableGray = true;
+                                HybridizerRefrigitz.ChessRules.BigKingCastleWHITE = false;
+                                HybridizerRefrigitz.ChessRules.CastleKingAllowedWHITE = false;
+                                HybridizerRefrigitz.ThinkingHybridizerRefrigitz.KingMaovableWHITE = true;
 
                             }
                         }
                     }
-                    else if (AA.CheckGrayObjectDangour || AA.CheckBrownObjectDangour)
+                    else if (AA.CheckWHITEObjectDangour || AA.CheckBLACKObjectDangour)
                     {
 
-                        if (AA.CheckGrayObjectDangour && Order == -1)
+                        if (AA.CheckWHITEObjectDangour && Order == -1)
                         {
                             Object O2 = new Object();
                             lock (O2)
                             {
-                                HybridizerRefrigitz.ThinkingHybridizerRefrigitz.KingMaovableBrown = true;
+                                HybridizerRefrigitz.ThinkingHybridizerRefrigitz.KingMaovableBLACK = true;
 
                             }
                         }
-                        if (AA.CheckBrownObjectDangour && Order == 1)
+                        if (AA.CheckBLACKObjectDangour && Order == 1)
                         {
                             Object O2 = new Object();
                             lock (O2)
                             {
-                                HybridizerRefrigitz.ThinkingHybridizerRefrigitz.KingMaovableGray = true;
+                                HybridizerRefrigitz.ThinkingHybridizerRefrigitz.KingMaovableWHITE = true;
 
                             }
                         }
@@ -1670,9 +1670,9 @@ namespace HybridizerRefrigitz
                             else//else of Condition.
                             {
                                 //Iniatiate Local Variables.
-                                ConsoleColor A = ConsoleColor.Gray;
+                                Color A = Color.WHITE;
                                 if (Order == -1)
-                                    A = ConsoleColor.Black;
+                                    A = Color.BLACK;
                                 //For All Second Home.
                                 for (var ii = 0; ii < 8; ii++)
                                     for (var jj = 0; jj < 8; jj++)
@@ -1701,8 +1701,8 @@ namespace HybridizerRefrigitz
                 return false;
             }
         }
-        //Brown King Found  Consideration.
-        public bool FindBrownKing(int[,] Table, ref int Row, ref int Column)
+        //BLACK King Found  Consideration.
+        public bool FindBLACKKing(int[,] Table, ref int Row, ref int Column)
         {
             Object O = new Object();
             lock (O)
@@ -1711,18 +1711,18 @@ namespace HybridizerRefrigitz
                 for (var i = 0; i < 8; i++)
                     for (var j = 0; j < 8; j++)
                     {
-                        //If Current Home is Brown King.
+                        //If Current Home is BLACK King.
                         if (Table[i, j] == -6)
                         {
                             //Initiate Refrencable Parameter.
                             Row = i;
                             Column = j;
-                            ////{ //AllDraw.OutPut.Append("\r\n");for (int l = 0; l < Spaces; l++) //AllDraw.OutPut.Append(Space);  //AllDraw.OutPut.Append("FindBrownKing:" + (TimeElapced.TimeNow() - Time).ToString());}Spaces--;
-                            //Found of Brown King.
+                            ////{ //AllDraw.OutPut.Append("\r\n");for (int l = 0; l < Spaces; l++) //AllDraw.OutPut.Append(Space);  //AllDraw.OutPut.Append("FindBLACKKing:" + (TimeElapced.TimeNow() - Time).ToString());}Spaces--;
+                            //Found of BLACK King.
                             return true;
                         }
                     }
-                ////{ //AllDraw.OutPut.Append("\r\n");for (int l = 0; l < Spaces; l++) //AllDraw.OutPut.Append(Space);  //AllDraw.OutPut.Append("FindBrownKing:" + (TimeElapced.TimeNow() - Time).ToString());}Spaces--;
+                ////{ //AllDraw.OutPut.Append("\r\n");for (int l = 0; l < Spaces; l++) //AllDraw.OutPut.Append(Space);  //AllDraw.OutPut.Append("FindBLACKKing:" + (TimeElapced.TimeNow() - Time).ToString());}Spaces--;
                 //Not Found.
                 return false;
             }
@@ -1743,9 +1743,9 @@ namespace HybridizerRefrigitz
                 Object OO = new Object();
                 lock (OO)
                 {
-                    CheckGrayRemovable = true;
+                    CheckWHITERemovable = true;
 
-                    CheckBrownRemovable = true;
+                    CheckBLACKRemovable = true;
                 }
 
                 Check(Tabl, Order);
@@ -1760,10 +1760,10 @@ namespace HybridizerRefrigitz
                                     //If Tow How is the Same Continue Traversal Back.
                                     if (i == ii && j == jj)
                                         continue;
-                                    //If is Brown Order.
+                                    //If is BLACK Order.
                                     if (Table[i, j] < 0)
                                     {
-                                        //If Is Gray Order.
+                                        //If Is WHITE Order.
                                         if (Table[ii, jj] > 0)
                                         {
                                             //Initiate Local Variables.
@@ -1775,7 +1775,7 @@ namespace HybridizerRefrigitz
                                                     Tab[iii, jjj] = Table[iii, jjj];
                                                 }
                                             //If Is Movable.
-                                            if ((new HybridizerRefrigitz.ThinkingHybridizerRefrigitz(-1, 0, CurrentAStarGredyMax, MovementsAStarGreedyHeuristicFoundT, IgnoreSelfObjectsT, UsePenaltyRegardMechnisamT, BestMovmentsT, PredictHeuristicT, OnlySelfT, AStarGreedyHeuristicT, ArrangmentsBoard, i, j)).Movable(CloneATable(Tab), i, j, ii, jj, ConsoleColor.Black, -1))
+                                            if ((new HybridizerRefrigitz.ThinkingHybridizerRefrigitz(-1, 0, CurrentAStarGredyMax, MovementsAStarGreedyHeuristicFoundT, IgnoreSelfObjectsT, UsePenaltyRegardMechnisamT, BestMovmentsT, PredictHeuristicT, OnlySelfT, AStarGreedyHeuristicT, ArrangmentsBoard, i, j)).Movable(CloneATable(Tab), i, j, ii, jj, Color.BLACK, -1))
                                             {
                                                 //Clone a Copy.
                                                 for (var iii = 0; iii < 8; iii++)
@@ -1783,8 +1783,8 @@ namespace HybridizerRefrigitz
                                                     {
                                                         Tab[iii, jjj] = Table[iii, jjj];
                                                     }
-                                                //If Brown Check.
-                                                if (CheckBrown)
+                                                //If BLACK Check.
+                                                if (CheckBLACK)
                                                 {
                                                     //Initiate Local Variables.
                                                     Tab[ii, jj] = Tab[i, j];
@@ -1792,8 +1792,8 @@ namespace HybridizerRefrigitz
                                                     //If There is Not Check.
                                                     if (!Check(CloneATable(Tab), Order))
                                                     {
-                                                        //If Is Not Brown Check.
-                                                        if (!CheckBrown)
+                                                        //If Is Not BLACK Check.
+                                                        if (!CheckBLACK)
                                                         {
                                                             //Initiate and Move.
                                                             Tab[i, j] = Table[ii, jj];
@@ -1801,11 +1801,11 @@ namespace HybridizerRefrigitz
                                                             Object O1 = new Object();
                                                             lock (O1)
                                                             {
-                                                                CheckBrownRemovableValueRowi = i;
-                                                                CheckGrayRemovableValueColumni = j;
-                                                                CheckGrayRemovableValueRowii = ii;
-                                                                CheckGrayRemovableValueColumnjj = jj;
-                                                                CheckGrayRemovable = true;
+                                                                CheckBLACKRemovableValueRowi = i;
+                                                                CheckWHITERemovableValueColumni = j;
+                                                                CheckWHITERemovableValueRowii = ii;
+                                                                CheckWHITERemovableValueColumnjj = jj;
+                                                                CheckWHITERemovable = true;
                                                             }
                                                         }
                                                     }
@@ -1830,10 +1830,10 @@ namespace HybridizerRefrigitz
                                     //if The Tow Traversal are the ame Continue Traversal Back.
                                     if (i == ii && j == jj)
                                         continue;
-                                    //If the Gray.
+                                    //If the WHITE.
                                     if (Table[i, j] > 0)
                                     {
-                                        //If the Brown.
+                                        //If the BLACK.
                                         if (Table[ii, jj] < 0)
                                         {
                                             //Inaitate Local Variables.
@@ -1845,15 +1845,15 @@ namespace HybridizerRefrigitz
                                                     Tab[iii, jjj] = Table[iii, jjj];
                                                 }
                                             //Moveable Movemnts in the Tow Traversal Kind.
-                                            if ((new HybridizerRefrigitz.ThinkingHybridizerRefrigitz(-1, 0, CurrentAStarGredyMax, MovementsAStarGreedyHeuristicFoundT, IgnoreSelfObjectsT, UsePenaltyRegardMechnisamT, BestMovmentsT, PredictHeuristicT, OnlySelfT, AStarGreedyHeuristicT, ArrangmentsBoard, i, j)).Movable(CloneATable(Tab), i, j, ii, jj, ConsoleColor.Gray, 1))
+                                            if ((new HybridizerRefrigitz.ThinkingHybridizerRefrigitz(-1, 0, CurrentAStarGredyMax, MovementsAStarGreedyHeuristicFoundT, IgnoreSelfObjectsT, UsePenaltyRegardMechnisamT, BestMovmentsT, PredictHeuristicT, OnlySelfT, AStarGreedyHeuristicT, ArrangmentsBoard, i, j)).Movable(CloneATable(Tab), i, j, ii, jj, Color.WHITE, 1))
                                             {
                                                 for (var iii = 0; iii < 8; iii++)
                                                     for (var jjj = 0; jjj < 8; jjj++)
                                                     {
                                                         Tab[iii, jjj] = Table[iii, jjj];
                                                     }
-                                                //If the Gray Check.
-                                                if (CheckGray)
+                                                //If the WHITE Check.
+                                                if (CheckWHITE)
                                                 {
                                                     //Move 
                                                     Tab[ii, jj] = Tab[i, j];
@@ -1861,8 +1861,8 @@ namespace HybridizerRefrigitz
                                                     //If ther is Not Check.
                                                     if (!Check(CloneATable(Tab), Order))
                                                     {
-                                                        //If there is Not Gray Check.
-                                                        if (!CheckGray)
+                                                        //If there is Not WHITE Check.
+                                                        if (!CheckWHITE)
                                                         {
                                                             //Move and Initaite Local and Global Variables.
                                                             Tab[i, j] = Table[ii, jj];
@@ -1870,11 +1870,11 @@ namespace HybridizerRefrigitz
                                                             Object O1 = new Object();
                                                             lock (O1)
                                                             {
-                                                                CheckBrownRemovableValueRowi = i;
-                                                                CheckBrownRemovableValueColumnj = j;
-                                                                CheckBrownRemovableValueRowii = ii;
-                                                                CheckBrownRemovableValueColumnjj = jj;
-                                                                CheckBrownRemovable = true;
+                                                                CheckBLACKRemovableValueRowi = i;
+                                                                CheckBLACKRemovableValueColumnj = j;
+                                                                CheckBLACKRemovableValueRowii = ii;
+                                                                CheckBLACKRemovableValueColumnjj = jj;
+                                                                CheckBLACKRemovable = true;
                                                             }
 
                                                         }
@@ -1891,14 +1891,14 @@ namespace HybridizerRefrigitz
                                 }
                 }
                 ////{ //AllDraw.OutPut.Append("\r\n");for (int l = 0; l < Spaces; l++) //AllDraw.OutPut.Append(Space);  //AllDraw.OutPut.Append("CheckRemovableByAttack:" + (TimeElapced.TimeNow() - Time).ToString());}Spaces--;
-                //If Check Remoavbe Brown Or Gray Return Removable.
-                if (CheckBrownRemovable || CheckGrayRemovable)
+                //If Check Remoavbe BLACK Or WHITE Return Removable.
+                if (CheckBLACKRemovable || CheckWHITERemovable)
                     return true;
                 //Return Not Removable.
                 return false;
             }
         }
-        bool[,] VeryFye(int[,] Table, int Order, ConsoleColor a, int ii, int jj)
+        bool[,] VeryFye(int[,] Table, int Order, Color a, int ii, int jj)
         {
             Object O = new Object();
             lock (O)
@@ -1999,7 +1999,7 @@ namespace HybridizerRefrigitz
 
         }
 
-        public bool Pat(int[,] Tab, int Order, ConsoleColor a)
+        public bool Pat(int[,] Tab, int Order, Color a)
         {
             Object O = new Object();
             lock (O)
@@ -2024,7 +2024,7 @@ namespace HybridizerRefrigitz
                         {
                             if (Table[ii, jj] > 0)
                             {
-                                bool[,] TableSS = VeryFye(CloneATable(Table), 1, ConsoleColor.Gray, ii, jj);
+                                bool[,] TableSS = VeryFye(CloneATable(Table), 1, Color.WHITE, ii, jj);
 
                                 for (var iii = 0; iii < 8; iii++)
                                     for (var jjj = 0; jjj < 8; jjj++)
@@ -2035,7 +2035,7 @@ namespace HybridizerRefrigitz
                         }
                     if (OnlyKingMovable(CloneATable(Table), CloneATable(TableS), 1))
                     {
-                        NumbersofKingMovesToPatGray++;
+                        NumbersofKingMovesToPatWHITE++;
                     }
                     Pat = false;
                     for (var ii = 0; ii < 8; ii++)
@@ -2044,13 +2044,13 @@ namespace HybridizerRefrigitz
                             Pat |= TableS[ii, jj];
                         }
                     Pat = !Pat;
-                    if (Pat || NumbersofKingMovesToPatGray > 16)
+                    if (Pat || NumbersofKingMovesToPatWHITE > 16)
                     {
                         Object On = new Object();
                         lock (On)
                         {
                             AllDraw.EndOfGame = true;
-                            PatkGray = true;
+                            PatkWHITE = true;
                         }
                     }
                     TableS = new bool[8, 8];
@@ -2060,7 +2060,7 @@ namespace HybridizerRefrigitz
                         {
                             if (Table[ii, jj] < 0)
                             {
-                                bool[,] TableSS = VeryFye(CloneATable(Table), -1, ConsoleColor.Black, ii, jj);
+                                bool[,] TableSS = VeryFye(CloneATable(Table), -1, Color.BLACK, ii, jj);
                                 for (var iii = 0; iii < 8; iii++)
                                     for (var jjj = 0; jjj < 8; jjj++)
                                     {
@@ -2070,7 +2070,7 @@ namespace HybridizerRefrigitz
                         }
                     if (OnlyKingMovable(CloneATable(Table), CloneATable(TableS), -1))
                     {
-                        NumbersofKingMovesToPatBrown++;
+                        NumbersofKingMovesToPatBLACK++;
                     }
                     Pat = false;
                     for (var ii = 0; ii < 8; ii++)
@@ -2079,25 +2079,25 @@ namespace HybridizerRefrigitz
                             Pat |= TableS[ii, jj];
                         }
                     Pat = !Pat;
-                    if (Pat || NumbersofKingMovesToPatBrown >= 16)
+                    if (Pat || NumbersofKingMovesToPatBLACK >= 16)
                     {
                         Object On = new Object();
                         lock (On)
                         {
                             AllDraw.EndOfGame = true;
-                            PatBrown = true;
+                            PatBLACK = true;
                         }
                     }
-                    if (PatkGray || PatBrown)
+                    if (PatkWHITE || PatBLACK)
                         Pat = true;
                 }
                 else
                 {
-                    if (CheckGray)
-                        NumbersofKingMovesToPatGray = 0;
+                    if (CheckWHITE)
+                        NumbersofKingMovesToPatWHITE = 0;
                     else
-                        if (CheckBrown)
-                        NumbersofKingMovesToPatBrown = 0;
+                        if (CheckBLACK)
+                        NumbersofKingMovesToPatBLACK = 0;
 
                 }
                 Object O1 = new Object();
@@ -2120,16 +2120,16 @@ namespace HybridizerRefrigitz
                     for (var jj = 0; jj < 8; jj++)
                         Tab[ii, jj] = Table[ii, jj];
                 int Ord = Order;
-                ConsoleColor aa = ConsoleColor.Gray;
+                Color aa = Color.WHITE;
                 if (Ord == -1)
-                    aa = ConsoleColor.Black;
+                    aa = Color.BLACK;
                 bool BREAK = false;
                 //For All Home Table.
                 for (var i = 0; i < 8; i++)
                 {
                     for (var j = 0; j < 8; j++)
                     {
-                        //If The Current Home is the Gray King Continue Traversal Back.
+                        //If The Current Home is the WHITE King Continue Traversal Back.
                         if (i == RowK && j == ColumnK)
                             continue;
                         if (Ord == 1 & Tab[i, j] <= 0)
@@ -2144,9 +2144,9 @@ namespace HybridizerRefrigitz
                             for (var jj = 0; jj < 8; jj++)
                                 Tab[ii, jj] = Table[ii, jj];
 
-                        ConsoleColor a = ConsoleColor.Gray;
+                        Color a = Color.WHITE;
                         if (Ord == -1)
-                            a = ConsoleColor.Black;
+                            a = Color.BLACK;
                         HybridizerRefrigitz.ChessRules A = new HybridizerRefrigitz.ChessRules(CurrentAStarGredyMax, MovementsAStarGreedyHeuristicFoundT, IgnoreSelfObjectsT, UsePenaltyRegardMechnisamT, BestMovmentsT, PredictHeuristicT, OnlySelfT, AStarGreedyHeuristicT, ArrangmentsBoard, Table[i, j], CloneATable(Table), Ord, i, j);
                         if (Ord == 1)
                         {
@@ -2155,7 +2155,7 @@ namespace HybridizerRefrigitz
                             {
                                 BREAK = true;
                                 //Initiate Local Is Check Variables.
-                                CheckBrown = true;
+                                CheckBLACK = true;
                                 break;
                             }
                         }
@@ -2164,7 +2164,7 @@ namespace HybridizerRefrigitz
                             if (A.Rules(i, j, RowK, ColumnK, aa, Ord))
                             {
                                 BREAK = true;
-                                CheckGray = true;
+                                CheckWHITE = true;
                                 break;
                             }
                         }
@@ -2187,10 +2187,10 @@ namespace HybridizerRefrigitz
             lock (O)
             {  //long Time = TimeElapced.TimeNow();Spaces++;
                //A player is not required to move their king out of check and the game concludes when there is a 100 % probability that one of the kings has been taken. As a result there is no checkmate.
-                if (DrawKing.KingGrayNotCheckedByQuantumMove && Ord == 1)
+                if (DrawKing.KingWHITENotCheckedByQuantumMove && Ord == 1)
                     return false;
                 else
-                if (DrawKing.KingBrownNotCheckedByQuantumMove && Ord == -1)
+                if (DrawKing.KingBLACKNotCheckedByQuantumMove && Ord == -1)
                     return false;
                 int DummyOrder = Ord;
                 //Initiate Local and Global Briables.
@@ -2200,31 +2200,31 @@ namespace HybridizerRefrigitz
                 {
                     HybridizerRefrigitz.ChessRules.CheckObjectDangourIgnoreSelfThingBetweenTowEnemyKing = false;
                 }
-                CheckGray = false;
-                CheckBrown = false;
+                CheckWHITE = false;
+                CheckBLACK = false;
                 //Initiate Local Variables.
                 int RowG = 0, ColumnG = 0;
                 int RowB = 0, ColumnB = 0;
                 //if (Ord == 1)
 
-                //Foud of Gray King.
-                if (FindGrayKing(CloneATable(Table), ref RowG, ref ColumnG))
+                //Foud of WHITE King.
+                if (FindWHITEKing(CloneATable(Table), ref RowG, ref ColumnG))
                     CheckKing(CloneATable(Table), -1, RowG, ColumnG);
 
-                //Found of Brown King.
-                if (FindBrownKing(CloneATable(Table), ref RowB, ref ColumnB))
+                //Found of BLACK King.
+                if (FindBLACKKing(CloneATable(Table), ref RowB, ref ColumnB))
                     CheckKing(CloneATable(Table), 1, RowB, ColumnB);
 
                 Ord = DummyOrder;
                 ////{ //AllDraw.OutPut.Append("\r\n");for (int l = 0; l < Spaces; l++) //AllDraw.OutPut.Append(Space);  //AllDraw.OutPut.Append("Check:" + (TimeElapced.TimeNow() - Time).ToString());}Spaces--;
-                //If Gray Check Or brwon Check return Check..
-                if (CheckBrown || CheckGray)
+                //If WHITE Check Or brwon Check return Check..
+                if (CheckBLACK || CheckWHITE)
                     return true;
                 //Return Non Check.
                 return false;
             }
         }
-        void CheckMateKing(int[,] Tab, int Ord, bool CheckGrayDummy, bool CheckBrownDummy, int RowK, int ColumnK, ref bool ActMove, bool Checked)
+        void CheckMateKing(int[,] Tab, int Ord, bool CheckWHITEDummy, bool CheckBLACKDummy, int RowK, int ColumnK, ref bool ActMove, bool Checked)
         {
             Object O = new Object();
             lock (O)
@@ -2244,17 +2244,17 @@ namespace HybridizerRefrigitz
                             continue;
 
                         //Clone a Copy.
-                        CheckGray = CheckGrayDummy;
-                        CheckBrown = CheckBrownDummy;
-                        //If There is Gray Check.
+                        CheckWHITE = CheckWHITEDummy;
+                        CheckBLACK = CheckBLACKDummy;
+                        //If There is WHITE Check.
                         if (Checked)
                         {
                             //Initiate Global Variables.
                             HybridizerRefrigitz.ChessRules.CurrentOrder = 1;
-                            //Ig Gray King is Movable to First Home Table.
-                            ConsoleColor a = ConsoleColor.Gray;
+                            //Ig WHITE King is Movable to First Home Table.
+                            Color a = Color.WHITE;
                             if (Ord == -1)
-                                a = ConsoleColor.Black;
+                                a = Color.BLACK;
                             HybridizerRefrigitz.ChessRules A = new HybridizerRefrigitz.ChessRules(CurrentAStarGredyMax, MovementsAStarGreedyHeuristicFoundT, IgnoreSelfObjectsT, UsePenaltyRegardMechnisamT, BestMovmentsT, PredictHeuristicT, OnlySelfT, AStarGreedyHeuristicT, ArrangmentsBoard, Table[RowK, ColumnK], CloneATable(Table), Ord, RowK, ColumnK);
                             Order = DummyOrder;
                             ///Table[ii, jj] = 0;
@@ -2275,16 +2275,16 @@ namespace HybridizerRefrigitz
                                 if (A.Check(CloneATable(Table), Ord))
                                 {
                                     //Move Back.
-                                    //If Gray Check.
+                                    //If WHITE Check.
                                     if (Ord == 1)
                                     {
-                                        if (A.CheckGray)
+                                        if (A.CheckWHITE)
                                         {
                                             //Move Mack.
                                             ActMove = true;
                                             continue;
                                         }
-                                        else//If There is Not Gray Check.
+                                        else//If There is Not WHITE Check.
                                         {
                                             //Move Back.
                                             ActMove = false;
@@ -2293,13 +2293,13 @@ namespace HybridizerRefrigitz
                                     }
                                     else
                                     {
-                                        if (A.CheckBrown)
+                                        if (A.CheckBLACK)
                                         {
                                             //Move Mack.
                                             ActMove = true;
                                             continue;
                                         }
-                                        else//If There is Not Gray Check.
+                                        else//If There is Not WHITE Check.
                                         {
                                             //Move Back.
                                             ActMove = false;
@@ -2327,7 +2327,7 @@ namespace HybridizerRefrigitz
                 ////{ //AllDraw.OutPut.Append("\r\n");for (int l = 0; l < Spaces; l++) //AllDraw.OutPut.Append(Space);  //AllDraw.OutPut.Append("CheckMateKing:" + (TimeElapced.TimeNow() - Time).ToString());}Spaces--;
             }
         }
-        void CheckMateNotKing(int[,] Tab, int Ord, bool CheckGrayDummy, bool CheckBrownDummy, ref bool ActMove)
+        void CheckMateNotKing(int[,] Tab, int Ord, bool CheckWHITEDummy, bool CheckBLACKDummy, ref bool ActMove)
         {
             Object O = new Object();
             lock (O)
@@ -2346,12 +2346,12 @@ namespace HybridizerRefrigitz
                         if (Ord == -1 && Tab[i, j] >= 0)
                             continue;
                         //Initiate Global varibales. 
-                        CheckGray = CheckGrayDummy;
-                        CheckBrown = CheckBrownDummy;
+                        CheckWHITE = CheckWHITEDummy;
+                        CheckBLACK = CheckBLACKDummy;
                         //Clone a Copy.
-                        CheckGray = CheckGrayDummy;
-                        CheckBrown = CheckBrownDummy;
-                        //If There is Gray Check.
+                        CheckWHITE = CheckWHITEDummy;
+                        CheckBLACK = CheckBLACKDummy;
+                        //If There is WHITE Check.
                         //Initiate Local Varibale.
                         ActMove = true;
                         //For All Second Home Table.
@@ -2368,9 +2368,9 @@ namespace HybridizerRefrigitz
 
                                 Table = CloneATable(Tab);
 
-                                ConsoleColor a = ConsoleColor.Gray;
+                                Color a = Color.WHITE;
                                 if (Ord == -1)
-                                    a = ConsoleColor.Black;
+                                    a = Color.BLACK;
                                 HybridizerRefrigitz.ChessRules A = new HybridizerRefrigitz.ChessRules(CurrentAStarGredyMax, MovementsAStarGreedyHeuristicFoundT, IgnoreSelfObjectsT, UsePenaltyRegardMechnisamT, BestMovmentsT, PredictHeuristicT, OnlySelfT, AStarGreedyHeuristicT, ArrangmentsBoard, Table[i, j], CloneATable(Table), Ord, i, j);
                                 ///Table[ii, jj] = 0;
                                 //Menen Parameter is Moveble to Second Parameters Location returm Movable.
@@ -2391,10 +2391,10 @@ namespace HybridizerRefrigitz
                                         //Move Back.
                                         Table[i, j] = Table[ii, jj];
                                         Table[ii, jj] = Store;
-                                        //If Gray Check.
+                                        //If WHITE Check.
                                         if (Ord == 1)
                                         {
-                                            if (A.CheckGray)
+                                            if (A.CheckWHITE)
                                             {
                                                 //Initiate and Move Back.
                                                 ActMove = true;
@@ -2402,7 +2402,7 @@ namespace HybridizerRefrigitz
                                                 Table[ii, jj] = Store;
                                                 continue;
                                             }
-                                            //If There is Not Gray Check.
+                                            //If There is Not WHITE Check.
                                             else
                                             {
                                                 //Initiate Varaible and Move Back.
@@ -2414,7 +2414,7 @@ namespace HybridizerRefrigitz
                                         }
                                         else
                                         {
-                                            if (A.CheckBrown)
+                                            if (A.CheckBLACK)
                                             {
                                                 //Initiate and Move Back.
                                                 ActMove = true;
@@ -2422,7 +2422,7 @@ namespace HybridizerRefrigitz
                                                 Table[ii, jj] = Store;
                                                 continue;
                                             }
-                                            //If There is Not Gray Check.
+                                            //If There is Not WHITE Check.
                                             else
                                             {
                                                 //Initiate Varaible and Move Back.
@@ -2473,10 +2473,10 @@ namespace HybridizerRefrigitz
                     for (var j = 0; j < 8; j++)
                         Table[i, j] = Tab[i, j];
 
-                CheckGray = false;
-                CheckBrown = false;
-                CheckMateBrown = false;
-                CheckMateGray = false;
+                CheckWHITE = false;
+                CheckBLACK = false;
+                CheckMateBLACK = false;
+                CheckMateWHITE = false;
                 bool ActMoveG = true;
                 bool ActMoveGF = true;
                 bool ActMoveB = true;
@@ -2487,8 +2487,8 @@ namespace HybridizerRefrigitz
                 //Check Consideration.
                 Check(CloneATable(Table), Ord);
                 //Initiate Local Varibales.
-                bool CheckGrayDummy = CheckGray;
-                bool CheckBrownDummy = CheckBrown;
+                bool CheckWHITEDummy = CheckWHITE;
+                bool CheckBLACKDummy = CheckBLACK;
 
                 ActMoveG = true;
                 ActMoveGF = true;
@@ -2498,24 +2498,24 @@ namespace HybridizerRefrigitz
                         Table[i, j] = Tab[i, j];
                 HybridizerRefrigitz.ChessRules A = new HybridizerRefrigitz.ChessRules(CurrentAStarGredyMax, MovementsAStarGreedyHeuristicFoundT, IgnoreSelfObjectsT, UsePenaltyRegardMechnisamT, BestMovmentsT, PredictHeuristicT, OnlySelfT, AStarGreedyHeuristicT, ArrangmentsBoard, Table[RowG, ColumnG], CloneATable(Table), Ord, RowG, ColumnG);
 
-                //Found of Gray King.
-                if (FindGrayKing(CloneATable(Table), ref RowG, ref ColumnG))
-                    A.CheckMateKing(CloneATable(Table), 1, CheckGrayDummy, CheckBrownDummy, RowG, ColumnG, ref ActMoveG, CheckGray);
+                //Found of WHITE King.
+                if (FindWHITEKing(CloneATable(Table), ref RowG, ref ColumnG))
+                    A.CheckMateKing(CloneATable(Table), 1, CheckWHITEDummy, CheckBLACKDummy, RowG, ColumnG, ref ActMoveG, CheckWHITE);
 
                 Table = CloneATable(Tab);
 
 
-                //Found of Gray King.
-                if (FindGrayKing(CloneATable(Table), ref RowG, ref ColumnG))
-                    A.CheckMateNotKing(CloneATable(Table), 1, CheckGrayDummy, CheckBrownDummy, ref ActMoveGF);
+                //Found of WHITE King.
+                if (FindWHITEKing(CloneATable(Table), ref RowG, ref ColumnG))
+                    A.CheckMateNotKing(CloneATable(Table), 1, CheckWHITEDummy, CheckBLACKDummy, ref ActMoveGF);
 
                 //Intiate Global Variables.
-                CheckGray = CheckGrayDummy;
-                CheckBrown = CheckBrownDummy;
+                CheckWHITE = CheckWHITEDummy;
+                CheckBLACK = CheckBLACKDummy;
 
-                //Condition of CheckMate Gray King.
-                if (CheckGray && (ActMoveG && ActMoveGF))
-                    CheckMateGray = true;
+                //Condition of CheckMate WHITE King.
+                if (CheckWHITE && (ActMoveG && ActMoveGF))
+                    CheckMateWHITE = true;
 
 
                 ActMoveB = true;
@@ -2526,32 +2526,32 @@ namespace HybridizerRefrigitz
                 Table = CloneATable(Tab);
 
 
-                //Found of Brown King.
-                if (FindBrownKing(CloneATable(Table), ref RowB, ref ColumnB))
-                    AA.CheckMateKing(CloneATable(Table), -1, CheckGrayDummy, CheckBrownDummy, RowB, ColumnB, ref ActMoveB, CheckBrown);
+                //Found of BLACK King.
+                if (FindBLACKKing(CloneATable(Table), ref RowB, ref ColumnB))
+                    AA.CheckMateKing(CloneATable(Table), -1, CheckWHITEDummy, CheckBLACKDummy, RowB, ColumnB, ref ActMoveB, CheckBLACK);
                 for (var i = 0; i < 8; i++)
                     for (var j = 0; j < 8; j++)
                         Table[i, j] = Tab[i, j];
-                //Found of Brown King.
-                if (FindBrownKing(CloneATable(Table), ref RowB, ref ColumnB))
-                    AA.CheckMateNotKing(CloneATable(Table), -1, CheckGrayDummy, CheckBrownDummy, ref ActMoveBF);
+                //Found of BLACK King.
+                if (FindBLACKKing(CloneATable(Table), ref RowB, ref ColumnB))
+                    AA.CheckMateNotKing(CloneATable(Table), -1, CheckWHITEDummy, CheckBLACKDummy, ref ActMoveBF);
 
 
                 //Initiate Global Varibales.
-                CheckGray = CheckGrayDummy;
-                CheckBrown = CheckBrownDummy;
-                //Condition of Brown CheckMate.
-                if (CheckBrown && (ActMoveB && ActMoveBF))
-                    CheckMateBrown = true;
+                CheckWHITE = CheckWHITEDummy;
+                CheckBLACK = CheckBLACKDummy;
+                //Condition of BLACK CheckMate.
+                if (CheckBLACK && (ActMoveB && ActMoveBF))
+                    CheckMateBLACK = true;
 
                 //Initiate Global Variables.
                 Ord = DumnyOrder;
-                //If Brown CheckMate and Gray.
-                if (CheckMateGray || CheckMateBrown)
+                //If BLACK CheckMate and WHITE.
+                if (CheckMateWHITE || CheckMateBLACK)
                 {
                     //Initiate Global Variable and Return CheckMate.
-                    CheckGray = CheckGrayDummy;
-                    CheckBrown = CheckBrownDummy;
+                    CheckWHITE = CheckWHITEDummy;
+                    CheckBLACK = CheckBLACKDummy;
                     Object On = new Object();
                     lock (On)
                     {
@@ -2561,15 +2561,15 @@ namespace HybridizerRefrigitz
                     }
                 }
                 //Initiate Global Variables.
-                CheckGray = CheckGrayDummy;
-                CheckBrown = CheckBrownDummy;
+                CheckWHITE = CheckWHITEDummy;
+                CheckBLACK = CheckBLACKDummy;
                 ////{ //AllDraw.OutPut.Append("\r\n");for (int l = 0; l < Spaces; l++) //AllDraw.OutPut.Append(Space);  //AllDraw.OutPut.Append("CheckMate:" + (TimeElapced.TimeNow() - Time).ToString());}Spaces--;
                 //Return Not CheckMate.
                 return false;
             }
         }
         //Internal Rule of HybridizerRefrigitz Method.
-        private bool Rule(int RowFirst, int ColumnFirst, int RowSecond, int ColumnSecond, bool NotMoved, ConsoleColor color, bool ExistInDestinationEnemy, int Ki, bool SelfHomeStatCP)
+        private bool Rule(int RowFirst, int ColumnFirst, int RowSecond, int ColumnSecond, bool NotMoved, Color color, bool ExistInDestinationEnemy, int Ki, bool SelfHomeStatCP)
         {
             Object O = new Object();
             lock (O)
@@ -2578,7 +2578,7 @@ namespace HybridizerRefrigitz
                 if (Kind != 7)
                 {
                     //Determination of Enemy Existing.
-                    if (ExistSelfHome(RowFirst, ColumnFirst, RowSecond, ColumnSecond, NotMoved, color , Ki) && SelfHomeStatCP)
+                    if (ExistSelfHome(RowFirst, ColumnFirst, RowSecond, ColumnSecond, NotMoved, color, Ki) && SelfHomeStatCP)
                     {
                         ////{ //AllDraw.OutPut.Append("\r\n");for (int l = 0; l < Spaces; l++) //AllDraw.OutPut.Append(Space);  //AllDraw.OutPut.Append("Rule:" + (TimeElapced.TimeNow() - Time).ToString());}Spaces--;
                         return false;
@@ -2606,7 +2606,7 @@ namespace HybridizerRefrigitz
                         if (System.Math.Abs(TableS[RowFirst, ColumnFirst]) != Kind)
                             return false;
                         ////{ //AllDraw.OutPut.Append("\r\n");for (int l = 0; l < Spaces; l++) //AllDraw.OutPut.Append(Space);  //AllDraw.OutPut.Append("Rule:" + (TimeElapced.TimeNow() - Time).ToString());}Spaces--;
-                        return SoldierRules(RowFirst, ColumnFirst, RowSecond, ColumnSecond, NotMoved, color , ExistInDestinationEnemy);
+                        return SoldierRules(RowFirst, ColumnFirst, RowSecond, ColumnSecond, NotMoved, color, ExistInDestinationEnemy);
 
                         
                     case 4://Rule of Castles.
@@ -2615,13 +2615,13 @@ namespace HybridizerRefrigitz
 
 
                         ////{ //AllDraw.OutPut.Append("\r\n");for (int l = 0; l < Spaces; l++) //AllDraw.OutPut.Append(Space);  //AllDraw.OutPut.Append("Rule:" + (TimeElapced.TimeNow() - Time).ToString());}Spaces--;
-                        return CastleRules(RowFirst, ColumnFirst, RowSecond, ColumnSecond, NotMoved, color , ExistInDestinationEnemy, Ki);
+                        return CastleRules(RowFirst, ColumnFirst, RowSecond, ColumnSecond, NotMoved, color, ExistInDestinationEnemy, Ki);
 
 
                     case 3://Rule of Hourses.
                         if (System.Math.Abs(TableS[RowFirst, ColumnFirst]) != Kind)
                             return false;
-                        return HourseRules(RowFirst, ColumnFirst, RowSecond, ColumnSecond, NotMoved, color , ExistInDestinationEnemy);
+                        return HourseRules(RowFirst, ColumnFirst, RowSecond, ColumnSecond, NotMoved, color, ExistInDestinationEnemy);
 
                     case 2://Rule of Elephant.
 
@@ -2629,23 +2629,23 @@ namespace HybridizerRefrigitz
                             return false;
 
                         ////{ //AllDraw.OutPut.Append("\r\n");for (int l = 0; l < Spaces; l++) //AllDraw.OutPut.Append(Space);  //AllDraw.OutPut.Append("Rule:" + (TimeElapced.TimeNow() - Time).ToString());}Spaces--;
-                        return ElefantRules(RowFirst, ColumnFirst, RowSecond, ColumnSecond, NotMoved, color , ExistInDestinationEnemy, Ki);
+                        return ElefantRules(RowFirst, ColumnFirst, RowSecond, ColumnSecond, NotMoved, color, ExistInDestinationEnemy, Ki);
                     case 5://Rule of Ministers.
                         if (System.Math.Abs(TableS[RowFirst, ColumnFirst]) != Kind)
                             return false;
 
                         ////{ //AllDraw.OutPut.Append("\r\n");for (int l = 0; l < Spaces; l++) //AllDraw.OutPut.Append(Space);  //AllDraw.OutPut.Append("Rule:" + (TimeElapced.TimeNow() - Time).ToString());}Spaces--;
-                        return MinisterRules(RowFirst, ColumnFirst, RowSecond, ColumnSecond, NotMoved, color , ExistInDestinationEnemy, Ki);
+                        return MinisterRules(RowFirst, ColumnFirst, RowSecond, ColumnSecond, NotMoved, color, ExistInDestinationEnemy, Ki);
 
                     case 6://Rule of Kings.
                         if (System.Math.Abs(TableS[RowFirst, ColumnFirst]) != Kind)
                             return false;
                         ////{ //AllDraw.OutPut.Append("\r\n");for (int l = 0; l < Spaces; l++) //AllDraw.OutPut.Append(Space);  //AllDraw.OutPut.Append("Rule:" + (TimeElapced.TimeNow() - Time).ToString());}Spaces--;
-                        return KingRules(RowFirst, ColumnFirst, RowSecond, ColumnSecond, NotMoved, color , ExistInDestinationEnemy, Ki);
+                        return KingRules(RowFirst, ColumnFirst, RowSecond, ColumnSecond, NotMoved, color, ExistInDestinationEnemy, Ki);
                     case 7://Rule of Castles King.
 
                         ////{ //AllDraw.OutPut.Append("\r\n");for (int l = 0; l < Spaces; l++) //AllDraw.OutPut.Append(Space);  //AllDraw.OutPut.Append("Rule:" + (TimeElapced.TimeNow() - Time).ToString());}Spaces--;
-                        return CastleKing(RowFirst, ColumnFirst, RowSecond, ColumnSecond, NotMoved, color , Ki);
+                        return CastleKing(RowFirst, ColumnFirst, RowSecond, ColumnSecond, NotMoved, color, Ki);
                     default:
                         return false;
                 }
@@ -2653,14 +2653,14 @@ namespace HybridizerRefrigitz
             }
         }
         //King Rule Method.
-        public bool KingRules(int RowFirst, int ColumnFirst, int RowSecond, int ColumnSecond, bool NotMoved, ConsoleColor color, bool ExistInDestinationEnemy, int Ki)
+        public bool KingRules(int RowFirst, int ColumnFirst, int RowSecond, int ColumnSecond, bool NotMoved, Color color, bool ExistInDestinationEnemy, int Ki)
         {
             Object O = new Object();
             lock (O)
             {     //long Time = TimeElapced.TimeNow();Spaces++;
                 bool Move = false;
                 //When Miniaster Rule is Valid.
-                if (MinisterRules(RowFirst, ColumnFirst, RowSecond, ColumnSecond, NotMoved, color , ExistInDestinationEnemy, Ki) && (System.Math.Abs(RowFirst - RowSecond) <= 1) && (System.Math.Abs(ColumnFirst - ColumnSecond) <= 1))
+                if (MinisterRules(RowFirst, ColumnFirst, RowSecond, ColumnSecond, NotMoved, color, ExistInDestinationEnemy, Ki) && (System.Math.Abs(RowFirst - RowSecond) <= 1) && (System.Math.Abs(ColumnFirst - ColumnSecond) <= 1))
                 {
                     //Initiate Local Variable.
                     
@@ -2671,19 +2671,19 @@ namespace HybridizerRefrigitz
             }
         }
         //Rules of Minister Method.
-        public bool MinisterRules(int RowFirst, int ColumnFirst, int RowSecond, int ColumnSecond, bool NotMoved, ConsoleColor color, bool ExistInDestinationEnemy, int Ki)
+        public bool MinisterRules(int RowFirst, int ColumnFirst, int RowSecond, int ColumnSecond, bool NotMoved, Color color, bool ExistInDestinationEnemy, int Ki)
         {
             Object O = new Object();
             lock (O)
             {    //long Time = TimeElapced.TimeNow();Spaces++;
                 bool Move = false;
                 //When is Castles Rule.
-                if (CastleRules(RowFirst, ColumnFirst, RowSecond, ColumnSecond, NotMoved, color , ExistInDestinationEnemy, Ki))
+                if (CastleRules(RowFirst, ColumnFirst, RowSecond, ColumnSecond, NotMoved, color, ExistInDestinationEnemy, Ki))
                     //Return Validity.,
                     Move = true;
                 else
                     //When is Elephant Rule.
-                    if (ElefantRules(RowFirst, ColumnFirst, RowSecond, ColumnSecond, NotMoved, color , ExistInDestinationEnemy, Ki))
+                    if (ElefantRules(RowFirst, ColumnFirst, RowSecond, ColumnSecond, NotMoved, color, ExistInDestinationEnemy, Ki))
                     //Return Validity.,
                     Move = true;
                 //Return Not Valididty.
@@ -2693,7 +2693,7 @@ namespace HybridizerRefrigitz
 
         }
         //Castles Rule Method.
-        public bool CastleRules(int RowFirst, int ColumnFirst, int RowSecond, int ColumnSecond, bool NotMoved, ConsoleColor color, bool ExistInDestinationEnemy, int Ki)
+        public bool CastleRules(int RowFirst, int ColumnFirst, int RowSecond, int ColumnSecond, bool NotMoved, Color color, bool ExistInDestinationEnemy, int Ki)
         {
             Object O = new Object();
             lock (O)
@@ -2752,13 +2752,13 @@ namespace HybridizerRefrigitz
                             //When is Not Current Source Home.
                             if (i != RowFirst)
                             {
-                                //When There is Self Home at Home of Gray Return Not Validity.
+                                //When There is Self Home at Home of WHITE Return Not Validity.
                                 if (Table[i, ColumnFirst] > 0 && Table[RowFirst, ColumnFirst] > 0)
                                 {
                                     Move = false;
                                     Act = true;
                                 }
-                                //When There is Self Home of Brown Objects Return Not Validity.
+                                //When There is Self Home of BLACK Objects Return Not Validity.
                                 if (Table[i, ColumnFirst] < 0 && Table[RowFirst, ColumnFirst] < 0)
                                 {
                                     Act = true;
@@ -2884,7 +2884,7 @@ namespace HybridizerRefrigitz
             }
         }
         //Elephant Rule Method.
-        public bool ElefantRules(int RowFirst, int ColumnFirst, int RowSecond, int ColumnSecond, bool NotMoved, ConsoleColor color, bool ExistInDestinationEnemy, int Ki)
+        public bool ElefantRules(int RowFirst, int ColumnFirst, int RowSecond, int ColumnSecond, bool NotMoved, Color color, bool ExistInDestinationEnemy, int Ki)
         {
             Object O = new Object();
             lock (O)
@@ -2991,7 +2991,7 @@ namespace HybridizerRefrigitz
             }
         }
         //Hource Rule Method.
-        public bool HourseRules(int RowFirst, int ColumnFirst, int RowSecond, int ColumnSecond, bool NotMoved, ConsoleColor color, bool ExistInDestinationEnemy)
+        public bool HourseRules(int RowFirst, int ColumnFirst, int RowSecond, int ColumnSecond, bool NotMoved, Color color, bool ExistInDestinationEnemy)
         {
             Object O = new Object();
             lock (O)
@@ -3015,7 +3015,7 @@ namespace HybridizerRefrigitz
                 return Move;
             }
         }
-        public bool SoldierRulesaArrangmentsBoardOne(int RowFirst, int ColumnFirst, int RowSecond, int ColumnSecond, bool NotMoved, ConsoleColor color, bool ExistInDestinationEnemy)
+        public bool SoldierRulesaArrangmentsBoardOne(int RowFirst, int ColumnFirst, int RowSecond, int ColumnSecond, bool NotMoved, Color color, bool ExistInDestinationEnemy)
         {
             Object O = new Object();
             lock (O)
@@ -3024,14 +3024,14 @@ namespace HybridizerRefrigitz
 
                 //long Time = TimeElapced.TimeNow();Spaces++;
                 bool Move = false;
-                //When int is Gray.
+                //When int is WHITE.
                 if (Order == 1)
                 {
                     //If Not Forward Return Not Validity.
                     if (ColumnFirst < ColumnSecond)
                         Move = false;
                 }
-                else//int of Brown.
+                else//int of BLACK.
                     if (Order == -1)
                 {
                     //If Not Back Wrad Return Not Vlaidity.
@@ -3066,7 +3066,7 @@ namespace HybridizerRefrigitz
                             else
                                 Move = false;
                         }
-                        else//Hit Brown Soldier Rulments.
+                        else//Hit BLACK Soldier Rulments.
                                 if ((ColumnFirst + 1 < 8) && ColumnSecond == ColumnFirst + 1)
                         {
                             if ((RowSecond - 1 < 8) &&
@@ -3083,7 +3083,7 @@ namespace HybridizerRefrigitz
                         }
 
                     }
-                    else//Gray int.
+                    else//WHITE int.
                         if (Order == 1 && Table[RowFirst, ColumnFirst] > 0)
                     {
                         //Depend Of First Move do For Positivism
@@ -3125,7 +3125,7 @@ namespace HybridizerRefrigitz
                 }
                 else//If Soldeior Moved Previously.
                 {
-                    //For Brown int.
+                    //For BLACK int.
                     if (Order == -1 && Table[RowFirst, ColumnFirst] < 0)
                     {
                         //Depend on Second Move do For Land Of Islam
@@ -3139,7 +3139,7 @@ namespace HybridizerRefrigitz
                             else
                                 Move = false;
                         }
-                        else//Hit Brown Soldier Rulments.                            
+                        else//Hit BLACK Soldier Rulments.                            
                             if ((ColumnFirst + 1 < 8) && ColumnSecond == ColumnFirst + 1)
                         {
                             if ((RowSecond - 1 < 8) &&
@@ -3156,7 +3156,7 @@ namespace HybridizerRefrigitz
                         }
 
                     }
-                    else//Gray int.
+                    else//WHITE int.
                         if (Order == 1 && Table[RowFirst, ColumnFirst] > 0)
                     {
                         //Depend Of Second Move do For Positivism Land
@@ -3189,7 +3189,7 @@ namespace HybridizerRefrigitz
                 return Move;
             }
         }
-        public bool SoldierRulesaArrangmentsBoardZero(int RowFirst, int ColumnFirst, int RowSecond, int ColumnSecond, bool NotMoved, ConsoleColor color, bool ExistInDestinationEnemy)
+        public bool SoldierRulesaArrangmentsBoardZero(int RowFirst, int ColumnFirst, int RowSecond, int ColumnSecond, bool NotMoved, Color color, bool ExistInDestinationEnemy)
         {
 
             Object O = new Object();
@@ -3199,14 +3199,14 @@ namespace HybridizerRefrigitz
 
                 //long Time = TimeElapced.TimeNow();Spaces++;
                 bool Move = false;
-                //When int is Gray.
+                //When int is WHITE.
                 if (Order == 1)
                 {
                     //If Not Forward Return Not Validity.
                     if (ColumnFirst > ColumnSecond)
                         Move = false;
                 }
-                else//int of Brown.
+                else//int of BLACK.
                     if (Order == -1)
                 {
                     //If Not Back Wrad Return Not Vlaidity.
@@ -3241,7 +3241,7 @@ namespace HybridizerRefrigitz
                             else
                                 Move = false;
                         }
-                        else//Hit Gray Soldier Rulments.
+                        else//Hit WHITE Soldier Rulments.
                                 if ((ColumnFirst + 1 < 8) && ColumnSecond == ColumnFirst + 1)
                         {
                             if ((RowSecond - 1 < 8) &&
@@ -3258,7 +3258,7 @@ namespace HybridizerRefrigitz
                         }
 
                     }
-                    else//Brown int.
+                    else//BLACK int.
                         if (Order == -1 && Table[RowFirst, ColumnFirst] < 0)
                     {
                         //Depend Of First Move do For Positivism
@@ -3300,7 +3300,7 @@ namespace HybridizerRefrigitz
                 }
                 else//If Soldeior Moved Previously.
                 {
-                    //For Gray int.
+                    //For WHITE int.
                     if (Order == 1 && Table[RowFirst, ColumnFirst] > 0)
                     {
                         //Depend on Second Move do For Land Of Islam
@@ -3314,7 +3314,7 @@ namespace HybridizerRefrigitz
                             else
                                 Move = false;
                         }
-                        else//Hit Gray Soldier Rulments.                            
+                        else//Hit WHITE Soldier Rulments.                            
                             if ((ColumnFirst + 1 < 8) && ColumnSecond == ColumnFirst + 1)
                         {
                             if ((RowSecond - 1 < 8) &&
@@ -3331,7 +3331,7 @@ namespace HybridizerRefrigitz
                         }
 
                     }
-                    else//Brown int.
+                    else//BLACK int.
                         if (Order == -1 && Table[RowFirst, ColumnFirst] < 0)
                     {
                         //Depend Of Second Move do For Positivism Land
@@ -3366,7 +3366,7 @@ namespace HybridizerRefrigitz
             
         }
         //Solder Rule Method.
-        public bool SoldierRules(int RowFirst, int ColumnFirst, int RowSecond, int ColumnSecond, bool NotMoved, ConsoleColor color, bool ExistInDestinationEnemy)
+        public bool SoldierRules(int RowFirst, int ColumnFirst, int RowSecond, int ColumnSecond, bool NotMoved, Color color, bool ExistInDestinationEnemy)
         {
             Object O = new Object();
             lock (O)
@@ -3376,12 +3376,12 @@ namespace HybridizerRefrigitz
                 if (!(ArrangmentsBoard))
                 {
                     ////{ //AllDraw.OutPut.Append("\r\n");for (int l = 0; l < Spaces; l++) //AllDraw.OutPut.Append(Space);  //AllDraw.OutPut.Append("SoldierRules:" + (TimeElapced.TimeNow() - Time).ToString());}Spaces--;
-                    return SoldierRulesaArrangmentsBoardZero(RowFirst, ColumnFirst, RowSecond, ColumnSecond, NotMoved, color , ExistInDestinationEnemy);
+                    return SoldierRulesaArrangmentsBoardZero(RowFirst, ColumnFirst, RowSecond, ColumnSecond, NotMoved, color, ExistInDestinationEnemy);
                 }
                 else
                 {
                     ////{ //AllDraw.OutPut.Append("\r\n");for (int l = 0; l < Spaces; l++) //AllDraw.OutPut.Append(Space);  //AllDraw.OutPut.Append("SoldierRules:" + (TimeElapced.TimeNow() - Time).ToString());}Spaces--;
-                    return SoldierRulesaArrangmentsBoardOne(RowFirst, ColumnFirst, RowSecond, ColumnSecond, NotMoved, color , ExistInDestinationEnemy);
+                    return SoldierRulesaArrangmentsBoardOne(RowFirst, ColumnFirst, RowSecond, ColumnSecond, NotMoved, color, ExistInDestinationEnemy);
                 }
                 
                 ///Return Not Validity.
