@@ -158,7 +158,10 @@ static string IsNullOrEmpty(string name)
         }
         else
             return;
-
+        ChessLibrary.FenNotation r = new ChessLibrary.FenNotation();
+        r.parse(fen);
+        //tarrget passent
+        string move = r.move;
         //pos.set(fen, GlobalMembersUcioption.Options["UCI_Chess960"], GlobalMembersThread.Threads.main());
         /*#if StateStackPtr_ConditionalDefinition1
             SetupStates = std.auto_ptr<Stack<StateInfo>>(new Stack<StateInfo>());
