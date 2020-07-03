@@ -1,0 +1,9 @@
+G:\'Personal'_'Files'\ChessBoardCtrl\bin\Debug\ChessBoardCtrl.dll
+G:\'Personal'_'Files'\ChessBoardCtrl\bin\Debug\ChessBoardCtrl.pdb
+G:\'Personal'_'Files'\ChessBoardCtrl\obj\Debug\ChessBoardCtrl.csprojAssemblyReference.cache
+G:\'Personal'_'Files'\ChessBoardCtrl\obj\Debug\ChessBoardCtrl.ChessBoard.resources
+G:\'Personal'_'Files'\ChessBoardCtrl\obj\Debug\ChessBoardCtrl.GameNavigation.resources
+G:\'Personal'_'Files'\ChessBoardCtrl\obj\Debug\ChessBoardCtrl.csproj.GenerateResource.cache
+G:\'Personal'_'Files'\ChessBoardCtrl\obj\Debug\ChessBoardCtrl.csproj.CoreCompileInputs.cache
+G:\'Personal'_'Files'\ChessBoardCtrl\obj\Debug\ChessBoardCtrl.dll
+G:\'Personal'_'Files'\ChessBoardCtrl\obj\Debug\ChessBoardCtrl.pdb
