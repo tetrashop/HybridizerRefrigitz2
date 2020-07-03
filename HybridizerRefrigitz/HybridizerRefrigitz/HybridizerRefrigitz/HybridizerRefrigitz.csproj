@@ -92,5 +92,11 @@
       <DependentUpon>ChessForm.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\ChessBoardCtrl\ChessBoardCtrl.csproj">
+      <Project>{8c5def94-2158-4832-9419-b61a006d7925}</Project>
+      <Name>ChessBoardCtrl</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
