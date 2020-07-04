@@ -255,7 +255,7 @@ static string IsNullOrEmpty(string name)
             HybridizerRefrigitzForm.Table[7, ColumnSource] = 0;
         }
         else
-             if (r.WQ)
+             if (r.BK)
         {
             HybridizerRefrigitz.ChessRules.SmallKingCastleBLACK = true;
 
@@ -268,7 +268,7 @@ static string IsNullOrEmpty(string name)
             HybridizerRefrigitzForm.Table[0, ColumnSource] = 0;
         }
         else
-        if (r.BK)
+        if (r.WQ)
         {
             if (GlobalMembersUci.t.t.order == 1)
             {
