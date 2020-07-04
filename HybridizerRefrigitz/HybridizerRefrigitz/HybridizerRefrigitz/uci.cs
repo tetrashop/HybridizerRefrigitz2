@@ -256,7 +256,7 @@ static string IsNullOrEmpty(string name)
             GlobalMembersUci.t.t.R.CromosomColumnFirst = ColumnSource;
             GlobalMembersUci.t.t.Play(GlobalMembersUci.t.t.R.CromosomRowFirst, GlobalMembersUci.t.t.R.CromosomColumnFirst);
 
-            GlobalMembersUci.t.t.R.CromosomRow = RowSource - 1;
+            GlobalMembersUci.t.t.R.CromosomRow = RowSource - 2;
             GlobalMembersUci.t.t.R.CromosomColumn = ColumnSource;
             GlobalMembersUci.t.t.Play(GlobalMembersUci.t.t.R.CromosomRow, GlobalMembersUci.t.t.R.CromosomColumn);
             //HybridizerRefrigitzForm.Table[RowSource - 1, ColumnDestination] = 4;
@@ -276,7 +276,7 @@ static string IsNullOrEmpty(string name)
             GlobalMembersUci.t.t.R.CromosomColumnFirst = ColumnSource;
             GlobalMembersUci.t.t.Play(GlobalMembersUci.t.t.R.CromosomRowFirst, GlobalMembersUci.t.t.R.CromosomColumnFirst);
 
-            GlobalMembersUci.t.t.R.CromosomRow = RowSource - 1;
+            GlobalMembersUci.t.t.R.CromosomRow = RowSource - 2;
             GlobalMembersUci.t.t.R.CromosomColumn = ColumnSource;
             GlobalMembersUci.t.t.Play(GlobalMembersUci.t.t.R.CromosomRow, GlobalMembersUci.t.t.R.CromosomColumn);
             /*  HybridizerRefrigitzForm.Table[RowSource - 1, ColumnDestination] = -4;
@@ -299,7 +299,7 @@ static string IsNullOrEmpty(string name)
                 GlobalMembersUci.t.t.R.CromosomColumnFirst = ColumnSource;
                 GlobalMembersUci.t.t.Play(GlobalMembersUci.t.t.R.CromosomRowFirst, GlobalMembersUci.t.t.R.CromosomColumnFirst);
 
-                GlobalMembersUci.t.t.R.CromosomRow = RowSource + 1;
+                GlobalMembersUci.t.t.R.CromosomRow = RowSource + 2;
                 GlobalMembersUci.t.t.R.CromosomColumn = ColumnSource;
                 GlobalMembersUci.t.t.Play(GlobalMembersUci.t.t.R.CromosomRow, GlobalMembersUci.t.t.R.CromosomColumn);
                 /*HybridizerRefrigitzForm.Table[RowSource + 1, ColumnDestination] = 4;
@@ -321,7 +321,7 @@ static string IsNullOrEmpty(string name)
             GlobalMembersUci.t.t.R.CromosomColumnFirst = ColumnSource;
             GlobalMembersUci.t.t.Play(GlobalMembersUci.t.t.R.CromosomRowFirst, GlobalMembersUci.t.t.R.CromosomColumnFirst);
 
-            GlobalMembersUci.t.t.R.CromosomRow = RowSource + 1;
+            GlobalMembersUci.t.t.R.CromosomRow = RowSource + 2;
             GlobalMembersUci.t.t.R.CromosomColumn = ColumnSource;
             GlobalMembersUci.t.t.Play(GlobalMembersUci.t.t.R.CromosomRow, GlobalMembersUci.t.t.R.CromosomColumn);
             /*  HybridizerRefrigitzForm.Table[RowSource + 1, ColumnDestination] = -4;
