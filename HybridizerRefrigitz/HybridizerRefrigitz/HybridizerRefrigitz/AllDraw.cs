@@ -16516,7 +16516,7 @@ namespace HybridizerRefrigitz
 
                 if (CalIdle == 2)
                     return true;
-                if (Timenow - TimeInitiation > TimeMax)
+                if (Timenow - TimeInitiation > TimeMax * 1000)
                     return true;
                 if (Kind == 1)
                 {
