@@ -145,6 +145,8 @@ namespace HybridizerRefrigitz
             {
                 if (!LoadP)
                 {
+                    brd = new Board();
+                    Table = brd.GetTable();
                     ////MessageBox.Show("Wait...");
                     var parallelOptions = new ParallelOptions();
                     parallelOptions.MaxDegreeOfParallelism = System.Threading.PlatformHelper.ProcessorCount;

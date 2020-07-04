@@ -9,7 +9,7 @@ namespace HybridizerRefrigitz
     /// </summary>
     public class Board : System.Object
     {
-        private int[,] square;
+        public int[,] square;
 
         public Board()
         {
