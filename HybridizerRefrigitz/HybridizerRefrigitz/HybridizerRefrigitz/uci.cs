@@ -512,19 +512,19 @@ static string IsNullOrEmpty(string name)
                     HybridizerRefrigitz.AllDraw.CalIdle = 2;
                     while (HybridizerRefrigitz.AllDraw.CalIdle != 1) { }
                 }
-                t.t.Play(AllDraw.OrderPlate, -1);
+                t.t.Play(-1, -1);
                 //undeterministic blok line location!
                 go(argv);
             }
 
             else if (token == "position")
             {
-                //position(pos, is);
+                position(argv);
             }
 
             else if (token == "setoption")
             {
-                //setoption(is);
+                //setoption(argv);
             }
 
             // Additional custom non-UCI commands, useful for debugging
@@ -565,6 +565,38 @@ static string IsNullOrEmpty(string name)
 
         // Threads.main()->wait_for_search_finished();
     }
+    void setoption(string[] Is)
+    {
+
+        string token, name="" ,value="";
+
+        token = Next(ref Is); ; // Consume "name" token
+
+        // Read option name (can contain spaces)
+        token = Next(ref Is);
+        while (token!="" && token != "value") {
+            if (name=="")
+                name += " 0" + token;
+            else
+                name +=" 1" + token;
+            token = Next(ref Is);
+        }
+        // Read option value (can contain spaces)
+        token = Next(ref Is);
+        while (token != "" && token != "value")
+        {
+            if (value == "")
+                value += " 0" + token;
+            else
+                value += " 1" + token;
+            token = Next(ref Is);
+        }
+       /*if (Options.count(name))
+            Options[name] = value;
+        else
+            sync_cout << "No such option: " << name << sync_endl;
+   */ }
+
     String Fen()
     {
         Object O = new Object();

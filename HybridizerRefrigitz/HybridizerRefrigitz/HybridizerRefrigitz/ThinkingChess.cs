@@ -9833,6 +9833,8 @@ namespace HybridizerRefrigitz
                     //Calculate Heuristic and Add to List and Cal Syntax.
                     if (!Sup)
                     {
+                        As(RowSource, ColumnSource, RowDestination, ColumnDestination);
+
                         String H = "";
                         Object A6 = new object();
                         lock (A6)
@@ -9984,6 +9986,8 @@ namespace HybridizerRefrigitz
                     //Calculate Heuristic and Add to List and Cal Syntax.
                     if (!Sup)
                     {
+                        As(RowSource, ColumnSource, RowDestination, ColumnDestination);
+
                         String H = "";
                         Object A6 = new object();
                         lock (A6)
@@ -10391,6 +10395,10 @@ namespace HybridizerRefrigitz
                 return LearningV;
             }
         }
+        void As(int i,int j,int ii,int jj)
+        {
+            Console.Write(Alphabet(i) + Number(j) + Alphabet(ii) + Number(jj));
+        }
         void CastlesThinkingHybridizerRefrigitz(ref int[] LoseOcuuredatChiled, ref int WinOcuuredatChiled, int DummyOrder, int DummyCurrentOrder, int[,] TableS, int RowSource, int ColumnSource, bool DoEnemySelf, bool PenRegStrore, bool EnemyCheckMateActionsString, int RowDestination, int ColumnDestination, bool Castle
         )
         {
@@ -10483,6 +10491,7 @@ namespace HybridizerRefrigitz
                     //Calculate Heuristic and Add to List and Cal Syntax.
                     if (!Sup)
                     {
+                        As(RowSource, ColumnSource, RowDestination, ColumnDestination);
                         String H = "";
                         Object A6 = new object();
                         lock (A6)
@@ -10615,6 +10624,8 @@ namespace HybridizerRefrigitz
                     //Calculate Heuristic and Add to List and Cal Syntax.
                     if (!Sup)
                     {
+                        As(RowSource, ColumnSource, RowDestination, ColumnDestination);
+
                         String H = "";
                         Object A6 = new object();
                         lock (A6)
@@ -10746,6 +10757,8 @@ namespace HybridizerRefrigitz
                     //Calculate Heuristic and Add to List and Cal Syntax.
                     if (!Sup)
                     {
+                        As(RowSource, ColumnSource, RowDestination, ColumnDestination);
+
                         String H = "";
                         Object A6 = new object();
                         lock (A6)
@@ -11914,6 +11927,8 @@ namespace HybridizerRefrigitz
                     //Calculate Heuristic and Add to List and Cal Syntax.
                     if (!Sup)
                     {
+                        As(RowSource, ColumnSource, RowDestination, ColumnDestination);
+
                         String H = "";
                         Object A6 = new object();
                         lock (A6)
@@ -12042,6 +12057,8 @@ namespace HybridizerRefrigitz
                 Object A6 = new Object();
                 lock (A6)
                 {
+                    As(RowSource, ColumnSource, RowDestination, ColumnDestination);
+
                     //if (IgnoreFromCheckandMateHeuristic)
 
                     newTask1 = Task.Factory.StartNew(() => HuMethod(ref Hu, HeuristicAttackValue, HeuristicMovementValue, HeuristicSelfSupportedValue, HeuristicReducedMovementValue, HeuristicReducedSupport, HeuristicReducedAttackValue, HeuristicDistributionValue, HeuristicKingSafe, HeuristicFromCenter, HeuristicKingDangour, HeuristicCheckedMate));
@@ -14491,6 +14508,8 @@ namespace HybridizerRefrigitz
                 Object A6 = new Object();
                 lock (A6)
                 {
+                    As(RowSource, ColumnSource, RowDestination, ColumnDestination);
+
                     //if (IgnoreFromCheckandMateHeuristic)
 
                     newTask1 = Task.Factory.StartNew(() => HuMethod(ref Hu, HeuristicAttackValue, HeuristicMovementValue, HeuristicSelfSupportedValue, HeuristicReducedMovementValue, HeuristicReducedSupport, HeuristicReducedAttackValue, HeuristicDistributionValue, HeuristicKingSafe, HeuristicFromCenter, HeuristicKingDangour, HeuristicCheckedMate));
