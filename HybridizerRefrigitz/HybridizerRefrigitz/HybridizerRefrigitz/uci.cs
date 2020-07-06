@@ -1,8 +1,11 @@
 using System.Collections.Generic;
 using System;
+using System.Threading.Tasks;
 using HybridizerRefrigitz;
 public class GlobalMembersUci
 {
+    static System.Threading.Thread tt = null;
+
     int i = 0;
     const string PieceToChar = "kqrnbp PBNRQK";
 
@@ -197,12 +200,31 @@ static string IsNullOrEmpty(string name)
             return S;
         }
     }
-
+    static void Output(ref string[] Is) {
+        object o = new object();
+        lock (o)
+        {
+            do
+            {if (Is != null
+                    )
+                {
+                    Is[Is.Length] = Next(ref HybridizerRefrigitz.ThinkingHybridizerRefrigitz.Out);
+                    if(Is.Length>0)
+                    Console.Write(Is[Is.Length - 1]);
+                }
+            } while (true);
+        }
+     }
 
     public static void position(//Position pos, 
         string[] Is //temporary parameter.
           )
     {
+        if (tt == null)
+        {
+           var tt = new Task(() => GlobalMembersUci.Output(ref Is));
+            tt.Start();
+        }
         ChessLibrary.FenNotation r = new ChessLibrary.FenNotation(StartFEN);
 
         //Move m;
@@ -332,7 +354,7 @@ static string IsNullOrEmpty(string name)
         }
 
 
-        //pos.set(fen, GlobalMembersUcioption.Options["UCI_Chess960"], GlobalMembersThread.Threads.main());
+        //pos.set(fen, UCIoption.Options["UCI_Chess960"], GlobalMembersThread.Threads.main());
         /*#if StateStackPtr_ConditionalDefinition1
             SetupStates = std.auto_ptr<Stack<StateInfo>>(new Stack<StateInfo>());
         #elif StateStackPtr_ConditionalDefinition2
@@ -432,138 +454,6 @@ static string IsNullOrEmpty(string name)
 
         //GlobalMembersThread.Threads.start_thinking(pos, limits, SetupStates);
 
-    }
-    public static void loop(string[] argv)
-    {
-
-        //Position pos;
-        string token = "", cmd = "";
-
-        //pos.set(StartFEN, false, &States->back(), Threads.main());
-
-        for (int i = 1; i < argv.Length; ++i)
-            cmd += (argv[i]).ToString() + " ";
-
-        do
-        {
-
-            if (argv.Length == 1 && cmd == "") // Block here waiting for input or EOF
-                cmd = "quit";
-
-            // istringstream is (cmd);
-
-            token = ""; // getline() could return empty or blank line
-                        //is >> skipws >> token;
-            token = Console.ReadLine();
-            // The GUI sends 'ponderhit' to tell us to ponder on the same move the
-            // opponent has played. In case Signals.stopOnPonderhit is set we are
-            // waiting for 'ponderhit' to stop the search (for instance because we
-            // already ran out of time), otherwise we should continue searching but
-            // switching from pondering to normal search.
-            if (token == "quit"
-                || token == "stop"
-                || (token == "ponderhit" && HybridizerRefrigitz.AllDraw.CalIdle == 0
-                ))
-            {
-                if (HybridizerRefrigitz.AllDraw.CalIdle == 0)
-                {
-                    HybridizerRefrigitz.AllDraw.CalIdle = 2;
-                    while (HybridizerRefrigitz.AllDraw.CalIdle != 1) { }
-                }
-                t.t.Play(-1, -1);//remain fen
-                StartFEN = (new GlobalMembersUci()).Fen();
-            }
-            else if (token == "ponderhit")
-            {
-                HybridizerRefrigitz.AllDraw.CalIdle = 0;
-
-
-
-            }
-            else if (token == "uci")
-
-            {
-                Console.WriteLine("\nid name tetrashop.ir and faradars.org 2020 Hybridizer chess engine.");
-
-                //sync_cout << "id name " << engine_info(true)
-                //     << "\n" << Options
-                //    << "\nuciok" << sync_endl;
-
-            }
-            else if (token == "ucinewgame")
-
-
-            {
-                t.t.Form1_Load();
-
-            }
-            else if (token == "isready")
-            {
-                if (AllDraw.CalIdle == 0)
-                    Console.WriteLine("\nreadyok");
-
-                    //sync_cout << "readyok" << sync_endl;
-            }
-
-            else if (token == "go")
-            {
-               if (HybridizerRefrigitz.AllDraw.CalIdle == 0)
-                {
-                    HybridizerRefrigitz.AllDraw.CalIdle = 2;
-                    while (HybridizerRefrigitz.AllDraw.CalIdle != 1) { }
-                }
-                t.t.Play(-1, -1);
-                //undeterministic blok line location!
-                go(argv);
-            }
-
-            else if (token == "position")
-            {
-                position(argv);
-            }
-
-            else if (token == "setoption")
-            {
-                //setoption(argv);
-            }
-
-            // Additional custom non-UCI commands, useful for debugging
-            else if (token == "flip")
-            {
-                //pos.flip();
-            }
-            else if (token == "bench")
-            {
-                //benchmark(pos, is
-            }
-            else if (token == "d")
-            {
-                //sync_cout << pos << sync_endl;
-            }
-            else if (token == "eval")
-            {
-                //sync_cout << Eval::trace(pos) << sync_endl;
-            }
-
-            else if (token == "perft")
-            {
-                //int depth;
-                //stringstream ss;
-
-                //is >> depth;
-                //ss << Options["Hash"] << " "
-                //  << Options["Threads"] << " " << depth << " current perft";
-
-                //  benchmark(pos, ss);
-            }
-            else
-            {
-                //sync_cout << "Unknown command: " << cmd << sync_endl;
-            }
-
-        } while (token != "quit" && argv.Length == 1); // Passed args have one-shot behaviour
-
-        // Threads.main()->wait_for_search_finished();
     }
     void setoption(string[] Is)
     {
@@ -694,7 +584,138 @@ static string IsNullOrEmpty(string name)
 
         }
     }
+    public static void loop(string[] argv)
+    {
 
+        //Position pos;
+        string token = "", cmd = "";
+
+        //pos.set(StartFEN, false, &States->back(), Threads.main());
+
+        for (int i = 1; i < argv.Length; ++i)
+            cmd += (argv[i]).ToString() + " ";
+
+        do
+        {
+
+            if (argv.Length == 1 && cmd == "") // Block here waiting for input or EOF
+                cmd = "quit";
+
+            // istringstream is (cmd);
+
+            token = ""; // getline() could return empty or blank line
+                        //is >> skipws >> token;
+            token = Console.ReadLine();
+            // The GUI sends 'ponderhit' to tell us to ponder on the same move the
+            // opponent has played. In case Signals.stopOnPonderhit is set we are
+            // waiting for 'ponderhit' to stop the search (for instance because we
+            // already ran out of time), otherwise we should continue searching but
+            // switching from pondering to normal search.
+            if (token == "quit"
+                || token == "stop"
+                || (token == "ponderhit" && HybridizerRefrigitz.AllDraw.CalIdle == 0
+                ))
+            {
+                if (HybridizerRefrigitz.AllDraw.CalIdle == 0)
+                {
+                    HybridizerRefrigitz.AllDraw.CalIdle = 2;
+                    while (HybridizerRefrigitz.AllDraw.CalIdle != 1) { }
+                }
+                t.t.Play(-1, -1);//remain fen
+                StartFEN = (new GlobalMembersUci()).Fen();
+            }
+            else if (token == "ponderhit")
+            {
+                HybridizerRefrigitz.AllDraw.CalIdle = 0;
+
+
+
+            }
+            else if (token == "uci")
+
+            {
+                Console.WriteLine("\nid name tetrashop.ir and faradars.org 2020 Hybridizer chess engine.");
+
+                //sync_cout << "id name " << engine_info(true)
+                //     << "\n" << Options
+                //    << "\nuciok" << sync_endl;
+
+            }
+            else if (token == "ucinewgame")
+
+
+            {
+                t.t.Form1_Load();
+
+            }
+            else if (token == "isready")
+            {
+                if (AllDraw.CalIdle == 0)
+                    Console.WriteLine("\nreadyok");
+
+                //sync_cout << "readyok" << sync_endl;
+            }
+
+            else if (token == "go")
+            {
+                if (HybridizerRefrigitz.AllDraw.CalIdle == 0)
+                {
+                    HybridizerRefrigitz.AllDraw.CalIdle = 2;
+                    while (HybridizerRefrigitz.AllDraw.CalIdle != 1) { }
+                }
+                t.t.Play(-1, -1);
+                //undeterministic blok line location!
+                go(argv);
+            }
+
+            else if (token == "position")
+            {
+                position(argv);
+            }
+
+            else if (token == "setoption")
+            {
+                //setoption(argv);
+            }
+
+            // Additional custom non-UCI commands, useful for debugging
+            else if (token == "flip")
+            {
+                //pos.flip();
+            }
+            else if (token == "bench")
+            {
+                //benchmark(pos, is
+            }
+            else if (token == "d")
+            {
+                //sync_cout << pos << sync_endl;
+            }
+            else if (token == "eval")
+            {
+                //sync_cout << Eval::trace(pos) << sync_endl;
+            }
+
+            else if (token == "perft")
+            {
+                //int depth;
+                //stringstream ss;
+
+                //is >> depth;
+                //ss << Options["Hash"] << " "
+                //  << Options["Threads"] << " " << depth << " current perft";
+
+                //  benchmark(pos, ss);
+            }
+            else
+            {
+                //sync_cout << "Unknown command: " << cmd << sync_endl;
+            }
+
+        } while (token != "quit" && argv.Length == 1); // Passed args have one-shot behaviour
+
+        // Threads.main()->wait_for_search_finished();
+    }
 }
 
 
@@ -828,3 +849,66 @@ public enum Color
     NO_COLOR,
     COLOR_NB = 2
 }
+namespace UCI
+{
+ 
+    //C++ TO C# CONVERTER NOTE: C# has no need of forward class declarations:
+    //class Option;
+
+    /// Custom comparator because UCI options should be case insensitive
+    public class CaseInsensitiveLess
+    {
+        //C++ TO C# CONVERTER WARNING: 'const' methods are not available in C#:
+        //ORIGINAL LINE: bool operator ()(const string&, const string&) const;
+        //C++ TO C# CONVERTER TODO TASK: The implementation of the following method could not be found:
+        //  bool operator ()(string NamelessParameter1, string NamelessParameter2);
+    }
+
+    /// Our options container is actually a std::map
+
+    /// Option class implements an option as defined by UCI protocol
+    public class Option
+    {
+
+        private delegate void OnChange(Option NamelessParameter);
+
+
+        //C++ TO C# CONVERTER TODO TASK: The implementation of the following method could not be found:
+        //  Option(OnChange);
+        //C++ TO C# CONVERTER TODO TASK: The implementation of the following method could not be found:
+        //  Option(bool v, OnChange);
+        //C++ TO C# CONVERTER TODO TASK: The implementation of the following method could not be found:
+        //  Option(string v, OnChange);
+        //C++ TO C# CONVERTER TODO TASK: The implementation of the following method could not be found:
+        //  Option(int v, int min, int max, OnChange);
+
+        //C++ TO C# CONVERTER NOTE: This 'CopyFrom' method was converted from the original C++ copy assignment operator:
+        //ORIGINAL LINE: Option& operator =(const string&);
+        //C++ TO C# CONVERTER TODO TASK: The implementation of the following method could not be found:
+        //  Option CopyFrom(string NamelessParameter);
+        //C++ TO C# CONVERTER TODO TASK: The implementation of the following method could not be found:
+        //  void operator <<(Option NamelessParameter);
+        //C++ TO C# CONVERTER WARNING: 'const' methods are not available in C#:
+        //ORIGINAL LINE: operator int() const;
+        //C++ TO C# CONVERTER TODO TASK: The implementation of the following method could not be found:
+        //  operator int();
+        //C++ TO C# CONVERTER WARNING: 'const' methods are not available in C#:
+        //ORIGINAL LINE: operator string() const;
+        //C++ TO C# CONVERTER TODO TASK: The implementation of the following method could not be found:
+        //  operator string();
+        public static bool BestMove;
+        //C++ TO C# CONVERTER TODO TASK: C# has no concept of a 'friend' function:
+        //ORIGINAL LINE: friend std::ostream& operator <<(std::ostream&, const ClassicMap<string, Option, CaseInsensitiveLess>&);
+        //C++ TO C# CONVERTER TODO TASK: The implementation of the following method could not be found:
+        //  std::ostream operator <<(std::ostream NamelessParameter1, ClassicMap<string, Option, CaseInsensitiveLess>);
+
+        private string defaultValue;
+        private string currentValue;
+        private string type;
+        private int min;
+        private int max;
+        private uint idx;
+        private OnChange on_change;
+    }
+
+} // namespace UCI

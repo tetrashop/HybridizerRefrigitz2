@@ -98,8 +98,7 @@ namespace GalleryStudio
                     BinaryFormatter Formatters = new BinaryFormatter();
                     DummyFileStream.Seek(0, SeekOrigin.Begin);
 
-                    Console.WriteLine("Loading...");
-                    tt = (HybridizerRefrigitz.AllDraw)Formatters.Deserialize(DummyFileStream);
+                     tt = (HybridizerRefrigitz.AllDraw)Formatters.Deserialize(DummyFileStream);
                     if (tt == null)
                         return tt;
                     try
@@ -115,6 +114,7 @@ namespace GalleryStudio
                         DummyFileStream.Close();
                     }
 
+                    Console.WriteLine("\nCompleted.");
 
 
                     return tt;

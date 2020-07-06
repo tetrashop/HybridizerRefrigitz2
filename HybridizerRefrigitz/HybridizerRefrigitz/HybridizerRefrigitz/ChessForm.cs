@@ -350,7 +350,7 @@ namespace HybridizerRefrigitz
                             jj = R.CromosomColumnFirst;
                             i = ii;
                             j = jj;
-                            
+                            Console.Write("\nBestMove :" + (new ThinkingHybridizerRefrigitz()).AsS(R.CromosomRowFirst, R.CromosomColumnFirst, R.CromosomRow, R.CromosomColumn));
                             k = brd.getInfo(i, j);
                             //if (k == 0)
                             

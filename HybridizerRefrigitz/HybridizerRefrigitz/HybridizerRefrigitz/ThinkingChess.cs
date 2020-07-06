@@ -51,6 +51,8 @@ namespace HybridizerRefrigitz
     [Serializable]
     public class ThinkingHybridizerRefrigitz//: IDisposable
     {
+        public static string[] Out=new string[10000];
+
         List<List<List<int[]>>> MovableAllObjectsList = new List<List<List<int[]>>>();
         public int RemoveOfDisturbIndex = -1;
         int HeuristicDoubleDefenceIndexInOnGameMidle = 0;
@@ -398,6 +400,10 @@ namespace HybridizerRefrigitz
 
             }
         }
+        public ThinkingHybridizerRefrigitz()
+        {
+        }
+
         //Constructor
         public ThinkingHybridizerRefrigitz(int iInde, int KindO, int CurrentAStarGredy, bool MovementsAStarGreedyHeuristicTFou, bool IgnoreSelfObject, bool UsePenaltyRegardMechnisa, bool BestMovment, bool PredictHurist, bool OnlySel, bool AStarGreedyHuris, bool Arrangments, int i, int j)
         {
@@ -10397,7 +10403,19 @@ namespace HybridizerRefrigitz
         }
         void As(int i,int j,int ii,int jj)
         {
-            Console.Write(Alphabet(i) + Number(j) + Alphabet(ii) + Number(jj));
+            object o = new object();
+            lock (o)
+            {
+                Out[Out.Length] = AsS(i, j, ii, jj);
+            }
+        }
+        public  string AsS(int i, int j, int ii, int jj)
+        {
+            object o = new object();
+            lock (o)
+            {
+               return Alphabet(i) + Number(j) + Alphabet(ii) + Number(jj);
+            }
         }
         void CastlesThinkingHybridizerRefrigitz(ref int[] LoseOcuuredatChiled, ref int WinOcuuredatChiled, int DummyOrder, int DummyCurrentOrder, int[,] TableS, int RowSource, int ColumnSource, bool DoEnemySelf, bool PenRegStrore, bool EnemyCheckMateActionsString, int RowDestination, int ColumnDestination, bool Castle
         )
