@@ -78,6 +78,7 @@ public class ArtificialInteligenceMove
 							//LevelMul++;
 							IdleProgress=false;
 							ArtificialInteligenceMove.UpdateIsRunning=true;
+                            Console.Write("\nIdle finished");
 
 							HybridizerRefrigitz.AllDraw.CalIdle=1;
 						}
@@ -85,23 +86,25 @@ public class ArtificialInteligenceMove
 						{
 					
 							HybridizerRefrigitz.AllDraw.CalIdle=5;
-						}
-//						if(HybridizerRefrigitz.AllDraw.CalIdle==2)
-//						{
-//							Debug.Log("Ready to 5 base");
-//
-//							HybridizerRefrigitz.AllDraw.CalIdle=5;
-//						}
-//						Debug.Log("Ready to 0 base");
+                            Console.Write("\nIdle 5");
+                        }
+                        //						if(HybridizerRefrigitz.AllDraw.CalIdle==2)
+                        //						{
+                        //							Debug.Log("Ready to 5 base");
+                        //
+                        //							HybridizerRefrigitz.AllDraw.CalIdle=5;
+                        //						}
+                        //						Debug.Log("Ready to 0 base");
 
-						if(HybridizerRefrigitz.AllDraw.CalIdle==5)
+                        if (HybridizerRefrigitz.AllDraw.CalIdle==5)
 						{		HybridizerRefrigitz.AllDraw.CalIdle=1;
 //						        HybridizerRefrigitz.AllDraw.IdleInWork=false;
 
 							//Debug.Log("Ready to 1 base");
 							ReadyZero=true;
-						}
-						while(HybridizerRefrigitz.AllDraw.CalIdle==1)
+                            Console.Write("\nIdle 1");
+                        }
+                        while (HybridizerRefrigitz.AllDraw.CalIdle==1)
 						{	
 
 							//Thread.Sleep(1);
@@ -110,13 +113,15 @@ public class ArtificialInteligenceMove
 						{	
 							//Thread.Sleep(1);
 						}
+                        UpdateIsRunning = false;
 
-						HybridizerRefrigitz.AllDraw.IdleInWork=true;
+                        HybridizerRefrigitz.AllDraw.IdleInWork=true;
 						HybridizerRefrigitz.AllDraw.CalIdle=0;
 						IdleProgress=true;
-//				
-					}
-				}
+                        //				
+                        Console.Write("\nIdle ready");
+                    }
+                }
 				} while(HybridizerRefrigitz.AllDraw.CalIdle!=3);
 		
 		}

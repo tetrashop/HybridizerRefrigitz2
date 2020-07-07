@@ -56,15 +56,17 @@ static string IsNullOrEmpty(string name)
     // The function sets up the position described in the given FEN string ("fen")
     // or the starting position ("startpos") and then makes the moves given in the
     // following move list ("moves").
-    static string Next(ref string[] Is)
+    static string Next(ref string Is)
     {
         string m = "";
         try
         {
-            m = Is[0];
-            for (int b = 0; b < Is.Length - 1; b++)
-                Is[b] = Is[b + 1];
-            Is[Is.Length - 1] = "\0";
+            if (Is.Length > 0)
+            {
+                m = Is.Substring(0, Is.IndexOf(" "));
+                Is = Is.Substring(Is.IndexOf(" ")+1, Is.Length- Is.IndexOf(" ")-1);
+                
+            }
         }
         catch (Exception t)
         {
@@ -200,7 +202,7 @@ static string IsNullOrEmpty(string name)
             return S;
         }
     }
-    static void Output(ref string[] Is) {
+    static void Output( ref string Is) {
         object o = new object();
         lock (o)
         {
@@ -208,21 +210,22 @@ static string IsNullOrEmpty(string name)
             {if (Is != null
                     )
                 {
-                    Is[Is.Length] = Next(ref HybridizerRefrigitz.ThinkingHybridizerRefrigitz.Out);
-                    if(Is.Length>0)
-                    Console.Write(Is[Is.Length - 1]);
+                    Is = Next(ref ThinkingHybridizerRefrigitz.OutP);
+                   
+                    Console.Write(Is);
                 }
             } while (true);
         }
      }
 
     public static void position(//Position pos, 
-        string[] Is //temporary parameter.
+        ref string Is //temporary parameter.
           )
     {
         if (tt == null)
         {
-           var tt = new Task(() => GlobalMembersUci.Output(ref Is));
+            string IsA = Is;
+           var tt = new Task(() => GlobalMembersUci.Output(ref IsA));
             tt.Start();
         }
         ChessLibrary.FenNotation r = new ChessLibrary.FenNotation(StartFEN);
@@ -374,7 +377,7 @@ static string IsNullOrEmpty(string name)
     }
 
 
-    public static void go(string[] Is//, Position pos//, istringstream @is //int a is for distinguiish temporarly
+    public static void go(ref string Is//, Position pos//, istringstream @is //int a is for distinguiish temporarly
           )
     {
 
@@ -455,7 +458,7 @@ static string IsNullOrEmpty(string name)
         //GlobalMembersThread.Threads.start_thinking(pos, limits, SetupStates);
 
     }
-    void setoption(string[] Is)
+    void setoption(string Is)
     {
 
         string token, name="" ,value="";
@@ -605,7 +608,13 @@ static string IsNullOrEmpty(string name)
 
             token = ""; // getline() could return empty or blank line
                         //is >> skipws >> token;
-            token = Console.ReadLine();
+            if (cmd != "quit")
+            {
+
+                cmd = Console.ReadLine();
+                token = Next(ref cmd);
+
+            }
             // The GUI sends 'ponderhit' to tell us to ponder on the same move the
             // opponent has played. In case Signals.stopOnPonderhit is set we are
             // waiting for 'ponderhit' to stop the search (for instance because we
@@ -658,19 +667,31 @@ static string IsNullOrEmpty(string name)
 
             else if (token == "go")
             {
-                if (HybridizerRefrigitz.AllDraw.CalIdle == 0)
+                if (HybridizerRefrigitz.AllDraw.CalIdle != 1)
                 {
-                    HybridizerRefrigitz.AllDraw.CalIdle = 2;
-                    while (HybridizerRefrigitz.AllDraw.CalIdle != 1) { }
-                }
+                    if (HybridizerRefrigitz.AllDraw.CalIdle == 0)
+                    {
+                        Console.Write("\ngo 0");
+
+                        HybridizerRefrigitz.AllDraw.CalIdle = 2;
+                        Console.Write("\ngo 2");
+                        while (HybridizerRefrigitz.AllDraw.CalIdle != 1)
+                        {
+                        }
+                        Console.Write("\ngo 1");
+                    }
+                } //undeterministic blok line location!
+                Console.Write("\ngo go");
+                go(ref cmd);
+
+                Console.Write("\ngo play");
                 t.t.Play(-1, -1);
-                //undeterministic blok line location!
-                go(argv);
+                Console.Write("\ngo finished.");
             }
 
             else if (token == "position")
             {
-                position(argv);
+                position(ref cmd);
             }
 
             else if (token == "setoption")

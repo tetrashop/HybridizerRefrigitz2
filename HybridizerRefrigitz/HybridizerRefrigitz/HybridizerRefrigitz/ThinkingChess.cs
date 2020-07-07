@@ -51,7 +51,7 @@ namespace HybridizerRefrigitz
     [Serializable]
     public class ThinkingHybridizerRefrigitz//: IDisposable
     {
-        public static string[] Out=new string[10000];
+        public static string OutP="";
 
         List<List<List<int[]>>> MovableAllObjectsList = new List<List<List<int[]>>>();
         public int RemoveOfDisturbIndex = -1;
@@ -10406,7 +10406,7 @@ namespace HybridizerRefrigitz
             object o = new object();
             lock (o)
             {
-                Out[Out.Length] = AsS(i, j, ii, jj);
+                OutP = AsS(i, j, ii, jj);
             }
         }
         public  string AsS(int i, int j, int ii, int jj)
