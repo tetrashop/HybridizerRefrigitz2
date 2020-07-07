@@ -37,10 +37,26 @@ public class GlobalMembersUci
 
 
 
-// setoption() is called when engine receives the "setoption" UCI command. The
-// function updates the UCI option ("name") to the given value ("value").
+    // setoption() is called when engine receives the "setoption" UCI command. The
+    // function updates the UCI option ("name") to the given value ("value").
+    public static void Output(ref string Is)
+    {
+        object o = new object();
+        lock (o)
+        {
+            do
+            {
+                if (Is != null
+                       )
+                {
+                    Is = GlobalMembersUci.Next(ref ThinkingHybridizerRefrigitz.OutP);
 
-static string IsNullOrEmpty(string name)
+                    Console.Write(Is);
+                }
+            } while (true);
+        }
+    }
+    static string IsNullOrEmpty(string name)
 
     {
         if (name != null)
@@ -56,7 +72,7 @@ static string IsNullOrEmpty(string name)
     // The function sets up the position described in the given FEN string ("fen")
     // or the starting position ("startpos") and then makes the moves given in the
     // following move list ("moves").
-    static string Next(ref string Is)
+   public static string Next(ref string Is)
     {
         string m = "";
         try
@@ -70,7 +86,9 @@ static string IsNullOrEmpty(string name)
         }
         catch (Exception t)
         {
-            return null;
+            m = Is;
+            Is = "";/// "quit";
+            return m;
 
         }
 
@@ -202,22 +220,7 @@ static string IsNullOrEmpty(string name)
             return S;
         }
     }
-    static void Output( ref string Is) {
-        object o = new object();
-        lock (o)
-        {
-            do
-            {if (Is != null
-                    )
-                {
-                    Is = Next(ref ThinkingHybridizerRefrigitz.OutP);
-                   
-                    Console.Write(Is);
-                }
-            } while (true);
-        }
-     }
-
+  
     public static void position(//Position pos, 
         ref string Is //temporary parameter.
           )
@@ -225,7 +228,7 @@ static string IsNullOrEmpty(string name)
         if (tt == null)
         {
             string IsA = Is;
-           var tt = new Task(() => GlobalMembersUci.Output(ref IsA));
+            var tt = new Task(() => GlobalMembersUci.Output(ref IsA));
             tt.Start();
         }
         ChessLibrary.FenNotation r = new ChessLibrary.FenNotation(StartFEN);
@@ -385,14 +388,14 @@ static string IsNullOrEmpty(string name)
         string token = "";
 
         token = Next(ref Is);
-        while (token != null)
+        while (token != null && token != "")
         {
             if (token == "searchmoves"
                 )
             {
                 token = Next(ref Is);
 
-                while (token != null)
+                while (token != null&&token!="")
                 {
                     //limits.searchmoves.Add(GlobalMembersUci.to_move(pos, token));
                     token = Next(ref Is);
@@ -872,7 +875,8 @@ public enum Color
 }
 namespace UCI
 {
- 
+    
+
     //C++ TO C# CONVERTER NOTE: C# has no need of forward class declarations:
     //class Option;
 
@@ -887,10 +891,11 @@ namespace UCI
 
     /// Our options container is actually a std::map
 
-    /// Option class implements an option as defined by UCI protocol
+    /// Option class implements an option as defined  by UCI protocol
     public class Option
     {
 
+        
         private delegate void OnChange(Option NamelessParameter);
 
 

@@ -53,8 +53,17 @@ namespace HybridizerRefrigitz
                         GlobalMembersUci.t.t.Form1_Load();
                 }
             }
-            GlobalMembersUci.loop(args);
+            var r = new Task(()=>loopT(args));
+            r.Start();
+        }
+        static void loopT(string[] args)
+        {
+            do
+            {
+                GlobalMembersUci.loop(args);
+            } while (true);
         }
     }
+   
 }
 //End of Documents.
