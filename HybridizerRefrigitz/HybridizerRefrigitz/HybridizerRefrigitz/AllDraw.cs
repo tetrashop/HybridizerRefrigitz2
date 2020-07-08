@@ -16505,6 +16505,9 @@ namespace HybridizerRefrigitz
                 //For WHITE Soldeirs Objects. 
                 Parallel.For(0, SodierMidle, i =>
                 {
+                    ///if (InitiateAStarGreedyt(i, 1, Order))
+                        //return;
+
                     var H = Task.Factory.StartNew(() => InitiateAStarGreedytSodler(i, iii, jjj, CloneATable(Table), DummyOrder, DummyCurrentOrder, iAStarGreedy, ii, jj, a, CloneATable(Tab), Order, TB, FOUND, LeafAStarGreedy));
                     H.Wait();
                     H.Dispose();
@@ -16660,7 +16663,7 @@ namespace HybridizerRefrigitz
                     Order = DummyOrder;
                     ChessRules.CurrentOrder = DummyCurrentOrder;
                     //If Solders Not Exist Continue and Traversal Back.
-                    if (InitiateAStarGreedyt(i, 1, Order))
+                    ///if (InitiateAStarGreedyt(i, 1, Order))
                     {
                         AllDraw Th = AStarGreedyString;
                         if (IsAtLeastAllObjectIsNull())
@@ -16715,6 +16718,8 @@ namespace HybridizerRefrigitz
             {
                 Parallel.For(0, ElefantMidle, i =>
                 {
+                    //if (InitiateAStarGreedyt(i, 2, Order))
+                       // return;
                     var H = Task.Factory.StartNew(() => InitiateAStarGreedytElephant(i, iii, jjj, CloneATable(Table), DummyOrder, DummyCurrentOrder, iAStarGreedy, ii, jj, a, CloneATable(Tab), Order, TB, FOUND, LeafAStarGreedy));
                     H.Wait();
                     H.Dispose();
@@ -16735,7 +16740,7 @@ namespace HybridizerRefrigitz
                     Order = DummyOrder;
                     ChessRules.CurrentOrder = DummyCurrentOrder;
                     //Ignore of Non Exist Current Elephant WHITE Objects.
-                    if (InitiateAStarGreedyt(i, 2, Order))
+                    ///if (InitiateAStarGreedyt(i, 2, Order))
                     {
                         AllDraw Th = AStarGreedyString;
                         if (IsAtLeastAllObjectIsNull())
@@ -16791,6 +16796,8 @@ namespace HybridizerRefrigitz
                 //For All WHITE Hourse Objects.
                 Parallel.For(0, HourseMidle, i =>
                 {
+                    //if (InitiateAStarGreedyt(i, 3, Order))
+                      //  return;
                     var H = Task.Factory.StartNew(() => InitiateAStarGreedythHourse(i, iii, jjj, CloneATable(Table), DummyOrder, DummyCurrentOrder, iAStarGreedy, ii, jj, a, CloneATable(Tab), Order, TB, FOUND, LeafAStarGreedy));
                     H.Wait();
                     H.Dispose();
@@ -16811,7 +16818,7 @@ namespace HybridizerRefrigitz
                     Order = DummyOrder;
                     ChessRules.CurrentOrder = DummyCurrentOrder;
                     //Ignore of Non Exist Current WHITE Hourse Objects.
-                    if (InitiateAStarGreedyt(i, 3, Order))
+                    ///if (InitiateAStarGreedyt(i, 3, Order))
                     {
                         AllDraw Th = AStarGreedyString;
                         if (IsAtLeastAllObjectIsNull())
@@ -16867,6 +16874,8 @@ namespace HybridizerRefrigitz
                 //For All Possible WHITE Castles Objects.
                 Parallel.For(0, CastleMidle, i =>
                 {
+                    //if (InitiateAStarGreedyt(i, 4, Order))
+                       // return;
                     var H = Task.Factory.StartNew(() => InitiateAStarGreedythCastle(i, iii, jjj, CloneATable(Table), DummyOrder, DummyCurrentOrder, iAStarGreedy, ii, jj, a, CloneATable(Tab), Order, TB, FOUND, LeafAStarGreedy));
                     H.Wait();
                     H.Dispose();
@@ -16887,7 +16896,7 @@ namespace HybridizerRefrigitz
                     Order = DummyOrder;
                     ChessRules.CurrentOrder = DummyCurrentOrder;
                     //When Current Castles WHITE Not Exist Continue Traversal Back.
-                    if (InitiateAStarGreedyt(i, 4, Order))
+                    ///if (InitiateAStarGreedyt(i, 4, Order))
                     {
                         AllDraw Th = AStarGreedyString;
                         if (IsAtLeastAllObjectIsNull())
@@ -16944,6 +16953,8 @@ namespace HybridizerRefrigitz
                 //For All Possible WHITE Minister Movments.
                 Parallel.For(0, MinisterMidle, i =>
                 {
+                    //if (InitiateAStarGreedyt(i, 5, Order))
+                       // return;
                     var H = Task.Factory.StartNew(() => InitiateAStarGreedythMinister(i, iii, jjj, CloneATable(Table), DummyOrder, DummyCurrentOrder, iAStarGreedy, ii, jj, a, CloneATable(Tab), Order, TB, FOUND, LeafAStarGreedy));
                     H.Wait();
                     H.Dispose();
@@ -16964,7 +16975,7 @@ namespace HybridizerRefrigitz
                     Order = DummyOrder;
                     ChessRules.CurrentOrder = DummyCurrentOrder;
                     //For Each Non Exist WHITE Minister Objectives.
-                    if (InitiateAStarGreedyt(i, 5, Order))
+                    ///if (InitiateAStarGreedyt(i, 5, Order))
                     {
                         AllDraw Th = AStarGreedyString;
                         if (IsAtLeastAllObjectIsNull())
@@ -17020,6 +17031,8 @@ namespace HybridizerRefrigitz
                 //For All Possible WHITE King Objects.
                 Parallel.For(0, KingMidle, i =>
                 {
+                    //if (InitiateAStarGreedyt(i, 6, Order))
+                        //return;
                     var H = Task.Factory.StartNew(() => InitiateAStarGreedythKing(i, iii, jjj, CloneATable(Table), DummyOrder, DummyCurrentOrder, iAStarGreedy, ii, jj, a, CloneATable(Tab), Order, TB, FOUND, LeafAStarGreedy));
                     H.Wait();
                     H.Dispose();
@@ -17040,7 +17053,7 @@ namespace HybridizerRefrigitz
                     Order = DummyOrder;
                     ChessRules.CurrentOrder = DummyCurrentOrder;
                     //If There is Not Current Object Continue Traversal Back.
-                    if (InitiateAStarGreedyt(i, 6, Order))
+                    ///if (InitiateAStarGreedyt(i, 6, Order))
                     {
                         AllDraw Th = AStarGreedyString;
                         if (IsAtLeastAllObjectIsNull())
@@ -17100,6 +17113,8 @@ namespace HybridizerRefrigitz
                 Parallel.For(SodierMidle, SodierHigh, i =>
 
                 {
+                    //if (InitiateAStarGreedyt(i, 1, Order))
+                      //  return;
                     var H = Task.Factory.StartNew(() => InitiateAStarGreedytSodler(i, iii, jjj, CloneATable(Table), DummyOrder, DummyCurrentOrder, iAStarGreedy, ii, jj, a, CloneATable(Tab), Order, TB, FOUND, LeafAStarGreedy));
                     H.Wait();
                     H.Dispose();
@@ -17123,6 +17138,8 @@ namespace HybridizerRefrigitz
                 Parallel.For(ElefantMidle, ElefantHigh, i =>
 
                 {
+                    //if (InitiateAStarGreedyt(i, 2, Order))
+                       // return;
                     var H = Task.Factory.StartNew(() => InitiateAStarGreedytElephant(i, iii, jjj, CloneATable(Table), DummyOrder, DummyCurrentOrder, iAStarGreedy, ii, jj, a, CloneATable(Tab), Order, TB, FOUND, LeafAStarGreedy));
                     H.Wait();
                     H.Dispose();
@@ -17145,6 +17162,8 @@ namespace HybridizerRefrigitz
                 Parallel.For(HourseMidle, HourseHight, i =>
 
                 {
+                    //if (InitiateAStarGreedyt(i, 3, Order))
+                       // return;
                     var H = Task.Factory.StartNew(() => InitiateAStarGreedythHourse(i, iii, jjj, CloneATable(Table), DummyOrder, DummyCurrentOrder, iAStarGreedy, ii, jj, a, CloneATable(Tab), Order, TB, FOUND, LeafAStarGreedy));
                     H.Wait();
                     H.Dispose();
@@ -17167,6 +17186,8 @@ namespace HybridizerRefrigitz
                 Parallel.For(CastleMidle, CastleHigh, i =>
 
                 {
+                    //if (InitiateAStarGreedyt(i, 4, Order))
+                        //return;
                     var H = Task.Factory.StartNew(() => InitiateAStarGreedythCastle(i, iii, jjj, CloneATable(Table), DummyOrder, DummyCurrentOrder, iAStarGreedy, ii, jj, a, CloneATable(Tab), Order, TB, FOUND, LeafAStarGreedy));
                     H.Wait();
                     H.Dispose();
@@ -17190,6 +17211,8 @@ namespace HybridizerRefrigitz
                 Parallel.For(MinisterMidle, MinisterHigh, i =>
 
                 {
+                    //if (InitiateAStarGreedyt(i, 5, Order))
+                        //return;
                     var H = Task.Factory.StartNew(() => InitiateAStarGreedythMinister(i, iii, jjj, CloneATable(Table), DummyOrder, DummyCurrentOrder, iAStarGreedy, ii, jj, a, CloneATable(Tab), Order, TB, FOUND, LeafAStarGreedy));
                     H.Wait();
                     H.Dispose();
@@ -17212,6 +17235,8 @@ namespace HybridizerRefrigitz
                 Parallel.For(KingMidle, KingHigh, i =>
 
                 {
+                    ///if (InitiateAStarGreedyt(i, 6, Order))
+                       // return;
                     var H = Task.Factory.StartNew(() => InitiateAStarGreedythKing(i, iii, jjj, CloneATable(Table), DummyOrder, DummyCurrentOrder, iAStarGreedy, ii, jj, a, CloneATable(Tab), Order, TB, FOUND, LeafAStarGreedy));
                     H.Wait();
                     H.Dispose();
@@ -18060,13 +18085,17 @@ namespace HybridizerRefrigitz
                 }
 
             }
-            Order = DummyOrder;
-            ChessRules.CurrentOrder = DummyCurrentOrder;
-            var array = Task.Factory.StartNew(() => Serve(Order));
-            array.Wait();
-            array.Dispose();
+            Object ooo = new Object();
+            lock (ooo)
+            {
+                Order = DummyOrder;
+                ChessRules.CurrentOrder = DummyCurrentOrder;
+                var array = Task.Factory.StartNew(() => Serve(Order));
+                array.Wait();
+                array.Dispose();
 
-
+                Timer.TimeEndAllow = true;
+            }
             if (FOUND)
             {
                 Object O = new Object();
@@ -24350,11 +24379,7 @@ if (Kind == 2 && ElephantOnTable[i].ElefantThinking[0].AStarGreedy != null && El
                 else
                     Btime = new Timer(-1);
                 LeafSemaphoreIndex = false;
-                if (tH != null)
-                    tH.Clear();
-                else
-                    tH = new List<Task>();
-                if (TH != null)
+                 if (TH != null)
                     TH.Clear();
                 else
                     TH = new List<Task>();

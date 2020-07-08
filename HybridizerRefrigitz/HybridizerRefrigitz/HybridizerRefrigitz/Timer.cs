@@ -32,6 +32,8 @@ namespace HybridizerRefrigitz
     [Serializable]
     public class Timer
     {
+        public static bool TimeEndAllow = false;
+
         public bool TimeEnd = false;
         String Name = "";
         //Initiate Variables. static and local for three timer.
@@ -73,6 +75,7 @@ namespace HybridizerRefrigitz
                 //For Infinity Timer until end.
                 if (SignPositive)
                 {
+                    TimeEndAllow = false;
                     Times = 0;
                     Sign = 1;
                     Infinity = true;
@@ -124,7 +127,8 @@ namespace HybridizerRefrigitz
                         while (DateTime.Now.Hour * 60 * 60 * 1000 + DateTime.Now.Minute * 60 * 1000
                            + DateTime.Now.Second * 1000 - t1 < AllDraw.winc);
                         Times = Times + AllDraw.winc * Sign;
-                    } while (Times <AllDraw.wtime);
+                    } while (Times < AllDraw.wtime);
+                    do { } while (!TimeEndAllow);
                     TimeEnd = true;
 
                 }
@@ -149,6 +153,7 @@ namespace HybridizerRefrigitz
                            + DateTime.Now.Second * 1000 - t1 < AllDraw.binc);
                         Times = Times + AllDraw.binc * Sign;
                     } while (Times <AllDraw.btime) ;
+                    do { } while (!TimeEndAllow);
                     TimeEnd = true;
                 }
                 //Local Variabe of Timer changed.

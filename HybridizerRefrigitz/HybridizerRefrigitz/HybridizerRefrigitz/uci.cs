@@ -86,8 +86,6 @@ public class GlobalMembersUci
                         //"[UCI] "+
                         Is + " ");
                 }
-                else
-                    System.Threading.Thread.Sleep(1);
             } while (true);
         }
     }
@@ -120,7 +118,7 @@ public class GlobalMembersUci
     // following move list ("moves").
    public static string Next(ref string Is)
     {
-        string m = "";
+       string m = "";
         try
         {
             if (Is.Length > 0)
