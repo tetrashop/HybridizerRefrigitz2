@@ -62,7 +62,7 @@ public class ArtificialInteligenceMove
 								bool Blit=HybridizerRefrigitz.AllDraw.Blitz;
 							HybridizerRefrigitz.AllDraw.Blitz=false;
 															Idle=true;
-                            HybridizerRefrigitz.AllDraw.TimeInitiation = (DateTime.Now.Hour * 60 * 60 * 1000 + DateTime.Now.Minute * 60 * 1000 + DateTime.Now.Second * 1000);
+                            HybridizerRefrigitz.AllDraw.TimeInitiation = (DateTime.Now.Hour * 60 * 60  + DateTime.Now.Minute * 60 + DateTime.Now.Second );
                             var arrayA =Task.Factory.StartNew(() =>	t.Draw.InitiateAStarGreedyt(HybridizerRefrigitz.AllDraw.MaxAStarGreedy,1, 4,OrderColor(t.Draw.OrderP), CloneATable(t.brd.GetTable()), t.Draw.OrderP, false, false, 0));
 							//var arrayA =Task.Factory.StartNew(() =>	t.Play(-1,-1));
                             arrayA.Wait();
@@ -80,7 +80,7 @@ public class ArtificialInteligenceMove
 							ArtificialInteligenceMove.UpdateIsRunning=true;
                             Console.Write("\nIdle finished");
 
-							HybridizerRefrigitz.AllDraw.CalIdle=1;
+							HybridizerRefrigitz.AllDraw.CalIdle=-1;
 						}
 						if(HybridizerRefrigitz.AllDraw.CalIdle==2)
 						{

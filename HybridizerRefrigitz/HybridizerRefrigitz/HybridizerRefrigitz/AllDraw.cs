@@ -55,7 +55,7 @@ namespace HybridizerRefrigitz
     public class AllDraw//: IDisposable
     {
         
-        public static int TimeMax = 0;
+        public static int TimeMax = 5;
         public static int TimeInitiation = 0;
         public static bool IdleInWork = true;
         public static int CalIdle = 0;
@@ -81,7 +81,7 @@ namespace HybridizerRefrigitz
               {-1, -1, - 1, -1, -1, -1, -1, -1 }}};
         public static bool AllowedSupTrue = false;
         public static int OrderPlateDraw = -1;
-        public static bool UniqueLeafDetection = false;
+        public static bool UniqueLeafDetection = true;
         int NumberOfnewMove = 0;
         bool UsedRestrictedMoveBlitzAndFull = true;
         public List<bool> SolderesOnTableMove = new List<bool>();
@@ -16512,11 +16512,11 @@ namespace HybridizerRefrigitz
             bool Is = false;
             try
             {
-                int Timenow= (DateTime.Now.Hour * 60 * 60 * 1000 + DateTime.Now.Minute * 60 * 1000 + DateTime.Now.Second * 1000);
+                int Timenow= (DateTime.Now.Hour * 60 * 60 + DateTime.Now.Minute * 60 + DateTime.Now.Second);
 
                 if (CalIdle == 2)
                     return true;
-                if (Timenow - TimeInitiation > TimeMax * 1000)
+                if (Timenow - TimeInitiation > TimeMax)
                     return true;
                 if (Kind == 1)
                 {
@@ -24447,6 +24447,8 @@ if (Kind == 2 && ElephantOnTable[i].ElefantThinking[0].AStarGreedy != null && El
                 Object OOOO = new Object();
                 lock (OOOO)
                 {
+                    bool ad = Blitz;
+                    Blitz = true;
                     //if (MaxAStarGreedy == 0)
                     MaxAStarGreedy = PlatformHelper.ProcessorCount;
                     MaxAStarGreedy1 = MaxAStarGreedy;
@@ -24457,6 +24459,7 @@ if (Kind == 2 && ElephantOnTable[i].ElefantThinking[0].AStarGreedy != null && El
                     H.Wait();
                     H.Dispose();
                     AStarGreedyString = THISA;
+                    Blitz = ad;
                 }
                 Object Om = new Object();
                 lock (Om)

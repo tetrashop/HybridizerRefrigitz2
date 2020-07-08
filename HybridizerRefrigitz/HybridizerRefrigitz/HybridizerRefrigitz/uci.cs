@@ -2,8 +2,11 @@ using System.Collections.Generic;
 using System;
 using System.Threading.Tasks;
 using HybridizerRefrigitz;
+using System.Diagnostics;
+
 public class GlobalMembersUci
 {
+    static Process myProcessO;
     static System.Threading.Thread tt = null;
 
     int i = 0;
@@ -32,6 +35,7 @@ public class GlobalMembersUci
 
     // FEN string of the initial position, normal chess
     public static string StartFEN = "rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1";
+    private static object myProcess;
 
 
 
@@ -39,23 +43,65 @@ public class GlobalMembersUci
 
     // setoption() is called when engine receives the "setoption" UCI command. The
     // function updates the UCI option ("name") to the given value ("value").
-    public static void Output(ref string Is)
+    public static void Output()
     {
+        /*ProcessStartInfo si = new ProcessStartInfo()
+        {
+            FileName = "HybridizerRefrigitz.exe",//"C:\\Program Files (x86)\\Arena\\Arena.exe",
+            UseShellExecute = false,
+            CreateNoWindow = true,
+            RedirectStandardError = true,
+            RedirectStandardInput = true,
+            RedirectStandardOutput = true
+        };
+
+         myProcessO= new Process();
+        myProcessO.StartInfo = si;
+        try
+        {
+            // throws an exception on win98
+            myProcessO.PriorityClass = ProcessPriorityClass.BelowNormal;
+        }
+        catch { }
+
+        myProcessO.OutputDataReceived += new DataReceivedEventHandler(myProcess_OutputDataReceived);
+
+        myProcessO.Start();
+        myProcessO.BeginErrorReadLine();
+        myProcessO.BeginOutputReadLine();*/
         object o = new object();
         lock (o)
         {
             do
             {
-                if (Is != null
+                string Is = "";
+                if (ThinkingHybridizerRefrigitz.OutP != null && ThinkingHybridizerRefrigitz.OutP != ""
                        )
                 {
                     Is = GlobalMembersUci.Next(ref ThinkingHybridizerRefrigitz.OutP);
 
-                    Console.Write(Is);
+                    // SendLine(Is);
+                    Console.Write//Line
+                        (
+                        //"[UCI] "+
+                        Is + " ");
                 }
+                else
+                    System.Threading.Thread.Sleep(1);
             } while (true);
         }
     }
+    private static void SendLine(string command)
+    {
+        myProcessO.StandardInput.WriteLine(command);
+        myProcessO.StandardInput.Flush();
+    }
+    private static void myProcess_OutputDataReceived(object sender, DataReceivedEventArgs e)
+    {
+        string text = e.Data;
+        //Debug.WriteLine("[UCI] " + text);
+    }
+
     static string IsNullOrEmpty(string name)
 
     {
@@ -225,12 +271,7 @@ public class GlobalMembersUci
         ref string Is //temporary parameter.
           )
     {
-        if (tt == null)
-        {
-            string IsA = Is;
-            var tt = new Task(() => GlobalMembersUci.Output(ref IsA));
-            tt.Start();
-        }
+        
         ChessLibrary.FenNotation r = new ChessLibrary.FenNotation(StartFEN);
 
         //Move m;
@@ -461,7 +502,7 @@ public class GlobalMembersUci
         //GlobalMembersThread.Threads.start_thinking(pos, limits, SetupStates);
 
     }
-    void setoption(string Is)
+    static void setoption(ref string Is)
     {
 
         string token, name="" ,value="";
@@ -582,7 +623,7 @@ public class GlobalMembersUci
             //else
             //    StockMove++;
 
-            //ss = "position fen " + ss;
+            ss = "position fen " + ss;
 
             return ss;
             //return fenS.ToString();
@@ -592,7 +633,19 @@ public class GlobalMembersUci
     }
     public static void loop(string[] argv)
     {
-
+        if (tt == null)
+        {
+            //string IsA = argv[0];
+            var tt = new Task(() => GlobalMembersUci.Output());
+            tt.Start();
+        }
+       /* else if (!tt.IsAlive)
+        {
+            string IsA = argv[0];
+            var tt = new Task(() => GlobalMembersUci.Output());
+            tt.Start();
+        }
+        */
         //Position pos;
         string token = "", cmd = "";
 
@@ -624,17 +677,18 @@ public class GlobalMembersUci
             // already ran out of time), otherwise we should continue searching but
             // switching from pondering to normal search.
             if (token == "quit"
-                || token == "stop"
-                || (token == "ponderhit" && HybridizerRefrigitz.AllDraw.CalIdle == 0
+                || (token == "stop" && HybridizerRefrigitz.AllDraw.CalIdle == 1)
+                || (token == "ponderhit" 
                 ))
             {
-                if (HybridizerRefrigitz.AllDraw.CalIdle == 0)
+             if((token == "quit"
+                || token == "stop")&& HybridizerRefrigitz.AllDraw.CalIdle == 1)
                 {
                     HybridizerRefrigitz.AllDraw.CalIdle = 2;
-                    while (HybridizerRefrigitz.AllDraw.CalIdle != 1) { }
-                }
-                t.t.Play(-1, -1);//remain fen
-                StartFEN = (new GlobalMembersUci()).Fen();
+                    while (HybridizerRefrigitz.AllDraw.CalIdle != 5) { }
+                    HybridizerRefrigitz.AllDraw.CalIdle=-1; }
+                //t.t.Play(-1, -1);//remain fen
+                //StartFEN = (new GlobalMembersUci()).Fen();
             }
             else if (token == "ponderhit")
             {
@@ -699,7 +753,8 @@ public class GlobalMembersUci
 
             else if (token == "setoption")
             {
-                //setoption(argv);
+
+                setoption(ref argv[0]);
             }
 
             // Additional custom non-UCI commands, useful for debugging
@@ -722,10 +777,11 @@ public class GlobalMembersUci
 
             else if (token == "perft")
             {
-                //int depth;
+                int depth;
                 //stringstream ss;
 
-                //is >> depth;
+                 depth=System.Convert.ToInt32(Console.ReadLine());
+                AllDraw.MaxAStarGreedy = depth;
                 //ss << Options["Hash"] << " "
                 //  << Options["Threads"] << " " << depth << " current perft";
 
