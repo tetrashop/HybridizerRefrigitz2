@@ -125,9 +125,18 @@ public class GlobalMembersUci
         {
             if (Is.Length > 0)
             {
-                m = Is.Substring(0, Is.IndexOf(" "));
-                Is = Is.Substring(Is.IndexOf(" ")+1, Is.Length- Is.IndexOf(" ")-1);
-                
+                if (Is.Contains(" "))
+                {
+                    m = Is.Substring(0, Is.IndexOf(" "));
+                    Is = Is.Substring(Is.IndexOf(" ") + 1, Is.Length - Is.IndexOf(" ") - 1);
+
+                }
+                else
+                {
+                    m = Is;
+                    Is = "";/// "quit";
+                    return m;
+                }
             }
         }
         catch (Exception t)
@@ -302,33 +311,40 @@ public class GlobalMembersUci
         string move = r.move;
         if (move.Length == 4)
         {
-            AlphabetRecurveFirst(move);
-            GlobalMembersUci.t.t.R.CromosomColumnFirst = ((int)(7 - System.Convert.ToInt32(move[1])));
+            object o = new object();
+            lock (o)
+            {
+                AlphabetRecurveFirst(move);
+                GlobalMembersUci.t.t.R.CromosomColumnFirst = ((int)(7 - System.Convert.ToInt32(move[1])));
 
-            AlphabetRecurve(move);
-            GlobalMembersUci.t.t.R.CromosomColumn = ((int)(7 - System.Convert.ToInt32(move[3])));
-            // HybridizerRefrigitzForm.Table[GlobalMembersUci.t.t.R.CromosomRow, GlobalMembersUci.t.t.R.CromosomColumn] = HybridizerRefrigitzForm.Table[GlobalMembersUci.t.t.R.CromosomRowFirst, GlobalMembersUci.t.t.R.CromosomColumnFirst];
-            //  HybridizerRefrigitzForm.Table[GlobalMembersUci.t.t.R.CromosomRowFirst, GlobalMembersUci.t.t.R.CromosomColumnFirst] = 0;
-            GlobalMembersUci.t.t.Play(GlobalMembersUci.t.t.R.CromosomRowFirst,GlobalMembersUci.t.t.R.CromosomColumnFirst);
+                AlphabetRecurve(move);
+                GlobalMembersUci.t.t.R.CromosomColumn = ((int)(7 - System.Convert.ToInt32(move[3])));
+                // HybridizerRefrigitzForm.Table[GlobalMembersUci.t.t.R.CromosomRow, GlobalMembersUci.t.t.R.CromosomColumn] = HybridizerRefrigitzForm.Table[GlobalMembersUci.t.t.R.CromosomRowFirst, GlobalMembersUci.t.t.R.CromosomColumnFirst];
+                //  HybridizerRefrigitzForm.Table[GlobalMembersUci.t.t.R.CromosomRowFirst, GlobalMembersUci.t.t.R.CromosomColumnFirst] = 0;
+                GlobalMembersUci.t.t.Play(GlobalMembersUci.t.t.R.CromosomRowFirst, GlobalMembersUci.t.t.R.CromosomColumnFirst);
 
-            GlobalMembersUci.t.t.Play(GlobalMembersUci.t.t.R.CromosomRow, GlobalMembersUci.t.t.R.CromosomColumn);
+                GlobalMembersUci.t.t.Play(GlobalMembersUci.t.t.R.CromosomRow, GlobalMembersUci.t.t.R.CromosomColumn);
+            }
         }//castling
         else
          if (r.WK)
         {
-            HybridizerRefrigitz.ChessRules.SmallKingCastleWHITE = true;
+            object o = new object();
+            lock (o)
+            {
+                HybridizerRefrigitz.ChessRules.SmallKingCastleWHITE = true;
 
-            int RowSource = 4;
-            int ColumnSource = 0, ColumnDestination = 0;
+                int RowSource = 4;
+                int ColumnSource = 0, ColumnDestination = 0;
 
-            GlobalMembersUci.t.t.R.CromosomRowFirst = RowSource;
-            GlobalMembersUci.t.t.R.CromosomColumnFirst = ColumnSource;
-            GlobalMembersUci.t.t.Play(GlobalMembersUci.t.t.R.CromosomRowFirst, GlobalMembersUci.t.t.R.CromosomColumnFirst);
+                GlobalMembersUci.t.t.R.CromosomRowFirst = RowSource;
+                GlobalMembersUci.t.t.R.CromosomColumnFirst = ColumnSource;
+                GlobalMembersUci.t.t.Play(GlobalMembersUci.t.t.R.CromosomRowFirst, GlobalMembersUci.t.t.R.CromosomColumnFirst);
 
-            GlobalMembersUci.t.t.R.CromosomRow = RowSource - 2;
-            GlobalMembersUci.t.t.R.CromosomColumn = ColumnSource;
-            GlobalMembersUci.t.t.Play(GlobalMembersUci.t.t.R.CromosomRow, GlobalMembersUci.t.t.R.CromosomColumn);
-            //HybridizerRefrigitzForm.Table[RowSource - 1, ColumnDestination] = 4;
+                GlobalMembersUci.t.t.R.CromosomRow = RowSource - 2;
+                GlobalMembersUci.t.t.R.CromosomColumn = ColumnSource;
+                GlobalMembersUci.t.t.Play(GlobalMembersUci.t.t.R.CromosomRow, GlobalMembersUci.t.t.R.CromosomColumn);
+            }  //HybridizerRefrigitzForm.Table[RowSource - 1, ColumnDestination] = 4;
             //HybridizerRefrigitzForm.Table[RowSource - 2, ColumnDestination] = 6;
             //HybridizerRefrigitzForm.Table[RowSource, ColumnSource] = 0;
             //HybridizerRefrigitzForm.Table[7, ColumnSource] = 0;
@@ -336,19 +352,22 @@ public class GlobalMembersUci
         else
              if (r.BK)
         {
-            HybridizerRefrigitz.ChessRules.SmallKingCastleBLACK = true;
+            object o = new object();
+            lock (o)
+            {
+                HybridizerRefrigitz.ChessRules.SmallKingCastleBLACK = true;
 
-            int RowSource = 4;
-            int ColumnSource = 7, ColumnDestination = 7;
+                int RowSource = 4;
+                int ColumnSource = 7, ColumnDestination = 7;
 
-            GlobalMembersUci.t.t.R.CromosomRowFirst = RowSource;
-            GlobalMembersUci.t.t.R.CromosomColumnFirst = ColumnSource;
-            GlobalMembersUci.t.t.Play(GlobalMembersUci.t.t.R.CromosomRowFirst, GlobalMembersUci.t.t.R.CromosomColumnFirst);
+                GlobalMembersUci.t.t.R.CromosomRowFirst = RowSource;
+                GlobalMembersUci.t.t.R.CromosomColumnFirst = ColumnSource;
+                GlobalMembersUci.t.t.Play(GlobalMembersUci.t.t.R.CromosomRowFirst, GlobalMembersUci.t.t.R.CromosomColumnFirst);
 
-            GlobalMembersUci.t.t.R.CromosomRow = RowSource - 2;
-            GlobalMembersUci.t.t.R.CromosomColumn = ColumnSource;
-            GlobalMembersUci.t.t.Play(GlobalMembersUci.t.t.R.CromosomRow, GlobalMembersUci.t.t.R.CromosomColumn);
-            /*  HybridizerRefrigitzForm.Table[RowSource - 1, ColumnDestination] = -4;
+                GlobalMembersUci.t.t.R.CromosomRow = RowSource - 2;
+                GlobalMembersUci.t.t.R.CromosomColumn = ColumnSource;
+                GlobalMembersUci.t.t.Play(GlobalMembersUci.t.t.R.CromosomRow, GlobalMembersUci.t.t.R.CromosomColumn);
+            } /*  HybridizerRefrigitzForm.Table[RowSource - 1, ColumnDestination] = -4;
                HybridizerRefrigitzForm.Table[RowSource - 2, ColumnDestination] = -6;
                HybridizerRefrigitzForm.Table[RowSource, ColumnSource] = 0;
                HybridizerRefrigitzForm.Table[0, ColumnSource] = 0;
@@ -359,19 +378,22 @@ public class GlobalMembersUci
         {
             if (GlobalMembersUci.t.t.order == 1)
             {
-                HybridizerRefrigitz.ChessRules.BigKingCastleWHITE = true;
+                object o = new object();
+                lock (o)
+                {
+                    HybridizerRefrigitz.ChessRules.BigKingCastleWHITE = true;
 
-                int RowSource = 4;
-                int ColumnSource = 0, ColumnDestination = 0;
+                    int RowSource = 4;
+                    int ColumnSource = 0, ColumnDestination = 0;
 
-                GlobalMembersUci.t.t.R.CromosomRowFirst = RowSource;
-                GlobalMembersUci.t.t.R.CromosomColumnFirst = ColumnSource;
-                GlobalMembersUci.t.t.Play(GlobalMembersUci.t.t.R.CromosomRowFirst, GlobalMembersUci.t.t.R.CromosomColumnFirst);
+                    GlobalMembersUci.t.t.R.CromosomRowFirst = RowSource;
+                    GlobalMembersUci.t.t.R.CromosomColumnFirst = ColumnSource;
+                    GlobalMembersUci.t.t.Play(GlobalMembersUci.t.t.R.CromosomRowFirst, GlobalMembersUci.t.t.R.CromosomColumnFirst);
 
-                GlobalMembersUci.t.t.R.CromosomRow = RowSource + 2;
-                GlobalMembersUci.t.t.R.CromosomColumn = ColumnSource;
-                GlobalMembersUci.t.t.Play(GlobalMembersUci.t.t.R.CromosomRow, GlobalMembersUci.t.t.R.CromosomColumn);
-                /*HybridizerRefrigitzForm.Table[RowSource + 1, ColumnDestination] = 4;
+                    GlobalMembersUci.t.t.R.CromosomRow = RowSource + 2;
+                    GlobalMembersUci.t.t.R.CromosomColumn = ColumnSource;
+                    GlobalMembersUci.t.t.Play(GlobalMembersUci.t.t.R.CromosomRow, GlobalMembersUci.t.t.R.CromosomColumn);
+                } /*HybridizerRefrigitzForm.Table[RowSource + 1, ColumnDestination] = 4;
                         HybridizerRefrigitzForm.Table[RowSource + 2, ColumnDestination] = 6;
                         HybridizerRefrigitzForm.Table[RowSource, ColumnSource] = 0;
 
@@ -381,19 +403,22 @@ public class GlobalMembersUci
         else
              if (r.BQ)
         {
-            HybridizerRefrigitz.ChessRules.BigKingCastleBLACK = true;
+            object o = new object();
+            lock (o)
+            {
+                HybridizerRefrigitz.ChessRules.BigKingCastleBLACK = true;
 
-            int RowSource = 4;
-            int ColumnSource = 7, ColumnDestination = 7;
+                int RowSource = 4;
+                int ColumnSource = 7, ColumnDestination = 7;
 
-            GlobalMembersUci.t.t.R.CromosomRowFirst = RowSource;
-            GlobalMembersUci.t.t.R.CromosomColumnFirst = ColumnSource;
-            GlobalMembersUci.t.t.Play(GlobalMembersUci.t.t.R.CromosomRowFirst, GlobalMembersUci.t.t.R.CromosomColumnFirst);
+                GlobalMembersUci.t.t.R.CromosomRowFirst = RowSource;
+                GlobalMembersUci.t.t.R.CromosomColumnFirst = ColumnSource;
+                GlobalMembersUci.t.t.Play(GlobalMembersUci.t.t.R.CromosomRowFirst, GlobalMembersUci.t.t.R.CromosomColumnFirst);
 
-            GlobalMembersUci.t.t.R.CromosomRow = RowSource + 2;
-            GlobalMembersUci.t.t.R.CromosomColumn = ColumnSource;
-            GlobalMembersUci.t.t.Play(GlobalMembersUci.t.t.R.CromosomRow, GlobalMembersUci.t.t.R.CromosomColumn);
-            /*  HybridizerRefrigitzForm.Table[RowSource + 1, ColumnDestination] = -4;
+                GlobalMembersUci.t.t.R.CromosomRow = RowSource + 2;
+                GlobalMembersUci.t.t.R.CromosomColumn = ColumnSource;
+                GlobalMembersUci.t.t.Play(GlobalMembersUci.t.t.R.CromosomRow, GlobalMembersUci.t.t.R.CromosomColumn);
+            }   /*  HybridizerRefrigitzForm.Table[RowSource + 1, ColumnDestination] = -4;
       HybridizerRefrigitzForm.Table[RowSource + 2, ColumnDestination] = -6;
       HybridizerRefrigitzForm.Table[RowSource, ColumnSource] = 0;
       HybridizerRefrigitzForm.Table[0, ColumnSource] = 0;
@@ -445,23 +470,39 @@ public class GlobalMembersUci
 
             else if (token == "wtime")
             {
-            AllDraw.TimeMax = System.Convert.ToInt32(Next(ref Is));
+                object o = new object();
+                lock (o)
+                {
+                    AllDraw.wtime = System.Convert.ToInt32(Next(ref Is));
+                }
                 // limits.time[(int)Color.WHITE] = System.Convert.ToInt32(Next(ref Is));
             }
             else if (token == "btime")
             {
-                AllDraw.TimeMax = System.Convert.ToInt32(Next(ref Is));
-                //  limits.time[(int)Color.BLACK] = System.Convert.ToInt32(Next(ref Is));
+                object o = new object();
+                lock (o)
+                {
+                    AllDraw.btime = System.Convert.ToInt32(Next(ref Is));
+                    //  limits.time[(int)Color.BLACK] = System.Convert.ToInt32(Next(ref Is));
+                }
             }
             else if (token == "winc")
             {
-                AllDraw.TimeMax = System.Convert.ToInt32(Next(ref Is));
-                //  limits.inc[(int)Color.WHITE] = System.Convert.ToInt32(Next(ref Is));
+                object o = new object();
+                lock (o)
+                {
+                    AllDraw.winc = System.Convert.ToInt32(Next(ref Is));
+                    //  limits.inc[(int)Color.WHITE] = System.Convert.ToInt32(Next(ref Is));
+                }
             }
             else if (token == "binc")
             {
-                AllDraw.TimeMax = System.Convert.ToInt32(Next(ref Is));
-                //   limits.inc[(int)Color.BLACK] = System.Convert.ToInt32(Next(ref Is));
+                object o = new object();
+                lock (o)
+                {
+                    AllDraw.binc = System.Convert.ToInt32(Next(ref Is));
+                    //   limits.inc[(int)Color.BLACK] = System.Convert.ToInt32(Next(ref Is));
+                }
             }
             else if (token == "movestogo")
             {
@@ -469,9 +510,12 @@ public class GlobalMembersUci
             }
             else if (token == "depth")
             {
-                AllDraw.MaxAStarGreedy = System.Convert.ToInt32(Next(ref Is));
+                object o = new object();
+                lock (o)
+                {
+                    AllDraw.MaxAStarGreedy = System.Convert.ToInt32(Next(ref Is));
 
-                //   limits.depth = System.Convert.ToInt32(Next(ref Is));
+                } //   limits.depth = System.Convert.ToInt32(Next(ref Is));
             }
             else if (token == "nodes")
             {
@@ -479,13 +523,21 @@ public class GlobalMembersUci
             }
             else if (token == "movetime")
             {
-                AllDraw.TimeMax = System.Convert.ToInt32(Next(ref Is));
-                //  limits.movetime = System.Convert.ToInt32(Next(ref Is));
+                object o = new object();
+                lock (o)
+                {
+                    AllDraw.TimeMax = System.Convert.ToInt32(Next(ref Is));
+                    //  limits.movetime = System.Convert.ToInt32(Next(ref Is));
+                }
             }
             else if (token == "mate")
             {
-                AllDraw.EndOfGame = true;
-             //   limits.mate = System.Convert.ToInt32(Next(ref Is));
+                object o = new object();
+                lock (o)
+                {
+                    AllDraw.EndOfGame = true;
+                    //   limits.mate = System.Convert.ToInt32(Next(ref Is));
+                }
             }
             else if (token == "infinite")
             {

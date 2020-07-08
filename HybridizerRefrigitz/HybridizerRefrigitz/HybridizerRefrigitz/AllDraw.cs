@@ -54,7 +54,13 @@ namespace HybridizerRefrigitz
     [Serializable]
     public class AllDraw//: IDisposable
     {
-        
+        public static Timer Wtime = null;
+        public static Timer Btime = null;
+        public static int wtime = 0;
+        public static int btime = 0;
+        public static int winc = 0;
+        public static int binc = 0;
+
         public static int TimeMax = 5;
         public static int TimeInitiation = 0;
         public static bool IdleInWork = true;
@@ -16516,8 +16522,16 @@ namespace HybridizerRefrigitz
 
                 if (CalIdle == 2)
                     return true;
-                if (Timenow - TimeInitiation > TimeMax)
-                    return true;
+                if (Wtime !=null)
+                {
+                    if (Wtime.EndTime)
+                        return true;
+                }
+                if (Btime != null)
+                {
+                    if (Btime.EndTime)
+                        return true;
+                }
                 if (Kind == 1)
                 {
                     Is = Is || InitiateAStarGreedytSoldier(i, Kind, Order);
@@ -24331,6 +24345,10 @@ if (Kind == 2 && ElephantOnTable[i].ElefantThinking[0].AStarGreedy != null && El
             Object o = new Object();
             lock (o)
             {
+                if (Order == 1)
+                    Wtime = new Timer(1);
+                else
+                    Btime = new Timer(-1);
                 LeafSemaphoreIndex = false;
                 if (tH != null)
                     tH.Clear();
@@ -24545,7 +24563,10 @@ if (Kind == 2 && ElephantOnTable[i].ElefantThinking[0].AStarGreedy != null && El
                             FoundATable = true;
                         }
                     }
-
+                if (Wtime != null)
+                    Wtime = null;
+                if (Btime != null)
+                    Btime = null;
                 return CloneATable(TableHeuristic);
             }
         }
