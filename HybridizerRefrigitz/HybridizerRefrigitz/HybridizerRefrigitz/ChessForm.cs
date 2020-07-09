@@ -105,7 +105,7 @@ namespace HybridizerRefrigitz
                     Draw.IsCurrentDraw = true;
                 }
                 Draw.AStarGreedyString = Th;
-                if(OrderPlate==1)
+                if(AllDraw.OrderPlate==1)
                 Initiate(Color.WHITE, 1);
                 else
                     Initiate(Color.BLACK, -1);
@@ -150,7 +150,7 @@ namespace HybridizerRefrigitz
                 {
                     brd = new Board();
                     Table = brd.GetTable();
-                    ////MessageBox.Show("Wait...");
+                    Console.WriteLine("Wait...");
                     var parallelOptions = new ParallelOptions();
                     parallelOptions.MaxDegreeOfParallelism = System.Threading.PlatformHelper.ProcessorCount;
                     HybridizerRefrigitz.AllDraw.OrderPlateDraw = -1;
@@ -165,7 +165,7 @@ namespace HybridizerRefrigitz
                         bool DrawDrawen = y.Load(FOUND, false, this, ref LoadTree, false, false, UsePenaltyRegardMechnisam, false, false, false, AStarGreedyHeuristic, true);
                         if (!DrawDrawen)
                         {
-                            Draw = new HybridizerRefrigitz.AllDraw(OrderPlate, false, false, UsePenaltyRegardMechnisam, false, false, false, AStarGreedyHeuristic, true);
+                            Draw = new HybridizerRefrigitz.AllDraw(AllDraw.OrderPlate, false, false, UsePenaltyRegardMechnisam, false, false, false, AStarGreedyHeuristic, true);
                             Draw.TableList.Clear();
                             Draw.TableList.Add(CloneATable(Table));
                             Draw.SetRowColumn(0);
@@ -174,16 +174,15 @@ namespace HybridizerRefrigitz
                             bool Store = Deeperthandeeper;
                             Deeperthandeeper = false;
 
-                            OrderPlate = 1;
-                            AllDraw.OrderPlate = OrderPlate;
+                            AllDraw.OrderPlate = 1;
+                            
 
-                            int Ord = OrderPlate;
+                            int Ord = AllDraw.OrderPlate;
                             Color aa = Color.WHITE;
                             if (Ord == -1)
                                 aa = Color.BLACK;
                             bool B = AllDraw.Blitz;
                             AllDraw.Blitz = false;
-                            HybridizerRefrigitz.AllDraw.MaxAStarGreedy = PlatformHelper.ProcessorCount;
                             
                             if (Draw.IsAtLeastAllObjectIsNull())
                             {
@@ -207,7 +206,7 @@ namespace HybridizerRefrigitz
                             arr.Join();
                         }
                     }
-                    ////MessageBox.Show("Ready...");
+                    Console.WriteLine("Ready...");
                     LoadP = true;
                 }
             }
@@ -295,7 +294,7 @@ namespace HybridizerRefrigitz
                         CoPermit = false;
                         Person = false;
                         
-                        AllDraw.Blitz = true;
+                        AllDraw.Blitz = false;
                         
 
                    
@@ -306,12 +305,12 @@ namespace HybridizerRefrigitz
                         
                         
                         
-                        var newTask = Task.Factory.StartNew(() => AliceAction(OrderPlate));
+                        var newTask = Task.Factory.StartNew(() => AliceAction(AllDraw.OrderPlate));
                         newTask.Wait();
                         newTask.Dispose();
                         if (Draw.TableZero(Table))
                         {
-                            ////MessageBox.Show("Board is invalid;");
+                            Console.WriteLine("Board is invalid;");
                             Draw.TableList.Clear();
                             Draw.TableList.Add(CloneATable(HybridizerRefrigitz.AllDraw.TableListAction[HybridizerRefrigitz.AllDraw.TableListAction.Count - 1]));
                             Draw.SetRowColumn(0);
@@ -328,7 +327,7 @@ namespace HybridizerRefrigitz
 
                         HybridizerRefrigitz.AllDraw.TableListAction.Add(CloneATable(Table));
                         R = new HybridizerRefrigitz.HybridizerRefrigitzGeneticAlgorithm(false, false, false, false, false, false, false, true);
-                        if (R.FindGenToModified(HybridizerRefrigitz.AllDraw.TableListAction[HybridizerRefrigitz.AllDraw.TableListAction.Count - 2], HybridizerRefrigitz.AllDraw.TableListAction[HybridizerRefrigitz.AllDraw.TableListAction.Count - 1], HybridizerRefrigitz.AllDraw.TableListAction, 0,OrderPlate, true))
+                        if (R.FindGenToModified(HybridizerRefrigitz.AllDraw.TableListAction[HybridizerRefrigitz.AllDraw.TableListAction.Count - 2], HybridizerRefrigitz.AllDraw.TableListAction[HybridizerRefrigitz.AllDraw.TableListAction.Count - 1], HybridizerRefrigitz.AllDraw.TableListAction, 0,AllDraw.OrderPlate, true))
                         {
                             
                             int ii = new int();
@@ -336,7 +335,7 @@ namespace HybridizerRefrigitz
                             if (R.CromosomRowFirst == -1 || R.CromosomColumnFirst == -1 || R.CromosomRow == -1 || R.CromosomColumn == -1)
                             {
                                 
-                                ////MessageBox.Show("One or more cromosoms is invalid;");
+                                Console.WriteLine("One or more cromosoms is invalid;");
                                 HybridizerRefrigitz.AllDraw.TableListAction.RemoveAt(HybridizerRefrigitz.AllDraw.TableListAction.Count - 1);
 
                       
@@ -368,7 +367,7 @@ namespace HybridizerRefrigitz
                             
                             
                             {
-                                ////MessageBox.Show("One or more DNA is invalid;");
+                                Console.WriteLine("One or more DNA is invalid;");
                                 
                                 
                                 
@@ -437,7 +436,7 @@ namespace HybridizerRefrigitz
                                     {
                                         //this.pb[x1, y1].BorderStyle = 0;
                                         cl = 0;
-                                        ////MessageBox.Show("شما نمی توانید این حرکت را انجام دهید");
+                                        Console.WriteLine("شما نمی توانید این حرکت را انجام دهید");
                                         return 0;
                                     }
                                     lstr = "R";
@@ -472,7 +471,7 @@ namespace HybridizerRefrigitz
                                     {
                                         //this.pb[x1, y1].BorderStyle = 0;
                                         cl = 0;
-                                        ////MessageBox.Show("شما نمی توانید این حرکت را انجام دهید");
+                                        Console.WriteLine("شما نمی توانید این حرکت را انجام دهید");
                                         return 0;
                                     }
                                     lstr = "N";
@@ -507,7 +506,7 @@ namespace HybridizerRefrigitz
                                     {
                                         //this.pb[x1, y1].BorderStyle = 0;
                                         cl = 0;
-                                        ////MessageBox.Show("شما نمی توانید این حرکت را انجام دهید");
+                                        Console.WriteLine("شما نمی توانید این حرکت را انجام دهید");
                                         return 0;
                                     }
                                     lstr = "B";
@@ -542,7 +541,7 @@ namespace HybridizerRefrigitz
                                     {
                                         //this.pb[x1, y1].BorderStyle = 0;
                                         cl = 0;
-                                        ////MessageBox.Show("شما نمی توانید این حرکت را انجام دهید");
+                                        Console.WriteLine("شما نمی توانید این حرکت را انجام دهید");
                                         return 0;
                                     }
                                     lstr = "Q";
@@ -577,7 +576,7 @@ namespace HybridizerRefrigitz
                                     {
                                         //this.pb[x1, y1].BorderStyle = 0;
                                         cl = 0;
-                                        ////MessageBox.Show("شما نمی توانید این حرکت را انجام دهید");
+                                        Console.WriteLine("شما نمی توانید این حرکت را انجام دهید");
                                         return 0;
                                     }
                                     //pb[x1, y1].Image = null;
@@ -602,7 +601,7 @@ namespace HybridizerRefrigitz
                                     {
                                         //this.pb[x1, y1].BorderStyle = 0;
                                         cl = 0;
-                                        ////MessageBox.Show("شما نمی توانید این حرکت را انجام دهید");
+                                        Console.WriteLine("شما نمی توانید این حرکت را انجام دهید");
                                         return 0;
                                     }
                                     lstr = "0-0";
@@ -625,7 +624,7 @@ namespace HybridizerRefrigitz
                                     {
                                         //this.pb[x1, y1].BorderStyle = 0;
                                         cl = 0;
-                                        ////MessageBox.Show("شما نمی توانید این حرکت را انجام دهید");
+                                        Console.WriteLine("شما نمی توانید این حرکت را انجام دهید");
                                         return 0;
                                     }
                                     lstr = "0-0";
@@ -657,7 +656,7 @@ namespace HybridizerRefrigitz
                                     {
                                         //this.pb[x1, y1].BorderStyle = 0;
                                         cl = 0;
-                                        ////MessageBox.Show("شما نمی توانید این حرکت را انجام دهید");
+                                        Console.WriteLine("شما نمی توانید این حرکت را انجام دهید");
                                         return 0;
                                     }
                                     lstr = "P";
@@ -779,7 +778,7 @@ namespace HybridizerRefrigitz
                                     {
                                         //this.pb[x1, y1].BorderStyle = 0;
                                         cl = 0;
-                                        ////MessageBox.Show("شما نمی توانید این حرکت را انجام دهید");
+                                        Console.WriteLine("شما نمی توانید این حرکت را انجام دهید");
                                         return 0;
                                     }
                                     lstr = "R";
@@ -814,7 +813,7 @@ namespace HybridizerRefrigitz
                                     {
                                         //this.pb[x1, y1].BorderStyle = 0;
                                         cl = 0;
-                                        ////MessageBox.Show("شما نمی توانید این حرکت را انجام دهید");
+                                        Console.WriteLine("شما نمی توانید این حرکت را انجام دهید");
                                         return 0;
                                     }
                                     lstr = "N";
@@ -842,7 +841,7 @@ namespace HybridizerRefrigitz
                                     {
                                         //this.pb[x1, y1].BorderStyle = 0;
                                         cl = 0;
-                                        ////MessageBox.Show("شما نمی توانید این حرکت را انجام دهید");
+                                        Console.WriteLine("شما نمی توانید این حرکت را انجام دهید");
                                         return 0;
                                     }
                                     lstr = "B";
@@ -877,7 +876,7 @@ namespace HybridizerRefrigitz
                                     {
                                         //this.pb[x1, y1].BorderStyle = 0;
                                         cl = 0;
-                                        ////MessageBox.Show("شما نمی توانید این حرکت را انجام دهید");
+                                        Console.WriteLine("شما نمی توانید این حرکت را انجام دهید");
                                         return 0;
                                     }
                                     lstr = "Q";
@@ -912,7 +911,7 @@ namespace HybridizerRefrigitz
                                     {
                                         //this.pb[x1, y1].BorderStyle = 0;
                                         cl = 0;
-                                        ////MessageBox.Show("شما نمی توانید این حرکت را انجام دهید");
+                                        Console.WriteLine("شما نمی توانید این حرکت را انجام دهید");
                                         return 0;
                                     }
                                     lstr = "K";
@@ -938,7 +937,7 @@ namespace HybridizerRefrigitz
                                     {
                                         //this.pb[x1, y1].BorderStyle = 0;
                                         cl = 0;
-                                        ////MessageBox.Show("شما نمی توانید این حرکت را انجام دهید");
+                                        Console.WriteLine("شما نمی توانید این حرکت را انجام دهید");
                                         return 0;
                                     }
                                     lstr = "0-0";
@@ -961,7 +960,7 @@ namespace HybridizerRefrigitz
                                     {
                                         //this.pb[x1, y1].BorderStyle = 0;
                                         cl = 0;
-                                        ////MessageBox.Show("شما نمی توانید این حرکت را انجام دهید");
+                                        Console.WriteLine("شما نمی توانید این حرکت را انجام دهید");
                                         return 0;
                                     }
                                     lstr = "0-0";
@@ -993,7 +992,7 @@ namespace HybridizerRefrigitz
                                     {
                                         cl = 0;
                                         //this.pb[x1, y1].BorderStyle = 0;
-                                        ////MessageBox.Show("شما نمی توانید این حرکت را انجام دهید");
+                                        Console.WriteLine("شما نمی توانید این حرکت را انجام دهید");
                                         return 0;
                                     }
                                     lstr = "P";
@@ -1188,11 +1187,11 @@ namespace HybridizerRefrigitz
                             else
                             {
                                 lstr = str2 + " کیش  " + lstr + " " + lstr3 + (y1 + 1).ToString() + " To " + lstr2 + (j + 1).ToString() + " Hu:" + AllDraw.Less.ToString();
-                                ////MessageBox.Show(" کیش توسط" + " " + str2);
+                                Console.WriteLine(" کیش توسط" + " " + str2);
                                 Object oo = new Object();
                                 lock (oo)
                                 {
-                                    if (Com && (order == 1))
+                                    if (Com && (AllDraw.OrderPlate == 1))
                                     {
                                         MovmentsNumber++;
                                         
@@ -1201,15 +1200,14 @@ namespace HybridizerRefrigitz
                                         ClearTableInitiationPreventionOfMultipleMove();
                                         HybridizerRefrigitz.AllDraw.TableListAction.Add(CloneATable(brd.GetTable()));
 
-                                        AllDraw.OrderPlate = OrderPlate;
-                                        int Ord = OrderPlate;
+                                        
+                                        int Ord = AllDraw.OrderPlate;
                                         Color aa = Color.WHITE;
                                         if (Ord == -1)
                                             aa = Color.BLACK;
                                         bool B = AllDraw.Blitz;
                                         AllDraw.Blitz = false;
-                                        HybridizerRefrigitz.AllDraw.MaxAStarGreedy = PlatformHelper.ProcessorCount;
-
+                                       
                                         AllDraw thiB = Draw.AStarGreedyString;
                                         if (Draw.IsAtLeastAllObjectIsNull())
                                         {
@@ -1228,7 +1226,7 @@ namespace HybridizerRefrigitz
                                         tt.Start();
                                         tt.Join();
                                         tt.Abort();
-                                        AllDraw.OrderPlate *= -1; OrderPlate *= -1;
+                                        AllDraw.OrderPlate *= -1; AllDraw.OrderPlate *= -1;
 
 
 
@@ -1238,7 +1236,7 @@ namespace HybridizerRefrigitz
                                         
                                     }
                                     else
-                              if (Com && (order == 2))
+                              if (Com && (AllDraw.OrderPlate == -1))
                                     {
                                         MovmentsNumber++;
 
@@ -1248,15 +1246,14 @@ namespace HybridizerRefrigitz
                                         HybridizerRefrigitz.AllDraw.TableListAction.Add(CloneATable(brd.GetTable()));
 
 
-                                        AllDraw.OrderPlate = OrderPlate;
-                                        int Ord = OrderPlate;
+                                        
+                                        int Ord = AllDraw.OrderPlate;
                                         Color aa = Color.WHITE;
                                         if (Ord == -1)
                                             aa = Color.BLACK;
                                         bool B = AllDraw.Blitz;
                                         AllDraw.Blitz = false;
-                                        HybridizerRefrigitz.AllDraw.MaxAStarGreedy = PlatformHelper.ProcessorCount;
-
+                                   
                                         AllDraw thiB = Draw.AStarGreedyString;
                                         if (Draw.IsAtLeastAllObjectIsNull())
                                         {
@@ -1278,7 +1275,7 @@ namespace HybridizerRefrigitz
                                         tt.Join();
                                         tt.Abort();
 
-                                        AllDraw.OrderPlate *= -1; OrderPlate *= -1;
+                                        AllDraw.OrderPlate *= -1; AllDraw.OrderPlate *= -1;
 
 
                                         //Play(-1, -1);
@@ -1299,7 +1296,7 @@ namespace HybridizerRefrigitz
                         Object oi = new Object();
                         lock (oi)
                         {
-                            if (Com && (order == 1))
+                            if (Com && (AllDraw.OrderPlate == 1))
                             {
                                 MovmentsNumber++;
                                 
@@ -1309,15 +1306,14 @@ namespace HybridizerRefrigitz
                                 HybridizerRefrigitz.AllDraw.TableListAction.Add(CloneATable(brd.GetTable()));
 
 
-                                AllDraw.OrderPlate = OrderPlate;
-                                int Ord = OrderPlate;
+                                
+                                int Ord = AllDraw.OrderPlate;
                                 Color aa = Color.WHITE;
                                 if (Ord == -1)
                                     aa = Color.BLACK;
                                 bool B = AllDraw.Blitz;
                                 AllDraw.Blitz = false;
-                                HybridizerRefrigitz.AllDraw.MaxAStarGreedy = PlatformHelper.ProcessorCount;
-
+                  
                                 AllDraw thiB = Draw.AStarGreedyString;
                                 if (Draw.IsAtLeastAllObjectIsNull())
                                 {
@@ -1339,7 +1335,7 @@ namespace HybridizerRefrigitz
                                 tt.Join();
                                 tt.Abort();
 
-                                AllDraw.OrderPlate *= -1; OrderPlate *= -1;
+                                AllDraw.OrderPlate *= -1; AllDraw.OrderPlate *= -1;
 
 
                                 //Play(-1, -1);
@@ -1348,7 +1344,7 @@ namespace HybridizerRefrigitz
                                 
                             }
                             else
-                              if (Com && (order == 2))
+                              if (Com && (AllDraw.OrderPlate == -1))
                             {
                                 MovmentsNumber++;
 
@@ -1358,15 +1354,14 @@ namespace HybridizerRefrigitz
                                 HybridizerRefrigitz.AllDraw.TableListAction.Add(CloneATable(brd.GetTable()));
 
 
-                                AllDraw.OrderPlate = OrderPlate;
-                                int Ord = OrderPlate;
+                                
+                                int Ord = AllDraw.OrderPlate;
                                 Color aa = Color.WHITE;
                                 if (Ord == -1)
                                     aa = Color.BLACK;
                                 bool B = AllDraw.Blitz;
                                 AllDraw.Blitz = false;
-                                HybridizerRefrigitz.AllDraw.MaxAStarGreedy = PlatformHelper.ProcessorCount;
-
+                            
                                 AllDraw thiB = Draw.AStarGreedyString;
                                 if (Draw.IsAtLeastAllObjectIsNull())
                                 {
@@ -1388,7 +1383,7 @@ namespace HybridizerRefrigitz
                                 tt.Join();
                                 tt.Abort();
 
-                                AllDraw.OrderPlate *= -1; OrderPlate *= -1;
+                                AllDraw.OrderPlate *= -1; AllDraw.OrderPlate *= -1;
 
 
                                 //Play(-1, -1);
@@ -1721,7 +1716,7 @@ namespace HybridizerRefrigitz
                 {
                     if (Draw == null)
                         return;
-                    int Dummy = OrderPlate;
+                    int Dummy = AllDraw.OrderPlate;
 
                     HybridizerRefrigitz.AllDraw THISB = Draw.AStarGreedyString;
                     HybridizerRefrigitz.AllDraw THISStore = Draw;
@@ -1741,7 +1736,7 @@ namespace HybridizerRefrigitz
                         //if (First)
 
                         //else
-                        int Ord = OrderPlate;
+                        int Ord = AllDraw.OrderPlate;
                         AllDraw.OrderPlate = Ord;
                         var output = Task.Factory.StartNew(() => Draw.FoundOfCurrentTableNode(CloneATable(Table), Ord, ref THIS, ref FOUND));
                         output.Wait();
@@ -1753,7 +1748,7 @@ namespace HybridizerRefrigitz
 
 
                             bool LoadTree = true;
-                            Ord = OrderPlate;
+                            Ord = AllDraw.OrderPlate;
                             //if (MovmentsNumber > 1)
                             (new TakeRoot()).Save(FOUND, false, this, ref LoadTree, false, false, UsePenaltyRegardMechnisam, false, false, false, AStarGreedyHeuristic, true);
 
@@ -1772,9 +1767,9 @@ namespace HybridizerRefrigitz
                             bool FirstS = false;
                             if ((HybridizerRefrigitz.AllDraw.TableListAction.Count > 2))
                             {
-                                Ord = OrderPlate * -1;
+                                Ord = AllDraw.OrderPlate * -1;
                                 AllDraw.OrderPlate = Ord;
-                                OrderPlate = Ord;
+                                AllDraw.OrderPlate = Ord;
 
                                 Color aa = Color.WHITE;
                                 if (Ord == -1)
@@ -1811,7 +1806,7 @@ namespace HybridizerRefrigitz
                                     aa = Color.BLACK;
                                 bool B = AllDraw.Blitz;
                                 AllDraw.Blitz = false;
-                                HybridizerRefrigitz.AllDraw.MaxAStarGreedy = PlatformHelper.ProcessorCount;
+                                HybridizerRefrigitz.AllDraw.
 
                                 if (!FirstS)
                                 {
@@ -1857,9 +1852,9 @@ namespace HybridizerRefrigitz
                                 FOUND = false;
                                 if (!First && (HybridizerRefrigitz.AllDraw.TableListAction.Count > 2))
                                 {
-                                    Ord = OrderPlate * -1;
+                                    Ord = AllDraw.OrderPlate * -1;
                                     AllDraw.OrderPlate = Ord;
-                                    OrderPlate = Ord;
+                                    AllDraw.OrderPlate = Ord;
                                 }
                                 output = Task.Factory.StartNew(() => Draw.FoundOfCurrentTableNode(CloneATable(HybridizerRefrigitz.AllDraw.TableListAction[HybridizerRefrigitz.AllDraw.TableListAction.Count - 1]), Ord, ref THIS, ref FOUND));
                                 output.Wait();
@@ -1894,7 +1889,7 @@ namespace HybridizerRefrigitz
                                     Draw.SetRowColumn(0);
                                     Draw.IsCurrentDraw = true;
                                     Draw.AStarGreedyString = THISB;
-                                    HybridizerRefrigitz.ChessRules.CurrentOrder = OrderPlate;
+                                    HybridizerRefrigitz.ChessRules.CurrentOrder = AllDraw.OrderPlate;
                                     HybridizerRefrigitz.AllDraw.DepthIterative = 0;
                                     (new TakeRoot()).Save(FOUND, false, this, ref LoadTree, false, false, UsePenaltyRegardMechnisam, false, false, false, AStarGreedyHeuristic, true);
 
@@ -1906,7 +1901,7 @@ namespace HybridizerRefrigitz
                                 Draw = THISStore;
                                 if (MovmentsNumber == 1)
                                     NotFoundBegin = true;
-                                OrderPlate = Dummy;
+                                AllDraw.OrderPlate = Dummy;
 
                                 bool LoadTree = true;
 
@@ -1916,7 +1911,7 @@ namespace HybridizerRefrigitz
                                 Draw.SetRowColumn(0);
                                 Draw.IsCurrentDraw = true;
                                 Draw.AStarGreedyString = THISB;
-                                HybridizerRefrigitz.ChessRules.CurrentOrder = OrderPlate;
+                                HybridizerRefrigitz.ChessRules.CurrentOrder = AllDraw.OrderPlate;
                                 HybridizerRefrigitz.AllDraw.DepthIterative = 0;
                                 (new TakeRoot()).Save(FOUND, false, this, ref LoadTree, false, false, UsePenaltyRegardMechnisam, false, false, false, AStarGreedyHeuristic, true);
 
@@ -1939,7 +1934,7 @@ namespace HybridizerRefrigitz
             {
                 if (Draw == null)
                     return;
-                int Dummy = OrderPlate;
+                int Dummy = AllDraw.OrderPlate;
 
                 HybridizerRefrigitz.AllDraw THISB = Draw.AStarGreedyString;
                 HybridizerRefrigitz.AllDraw THISStore = Draw;
@@ -1959,7 +1954,7 @@ namespace HybridizerRefrigitz
                     //if (First)
 
                     //else
-                    int Ord = OrderPlate;
+                    int Ord = AllDraw.OrderPlate;
                     AllDraw.OrderPlate = Ord;
                     var output = Task.Factory.StartNew(() => Draw.FoundOfCurrentTableNode(CloneATable(Table), Ord, ref THIS, ref FOUND));
                     output.Wait();
@@ -1971,7 +1966,7 @@ namespace HybridizerRefrigitz
 
 
                         bool LoadTree = true;
-                        Ord = OrderPlate;
+                        Ord = AllDraw.OrderPlate;
                         //if (MovmentsNumber > 1)
                         (new TakeRoot()).Save(FOUND, false, this, ref LoadTree, false, false, UsePenaltyRegardMechnisam, false, false, false, AStarGreedyHeuristic, true);
 
@@ -2048,7 +2043,7 @@ namespace HybridizerRefrigitz
                             Draw.SetRowColumn(0);
                             Draw.IsCurrentDraw = true;
                             Draw.AStarGreedyString = THISB;
-                            HybridizerRefrigitz.ChessRules.CurrentOrder = OrderPlate;
+                            HybridizerRefrigitz.ChessRules.CurrentOrder = AllDraw.OrderPlate;
                             HybridizerRefrigitz.AllDraw.DepthIterative = 0;
                             (new TakeRoot()).Save(FOUND, false, this, ref LoadTree, false, false, UsePenaltyRegardMechnisam, false, false, false, AStarGreedyHeuristic, true);
 

@@ -58,10 +58,10 @@ namespace HybridizerRefrigitz
         }
         static void loopT(string[] args)
         {
-            do
+            //do
             {
                 GlobalMembersUci.loop(args);
-            } while (true);
+            } ///while (true);
         }
     }
    

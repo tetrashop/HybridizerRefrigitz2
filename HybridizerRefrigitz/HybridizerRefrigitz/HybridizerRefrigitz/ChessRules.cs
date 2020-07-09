@@ -1609,7 +1609,7 @@ namespace HybridizerRefrigitz
                 }
                 //Separate.
                 if (AllDraw.Less != int.MinValue)
-                    S += " With Heuristic (" +HybridizerRefrigitz.AllDraw.Less.ToString() + ")--";
+                    S += " With Heuristic (" +AllDraw.Less.ToString() + ")--";
                 else
                     S += " --";
                 ////{ //AllDraw.OutPut.Append("\r\n");for (int l = 0; l < Spaces; l++) //AllDraw.OutPut.Append(Space);  //AllDraw.OutPut.Append("CreateStatistic:" + (TimeElapced.TimeNow() - Time).ToString());}Spaces--;

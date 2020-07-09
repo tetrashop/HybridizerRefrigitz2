@@ -14372,7 +14372,7 @@ namespace HybridizerRefrigitz
             lock (O)
             {
                 int[,] TableHeuristic = new int[8, 8];
-                AStarGreedyi++;
+                //AStarGreedyi++;
                 int DummyOrder = Order;
                 int DummyCurrentOrder = ChessRules.CurrentOrder;
                 //Initiate For Dynamic Backward Current AStarGreedyi Non Minus Founded Max Movments Detection Global Variables.
@@ -14406,8 +14406,8 @@ namespace HybridizerRefrigitz
                 Object Omm = new Object();
                 lock (Omm)
                 {
-                    if (AStarGreedyi > MaxAStarGreedy)
-                        return TableHeuristic;
+                    //if (AStarGreedyi > MaxAStarGreedy)
+                        ////return TableHeuristic;
                 }
                 bool Act = false;
                 if (Order == 1)
@@ -24484,7 +24484,7 @@ if (Kind == 2 && ElephantOnTable[i].ElefantThinking[0].AStarGreedy != null && El
                     Object OOO = new Object();
                     lock (OOO)
                     {
-                        if (!SetDept)
+                     /*   if (!SetDept)
                             MaxAStarGreedy = System.Convert.ToInt32(AllDraw.MaxDuringLevelThinkingCreation);
                         AllDraw.AStarGreedyiLevelMax = MaxAStarGreedy;
                         AStarGreedyiLevelMax = System.Convert.ToInt32(AllDraw.MaxDuringLevelThinkingCreation);
@@ -24496,7 +24496,7 @@ if (Kind == 2 && ElephantOnTable[i].ElefantThinking[0].AStarGreedy != null && El
                         lock (Omm1)
                         {
                             AStarGreedytMaxCount = (int)MaxAStarGreedy;
-                        }
+                        }*/
                     }
                 }
                 ChessRules.CurrentOrder = Current;
@@ -24506,10 +24506,10 @@ if (Kind == 2 && ElephantOnTable[i].ElefantThinking[0].AStarGreedy != null && El
                 Object OOOO = new Object();
                 lock (OOOO)
                 {
-                    bool ad = Blitz;
-                    Blitz = true;
+                    //bool ad = Blitz;
+                    //Blitz = true;
                     //if (MaxAStarGreedy == 0)
-                    MaxAStarGreedy = PlatformHelper.ProcessorCount;
+                    
                     MaxAStarGreedy1 = MaxAStarGreedy;
                     int[,] Tabl = CloneATable(Table);
                     Color aaa = a;
@@ -24518,7 +24518,7 @@ if (Kind == 2 && ElephantOnTable[i].ElefantThinking[0].AStarGreedy != null && El
                     H.Wait();
                     H.Dispose();
                     AStarGreedyString = THISA;
-                    Blitz = ad;
+                    //Blitz = ad;
                 }
                 Object Om = new Object();
                 lock (Om)
@@ -24551,7 +24551,7 @@ if (Kind == 2 && ElephantOnTable[i].ElefantThinking[0].AStarGreedy != null && El
                         UsePenaltyRegardMechnisamT = false;
 
                         RemovePenalltyFromFirstBranches(Order);
-                        MaxAStarGreedy = 1;
+                       //MaxAStarGreedy = 1;
                         AStarGreedyiLevelMax = 1;
                         Less = Int32.MinValue;
 

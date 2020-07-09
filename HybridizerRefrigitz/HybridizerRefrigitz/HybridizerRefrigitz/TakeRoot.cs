@@ -282,7 +282,7 @@ namespace HybridizerRefrigitz
                                 //PictureBoxHybridizerRefrigitz.SendToBack();
                                 //PictureBoxTimerWHITE.SendToBack();
                                 //PictureBoxTimerBLACK.SendToBack();
-                                ////MessageBox.Show("Saved Completed.");
+                                Console.WriteLine("Saved Completed.");
                             }
                         }
                         /*else {
@@ -297,7 +297,7 @@ namespace HybridizerRefrigitz
                                 //PictureBoxHybridizerRefrigitz.SendToBack();
                                 //PictureBoxTimerWHITE.SendToBack();
                                 //PictureBoxTimerBLACK.SendToBack();
-                                ////MessageBox.Show("Saved Completed.");
+                                Console.WriteLine("Saved Completed.");
                             }
                         */
                     }
@@ -325,7 +325,7 @@ namespace HybridizerRefrigitz
                             //PictureBoxHybridizerRefrigitz.SendToBack();
                             //PictureBoxTimerWHITE.SendToBack();
                             //PictureBoxTimerBLACK.SendToBack();
-                            ////MessageBox.Show("Saved Completed.");
+                            Console.WriteLine("Saved Completed.");
                         }
                         //DrawManagement(FOUND, UsePenaltyRegardMechnisam, AStarGreedyHeuristic);
 
