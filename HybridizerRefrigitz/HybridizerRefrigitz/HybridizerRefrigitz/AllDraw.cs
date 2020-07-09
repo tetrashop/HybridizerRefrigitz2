@@ -22975,7 +22975,7 @@ if (Kind == 2 && ElephantOnTable[i].ElefantThinking[0].AStarGreedy != null && El
                                 int iAStarGreedy1 = iAStarGreedy;
 
                                 var array1 = Task.Factory.StartNew(() => Do |= this.FullGameThinkingTreeSoldierWHITE(a1, Ord1, iAStarGreedy1, ii1, jj1, ik11, j11, FOUND, LeafAStarGreedy));
-                                array1.Wait(); array1.Dispose();
+                                //array1.Wait(); array1.Dispose();
 
 
                                 Order = DummyOrder;
@@ -22998,7 +22998,7 @@ if (Kind == 2 && ElephantOnTable[i].ElefantThinking[0].AStarGreedy != null && El
                                 int iAStarGreedy2 = iAStarGreedy;
 
                                 var array2 = Task.Factory.StartNew(() => Do |= this.FullGameThinkingTreeElephantWHITE(a2, Ord2, iAStarGreedy2, ii2, jj2, ik12, j12, FOUND, LeafAStarGreedy));
-                                array2.Wait(); array2.Dispose();
+                                //array2.Wait(); array2.Dispose();
 
 
                                 //Initiatye Variables.
@@ -23022,7 +23022,7 @@ if (Kind == 2 && ElephantOnTable[i].ElefantThinking[0].AStarGreedy != null && El
                                 int iAStarGreedy3 = iAStarGreedy;
 
                                 var array3 = Task.Factory.StartNew(() => Do |= this.FullGameThinkingTreeHourseWHITE(a3, Ord3, iAStarGreedy3, ii3, jj3, ik13, j13, FOUND, LeafAStarGreedy));
-                                array3.Wait(); array3.Dispose();
+                               // array3.Wait(); array3.Dispose();
 
 
                                 //Initiatye Variables.
@@ -23046,7 +23046,7 @@ if (Kind == 2 && ElephantOnTable[i].ElefantThinking[0].AStarGreedy != null && El
                                 int iAStarGreedy4 = iAStarGreedy;
 
                                 var array4 = Task.Factory.StartNew(() => Do |= this.FullGameThinkingTreeCastleWHITE(a4, Ord4, iAStarGreedy4, ii4, jj4, ik14, j14, FOUND, LeafAStarGreedy));
-                                array4.Wait(); array4.Dispose();
+                               // array4.Wait(); array4.Dispose();
 
 
                                 //Initiatye Variables.
@@ -23070,7 +23070,7 @@ if (Kind == 2 && ElephantOnTable[i].ElefantThinking[0].AStarGreedy != null && El
                                 int iAStarGreedy5 = iAStarGreedy;
 
                                 var array5 = Task.Factory.StartNew(() => Do |= this.FullGameThinkingTreeMinisterWHITE(a5, Ord5, iAStarGreedy5, ii5, jj5, ik15, j15, FOUND, LeafAStarGreedy));
-                                array5.Wait(); array5.Dispose();
+                               // array5.Wait(); array5.Dispose();
 
 
                                 //Initiatye Variables.
@@ -23094,7 +23094,7 @@ if (Kind == 2 && ElephantOnTable[i].ElefantThinking[0].AStarGreedy != null && El
                                 int iAStarGreedy6 = iAStarGreedy;
 
                                 var array6 = Task.Factory.StartNew(() => Do |= this.FullGameThinkingTreeKingWHITE(a6, Ord6, iAStarGreedy6, ii6, jj6, ik16, j16, FOUND, LeafAStarGreedy));
-                                array6.Wait(); array6.Dispose();
+                               // array6.Wait(); array6.Dispose();
 
 
                                 Order = DummyOrder;
