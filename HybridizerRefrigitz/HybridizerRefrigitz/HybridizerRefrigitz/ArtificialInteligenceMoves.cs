@@ -8,7 +8,8 @@ using System.Drawing;
 using HybridizerRefrigitz;
 
 public class ArtificialInteligenceMove
-{	public static bool UpdateIsRunning=false; 
+{
+   public static bool UpdateIsRunning=false; 
 	public static ArtificialInteligenceMove tta;
 	int LevelMul=1;
 	int Order=1;

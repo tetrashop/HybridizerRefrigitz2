@@ -51,8 +51,7 @@ namespace HybridizerRefrigitz
     [Serializable]
     public class ThinkingHybridizerRefrigitz//: IDisposable
     {
-        public static string OutP="";
-
+        public static string OutP = "";
         List<List<List<int[]>>> MovableAllObjectsList = new List<List<List<int[]>>>();
         public int RemoveOfDisturbIndex = -1;
         int HeuristicDoubleDefenceIndexInOnGameMidle = 0;
@@ -400,10 +399,16 @@ namespace HybridizerRefrigitz
 
             }
         }
-        public ThinkingHybridizerRefrigitz()
+        public string AsS(int i,int j,int ii,int jj)
         {
+            object o = new object();
+            lock (o)
+            {
+                OutP = Alphabet(i) + Number(j) + Alphabet(ii) + Number(jj);
+                return OutP ;
+            }
         }
-
+        public ThinkingHybridizerRefrigitz() { }
         //Constructor
         public ThinkingHybridizerRefrigitz(int iInde, int KindO, int CurrentAStarGredy, bool MovementsAStarGreedyHeuristicTFou, bool IgnoreSelfObject, bool UsePenaltyRegardMechnisa, bool BestMovment, bool PredictHurist, bool OnlySel, bool AStarGreedyHuris, bool Arrangments, int i, int j)
         {
@@ -4829,7 +4834,8 @@ namespace HybridizerRefrigitz
                             if (S3)
                                 HA += RationalRegard;
                         }
-                    } }
+                    }
+                }
                 return HA;
             }
         }
@@ -4889,106 +4895,60 @@ namespace HybridizerRefrigitz
             lock (O)
             {
                 int NIs = 0;
-                if ((ColK - 1 >= 0))
+                if ((ColK - 1 >= 0) && !SameSign(Table[Rowk, ColK], Table[Rowk, ColK - 1]))
                 {
-                    if (!SameSign(Table[Rowk, ColK], Table[Rowk, ColK - 1]))
-                    {
-
-                        EmptyR.Add(Rowk);
-                        EmptyC.Add(ColK - 1);
-                        NIs++;
-                    }
+                    EmptyR.Add(Rowk);
+                    EmptyC.Add(ColK - 1);
+                    NIs++;
                 }
-
-                if ((ColK + 1 < 8))
+                if ((ColK + 1 < 8) && !SameSign(Table[Rowk, ColK], Table[Rowk, ColK + 1]))
                 {
-                    if (!SameSign(Table[Rowk, ColK], Table[Rowk, ColK + 1]))
-                    {
-
-                        EmptyR.Add(Rowk);
-                        EmptyC.Add(ColK + 1);
-                        NIs++;
-                    }
+                    EmptyR.Add(Rowk);
+                    EmptyC.Add(ColK + 1);
+                    NIs++;
                 }
-
-                if ((Rowk - 1 >= 0))
+                if ((Rowk - 1 >= 0) && !SameSign(Table[Rowk, ColK], Table[Rowk - 1, ColK]))
                 {
-                    if (!SameSign(Table[Rowk, ColK], Table[Rowk - 1, ColK]))
-                    {
-                        EmptyR.Add(Rowk - 1);
-                        EmptyC.Add(ColK);
-                        NIs++;
-                    }
+                    EmptyR.Add(Rowk - 1);
+                    EmptyC.Add(ColK);
+                    NIs++;
                 }
-                if ((Row + 1 < 8))
+                if ((Row + 1 < 8) && !SameSign(Table[Rowk, ColK], Table[Rowk + 1, ColK]))
                 {
-                    if (!SameSign(Table[Rowk, ColK], Table[Rowk + 1, ColK]))
-                    {
-                        EmptyR.Add(Rowk + 1);
-                        EmptyC.Add(ColK);
-                        NIs++;
-                    }
+                    EmptyR.Add(Rowk + 1);
+                    EmptyC.Add(ColK);
+                    NIs++;
                 }
-                if ((ColK - 1 >= 0))
+                if ((ColK - 1 >= 0) && (Rowk - 1 >= 0) && !SameSign(Table[Rowk, ColK], Table[Rowk - 1, ColK - 1]))
                 {
-                    if (!SameSign(Table[Rowk, ColK], Table[Rowk - 1, ColK - 1]))
-
-                    {
-                        EmptyR.Add(Rowk - 1);
-                        EmptyC.Add(ColK - 1);
-                        NIs++;
-                    }
+                    EmptyR.Add(Rowk - 1);
+                    EmptyC.Add(ColK - 1);
+                    NIs++;
                 }
-                if ((Rowk + 1 < 8))
+                if ((ColK - 1 >= 0) && (Rowk + 1 < 8) && !SameSign(Table[Rowk, ColK], Table[Rowk + 1, ColK - 1]))
                 {
-                    if ((ColK - 1 >= 0))
-                    {
-                        if (!SameSign(Table[Rowk, ColK], Table[Rowk + 1, ColK - 1]))
-                        {
-                            EmptyR.Add(Rowk + 1);
-                            EmptyC.Add(ColK - 1);
-                            NIs++;
-                        }
-                    }
+                    EmptyR.Add(Rowk + 1);
+                    EmptyC.Add(ColK - 1);
+                    NIs++;
                 }
-                if ((Rowk + 1 < 8))
+                if ((ColK + 1 < 8) && (Rowk + 1 < 8) && !SameSign(Table[Rowk, ColK], Table[Rowk + 1, ColK + 1]))
                 {
-                    if ((ColK + 1 < 8))
-                    {
-                        if (!SameSign(Table[Rowk, ColK], Table[Rowk + 1, ColK + 1]))
-                        {
-                            EmptyR.Add(Rowk + 1);
-                            EmptyC.Add(ColK + 1);
-                            NIs++;
-                        }
-                    }
+                    EmptyR.Add(Rowk + 1);
+                    EmptyC.Add(ColK + 1);
+                    NIs++;
                 }
-                if ((ColK + 1 < 8))
+                if ((ColK + 1 < 8) && (Rowk - 1 >= 0) && !SameSign(Table[Rowk, ColK], Table[Rowk - 1, ColK + 1]))
                 {
-                    if ((Rowk - 1 >= 0))
-                    {
-                        if (!SameSign(Table[Rowk, ColK], Table[Rowk - 1, ColK + 1]))
-                        {
-                            EmptyR.Add(Rowk - 1);
-                            EmptyC.Add(ColK + 1);
-                            NIs++;
-                        }
-                    }
+                    EmptyR.Add(Rowk - 1);
+                    EmptyC.Add(ColK + 1);
+                    NIs++;
                 }
-
-                if ((ColK - 1 >= 0))
+                if ((ColK + 1 < 8) && (Rowk - 1 >= 0) && !SameSign(Table[Rowk, ColK], Table[Rowk - 1, ColK + 1]))
                 {
-                    if ((Rowk - 1 >= 0))
-                    {
-                        if (!SameSign(Table[Rowk, ColK], Table[Rowk - 1, ColK - 1]))
-                        {
-                            EmptyR.Add(Rowk - 1);
-                            EmptyC.Add(ColK + 1);
-                            NIs++;
-                        }
-                    }
+                    EmptyR.Add(Rowk - 1);
+                    EmptyC.Add(ColK + 1);
+                    NIs++;
                 }
-
                 return NIs;
             }
         }
@@ -5003,7 +4963,7 @@ namespace HybridizerRefrigitz
             Object O = new Object();
             lock (O)
             {
-//#pragma warning disable CS0219 // The variable 'NIs' is assigned but its value is never used
+                //#pragma warning disable CS0219 // The variable 'NIs' is assigned but its value is never used
 #pragma warning disable CS0219 // The variable 'NIs' is assigned but its value is never used
                 int NIs = 0;
 #pragma warning restore CS0219 // The variable 'NIs' is assigned but its value is never used
@@ -5125,7 +5085,7 @@ namespace HybridizerRefrigitz
                                                 var th2 = Task.Factory.StartNew(() => ab = Attack(CloneATable(Tab), k, p, kkk, ppp, color, Order));
                                                 th2.Wait();
                                                 th2.Dispose();
-                                                if (ab)                                                  
+                                                if (ab)
                                                 {
                                                     int[,] Ta = CloneATable(Tab);
                                                     Ta[kkk, ppp] = Ta[k, p];
@@ -6024,7 +5984,7 @@ namespace HybridizerRefrigitz
                         if (Tab[RowS, ColS] == 4 || Tab[RowD, ColD] == 4)
                             Dis += RationalRegard;
                     }
-                       if ((Tab[3, 4] > ObjectWHITE && Tab[4, 3] > ObjectWHITE && Tab[3, 3] > ObjectWHITE && Tab[4, 4] > ObjectWHITE) || (IsNumberOfObjecttIsLessThanThreashold(CloneATable(Tab), 25)))
+                    if ((Tab[3, 4] > ObjectWHITE && Tab[4, 3] > ObjectWHITE && Tab[3, 3] > ObjectWHITE && Tab[4, 4] > ObjectWHITE) || (IsNumberOfObjecttIsLessThanThreashold(CloneATable(Tab), 25)))
                     {
                         var th3 = Task.Factory.StartNew(() => ab = (Tab[RowS, ColS] == 3) && (NoOfExistInReducedAttackList(Before, RowS, ColS, RowD, ColD) > 0));
                         th3.Wait();
@@ -6039,8 +5999,8 @@ namespace HybridizerRefrigitz
                             if (ab)
                                 Dis += RationalPenalty;
                             else
-                            
-                        {
+
+                            {
                                 var th5 = Task.Factory.StartNew(() => ab = (Tab[RowS, ColS] == 3) && (NoOfExistInReducedAttackList(Before, RowS, ColS, RowD, ColD) == 0));
                                 th5.Wait();
                                 th5.Dispose();
@@ -6054,7 +6014,7 @@ namespace HybridizerRefrigitz
                                     if (ab)
                                         Dis += RationalRegard;
                                 }
-                        }
+                            }
                         }
                     }
                     if (IsNumberOfObjecttIsLessThanThreashold(CloneATable(Tab), 32))
@@ -6253,7 +6213,7 @@ namespace HybridizerRefrigitz
                 {
                     if (ColS < 5)
                     {
-                        
+
                         if (!Is)
                         {
                             bool A = true;
@@ -6271,7 +6231,7 @@ namespace HybridizerRefrigitz
                 {
                     if (ColS > 2)
                     {
-                        
+
                         if (!Is)
                         {
                             bool A = true;
@@ -7635,7 +7595,7 @@ namespace HybridizerRefrigitz
                                         th2.Wait();
                                         th2.Dispose();
 
-                                        
+
                                         //When Enemy is Supported.
                                         if (B)
                                         {
@@ -8092,7 +8052,7 @@ namespace HybridizerRefrigitz
                 th.Dispose();
                 if (ab)
                 {
-                  
+
                     //Initiate Local Variables.
                     for (var RowS = 0; RowS < 8; RowS++)
                         for (var ColS = 0; ColS < 8; ColS++)
@@ -9794,7 +9754,7 @@ namespace HybridizerRefrigitz
                     Object A = new object();
                     lock (A)
                     {
-                        int[] TmpL = LoseOcuuredatChiled;int TmpW = WinOcuuredatChiled; newTask1 = Task.Factory.StartNew(() => CalculateHeuristics(TmpL, TmpW, true, Order, 0, CloneATable(TableS), RowSource, ColumnSource, RowDestination, ColumnDestination, color, ref HeuristicAttackValue, ref HeuristicMovementValue, ref HeuristicSelfSupportedValue, ref HeuristicReducedMovementValue, ref HeuristicReducedSupport, ref HeuristicReducedAttackValue, ref HeuristicDistributionValue, ref HeuristicKingSafe, ref HeuristicFromCenter, ref HeuristicKingDangour, ref HeuristicCheckedMate));
+                        int[] TmpL = LoseOcuuredatChiled; int TmpW = WinOcuuredatChiled; newTask1 = Task.Factory.StartNew(() => CalculateHeuristics(TmpL, TmpW, true, Order, 0, CloneATable(TableS), RowSource, ColumnSource, RowDestination, ColumnDestination, color, ref HeuristicAttackValue, ref HeuristicMovementValue, ref HeuristicSelfSupportedValue, ref HeuristicReducedMovementValue, ref HeuristicReducedSupport, ref HeuristicReducedAttackValue, ref HeuristicDistributionValue, ref HeuristicKingSafe, ref HeuristicFromCenter, ref HeuristicKingDangour, ref HeuristicCheckedMate));
                         newTask1.Wait(); newTask1.Dispose();
                         LoseOcuuredatChiled[0] += TmpL[0]; WinOcuuredatChiled += TmpW;
                     }
@@ -9804,7 +9764,7 @@ namespace HybridizerRefrigitz
                         if (!Sup) { NumbersOfAllNode++; }
                     }
                     int Killed = 0;
-                    newTask1 = Task.Factory.StartNew(() => KilledMethod(ref Killed, Sup, RowSource, ColumnSource, RowDestination, ColumnDestination,ref TableS));
+                    newTask1 = Task.Factory.StartNew(() => KilledMethod(ref Killed, Sup, RowSource, ColumnSource, RowDestination, ColumnDestination, ref TableS));
                     newTask1.Wait(); newTask1.Dispose();
 
 
@@ -9815,7 +9775,7 @@ namespace HybridizerRefrigitz
                         lock (A3)
                         {
                             PenaltyVCar = false;
-                            int[] TmpL = LoseOcuuredatChiled;int TmpW = WinOcuuredatChiled;
+                            int[] TmpL = LoseOcuuredatChiled; int TmpW = WinOcuuredatChiled;
                             newTask1 = Task.Factory.StartNew(() => PenaltyMechanisam(ref PenaltyVCar, ref TmpL, ref TmpW, ref CheckedM, Killed, false, Kind, CloneATable(TableS), RowSource, ColumnSource, ref Current, DoEnemySelf, PenRegStrore, EnemyCheckMateActionsString, RowDestination, ColumnDestination, Castle));
                             newTask1.Wait(); newTask1.Dispose();
                             LoseOcuuredatChiled[0] += TmpL[0]; WinOcuuredatChiled += TmpW;
@@ -9831,7 +9791,7 @@ namespace HybridizerRefrigitz
                         //Caused this for Stachostic results.
                         if (!Sup)
                         {
-                            int[] TmpL = LoseOcuuredatChiled;int TmpW = WinOcuuredatChiled; newTask1 = Task.Factory.StartNew(() => CalculateHeuristics(TmpL, TmpW, false, Order, Killed, CloneATable(TableS), RowSource, ColumnSource, RowDestination, ColumnDestination, color, ref HeuristicAttackValue, ref HeuristicMovementValue, ref HeuristicSelfSupportedValue, ref HeuristicReducedMovementValue, ref HeuristicReducedSupport, ref HeuristicReducedAttackValue, ref HeuristicDistributionValue, ref HeuristicKingSafe, ref HeuristicFromCenter, ref HeuristicKingDangour, ref HeuristicCheckedMate));
+                            int[] TmpL = LoseOcuuredatChiled; int TmpW = WinOcuuredatChiled; newTask1 = Task.Factory.StartNew(() => CalculateHeuristics(TmpL, TmpW, false, Order, Killed, CloneATable(TableS), RowSource, ColumnSource, RowDestination, ColumnDestination, color, ref HeuristicAttackValue, ref HeuristicMovementValue, ref HeuristicSelfSupportedValue, ref HeuristicReducedMovementValue, ref HeuristicReducedSupport, ref HeuristicReducedAttackValue, ref HeuristicDistributionValue, ref HeuristicKingSafe, ref HeuristicFromCenter, ref HeuristicKingDangour, ref HeuristicCheckedMate));
                             newTask1.Wait(); newTask1.Dispose();
                             LoseOcuuredatChiled[0] += TmpL[0]; WinOcuuredatChiled += TmpW;
                         }
@@ -9839,12 +9799,11 @@ namespace HybridizerRefrigitz
                     //Calculate Heuristic and Add to List and Cal Syntax.
                     if (!Sup)
                     {
-                        As(RowSource, ColumnSource, RowDestination, ColumnDestination);
-
                         String H = "";
                         Object A6 = new object();
                         lock (A6)
                         {
+                            AsS(RowSource, ColumnSource, RowDestination, ColumnDestination);
                             int[] Hu = new int[10];
                             //if (!(IsSup[j]))
                             {
@@ -9948,7 +9907,7 @@ namespace HybridizerRefrigitz
                     Object A = new object();
                     lock (A)
                     {
-                        int[] TmpL = LoseOcuuredatChiled;int TmpW = WinOcuuredatChiled; newTask1 = Task.Factory.StartNew(() => CalculateHeuristics(TmpL, TmpW, true, Order, 0, CloneATable(TableS), RowSource, ColumnSource, RowDestination, ColumnDestination, color, ref HeuristicAttackValue, ref HeuristicMovementValue, ref HeuristicSelfSupportedValue, ref HeuristicReducedMovementValue, ref HeuristicReducedSupport, ref HeuristicReducedAttackValue, ref HeuristicDistributionValue, ref HeuristicKingSafe, ref HeuristicFromCenter, ref HeuristicKingDangour, ref HeuristicCheckedMate));
+                        int[] TmpL = LoseOcuuredatChiled; int TmpW = WinOcuuredatChiled; newTask1 = Task.Factory.StartNew(() => CalculateHeuristics(TmpL, TmpW, true, Order, 0, CloneATable(TableS), RowSource, ColumnSource, RowDestination, ColumnDestination, color, ref HeuristicAttackValue, ref HeuristicMovementValue, ref HeuristicSelfSupportedValue, ref HeuristicReducedMovementValue, ref HeuristicReducedSupport, ref HeuristicReducedAttackValue, ref HeuristicDistributionValue, ref HeuristicKingSafe, ref HeuristicFromCenter, ref HeuristicKingDangour, ref HeuristicCheckedMate));
                         newTask1.Wait(); newTask1.Dispose();
                         LoseOcuuredatChiled[0] += TmpL[0]; WinOcuuredatChiled += TmpW;
                     }
@@ -9958,7 +9917,7 @@ namespace HybridizerRefrigitz
                         if (!Sup) { NumbersOfAllNode++; }
                     }
                     int Killed = 0;
-                    newTask1 = Task.Factory.StartNew(() => KilledMethod(ref Killed, Sup, RowSource, ColumnSource, RowDestination, ColumnDestination,ref TableS));
+                    newTask1 = Task.Factory.StartNew(() => KilledMethod(ref Killed, Sup, RowSource, ColumnSource, RowDestination, ColumnDestination, ref TableS));
                     newTask1.Wait(); newTask1.Dispose();
 
 
@@ -9968,7 +9927,7 @@ namespace HybridizerRefrigitz
                         lock (A3)
                         {
                             PenaltyVCar = false;
-                            int[] TmpL = LoseOcuuredatChiled;int TmpW = WinOcuuredatChiled;
+                            int[] TmpL = LoseOcuuredatChiled; int TmpW = WinOcuuredatChiled;
                             newTask1 = Task.Factory.StartNew(() => PenaltyMechanisam(ref PenaltyVCar, ref TmpL, ref TmpW, ref CheckedM, Killed, false, Kind, CloneATable(TableS), RowSource, ColumnSource, ref Current, DoEnemySelf, PenRegStrore, EnemyCheckMateActionsString, RowDestination, ColumnDestination, Castle));
                             newTask1.Wait(); newTask1.Dispose();
                             LoseOcuuredatChiled[0] += TmpL[0]; WinOcuuredatChiled += TmpW;
@@ -9984,7 +9943,7 @@ namespace HybridizerRefrigitz
                         //Caused this for Stachostic results.
                         if (!Sup)
                         {
-                            int[] TmpL = LoseOcuuredatChiled;int TmpW = WinOcuuredatChiled; newTask1 = Task.Factory.StartNew(() => CalculateHeuristics(TmpL, TmpW, false, Order, Killed, CloneATable(TableS), RowSource, ColumnSource, RowDestination, ColumnDestination, color, ref HeuristicAttackValue, ref HeuristicMovementValue, ref HeuristicSelfSupportedValue, ref HeuristicReducedMovementValue, ref HeuristicReducedSupport, ref HeuristicReducedAttackValue, ref HeuristicDistributionValue, ref HeuristicKingSafe, ref HeuristicFromCenter, ref HeuristicKingDangour, ref HeuristicCheckedMate));
+                            int[] TmpL = LoseOcuuredatChiled; int TmpW = WinOcuuredatChiled; newTask1 = Task.Factory.StartNew(() => CalculateHeuristics(TmpL, TmpW, false, Order, Killed, CloneATable(TableS), RowSource, ColumnSource, RowDestination, ColumnDestination, color, ref HeuristicAttackValue, ref HeuristicMovementValue, ref HeuristicSelfSupportedValue, ref HeuristicReducedMovementValue, ref HeuristicReducedSupport, ref HeuristicReducedAttackValue, ref HeuristicDistributionValue, ref HeuristicKingSafe, ref HeuristicFromCenter, ref HeuristicKingDangour, ref HeuristicCheckedMate));
                             newTask1.Wait(); newTask1.Dispose();
                             LoseOcuuredatChiled[0] += TmpL[0]; WinOcuuredatChiled += TmpW;
                         }
@@ -9992,12 +9951,11 @@ namespace HybridizerRefrigitz
                     //Calculate Heuristic and Add to List and Cal Syntax.
                     if (!Sup)
                     {
-                        As(RowSource, ColumnSource, RowDestination, ColumnDestination);
-
                         String H = "";
                         Object A6 = new object();
                         lock (A6)
                         {
+                            AsS(RowSource, ColumnSource, RowDestination, ColumnDestination);
                             int[] Hu = new int[10];
                             //if (!(IsSup[j]))
                             {
@@ -10401,22 +10359,6 @@ namespace HybridizerRefrigitz
                 return LearningV;
             }
         }
-        void As(int i,int j,int ii,int jj)
-        {
-            object o = new object();
-            lock (o)
-            {
-                OutP = AsS(i, j, ii, jj);
-            }
-        }
-        public  string AsS(int i, int j, int ii, int jj)
-        {
-            object o = new object();
-            lock (o)
-            {
-               return Alphabet(i) + Number(j) + Alphabet(ii) + Number(jj);
-            }
-        }
         void CastlesThinkingHybridizerRefrigitz(ref int[] LoseOcuuredatChiled, ref int WinOcuuredatChiled, int DummyOrder, int DummyCurrentOrder, int[,] TableS, int RowSource, int ColumnSource, bool DoEnemySelf, bool PenRegStrore, bool EnemyCheckMateActionsString, int RowDestination, int ColumnDestination, bool Castle
         )
         {
@@ -10464,7 +10406,7 @@ namespace HybridizerRefrigitz
                     Object A = new object();
                     lock (A)
                     {
-                        int[] TmpL = LoseOcuuredatChiled;int TmpW = WinOcuuredatChiled; newTask1 = Task.Factory.StartNew(() => CalculateHeuristics(TmpL, TmpW, true, Order, 0, CloneATable(TableS), RowSource, ColumnSource, RowDestination, ColumnDestination, color, ref HeuristicAttackValue, ref HeuristicMovementValue, ref HeuristicSelfSupportedValue, ref HeuristicReducedMovementValue, ref HeuristicReducedSupport, ref HeuristicReducedAttackValue, ref HeuristicDistributionValue, ref HeuristicKingSafe, ref HeuristicFromCenter, ref HeuristicKingDangour, ref HeuristicCheckedMate));
+                        int[] TmpL = LoseOcuuredatChiled; int TmpW = WinOcuuredatChiled; newTask1 = Task.Factory.StartNew(() => CalculateHeuristics(TmpL, TmpW, true, Order, 0, CloneATable(TableS), RowSource, ColumnSource, RowDestination, ColumnDestination, color, ref HeuristicAttackValue, ref HeuristicMovementValue, ref HeuristicSelfSupportedValue, ref HeuristicReducedMovementValue, ref HeuristicReducedSupport, ref HeuristicReducedAttackValue, ref HeuristicDistributionValue, ref HeuristicKingSafe, ref HeuristicFromCenter, ref HeuristicKingDangour, ref HeuristicCheckedMate));
                         newTask1.Wait(); newTask1.Dispose();
                         LoseOcuuredatChiled[0] += TmpL[0]; WinOcuuredatChiled += TmpW;
                     }
@@ -10474,7 +10416,7 @@ namespace HybridizerRefrigitz
                         if (!Sup) { NumbersOfAllNode++; }
                     }
                     int Killed = 0;
-                    newTask1 = Task.Factory.StartNew(() => KilledMethod(ref Killed, Sup, RowSource, ColumnSource, RowDestination, ColumnDestination,ref TableS));
+                    newTask1 = Task.Factory.StartNew(() => KilledMethod(ref Killed, Sup, RowSource, ColumnSource, RowDestination, ColumnDestination, ref TableS));
                     newTask1.Wait(); newTask1.Dispose();
 
 
@@ -10484,7 +10426,7 @@ namespace HybridizerRefrigitz
                         lock (A3)
                         {
                             PenaltyVCar = false;
-                            int[] TmpL = LoseOcuuredatChiled;int TmpW = WinOcuuredatChiled;
+                            int[] TmpL = LoseOcuuredatChiled; int TmpW = WinOcuuredatChiled;
                             newTask1 = Task.Factory.StartNew(() => PenaltyMechanisam(ref PenaltyVCar, ref TmpL, ref TmpW, ref CheckedM, Killed, false, Kind, CloneATable(TableS), RowSource, ColumnSource, ref Current, DoEnemySelf, PenRegStrore, EnemyCheckMateActionsString, RowDestination, ColumnDestination, Castle));
                             newTask1.Wait(); newTask1.Dispose();
                             LoseOcuuredatChiled[0] += TmpL[0]; WinOcuuredatChiled += TmpW;
@@ -10500,7 +10442,7 @@ namespace HybridizerRefrigitz
                         //Caused this for Stachostic results.
                         if (!Sup)
                         {
-                            int[] TmpL = LoseOcuuredatChiled;int TmpW = WinOcuuredatChiled; newTask1 = Task.Factory.StartNew(() => CalculateHeuristics(TmpL, TmpW, false, Order, Killed, CloneATable(TableS), RowSource, ColumnSource, RowDestination, ColumnDestination, color, ref HeuristicAttackValue, ref HeuristicMovementValue, ref HeuristicSelfSupportedValue, ref HeuristicReducedMovementValue, ref HeuristicReducedSupport, ref HeuristicReducedAttackValue, ref HeuristicDistributionValue, ref HeuristicKingSafe, ref HeuristicFromCenter, ref HeuristicKingDangour, ref HeuristicCheckedMate));
+                            int[] TmpL = LoseOcuuredatChiled; int TmpW = WinOcuuredatChiled; newTask1 = Task.Factory.StartNew(() => CalculateHeuristics(TmpL, TmpW, false, Order, Killed, CloneATable(TableS), RowSource, ColumnSource, RowDestination, ColumnDestination, color, ref HeuristicAttackValue, ref HeuristicMovementValue, ref HeuristicSelfSupportedValue, ref HeuristicReducedMovementValue, ref HeuristicReducedSupport, ref HeuristicReducedAttackValue, ref HeuristicDistributionValue, ref HeuristicKingSafe, ref HeuristicFromCenter, ref HeuristicKingDangour, ref HeuristicCheckedMate));
                             newTask1.Wait(); newTask1.Dispose();
                             LoseOcuuredatChiled[0] += TmpL[0]; WinOcuuredatChiled += TmpW;
 
@@ -10509,11 +10451,11 @@ namespace HybridizerRefrigitz
                     //Calculate Heuristic and Add to List and Cal Syntax.
                     if (!Sup)
                     {
-                        As(RowSource, ColumnSource, RowDestination, ColumnDestination);
                         String H = "";
                         Object A6 = new object();
                         lock (A6)
                         {
+                            AsS(RowSource, ColumnSource, RowDestination, ColumnDestination);
                             int[] Hu = new int[10];
                             //if (!(IsSup[j]))
                             {
@@ -10597,7 +10539,7 @@ namespace HybridizerRefrigitz
                     Object A = new object();
                     lock (A)
                     {
-                        int[] TmpL = LoseOcuuredatChiled;int TmpW = WinOcuuredatChiled; newTask1 = Task.Factory.StartNew(() => CalculateHeuristics(TmpL, TmpW, true, Order, 0, CloneATable(TableS), RowSource, ColumnSource, RowDestination, ColumnDestination, color, ref HeuristicAttackValue, ref HeuristicMovementValue, ref HeuristicSelfSupportedValue, ref HeuristicReducedMovementValue, ref HeuristicReducedSupport, ref HeuristicReducedAttackValue, ref HeuristicDistributionValue, ref HeuristicKingSafe, ref HeuristicFromCenter, ref HeuristicKingDangour, ref HeuristicCheckedMate));
+                        int[] TmpL = LoseOcuuredatChiled; int TmpW = WinOcuuredatChiled; newTask1 = Task.Factory.StartNew(() => CalculateHeuristics(TmpL, TmpW, true, Order, 0, CloneATable(TableS), RowSource, ColumnSource, RowDestination, ColumnDestination, color, ref HeuristicAttackValue, ref HeuristicMovementValue, ref HeuristicSelfSupportedValue, ref HeuristicReducedMovementValue, ref HeuristicReducedSupport, ref HeuristicReducedAttackValue, ref HeuristicDistributionValue, ref HeuristicKingSafe, ref HeuristicFromCenter, ref HeuristicKingDangour, ref HeuristicCheckedMate));
                         newTask1.Wait(); newTask1.Dispose();
                         LoseOcuuredatChiled[0] += TmpL[0]; WinOcuuredatChiled += TmpW;
                     }
@@ -10607,7 +10549,7 @@ namespace HybridizerRefrigitz
                         if (!Sup) { NumbersOfAllNode++; }
                     }
                     int Killed = 0;
-                    newTask1 = Task.Factory.StartNew(() => KilledMethod(ref Killed, Sup, RowSource, ColumnSource, RowDestination, ColumnDestination,ref TableS));
+                    newTask1 = Task.Factory.StartNew(() => KilledMethod(ref Killed, Sup, RowSource, ColumnSource, RowDestination, ColumnDestination, ref TableS));
                     newTask1.Wait(); newTask1.Dispose();
 
 
@@ -10617,7 +10559,7 @@ namespace HybridizerRefrigitz
                         lock (A3)
                         {
                             PenaltyVCar = false;
-                            int[] TmpL = LoseOcuuredatChiled;int TmpW = WinOcuuredatChiled;
+                            int[] TmpL = LoseOcuuredatChiled; int TmpW = WinOcuuredatChiled;
                             newTask1 = Task.Factory.StartNew(() => PenaltyMechanisam(ref PenaltyVCar, ref TmpL, ref TmpW, ref CheckedM, Killed, false, Kind, CloneATable(TableS), RowSource, ColumnSource, ref Current, DoEnemySelf, PenRegStrore, EnemyCheckMateActionsString, RowDestination, ColumnDestination, Castle));
                             newTask1.Wait(); newTask1.Dispose();
                             LoseOcuuredatChiled[0] += TmpL[0]; WinOcuuredatChiled += TmpW;
@@ -10633,7 +10575,7 @@ namespace HybridizerRefrigitz
                         //Caused this for Stachostic results.
                         if (!Sup)
                         {
-                            int[] TmpL = LoseOcuuredatChiled;int TmpW = WinOcuuredatChiled; newTask1 = Task.Factory.StartNew(() => CalculateHeuristics(TmpL, TmpW, false, Order, Killed, CloneATable(TableS), RowSource, ColumnSource, RowDestination, ColumnDestination, color, ref HeuristicAttackValue, ref HeuristicMovementValue, ref HeuristicSelfSupportedValue, ref HeuristicReducedMovementValue, ref HeuristicReducedSupport, ref HeuristicReducedAttackValue, ref HeuristicDistributionValue, ref HeuristicKingSafe, ref HeuristicFromCenter, ref HeuristicKingDangour, ref HeuristicCheckedMate));
+                            int[] TmpL = LoseOcuuredatChiled; int TmpW = WinOcuuredatChiled; newTask1 = Task.Factory.StartNew(() => CalculateHeuristics(TmpL, TmpW, false, Order, Killed, CloneATable(TableS), RowSource, ColumnSource, RowDestination, ColumnDestination, color, ref HeuristicAttackValue, ref HeuristicMovementValue, ref HeuristicSelfSupportedValue, ref HeuristicReducedMovementValue, ref HeuristicReducedSupport, ref HeuristicReducedAttackValue, ref HeuristicDistributionValue, ref HeuristicKingSafe, ref HeuristicFromCenter, ref HeuristicKingDangour, ref HeuristicCheckedMate));
                             newTask1.Wait(); newTask1.Dispose();
                             LoseOcuuredatChiled[0] += TmpL[0]; WinOcuuredatChiled += TmpW;
 
@@ -10642,12 +10584,11 @@ namespace HybridizerRefrigitz
                     //Calculate Heuristic and Add to List and Cal Syntax.
                     if (!Sup)
                     {
-                        As(RowSource, ColumnSource, RowDestination, ColumnDestination);
-
                         String H = "";
                         Object A6 = new object();
                         lock (A6)
                         {
+                            AsS(RowSource, ColumnSource, RowDestination, ColumnDestination);
                             int[] Hu = new int[10];
                             //if (!(IsSup[j]))
                             {
@@ -10731,7 +10672,7 @@ namespace HybridizerRefrigitz
                     Object A = new object();
                     lock (A)
                     {
-                        int[] TmpL = LoseOcuuredatChiled;int TmpW = WinOcuuredatChiled; newTask1 = Task.Factory.StartNew(() => CalculateHeuristics(TmpL, TmpW, true, Order, 0, CloneATable(TableS), RowSource, ColumnSource, RowDestination, ColumnDestination, color, ref HeuristicAttackValue, ref HeuristicMovementValue, ref HeuristicSelfSupportedValue, ref HeuristicReducedMovementValue, ref HeuristicReducedSupport, ref HeuristicReducedAttackValue, ref HeuristicDistributionValue, ref HeuristicKingSafe, ref HeuristicFromCenter, ref HeuristicKingDangour, ref HeuristicCheckedMate));
+                        int[] TmpL = LoseOcuuredatChiled; int TmpW = WinOcuuredatChiled; newTask1 = Task.Factory.StartNew(() => CalculateHeuristics(TmpL, TmpW, true, Order, 0, CloneATable(TableS), RowSource, ColumnSource, RowDestination, ColumnDestination, color, ref HeuristicAttackValue, ref HeuristicMovementValue, ref HeuristicSelfSupportedValue, ref HeuristicReducedMovementValue, ref HeuristicReducedSupport, ref HeuristicReducedAttackValue, ref HeuristicDistributionValue, ref HeuristicKingSafe, ref HeuristicFromCenter, ref HeuristicKingDangour, ref HeuristicCheckedMate));
                         newTask1.Wait(); newTask1.Dispose();
                         LoseOcuuredatChiled[0] += TmpL[0]; WinOcuuredatChiled += TmpW;
                     }
@@ -10741,7 +10682,7 @@ namespace HybridizerRefrigitz
                         if (!Sup) { NumbersOfAllNode++; }
                     }
                     int Killed = 0;
-                    newTask1 = Task.Factory.StartNew(() => KilledMethod(ref Killed, Sup, RowSource, ColumnSource, RowDestination, ColumnDestination,ref TableS));
+                    newTask1 = Task.Factory.StartNew(() => KilledMethod(ref Killed, Sup, RowSource, ColumnSource, RowDestination, ColumnDestination, ref TableS));
                     newTask1.Wait(); newTask1.Dispose();
 
 
@@ -10751,7 +10692,7 @@ namespace HybridizerRefrigitz
                         lock (A3)
                         {
                             PenaltyVCar = false;
-                            int[] TmpL = LoseOcuuredatChiled;int TmpW = WinOcuuredatChiled;
+                            int[] TmpL = LoseOcuuredatChiled; int TmpW = WinOcuuredatChiled;
                             newTask1 = Task.Factory.StartNew(() => PenaltyMechanisam(ref PenaltyVCar, ref TmpL, ref TmpW, ref CheckedM, Killed, false, Kind, CloneATable(TableS), RowSource, ColumnSource, ref Current, DoEnemySelf, PenRegStrore, EnemyCheckMateActionsString, RowDestination, ColumnDestination, Castle));
                             newTask1.Wait(); newTask1.Dispose();
                             LoseOcuuredatChiled[0] += TmpL[0]; WinOcuuredatChiled += TmpW;
@@ -10767,7 +10708,7 @@ namespace HybridizerRefrigitz
                         //Caused this for Stachostic results.
                         if (!Sup)
                         {
-                            int[] TmpL = LoseOcuuredatChiled;int TmpW = WinOcuuredatChiled; newTask1 = Task.Factory.StartNew(() => CalculateHeuristics(TmpL, TmpW, false, Order, Killed, CloneATable(TableS), RowSource, ColumnSource, RowDestination, ColumnDestination, color, ref HeuristicAttackValue, ref HeuristicMovementValue, ref HeuristicSelfSupportedValue, ref HeuristicReducedMovementValue, ref HeuristicReducedSupport, ref HeuristicReducedAttackValue, ref HeuristicDistributionValue, ref HeuristicKingSafe, ref HeuristicFromCenter, ref HeuristicKingDangour, ref HeuristicCheckedMate));
+                            int[] TmpL = LoseOcuuredatChiled; int TmpW = WinOcuuredatChiled; newTask1 = Task.Factory.StartNew(() => CalculateHeuristics(TmpL, TmpW, false, Order, Killed, CloneATable(TableS), RowSource, ColumnSource, RowDestination, ColumnDestination, color, ref HeuristicAttackValue, ref HeuristicMovementValue, ref HeuristicSelfSupportedValue, ref HeuristicReducedMovementValue, ref HeuristicReducedSupport, ref HeuristicReducedAttackValue, ref HeuristicDistributionValue, ref HeuristicKingSafe, ref HeuristicFromCenter, ref HeuristicKingDangour, ref HeuristicCheckedMate));
                             newTask1.Wait(); newTask1.Dispose();
                             LoseOcuuredatChiled[0] += TmpL[0]; WinOcuuredatChiled += TmpW;
                         }
@@ -10775,12 +10716,13 @@ namespace HybridizerRefrigitz
                     //Calculate Heuristic and Add to List and Cal Syntax.
                     if (!Sup)
                     {
-                        As(RowSource, ColumnSource, RowDestination, ColumnDestination);
-
                         String H = "";
                         Object A6 = new object();
                         lock (A6)
                         {
+                            AsS(RowSource, ColumnSource, RowDestination, ColumnDestination);
+
+
                             int[] Hu = new int[10];
                             //if (!(IsSup[j]))
                             {
@@ -11650,7 +11592,7 @@ namespace HybridizerRefrigitz
                         Object A2 = new object();
                         lock (A2)
                         {
-                            MovableAllObjectsListMethos(CloneATable(TableS), true, RowSource, ColumnSource, RowDestination, ColumnDestination,1);
+                            MovableAllObjectsListMethos(CloneATable(TableS), true, RowSource, ColumnSource, RowDestination, ColumnDestination, 1);
                             Killed = TableConst[RowDestination, ColumnDestination];
                             TableS[RowDestination, ColumnDestination] = TableS[RowSource, ColumnSource];
                             TableS[RowSource, ColumnSource] = 0;
@@ -11900,7 +11842,7 @@ namespace HybridizerRefrigitz
                     Object A = new object();
                     lock (A)
                     {
-                        int[] TmpL = LoseOcuuredatChiled;int TmpW = WinOcuuredatChiled; newTask1 = Task.Factory.StartNew(() => CalculateHeuristics(TmpL, TmpW, true, Order, 0, CloneATable(TableS), RowSource, ColumnSource, RowDestination, ColumnDestination, color, ref HeuristicAttackValue, ref HeuristicMovementValue, ref HeuristicSelfSupportedValue, ref HeuristicReducedMovementValue, ref HeuristicReducedSupport, ref HeuristicReducedAttackValue, ref HeuristicDistributionValue, ref HeuristicKingSafe, ref HeuristicFromCenter, ref HeuristicKingDangour, ref HeuristicCheckedMate));
+                        int[] TmpL = LoseOcuuredatChiled; int TmpW = WinOcuuredatChiled; newTask1 = Task.Factory.StartNew(() => CalculateHeuristics(TmpL, TmpW, true, Order, 0, CloneATable(TableS), RowSource, ColumnSource, RowDestination, ColumnDestination, color, ref HeuristicAttackValue, ref HeuristicMovementValue, ref HeuristicSelfSupportedValue, ref HeuristicReducedMovementValue, ref HeuristicReducedSupport, ref HeuristicReducedAttackValue, ref HeuristicDistributionValue, ref HeuristicKingSafe, ref HeuristicFromCenter, ref HeuristicKingDangour, ref HeuristicCheckedMate));
                         newTask1.Wait(); newTask1.Dispose();
                         LoseOcuuredatChiled[0] += TmpL[0]; WinOcuuredatChiled += TmpW;
                     }
@@ -11920,7 +11862,7 @@ namespace HybridizerRefrigitz
                         lock (A3)
                         {
                             PenaltyVCar = false;
-                            int[] TmpL = LoseOcuuredatChiled;int TmpW = WinOcuuredatChiled;
+                            int[] TmpL = LoseOcuuredatChiled; int TmpW = WinOcuuredatChiled;
                             newTask1 = Task.Factory.StartNew(() => PenaltyMechanisam(ref PenaltyVCar, ref TmpL, ref TmpW, ref CheckedM, Killed, false, Kind, CloneATable(TableS), RowSource, ColumnSource, ref Current, DoEnemySelf, PenRegStrore, EnemyCheckMateActionsString, RowDestination, ColumnDestination, Castle));
                             newTask1.Wait(); newTask1.Dispose();
                             LoseOcuuredatChiled[0] += TmpL[0]; WinOcuuredatChiled += TmpW;
@@ -11936,7 +11878,7 @@ namespace HybridizerRefrigitz
                         //Caused this for Stachostic results.
                         if (!Sup)
                         {
-                            int[] TmpL = LoseOcuuredatChiled;int TmpW = WinOcuuredatChiled; newTask1 = Task.Factory.StartNew(() => CalculateHeuristics(TmpL, TmpW, false, Order, Killed, CloneATable(TableS), RowSource, ColumnSource, RowDestination, ColumnDestination, color, ref HeuristicAttackValue, ref HeuristicMovementValue, ref HeuristicSelfSupportedValue, ref HeuristicReducedMovementValue, ref HeuristicReducedSupport, ref HeuristicReducedAttackValue, ref HeuristicDistributionValue, ref HeuristicKingSafe, ref HeuristicFromCenter, ref HeuristicKingDangour, ref HeuristicCheckedMate));
+                            int[] TmpL = LoseOcuuredatChiled; int TmpW = WinOcuuredatChiled; newTask1 = Task.Factory.StartNew(() => CalculateHeuristics(TmpL, TmpW, false, Order, Killed, CloneATable(TableS), RowSource, ColumnSource, RowDestination, ColumnDestination, color, ref HeuristicAttackValue, ref HeuristicMovementValue, ref HeuristicSelfSupportedValue, ref HeuristicReducedMovementValue, ref HeuristicReducedSupport, ref HeuristicReducedAttackValue, ref HeuristicDistributionValue, ref HeuristicKingSafe, ref HeuristicFromCenter, ref HeuristicKingDangour, ref HeuristicCheckedMate));
                             newTask1.Wait(); newTask1.Dispose();
                             LoseOcuuredatChiled[0] += TmpL[0]; WinOcuuredatChiled += TmpW;
 
@@ -11945,12 +11887,11 @@ namespace HybridizerRefrigitz
                     //Calculate Heuristic and Add to List and Cal Syntax.
                     if (!Sup)
                     {
-                        As(RowSource, ColumnSource, RowDestination, ColumnDestination);
-
                         String H = "";
                         Object A6 = new object();
                         lock (A6)
                         {
+                            AsS(RowSource, ColumnSource, RowDestination, ColumnDestination);
                             int[] Hu = new int[10];
                             //if (!(IsSup[j]))
                             {
@@ -12035,7 +11976,7 @@ namespace HybridizerRefrigitz
                 {
                     ThinkingRun = true;
                 }
-                int[] TmpL = LoseOcuuredatChiled;int TmpW = WinOcuuredatChiled; var newTask1 = Task.Factory.StartNew(() => CalculateHeuristics(TmpL, TmpW, true, Order, 0, CloneATable(TableS), RowSource, ColumnSource, RowDestination, ColumnDestination, color, ref HeuristicAttackValue, ref HeuristicMovementValue, ref HeuristicSelfSupportedValue, ref HeuristicReducedMovementValue, ref HeuristicReducedSupport, ref HeuristicReducedAttackValue, ref HeuristicDistributionValue, ref HeuristicKingSafe, ref HeuristicFromCenter, ref HeuristicKingDangour, ref HeuristicCheckedMate));
+                int[] TmpL = LoseOcuuredatChiled; int TmpW = WinOcuuredatChiled; var newTask1 = Task.Factory.StartNew(() => CalculateHeuristics(TmpL, TmpW, true, Order, 0, CloneATable(TableS), RowSource, ColumnSource, RowDestination, ColumnDestination, color, ref HeuristicAttackValue, ref HeuristicMovementValue, ref HeuristicSelfSupportedValue, ref HeuristicReducedMovementValue, ref HeuristicReducedSupport, ref HeuristicReducedAttackValue, ref HeuristicDistributionValue, ref HeuristicKingSafe, ref HeuristicFromCenter, ref HeuristicKingDangour, ref HeuristicCheckedMate));
                 newTask1.Wait(); newTask1.Dispose();
                 LoseOcuuredatChiled[0] += TmpL[0]; WinOcuuredatChiled += TmpW;
                 Object A = new object();
@@ -12071,12 +12012,11 @@ namespace HybridizerRefrigitz
                 TableListKing.Add(CloneATable(TableS));
                 IndexKing++;
                 //Calculate Heuristic Sumation and Store in Specific List.
+                AsS(RowSource, ColumnSource, RowDestination, ColumnDestination);
                 int[] Hu = new int[10]; String H = "";
                 Object A6 = new Object();
                 lock (A6)
                 {
-                    As(RowSource, ColumnSource, RowDestination, ColumnDestination);
-
                     //if (IgnoreFromCheckandMateHeuristic)
 
                     newTask1 = Task.Factory.StartNew(() => HuMethod(ref Hu, HeuristicAttackValue, HeuristicMovementValue, HeuristicSelfSupportedValue, HeuristicReducedMovementValue, HeuristicReducedSupport, HeuristicReducedAttackValue, HeuristicDistributionValue, HeuristicKingSafe, HeuristicFromCenter, HeuristicKingDangour, HeuristicCheckedMate));
@@ -12867,7 +12807,7 @@ namespace HybridizerRefrigitz
         List<List<int[]>> AchMazReducedElephasnt(int[,] Tabl, bool Before, int RowS, int ColS, int RowD, int ColD, int Order)
         {
             List<List<int[]>> Existence = new List<List<int[]>>();
-            
+
             int ii = RowS, jj = ColS;
 
             for (var i = 0; i < 8; i++)
@@ -12886,23 +12826,23 @@ namespace HybridizerRefrigitz
                         List<int[]> Exist = ListOfExistInReducedAttackList(Before, RowS, ColS, i, j);
                         if (Exist.Count >= 1)
                         {
-                            
+
                             Existence.Add(Exist);
                         }
-                        
+
                     }
                 }
             }
             //===============================
-            
-            
+
+
             return Existence;
         }
         //method of list of reduced attack or attack by lists of method found lists by every specified objects on board.
         List<List<int[]>> AchMazReducedCastle(int[,] Tabl, bool Before, int RowS, int ColS, int RowD, int ColD, int Order)
         {
             List<List<int[]>> Existence = new List<List<int[]>>();
-            
+
             int ii = RowS, jj = ColS;
 
             Object O1 = new Object();
@@ -12925,15 +12865,15 @@ namespace HybridizerRefrigitz
                         List<int[]> Exist = ListOfExistInReducedAttackList(Before, RowS, ColS, i, j);
                         if (Exist.Count >= 1)
                         {
-                            
+
                             Existence.Add(Exist);
                         }
-                        
+
                     }
                 }
             }
             //===============================
-            
+
             Object OO = new Object();
             lock (OO)
             {
@@ -12953,21 +12893,21 @@ namespace HybridizerRefrigitz
                         List<int[]> Exist = ListOfExistInReducedAttackList(Before, i, j, RowS, ColS);
                         if (Exist.Count >= 1)
                         {
-                            
+
                             Existence.Add(Exist);
                         }
-                        
+
                     }
                 }
             }
-            
+
             return Existence;
         }
         //method of list of reduced attack or attack by lists of method found lists by every specified objects on board.
         List<List<int[]>> AchMazElephasnt(int[,] Tabl, bool Before, int RowS, int ColS, int RowD, int ColD, int Order)
         {
             List<List<int[]>> Existence = new List<List<int[]>>();
-            
+
             int ii = RowS, jj = ColS;
             if (Order == 1 && Tabl[RowS, ColS] != 2)
                 return Existence;
@@ -12986,21 +12926,21 @@ namespace HybridizerRefrigitz
                         List<int[]> Exist = ListOfExistInAttackList(Before, RowS, ColS, i, j);
                         if (Exist.Count >= 1)
                         {
-                            
+
                             Existence.Add(Exist);
                         }
-                        
+
                     }
                 }
             }
-             //===============================
+            //===============================
             return Existence;
         }
         //method of list of reduced attack or attack by lists of method found lists by every specified objects on board.
         List<List<int[]>> AchMazCastle(int[,] Tabl, bool Before, int RowS, int ColS, int RowD, int ColD, int Order)
         {
             List<List<int[]>> Existence = new List<List<int[]>>();
-            
+
             int ii = RowS, jj = ColS;
             if (Order == 1 && Tabl[RowS, ColS] != 4)
                 return Existence;
@@ -13023,19 +12963,19 @@ namespace HybridizerRefrigitz
                         List<int[]> Exist = ListOfExistInAttackList(Before, RowS, ColS, i, j);
                         if (Exist.Count >= 1)
                         {
-                            
+
                             Existence.Add(Exist);
                         }
-                        
+
                     }
                 }
-                
+
             }
             //===============================
             Object OO = new Object();
             lock (OO)
             {
-                
+
                 for (var j = 0; j < 8; j++)
                 {
                     Object O = new Object();
@@ -13048,13 +12988,13 @@ namespace HybridizerRefrigitz
                         List<int[]> Exist = ListOfExistInAttackList(Before, RowS, ColS, i, j);
                         if (Exist.Count >= 1)
                         {
-                            
+
                             Existence.Add(Exist);
                         }
-                        
+
                     }
                 }
-                
+
             }
 
             return Existence;
@@ -13063,7 +13003,7 @@ namespace HybridizerRefrigitz
         List<List<int[]>> AchMazHourse(int[,] Tabl, bool Before, int RowS, int ColS, int RowD, int ColD, int Order)
         {
             List<List<int[]>> Existence = new List<List<int[]>>();
-            
+
             int ii = RowS, jj = ColS;
             if (Order == 1 && Tabl[RowS, ColS] != 3)
                 return Existence;
@@ -13085,15 +13025,15 @@ namespace HybridizerRefrigitz
                             List<int[]> Exist = ListOfExistInAttackList(Before, RowS, ColS, i, j);
                             if (Exist.Count >= 1)
                             {
-                                
+
                                 Existence.Add(Exist);
                             }
-                            
+
                         }
                     }
                 }
             }
-            
+
 
             return Existence;
         }
@@ -13101,7 +13041,7 @@ namespace HybridizerRefrigitz
         List<List<int[]>> AchMazReducedHourse(int[,] Tabl, bool Before, int RowS, int ColS, int RowD, int ColD, int Order)
         {
             List<List<int[]>> Existence = new List<List<int[]>>();
-            
+
             int ii = RowS, jj = ColS;
             Object O1 = new Object();
             lock (O1)
@@ -13123,16 +13063,16 @@ namespace HybridizerRefrigitz
                             List<int[]> Exist = ListOfExistInReducedAttackList(Before, RowS, ColS, i, j);
                             if (Exist.Count >= 1)
                             {
-                                
+
                                 Existence.Add(Exist);
                             }
-                            
+
                         }
                     }
                 }
             }
             //===============================
-            
+
 
             return Existence;
         }
@@ -13140,7 +13080,7 @@ namespace HybridizerRefrigitz
         List<List<int[]>> AchMazMinister(int[,] Tabl, bool Before, int RowS, int ColS, int RowD, int ColD, int Order)
         {
             List<List<int[]>> Existence = new List<List<int[]>>();
-            
+
             int ii = RowS, jj = ColS;
             if (Order == 1 && Tabl[RowS, ColS] != 5)
                 return Existence;
@@ -13162,22 +13102,22 @@ namespace HybridizerRefrigitz
                             List<int[]> Exist = ListOfExistInAttackList(Before, RowS, ColS, i, j);
                             if (Exist.Count >= 1)
                             {
-                                
+
                                 Existence.Add(Exist);
                             }
-                            
+
                         }
                     }
                 }
             }
-            
+
             return Existence;
         }
         //method of list of reduced attack or attack by lists of method found lists by every specified objects on board.
         List<List<int[]>> AchMazKing(int[,] Tabl, bool Before, int RowS, int ColS, int RowD, int ColD, int Order)
         {
             List<List<int[]>> Existence = new List<List<int[]>>();
-            
+
             int ii = RowS, jj = ColS;
             if (Order == 1 && Tabl[RowS, ColS] != 6)
                 return Existence;
@@ -13197,18 +13137,18 @@ namespace HybridizerRefrigitz
                         List<int[]> Exist = ListOfExistInAttackList(Before, RowS, ColS, i, j);
                         if (Exist.Count >= 1)
                         {
-                            
+
                             Existence.Add(Exist);
                         }
-                        
+
                     }
                 }
                 //===============================
                 Object OOOo1 = new Object();
                 lock (OOOo1)
                 {
-                    
-                    
+
+
                     for (var i = ii - 1; i < ii + 2; i++)
                     {
                         Object O = new Object();
@@ -13220,17 +13160,17 @@ namespace HybridizerRefrigitz
                             List<int[]> Exist = ListOfExistInAttackList(Before, RowS, ColS, i, j);
                             if (Exist.Count >= 1)
                             {
-                                
+
                                 Existence.Add(Exist);
                             }
-                            
+
                         }
                     }
                 }
                 //=============================================
                 ////Parallel.For(0, 8, i =>
-                
-                
+
+
                 for (var i = ii - 1; i < ii + 2; i++)
                 {
                     Object O = new Object();
@@ -13243,10 +13183,10 @@ namespace HybridizerRefrigitz
                         List<int[]> Exist = ListOfExistInAttackList(Before, RowS, ColS, i, j);
                         if (Exist.Count >= 1)
                         {
-                            
+
                             Existence.Add(Exist);
                         }
-                        
+
                     }
                 }
             }
@@ -13254,8 +13194,8 @@ namespace HybridizerRefrigitz
             Object OO = new Object();
             lock (OO)
             {
-                
-                
+
+
                 for (var j = ii - 1; j < ii + 2; j++)
                 {
                     Object O = new Object();
@@ -13268,22 +13208,22 @@ namespace HybridizerRefrigitz
                         List<int[]> Exist = ListOfExistInAttackList(Before, RowS, ColS, i, j);
                         if (Exist.Count >= 1)
                         {
-                            
+
                             Existence.Add(Exist);
                         }
-                        
+
                     }
                 }
             }
 
-            
+
             return Existence;
         }
         //method of list of reduced attack or attack by lists of method found lists by every specified objects on board.
         List<List<int[]>> AchMazReducedKing(int[,] Tabl, bool Before, int RowS, int ColS, int RowD, int ColD, int Order)
         {
             List<List<int[]>> Existence = new List<List<int[]>>();
-            
+
             int ii = RowS, jj = ColS;
 
             Object O1 = new Object();
@@ -13304,18 +13244,18 @@ namespace HybridizerRefrigitz
                         List<int[]> Exist = ListOfExistInAttackList(Before, RowS, ColS, i, j);
                         if (Exist.Count >= 1)
                         {
-                            
+
                             Existence.Add(Exist);
                         }
-                        
+
                     }
                 }
                 //===============================
                 Object OOOo1 = new Object();
                 lock (OOOo1)
                 {
-                    
-                    
+
+
                     for (var i = ii - 1; i < ii + 2; i++)
                     {
                         Object O = new Object();
@@ -13331,17 +13271,17 @@ namespace HybridizerRefrigitz
                             List<int[]> Exist = ListOfExistInAttackList(Before, RowS, ColS, i, j);
                             if (Exist.Count >= 1)
                             {
-                                
+
                                 Existence.Add(Exist);
                             }
-                            
+
                         }
                     }
                 }
                 //=============================================
                 ////Parallel.For(0, 8, i =>
-                
-                
+
+
                 for (var i = ii - 1; i < ii + 2; i++)
                 {
                     Object O = new Object();
@@ -13359,10 +13299,10 @@ namespace HybridizerRefrigitz
                         List<int[]> Exist = ListOfExistInAttackList(Before, RowS, ColS, i, j);
                         if (Exist.Count >= 1)
                         {
-                            
+
                             Existence.Add(Exist);
                         }
-                        
+
                     }
                 }
             }
@@ -13370,8 +13310,8 @@ namespace HybridizerRefrigitz
             Object OO = new Object();
             lock (OO)
             {
-                
-                
+
+
                 for (var j = ii - 1; j < ii + 2; j++)
                 {
                     Object O = new Object();
@@ -13388,22 +13328,22 @@ namespace HybridizerRefrigitz
                         List<int[]> Exist = ListOfExistInAttackList(Before, RowS, ColS, i, j);
                         if (Exist.Count >= 1)
                         {
-                            
+
                             Existence.Add(Exist);
                         }
-                        
+
                     }
                 }
             }
 
-            
+
             return Existence;
         }
         //method of list of reduced attack or attack by lists of method found lists by every specified objects on board.
         List<List<int[]>> AchMazReducedMinister(int[,] Tabl, bool Before, int RowS, int ColS, int RowD, int ColD, int Order)
         {
             List<List<int[]>> Existence = new List<List<int[]>>();
-            
+
             int ii = RowS, jj = ColS;
 
             for (var i = 0; i < 8; i++)
@@ -13422,14 +13362,14 @@ namespace HybridizerRefrigitz
                         List<int[]> Exist = ListOfExistInReducedAttackList(Before, RowS, ColS, i, j);
                         if (Exist.Count >= 1)
                         {
-                            
+
                             Existence.Add(Exist);
                         }
-                        
+
                     }
                 }
             }
-            
+
             return Existence;
         }
 
@@ -13549,62 +13489,62 @@ namespace HybridizerRefrigitz
 
             List<int[]> Co1 = new List<int[]>();
             CollectionSummation(A, -4, ref Co1);
-            
+
             CollectionSummation(C, -4, ref Co1);
             CollectionSummation(D, -4, ref Co1);
-            
+
             if (Co1.Count > 0) Col.Add(Co1);
             List<int[]> Co2 = new List<int[]>();
             CollectionSummation(A, -3, ref Co2);
-            
+
             CollectionSummation(C, -3, ref Co2);
             CollectionSummation(D, -3, ref Co2);
-            
+
             if (Co2.Count > 0) Col.Add(Co2);
             List<int[]> Co3 = new List<int[]>();
             CollectionSummation(A, -2, ref Co3);
-            
+
             CollectionSummation(C, -2, ref Co3);
             CollectionSummation(D, -2, ref Co3);
-            
+
             if (Co3.Count > 0) Col.Add(Co3);
             List<int[]> Co4 = new List<int[]>();
             CollectionSummation(A, -1, ref Co4);
-            
+
             CollectionSummation(C, -1, ref Co4);
             CollectionSummation(D, -1, ref Co4);
-            
+
             if (Co4.Count > 0) Col.Add(Co4);
             List<int[]> Co5 = new List<int[]>();
             CollectionSummation(A, 1, ref Co5);
-            
+
             CollectionSummation(C, 1, ref Co5);
             CollectionSummation(D, 1, ref Co5);
-            
+
             if (Co5.Count > 0) Col.Add(Co5);
 
             List<int[]> Co6 = new List<int[]>();
             CollectionSummation(A, 2, ref Co6);
-            
+
             CollectionSummation(C, 2, ref Co6);
             CollectionSummation(D, 2, ref Co6);
-            
+
             if (Co6.Count > 0) Col.Add(Co6);
 
             List<int[]> Co7 = new List<int[]>();
             CollectionSummation(A, 3, ref Co7);
-            
+
             CollectionSummation(C, 3, ref Co7);
             CollectionSummation(D, 3, ref Co7);
-            
+
             if (Co7.Count > 0) Col.Add(Co7);
 
             List<int[]> Co8 = new List<int[]>();
             CollectionSummation(A, 4, ref Co8);
-            
+
             CollectionSummation(C, 4, ref Co8);
             CollectionSummation(D, 4, ref Co8);
-            
+
             if (Co8.Count > 0) Col.Add(Co8);
 
             return Col;
@@ -13678,7 +13618,7 @@ namespace HybridizerRefrigitz
                 }
 
             }
-     
+
             return Sum;
         }
         //calculate sum of achmazin pure and reduced and beforand after
@@ -13695,7 +13635,7 @@ namespace HybridizerRefrigitz
                     }
                 }
             }
-      
+
             return Sum;
         }
         //heuristic creation of double attacked
@@ -13954,7 +13894,7 @@ namespace HybridizerRefrigitz
                                     if (Order == AllDraw.OrderPlateDraw)
                                     {
                                         B = NoOfExistInAttackList(Before, RowS, ColS, RowD, ColD) > 0 && (System.Math.Abs(TableS[RowD, ColD]) != 0 && System.Math.Abs(TableS[RowS, ColS]) > 1);
-                                        C = HeuristicCheckedMate != 0 && (IsThereMateOfSelf[IsThereMateOfSelf.Count-1] || IsThereMateOfEnemy[IsThereMateOfEnemy.Count-1]);
+                                        C = HeuristicCheckedMate != 0 && (IsThereMateOfSelf[IsThereMateOfSelf.Count - 1] || IsThereMateOfEnemy[IsThereMateOfEnemy.Count - 1]);
                                     }
                                 }
                                 else
@@ -13963,7 +13903,7 @@ namespace HybridizerRefrigitz
                                     if (Order == AllDraw.OrderPlateDraw)
                                     {
                                         B = NoOfExistInAttackList(Before, RowS, ColS, RowD, ColD) > 0 && (System.Math.Abs(TableS[RowD, ColD]) != 0 && System.Math.Abs(TableS[RowS, ColS]) > 1);
-                                        C = HeuristicCheckedMate != 0 && (IsThereMateOfSelf[IsThereMateOfSelf.Count-1] || IsThereMateOfEnemy[IsThereMateOfEnemy.Count-1]);
+                                        C = HeuristicCheckedMate != 0 && (IsThereMateOfSelf[IsThereMateOfSelf.Count - 1] || IsThereMateOfEnemy[IsThereMateOfEnemy.Count - 1]);
                                     }
                                 }
                                 if (A && ((B) || (C)))
@@ -14081,7 +14021,7 @@ namespace HybridizerRefrigitz
                                     if (Order == AllDraw.OrderPlateDraw)
                                     {
                                         B = NoOfExistInAttackList(Before, RowS, ColS, RowD, ColD) > 0 && (Killed != 0 && Killed < TableS[RowD, ColD]);
-                                        C = HeuristicCheckedMate != 0 && (IsThereMateOfSelf[IsThereMateOfSelf.Count-1] || IsThereMateOfEnemy[IsThereMateOfEnemy.Count-1]);
+                                        C = HeuristicCheckedMate != 0 && (IsThereMateOfSelf[IsThereMateOfSelf.Count - 1] || IsThereMateOfEnemy[IsThereMateOfEnemy.Count - 1]);
                                     }
                                 }
                                 else
@@ -14090,7 +14030,7 @@ namespace HybridizerRefrigitz
                                     if (Order == AllDraw.OrderPlateDraw)
                                     {
                                         B = NoOfExistInAttackList(Before, RowS, ColS, RowD, ColD) > 0 && (Killed != 0 && Killed < TableS[RowD, ColD]);
-                                        C = HeuristicCheckedMate != 0 && (IsThereMateOfSelf[IsThereMateOfSelf.Count-1] || IsThereMateOfEnemy[IsThereMateOfEnemy.Count-1]);
+                                        C = HeuristicCheckedMate != 0 && (IsThereMateOfSelf[IsThereMateOfSelf.Count - 1] || IsThereMateOfEnemy[IsThereMateOfEnemy.Count - 1]);
                                     }
                                 }
                                 if (A && ((B) || (C)))
@@ -14461,7 +14401,7 @@ namespace HybridizerRefrigitz
                 {
                     ThinkingRun = true;
                 }
-                int[] TmpL = LoseOcuuredatChiled;int TmpW = WinOcuuredatChiled;  var newTask1 = Task.Factory.StartNew(() => CalculateHeuristics(TmpL, TmpW, true, Order, 0, CloneATable(TableS), RowSource, ColumnSource, RowDestination, ColumnDestination, color, ref HeuristicAttackValue, ref HeuristicMovementValue, ref HeuristicSelfSupportedValue, ref HeuristicReducedMovementValue, ref HeuristicReducedSupport, ref HeuristicReducedAttackValue, ref HeuristicDistributionValue, ref HeuristicKingSafe, ref HeuristicFromCenter, ref HeuristicKingDangour, ref HeuristicCheckedMate));
+                int[] TmpL = LoseOcuuredatChiled; int TmpW = WinOcuuredatChiled; var newTask1 = Task.Factory.StartNew(() => CalculateHeuristics(TmpL, TmpW, true, Order, 0, CloneATable(TableS), RowSource, ColumnSource, RowDestination, ColumnDestination, color, ref HeuristicAttackValue, ref HeuristicMovementValue, ref HeuristicSelfSupportedValue, ref HeuristicReducedMovementValue, ref HeuristicReducedSupport, ref HeuristicReducedAttackValue, ref HeuristicDistributionValue, ref HeuristicKingSafe, ref HeuristicFromCenter, ref HeuristicKingDangour, ref HeuristicCheckedMate));
                 newTask1.Wait(); newTask1.Dispose();
                 LoseOcuuredatChiled[0] += TmpL[0]; WinOcuuredatChiled += TmpW;
 
@@ -14522,12 +14462,11 @@ namespace HybridizerRefrigitz
                 LoseOcuuredatChiled[0] += TmpL[0]; WinOcuuredatChiled += TmpW;
 
                 String H = "";
+                AsS(RowSource, ColumnSource, RowDestination, ColumnDestination);
                 int[] Hu = new int[10];
                 Object A6 = new Object();
                 lock (A6)
                 {
-                    As(RowSource, ColumnSource, RowDestination, ColumnDestination);
-
                     //if (IgnoreFromCheckandMateHeuristic)
 
                     newTask1 = Task.Factory.StartNew(() => HuMethod(ref Hu, HeuristicAttackValue, HeuristicMovementValue, HeuristicSelfSupportedValue, HeuristicReducedMovementValue, HeuristicReducedSupport, HeuristicReducedAttackValue, HeuristicDistributionValue, HeuristicKingSafe, HeuristicFromCenter, HeuristicKingDangour, HeuristicCheckedMate));
@@ -14630,7 +14569,7 @@ namespace HybridizerRefrigitz
                 if (Scop(ii, jj, i, j, 1) && System.Math.Abs(TableS[ii, jj]) == 1 && System.Math.Abs(Kind) == 1)
                 {
                     Order = ord;
-                    int[] TmpL = LoseOcuuredatChiled;int TmpW = WinOcuuredatChiled;
+                    int[] TmpL = LoseOcuuredatChiled; int TmpW = WinOcuuredatChiled;
                     var newTask = Task.Factory.StartNew(() => SolderThinkingHybridizerRefrigitz(ref TmpL, ref TmpW, DummyOrder, DummyCurrentOrder, CloneATable(TableS), ii, jj, DoEnemySelf, PenRegStrore, EnemyCheckMateActionsString, i, j, Castle));
 
 
@@ -14670,7 +14609,7 @@ namespace HybridizerRefrigitz
                                     {
                                         TableS[RowS, ColS] = TableConst[RowS, ColS];
                                     }
-                                int[] TmpL = LoseOcuuredatChiled;int TmpW = WinOcuuredatChiled;
+                                int[] TmpL = LoseOcuuredatChiled; int TmpW = WinOcuuredatChiled;
                                 var newTask = Task.Factory.StartNew(() => ThinkingSoldierbase(ref TmpL, ref TmpW, ord, ii, jj, i, j, DummyOrder, DummyCurrentOrder, DoEnemySelf, PenRegStrore, EnemyCheckMateActionsString, Castle));
 
 
@@ -14701,7 +14640,7 @@ namespace HybridizerRefrigitz
                     if (Scop(ii, jj, i, j, 2) && System.Math.Abs(TableS[ii, jj]) == 2 && System.Math.Abs(Kind) == 2)
                     {
                         Order = ord;
-                        int[] TmpL = LoseOcuuredatChiled;int TmpW = WinOcuuredatChiled;
+                        int[] TmpL = LoseOcuuredatChiled; int TmpW = WinOcuuredatChiled;
                         var newTask = Task.Factory.StartNew(() => ElephantThinkingHybridizerRefrigitz(ref TmpL, ref TmpW, DummyOrder, DummyCurrentOrder, CloneATable(TableS), ii, jj, DoEnemySelf, PenRegStrore, EnemyCheckMateActionsString, i, j, Castle));
 
 
@@ -14762,7 +14701,7 @@ namespace HybridizerRefrigitz
                     Order = ord;
                     if (Scop(ii, jj, ii + 2, jj + 1, 3))
                     {
-                        int[] TmpL = LoseOcuuredatChiled;int TmpW = WinOcuuredatChiled;
+                        int[] TmpL = LoseOcuuredatChiled; int TmpW = WinOcuuredatChiled;
                         var newTask = Task.Factory.StartNew(() => HourseThinkingHybridizerRefrigitz(ref TmpL, ref TmpW, DummyOrder, DummyCurrentOrder, CloneATable(TableS), ii, jj, DoEnemySelf, PenRegStrore, EnemyCheckMateActionsString, ii + 2, jj + 1, Castle));
 
 
@@ -14788,7 +14727,7 @@ namespace HybridizerRefrigitz
                 Order = ord;
                 if (Scop(ii, jj, ii - 2, jj - 1, 3))
                 {
-                    int[] TmpL = LoseOcuuredatChiled;int TmpW = WinOcuuredatChiled;
+                    int[] TmpL = LoseOcuuredatChiled; int TmpW = WinOcuuredatChiled;
                     var newTask = Task.Factory.StartNew(() => HourseThinkingHybridizerRefrigitz(ref TmpL, ref TmpW, DummyOrder, DummyCurrentOrder, CloneATable(TableS), ii, jj, DoEnemySelf, PenRegStrore, EnemyCheckMateActionsString, ii - 2, jj - 1, Castle));
 
 
@@ -14815,7 +14754,7 @@ namespace HybridizerRefrigitz
                     Order = ord;
                     if (Scop(ii, jj, ii + 2, jj - 1, 3))
                     {
-                        int[] TmpL = LoseOcuuredatChiled;int TmpW = WinOcuuredatChiled;
+                        int[] TmpL = LoseOcuuredatChiled; int TmpW = WinOcuuredatChiled;
                         var newTask = Task.Factory.StartNew(() => HourseThinkingHybridizerRefrigitz(ref TmpL, ref TmpW, DummyOrder, DummyCurrentOrder, CloneATable(TableS), ii, jj, DoEnemySelf, PenRegStrore, EnemyCheckMateActionsString, ii + 2, jj - 1, Castle));
 
 
@@ -14840,7 +14779,7 @@ namespace HybridizerRefrigitz
                 Order = ord;
                 if (Scop(ii, jj, ii - 2, jj + 1, 3))
                 {
-                    int[] TmpL = LoseOcuuredatChiled;int TmpW = WinOcuuredatChiled;
+                    int[] TmpL = LoseOcuuredatChiled; int TmpW = WinOcuuredatChiled;
                     var newTask = Task.Factory.StartNew(() => HourseThinkingHybridizerRefrigitz(ref TmpL, ref TmpW, DummyOrder, DummyCurrentOrder, CloneATable(TableS), ii, jj, DoEnemySelf, PenRegStrore, EnemyCheckMateActionsString, ii - 2, jj + 1, Castle));
 
 
@@ -14867,7 +14806,7 @@ namespace HybridizerRefrigitz
                     Order = ord;
                     if (Scop(ii, jj, ii + 1, jj + 2, 3))
                     {
-                        int[] TmpL = LoseOcuuredatChiled;int TmpW = WinOcuuredatChiled;
+                        int[] TmpL = LoseOcuuredatChiled; int TmpW = WinOcuuredatChiled;
                         var newTask = Task.Factory.StartNew(() => HourseThinkingHybridizerRefrigitz(ref TmpL, ref TmpW, DummyOrder, DummyCurrentOrder, CloneATable(TableS), ii, jj, DoEnemySelf, PenRegStrore, EnemyCheckMateActionsString, ii + 1, jj + 2, Castle));
 
 
@@ -14895,7 +14834,7 @@ namespace HybridizerRefrigitz
                     Order = ord;
                     if (Scop(ii, jj, ii - 1, jj - 2, 3))
                     {
-                        int[] TmpL = LoseOcuuredatChiled;int TmpW = WinOcuuredatChiled;
+                        int[] TmpL = LoseOcuuredatChiled; int TmpW = WinOcuuredatChiled;
                         var newTask = Task.Factory.StartNew(() => HourseThinkingHybridizerRefrigitz(ref TmpL, ref TmpW, DummyOrder, DummyCurrentOrder, CloneATable(TableS), ii, jj, DoEnemySelf, PenRegStrore, EnemyCheckMateActionsString, ii - 1, jj - 2, Castle));
 
 
@@ -14923,7 +14862,7 @@ namespace HybridizerRefrigitz
                     Order = ord;
                     if (Scop(ii, jj, ii + 1, jj - 2, 3))
                     {
-                        int[] TmpL = LoseOcuuredatChiled;int TmpW = WinOcuuredatChiled;
+                        int[] TmpL = LoseOcuuredatChiled; int TmpW = WinOcuuredatChiled;
                         var newTask = Task.Factory.StartNew(() => HourseThinkingHybridizerRefrigitz(ref TmpL, ref TmpW, DummyOrder, DummyCurrentOrder, CloneATable(TableS), ii, jj, DoEnemySelf, PenRegStrore, EnemyCheckMateActionsString, ii + 1, jj - 2, Castle));
 
 
@@ -14950,7 +14889,7 @@ namespace HybridizerRefrigitz
                     Order = ord;
                     if (Scop(ii, jj, ii - 1, jj + 2, 3))
                     {
-                        int[] TmpL = LoseOcuuredatChiled;int TmpW = WinOcuuredatChiled;
+                        int[] TmpL = LoseOcuuredatChiled; int TmpW = WinOcuuredatChiled;
                         var newTask = Task.Factory.StartNew(() => HourseThinkingHybridizerRefrigitz(ref TmpL, ref TmpW, DummyOrder, DummyCurrentOrder, CloneATable(TableS), ii, jj, DoEnemySelf, PenRegStrore, EnemyCheckMateActionsString, ii - 1, jj + 2, Castle));
 
 
@@ -14967,7 +14906,7 @@ namespace HybridizerRefrigitz
             Object O = new Object();
             lock (O)
             {
-                int[] TmpL = LoseOcuuredatChiled;int TmpW = WinOcuuredatChiled;
+                int[] TmpL = LoseOcuuredatChiled; int TmpW = WinOcuuredatChiled;
                 var newTask = Task.Factory.StartNew(() => ThinkingHourseOne(ref TmpL, ref TmpW, ord, ii, jj, DummyOrder, DummyCurrentOrder, DoEnemySelf, PenRegStrore, EnemyCheckMateActionsString, Castle));
 
 
@@ -14978,7 +14917,7 @@ namespace HybridizerRefrigitz
             Object O1 = new Object();
             lock (O1)
             {
-                int[] TmpL = LoseOcuuredatChiled;int TmpW = WinOcuuredatChiled;
+                int[] TmpL = LoseOcuuredatChiled; int TmpW = WinOcuuredatChiled;
                 var newTask = Task.Factory.StartNew(() => ThinkingHourseTwo(ref TmpL, ref TmpW, ord, ii, jj, DummyOrder, DummyCurrentOrder, DoEnemySelf, PenRegStrore, EnemyCheckMateActionsString, Castle));
 
 
@@ -14989,7 +14928,7 @@ namespace HybridizerRefrigitz
             Object O2 = new Object();
             lock (O2)
             {
-                int[] TmpL = LoseOcuuredatChiled;int TmpW = WinOcuuredatChiled;
+                int[] TmpL = LoseOcuuredatChiled; int TmpW = WinOcuuredatChiled;
                 var newTask = Task.Factory.StartNew(() => ThinkingHourseThree(ref TmpL, ref TmpW, ord, ii, jj, DummyOrder, DummyCurrentOrder, DoEnemySelf, PenRegStrore, EnemyCheckMateActionsString, Castle));
 
 
@@ -15000,7 +14939,7 @@ namespace HybridizerRefrigitz
             Object O3 = new Object();
             lock (O3)
             {
-                int[] TmpL = LoseOcuuredatChiled;int TmpW = WinOcuuredatChiled;
+                int[] TmpL = LoseOcuuredatChiled; int TmpW = WinOcuuredatChiled;
                 var newTask = Task.Factory.StartNew(() => ThinkingHourseFour(ref TmpL, ref TmpW, ord, ii, jj, DummyOrder, DummyCurrentOrder, DoEnemySelf, PenRegStrore, EnemyCheckMateActionsString, Castle));
 
 
@@ -15011,7 +14950,7 @@ namespace HybridizerRefrigitz
             Object O4 = new Object();
             lock (O4)
             {
-                int[] TmpL = LoseOcuuredatChiled;int TmpW = WinOcuuredatChiled;
+                int[] TmpL = LoseOcuuredatChiled; int TmpW = WinOcuuredatChiled;
                 var newTask = Task.Factory.StartNew(() => ThinkingHourseFive(ref TmpL, ref TmpW, ord, ii, jj, DummyOrder, DummyCurrentOrder, DoEnemySelf, PenRegStrore, EnemyCheckMateActionsString, Castle));
 
 
@@ -15022,7 +14961,7 @@ namespace HybridizerRefrigitz
             Object O5 = new Object();
             lock (O5)
             {
-                int[] TmpL = LoseOcuuredatChiled;int TmpW = WinOcuuredatChiled;
+                int[] TmpL = LoseOcuuredatChiled; int TmpW = WinOcuuredatChiled;
                 var newTask = Task.Factory.StartNew(() => ThinkingHourseSix(ref TmpL, ref TmpW, ord, ii, jj, DummyOrder, DummyCurrentOrder, DoEnemySelf, PenRegStrore, EnemyCheckMateActionsString, Castle));
 
 
@@ -15033,7 +14972,7 @@ namespace HybridizerRefrigitz
             Object O6 = new Object();
             lock (O6)
             {
-                int[] TmpL = LoseOcuuredatChiled;int TmpW = WinOcuuredatChiled;
+                int[] TmpL = LoseOcuuredatChiled; int TmpW = WinOcuuredatChiled;
                 var newTask = Task.Factory.StartNew(() => ThinkingHourseSeven(ref TmpL, ref TmpW, ord, ii, jj, DummyOrder, DummyCurrentOrder, DoEnemySelf, PenRegStrore, EnemyCheckMateActionsString, Castle));
 
 
@@ -15044,7 +14983,7 @@ namespace HybridizerRefrigitz
             Object O7 = new Object();
             lock (O7)
             {
-                int[] TmpL = LoseOcuuredatChiled;int TmpW = WinOcuuredatChiled;
+                int[] TmpL = LoseOcuuredatChiled; int TmpW = WinOcuuredatChiled;
                 var newTask = Task.Factory.StartNew(() => ThinkingHourseEight(ref TmpL, ref TmpW, ord, ii, jj, DummyOrder, DummyCurrentOrder, DoEnemySelf, PenRegStrore, EnemyCheckMateActionsString, Castle));
 
 
@@ -15075,7 +15014,7 @@ namespace HybridizerRefrigitz
                         if (Scop(ii, jj, i, j, 4) && System.Math.Abs(TableS[ii, jj]) == 4 && System.Math.Abs(Kind) == 4)
                         {
                             Order = ord;
-                            int[] TmpL = LoseOcuuredatChiled;int TmpW = WinOcuuredatChiled;
+                            int[] TmpL = LoseOcuuredatChiled; int TmpW = WinOcuuredatChiled;
                             var newTask = Task.Factory.StartNew(() => CastlesThinkingHybridizerRefrigitz(ref TmpL, ref TmpW, DummyOrder, DummyCurrentOrder, CloneATable(TableS), ii, jj, DoEnemySelf, PenRegStrore, EnemyCheckMateActionsString, i, j, Castle));
 
 
@@ -15109,7 +15048,7 @@ namespace HybridizerRefrigitz
                         if (Scop(ii, jj, i, j, 4) && System.Math.Abs(TableS[ii, jj]) == 4 && System.Math.Abs(Kind) == 4)
                         {
                             Order = ord;
-                            int[] TmpL = LoseOcuuredatChiled;int TmpW = WinOcuuredatChiled;
+                            int[] TmpL = LoseOcuuredatChiled; int TmpW = WinOcuuredatChiled;
                             var newTask = Task.Factory.StartNew(() => CastlesThinkingHybridizerRefrigitz(ref TmpL, ref TmpW, DummyOrder, DummyCurrentOrder, CloneATable(TableS), ii, jj, DoEnemySelf, PenRegStrore, EnemyCheckMateActionsString, i, j, Castle));
                             newTask.Wait(); newTask.Dispose();
                             LoseOcuuredatChiled[0] += TmpL[0]; WinOcuuredatChiled += TmpW;
@@ -15125,7 +15064,7 @@ namespace HybridizerRefrigitz
             Object O = new Object();
             lock (O)
             {
-                int[] TmpL = LoseOcuuredatChiled;int TmpW = WinOcuuredatChiled;
+                int[] TmpL = LoseOcuuredatChiled; int TmpW = WinOcuuredatChiled;
                 var newTask1 = Task.Factory.StartNew(() => ThinkingCastleOne(ref TmpL, ref TmpW, ord, ii, jj, DummyOrder, DummyCurrentOrder, DoEnemySelf, PenRegStrore, EnemyCheckMateActionsString, Castle));
                 newTask1.Wait(); newTask1.Dispose();
                 LoseOcuuredatChiled[0] += TmpL[0]; WinOcuuredatChiled += TmpW;
@@ -15153,7 +15092,7 @@ namespace HybridizerRefrigitz
                     if (Scop(ii, jj, i, j, 5) && System.Math.Abs(TableS[ii, jj]) == 5 && System.Math.Abs(Kind) == 5)
                     {
                         Order = ord;
-                        int[] TmpL = LoseOcuuredatChiled;int TmpW = WinOcuuredatChiled;
+                        int[] TmpL = LoseOcuuredatChiled; int TmpW = WinOcuuredatChiled;
                         var newTask = Task.Factory.StartNew(() => MinisterThinkingHybridizerRefrigitz(ref TmpL, ref TmpW, DummyOrder, DummyCurrentOrder, CloneATable(TableS), ii, jj, DoEnemySelf, PenRegStrore, EnemyCheckMateActionsString, i, j, Castle));
 
 
@@ -15181,7 +15120,7 @@ namespace HybridizerRefrigitz
                         Object O = new Object();
                         lock (O)
                         {
-                            int[] TmpL = LoseOcuuredatChiled;int TmpW = WinOcuuredatChiled;
+                            int[] TmpL = LoseOcuuredatChiled; int TmpW = WinOcuuredatChiled;
                             var newTask = Task.Factory.StartNew(() => ThinkingMinisterbase(ref TmpL, ref TmpW, ord, ii, jj, i, j, DummyOrder, DummyCurrentOrder, DoEnemySelf, PenRegStrore, EnemyCheckMateActionsString, Castle));
 
 
@@ -15212,7 +15151,7 @@ namespace HybridizerRefrigitz
                     ///Calculate of Castles of BLACK.
                     if ((new ChessRules(CurrentAStarGredyMax, MovementsAStarGreedyHeuristicFoundT, IgnoreSelfObjectsT, UsePenaltyRegardMechnisamT, BestMovmentsT, PredictHeuristicT, OnlySelfT, AStarGreedyHeuristicT, ArrangmentsChanged, -7, CloneATable(TableS), Order, ii, jj)).Rules(ii, jj, i, jj, color, -7) && (ChessRules.CastleKingAllowedBLACK))
                     {
-                        int[] TmpL = LoseOcuuredatChiled;int TmpW = WinOcuuredatChiled;
+                        int[] TmpL = LoseOcuuredatChiled; int TmpW = WinOcuuredatChiled;
                         var newTask = Task.Factory.StartNew(() => CastleThinkingBLACK(ref TmpL, ref TmpW, DummyOrder, DummyCurrentOrder, CloneATable(TableS), ii, jj, DoEnemySelf, PenRegStrore, EnemyCheckMateActionsString, i, jj, Castle));
 
 
@@ -15241,7 +15180,7 @@ namespace HybridizerRefrigitz
 
                     if ((new ChessRules(CurrentAStarGredyMax, MovementsAStarGreedyHeuristicFoundT, IgnoreSelfObjectsT, UsePenaltyRegardMechnisamT, BestMovmentsT, PredictHeuristicT, OnlySelfT, AStarGreedyHeuristicT, ArrangmentsChanged, 7, CloneATable(TableS), Order, ii, jj)).Rules(ii, jj, i, jj, color, 7) && (ChessRules.CastleKingAllowedWHITE))
                     {
-                        int[] TmpL = LoseOcuuredatChiled;int TmpW = WinOcuuredatChiled;
+                        int[] TmpL = LoseOcuuredatChiled; int TmpW = WinOcuuredatChiled;
                         var newTask = Task.Factory.StartNew(() => CastleThinkingWHITE(ref TmpL, ref TmpW, DummyOrder, DummyCurrentOrder, CloneATable(TableS), ii, jj, DoEnemySelf, PenRegStrore, EnemyCheckMateActionsString, i, jj, Castle));
 
 
@@ -15277,7 +15216,7 @@ namespace HybridizerRefrigitz
                             if (Scop(ii, jj, i, j, 6) && System.Math.Abs(TableS[ii, jj]) == 6 && System.Math.Abs(Kind) == 6)
                             {
                                 Order = ord;
-                                int[] TmpL = LoseOcuuredatChiled;int TmpW = WinOcuuredatChiled;
+                                int[] TmpL = LoseOcuuredatChiled; int TmpW = WinOcuuredatChiled;
                                 var newTask = Task.Factory.StartNew(() => KingThinkingHybridizerRefrigitz(ref TmpL, ref TmpW, DummyOrder, DummyCurrentOrder, CloneATable(TableS), ii, jj, DoEnemySelf, PenRegStrore, EnemyCheckMateActionsString, i, j, Castle));
 
 
@@ -15586,7 +15525,7 @@ namespace HybridizerRefrigitz
                     {
                         ThinkingBegin = false;
                         ThinkingFinished = true;
-                        
+
                         return;
                     }
                     Thread t = new Thread(new ThreadStart(ThinkingWaite));
@@ -15611,7 +15550,7 @@ namespace HybridizerRefrigitz
                             Object O2 = new Object();
                             lock (O2)
                             {
-                                
+
                                 ThinkingBegin = false;
                                 ThinkingFinished = true;
                                 EndThread++;
@@ -15625,7 +15564,7 @@ namespace HybridizerRefrigitz
                             Object O2 = new Object();
                             lock (O2)
                             {
-                                
+
                                 ThinkingBegin = false;
                                 ThinkingFinished = true;
                                 EndThread++;
@@ -15656,7 +15595,7 @@ namespace HybridizerRefrigitz
                         Object O2 = new Object();
                         lock (O2)
                         {
-                            
+
                             ThinkingFinished = true;
                             ThinkingBegin = false;
                             EndThread++;
@@ -15670,7 +15609,7 @@ namespace HybridizerRefrigitz
                         Object O2 = new Object();
                         lock (O2)
                         {
-                            
+
                             ThinkingFinished = true;
                             ThinkingBegin = false;
                             EndThread++;
@@ -15754,7 +15693,7 @@ namespace HybridizerRefrigitz
                     ChessRules.CurrentOrder = DummyCurrentOrder;
                     ///Calculate Castles of WHITE King.
                     ///
-                    int[] TmpL = LoseOcuuredatChiled;int TmpW = WinOcuuredatChiled;
+                    int[] TmpL = LoseOcuuredatChiled; int TmpW = WinOcuuredatChiled;
                     switch (Kind)
                     {
                         case 7:
@@ -16022,7 +15961,7 @@ namespace HybridizerRefrigitz
             }
             return ObjectIndex;
 
-            
+
         }
         int IndexOfIsSupTRUE(int Kind, int RowD, int ColD)
         {
@@ -16203,262 +16142,262 @@ namespace HybridizerRefrigitz
         }     //objects value main method
               //objects value main method
         int RetrunValValue(int RowS, int ColS, int RowO, int ColO, int[,] Tab, int Sign)
+        {
+            int O = 0;
+            if (RowO == -1 && ColO == -1)
+                O = System.Math.Abs(Tab[RowS, ColS]);
+            else
+                O = System.Math.Abs(Tab[RowS, ColS]) + System.Math.Abs(Tab[RowO, ColO]);
+            O *= Sign;
+            return O;
+        }
+        //objects value main method
+        int ObjectValueCalculator(int[,] Table//, int Order
+            , int RowS, int ColS, int RowO, int ColumnO)
+        {
+            int Val = 1;
+            if (Table[RowS, ColS] / Order > 0)
+            {
+                if (System.Math.Abs(Table[RowS, ColS]) == 2)
                 {
-                    int O = 0;
-                    if (RowO == -1 && ColO == -1)
-                        O = System.Math.Abs(Tab[RowS, ColS]);
-                    else
-                        O = System.Math.Abs(Tab[RowS, ColS]) + System.Math.Abs(Tab[RowO, ColO]);
-                    O *= Sign;
-                    return O;
+                    Val = Val * 3;
                 }
-                //objects value main method
-                int ObjectValueCalculator(int[,] Table//, int Order
-                    , int RowS, int ColS, int RowO, int ColumnO)
+                else
+                        if (System.Math.Abs(Table[RowS, ColS]) == 3)
                 {
-                    int Val = 1;
-                    if (Table[RowS, ColS] / Order > 0)
-                    {
-                        if (System.Math.Abs(Table[RowS, ColS]) == 2)
-                        {
-                            Val = Val * 3;
-                        }
-                        else
-                                if (System.Math.Abs(Table[RowS, ColS]) == 3)
-                        {
-                            Val = Val * 3;
-                        }
-                        else
-                                    if (System.Math.Abs(Table[RowS, ColS]) == 4)
-                        {
-                            Val = Val * 5;
-                        }
-                        else
-                                        if (System.Math.Abs(Table[RowS, ColS]) == 5)
-                        {
-                            Val = Val * 9;
-                        }
-                        else
-                                        if (System.Math.Abs(Table[RowS, ColS]) == 6)
-                        {
-                            Val = Val * 10;
-                        }
-                    }
-                    else
-                    if (Table[RowO, ColumnO] / Order > 0)
-                    {
-                        if (System.Math.Abs(Table[RowO, ColumnO]) == 2)
-                        {
-                            Val = Val * 3;
-                        }
-                        else
-                           if (System.Math.Abs(Table[RowO, ColumnO]) == 3)
-                        {
-                            Val = Val * 3;
-                        }
-                        else
-                               if (System.Math.Abs(Table[RowO, ColumnO]) == 4)
-                        {
-                            Val = Val * 5;
-                        }
-                        else
-                                   if (System.Math.Abs(Table[RowO, ColumnO]) == 5)
-                        {
-                            Val = Val * 9;
-                        }
-                        else
-                                   if (System.Math.Abs(Table[RowO, ColumnO]) == 6)
-                        {
-                            Val = Val * 10;
-                        }
-                    }
-                    //}
-                    //       if (Val < 0)
-
-                    return Val;
-
-
-
+                    Val = Val * 3;
                 }
-                //objects value main method
-                int ObjectValueCalculator(int[,] Table//, int Order
-                    , int RowS, int ColS)
+                else
+                            if (System.Math.Abs(Table[RowS, ColS]) == 4)
                 {
-                    int Val = 1;
-
-                    if (System.Math.Abs(Table[RowS, ColS]) == 1)
-                    {
-                        Val = 1;
-                    }
-                    else
-                    if (System.Math.Abs(Table[RowS, ColS]) == 2)
-                    {
-                        Val = 3;
-                    }
-                    else
-                                if (System.Math.Abs(Table[RowS, ColS]) == 3)
-                    {
-                        Val = 3;
-                    }
-                    else
-                                    if (System.Math.Abs(Table[RowS, ColS]) == 4)
-                    {
-                        Val = 5;
-                    }
-                    else
-                                        if (System.Math.Abs(Table[RowS, ColS]) == 5)
-                    {
-                        Val = 9;
-                    }
-                    else
-                                        if (System.Math.Abs(Table[RowS, ColS]) == 6)
-                    {
-                        Val = 10;
-                    }
-                    return Val;
+                    Val = Val * 5;
                 }
-                //objects value main method determination
-                bool SignSelfEmpty(int Obj1, int Obj2, int Order, ref int Ord, ref Color A)
+                else
+                                if (System.Math.Abs(Table[RowS, ColS]) == 5)
                 {
-                    Object O = new Object();
-                    lock (O)
-                    {
-                        bool Is = false;
-                        if (Order == 1)
-                        {
-                            if (Obj1 > 0 && Obj2 == 0)
-                            {
-                                Is = true;
-                                A = Color.WHITE;
-                                Ord = 1;
-                            }
-                        }
-                        else
-                        {
-                            if (Obj1 < 0 && Obj2 == 0)
-                            {
-                                Is = true;
-                                A = Color.BLACK;
-                                Ord = -1;
-                            }
-                        }
-                        return Is;
-                    }
+                    Val = Val * 9;
                 }
-                //objects value main method determination
-                bool SignEnemyEmpty(int Obj1, int Obj2, int Order, ref int Ord, ref Color A)
+                else
+                                if (System.Math.Abs(Table[RowS, ColS]) == 6)
                 {
-                    Object O = new Object();
-                    lock (O)
-                    {
-                        bool Is = false;
-                        if (Order == 1)
-                        {
-                            if (Obj1 < 0 && Obj2 == 0)
-                            {
-                                Is = true;
-                                A = Color.BLACK;
-                                Ord = -1;
-                            }
-                        }
-                        else
-                        {
-                            if (Obj1 > 0 && Obj2 == 0)
-                            {
-                                Is = true;
-                                A = Color.WHITE;
-                                Ord = 1;
-                            }
-                        }
-                        return Is;
-                    }
-                }
-                //objects value main method determination
-                bool SignNotEqualEnemy(int Obj1, int Obj2, int Order, ref int Ord, ref Color A)
-                {
-                    Object O = new Object();
-                    lock (O)
-                    {
-                        bool Is = false;
-
-                        if (Order == 1)
-                        {
-                            if (Obj1 < 0 && Obj2 > 0)
-                            {
-                                Is = true;
-                                A = Color.BLACK;
-                                Ord = -1;
-                            }
-                        }
-                        else
-                        {
-                            if (Obj1 > 0 && Obj2 < 0)
-                            {
-                                Is = true;
-                                A = Color.WHITE;
-                                Ord = 1;
-                            }
-                        }
-                        return Is;
-                    }
-                }
-                //objects value main method determination
-                bool SignEqualSelf(int Obj1, int Obj2, int Order, ref int Ord, ref Color A)
-                {
-                    Object O = new Object();
-                    lock (O)
-                    {
-                        bool Is = false;
-
-                        if (Order == 1)
-                        {
-                            if (Obj1 > 0 && Obj2 > 0)
-                            {
-                                Is = true;
-                                A = Color.WHITE;
-                                Ord = 1;
-                            }
-                        }
-                        else
-                        {
-                            if (Obj1 < 0 && Obj2 < 0)
-                            {
-                                Is = true;
-                                A = Color.BLACK;
-                                Ord = -1;
-                            }
-                        }
-                        return Is;
-                    }
-                }
-                //objects value main method determination
-                bool SignNotEqualSelf(int Obj1, int Obj2, int Order, ref int Ord, ref Color A)
-                {
-                    Object O = new Object();
-                    lock (O)
-                    {
-                        bool Is = false;
-                        if (Order == 1)
-                        {
-                            if (Obj1 > 0 && Obj2 < 0)
-                            {
-                                Is = true;
-                                A = Color.WHITE;
-                                Ord = 1;
-                            }
-                        }
-                        else
-                        {
-                            if (Obj1 < 0 && Obj2 > 0)
-                            {
-                                Is = true;
-                                A = Color.BLACK;
-                                Ord = -1;
-                            }
-                        }
-                        return Is;
-                    }
+                    Val = Val * 10;
                 }
             }
+            else
+            if (Table[RowO, ColumnO] / Order > 0)
+            {
+                if (System.Math.Abs(Table[RowO, ColumnO]) == 2)
+                {
+                    Val = Val * 3;
+                }
+                else
+                   if (System.Math.Abs(Table[RowO, ColumnO]) == 3)
+                {
+                    Val = Val * 3;
+                }
+                else
+                       if (System.Math.Abs(Table[RowO, ColumnO]) == 4)
+                {
+                    Val = Val * 5;
+                }
+                else
+                           if (System.Math.Abs(Table[RowO, ColumnO]) == 5)
+                {
+                    Val = Val * 9;
+                }
+                else
+                           if (System.Math.Abs(Table[RowO, ColumnO]) == 6)
+                {
+                    Val = Val * 10;
+                }
             }
+            //}
+            //       if (Val < 0)
+
+            return Val;
+
+
+
+        }
+        //objects value main method
+        int ObjectValueCalculator(int[,] Table//, int Order
+            , int RowS, int ColS)
+        {
+            int Val = 1;
+
+            if (System.Math.Abs(Table[RowS, ColS]) == 1)
+            {
+                Val = 1;
+            }
+            else
+            if (System.Math.Abs(Table[RowS, ColS]) == 2)
+            {
+                Val = 3;
+            }
+            else
+                        if (System.Math.Abs(Table[RowS, ColS]) == 3)
+            {
+                Val = 3;
+            }
+            else
+                            if (System.Math.Abs(Table[RowS, ColS]) == 4)
+            {
+                Val = 5;
+            }
+            else
+                                if (System.Math.Abs(Table[RowS, ColS]) == 5)
+            {
+                Val = 9;
+            }
+            else
+                                if (System.Math.Abs(Table[RowS, ColS]) == 6)
+            {
+                Val = 10;
+            }
+            return Val;
+        }
+        //objects value main method determination
+        bool SignSelfEmpty(int Obj1, int Obj2, int Order, ref int Ord, ref Color A)
+        {
+            Object O = new Object();
+            lock (O)
+            {
+                bool Is = false;
+                if (Order == 1)
+                {
+                    if (Obj1 > 0 && Obj2 == 0)
+                    {
+                        Is = true;
+                        A = Color.WHITE;
+                        Ord = 1;
+                    }
+                }
+                else
+                {
+                    if (Obj1 < 0 && Obj2 == 0)
+                    {
+                        Is = true;
+                        A = Color.BLACK;
+                        Ord = -1;
+                    }
+                }
+                return Is;
+            }
+        }
+        //objects value main method determination
+        bool SignEnemyEmpty(int Obj1, int Obj2, int Order, ref int Ord, ref Color A)
+        {
+            Object O = new Object();
+            lock (O)
+            {
+                bool Is = false;
+                if (Order == 1)
+                {
+                    if (Obj1 < 0 && Obj2 == 0)
+                    {
+                        Is = true;
+                        A = Color.BLACK;
+                        Ord = -1;
+                    }
+                }
+                else
+                {
+                    if (Obj1 > 0 && Obj2 == 0)
+                    {
+                        Is = true;
+                        A = Color.WHITE;
+                        Ord = 1;
+                    }
+                }
+                return Is;
+            }
+        }
+        //objects value main method determination
+        bool SignNotEqualEnemy(int Obj1, int Obj2, int Order, ref int Ord, ref Color A)
+        {
+            Object O = new Object();
+            lock (O)
+            {
+                bool Is = false;
+
+                if (Order == 1)
+                {
+                    if (Obj1 < 0 && Obj2 > 0)
+                    {
+                        Is = true;
+                        A = Color.BLACK;
+                        Ord = -1;
+                    }
+                }
+                else
+                {
+                    if (Obj1 > 0 && Obj2 < 0)
+                    {
+                        Is = true;
+                        A = Color.WHITE;
+                        Ord = 1;
+                    }
+                }
+                return Is;
+            }
+        }
+        //objects value main method determination
+        bool SignEqualSelf(int Obj1, int Obj2, int Order, ref int Ord, ref Color A)
+        {
+            Object O = new Object();
+            lock (O)
+            {
+                bool Is = false;
+
+                if (Order == 1)
+                {
+                    if (Obj1 > 0 && Obj2 > 0)
+                    {
+                        Is = true;
+                        A = Color.WHITE;
+                        Ord = 1;
+                    }
+                }
+                else
+                {
+                    if (Obj1 < 0 && Obj2 < 0)
+                    {
+                        Is = true;
+                        A = Color.BLACK;
+                        Ord = -1;
+                    }
+                }
+                return Is;
+            }
+        }
+        //objects value main method determination
+        bool SignNotEqualSelf(int Obj1, int Obj2, int Order, ref int Ord, ref Color A)
+        {
+            Object O = new Object();
+            lock (O)
+            {
+                bool Is = false;
+                if (Order == 1)
+                {
+                    if (Obj1 > 0 && Obj2 < 0)
+                    {
+                        Is = true;
+                        A = Color.WHITE;
+                        Ord = 1;
+                    }
+                }
+                else
+                {
+                    if (Obj1 < 0 && Obj2 > 0)
+                    {
+                        Is = true;
+                        A = Color.BLACK;
+                        Ord = -1;
+                    }
+                }
+                return Is;
+            }
+        }
+    }
+}
 //End of Documentation.
