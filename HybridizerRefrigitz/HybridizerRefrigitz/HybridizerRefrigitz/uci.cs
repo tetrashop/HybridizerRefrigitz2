@@ -820,6 +820,7 @@ public class GlobalMembersUci
             }
             else if (token == "d")
             {
+                posa();
                 //sync_cout << pos << sync_endl;
             }
             else if (token == "eval")
@@ -847,6 +848,63 @@ public class GlobalMembersUci
         } while (token != "quit" && argv.Length == 1); // Passed args have one-shot behaviour
 
         // Threads.main()->wait_for_search_finished();
+    }
+    static void posa()
+    {
+        for (int i = 0; i < 8; i++)
+        {
+            Console.WriteLine("\n+---+---+---+---+---+---+---+---+");
+            Console.Write("|");
+
+            for (int j = 0; j < 8; j++)
+            {
+                switch (HybridizerRefrigitzForm.Table[j, i])
+                {
+                    case -6:
+                        Console.Write(" k |");
+                        break;
+                    case -5:
+                        Console.Write(" q |");
+                        break;
+                    case -4:
+                        Console.Write(" r |");
+                        break;
+                    case -3:
+                        Console.Write(" b |");
+                        break;
+                        case -2:
+                        Console.Write(" n |");
+                        break;
+                    case -1:
+                        Console.Write(" p |");
+                        break;
+                    case 6:
+                        Console.Write(" K |");
+                        break;
+                    case 5:
+                        Console.Write(" Q |");
+                        break;
+                    case 4:
+                        Console.Write(" R |");
+                        break;
+                    case 3:
+                        Console.Write(" B |");
+                        break;
+                    case 2:
+                        Console.Write(" N |");
+                        break;
+                    case 1:
+                        Console.Write(" P |");
+                        break;
+                    case 0:
+                        Console.Write("   |");
+                        break;
+
+                }
+            }
+        }
+        Console.WriteLine("\n+---+---+---+---+---+---+---+---+");
+
     }
 }
 

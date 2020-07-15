@@ -16541,6 +16541,8 @@ namespace HybridizerRefrigitz
                             return true;
                     }
                 }
+                if (CalIdle == 2)
+                    return true;
                 if (Kind == 1)
                 {
                     Is = Is || InitiateAStarGreedytSoldier(i, Kind, Order);
