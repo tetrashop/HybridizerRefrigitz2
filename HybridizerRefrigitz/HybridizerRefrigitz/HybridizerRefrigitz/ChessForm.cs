@@ -32,7 +32,7 @@ namespace HybridizerRefrigitz
         public static int MovmentsNumber = 0;
         public static String Root = System.IO.Path.GetDirectoryName(Environment.GetCommandLineArgs()[0]);
         public static String AllDrawKindString = "";
-        public static int OrderPlate = 1;
+        //public static int OrderPlate = 1;
         bool CoPermit = true;
         int ConClick = -1;
         bool WaitOnplay = false;
@@ -195,7 +195,14 @@ namespace HybridizerRefrigitz
 
                             AllDraw.Blitz = B;
                             Deeperthandeeper = Store;
-                            
+
+                            object i = new object();
+
+                            lock (i)
+                            {
+                                 LoadTree = false;
+                                (new HybridizerRefrigitz.TakeRoot()).Save(false, false, this, ref LoadTree, false, false, false, false, false, false, false, true);
+                            }
                         }
                         else
                         {
@@ -1226,7 +1233,7 @@ namespace HybridizerRefrigitz
                                         tt.Start();
                                         tt.Join();
                                         tt.Abort();
-                                        AllDraw.OrderPlate *= -1; AllDraw.OrderPlate *= -1;
+                                        AllDraw.OrderPlate *= -1;
 
 
 
@@ -1275,7 +1282,7 @@ namespace HybridizerRefrigitz
                                         tt.Join();
                                         tt.Abort();
 
-                                        AllDraw.OrderPlate *= -1; AllDraw.OrderPlate *= -1;
+                                        AllDraw.OrderPlate *= -1;
 
 
                                         //Play(-1, -1);
@@ -1335,7 +1342,7 @@ namespace HybridizerRefrigitz
                                 tt.Join();
                                 tt.Abort();
 
-                                AllDraw.OrderPlate *= -1; AllDraw.OrderPlate *= -1;
+                                AllDraw.OrderPlate *= -1;
 
 
                                 //Play(-1, -1);
@@ -1383,7 +1390,7 @@ namespace HybridizerRefrigitz
                                 tt.Join();
                                 tt.Abort();
 
-                                AllDraw.OrderPlate *= -1; AllDraw.OrderPlate *= -1;
+                                AllDraw.OrderPlate *= -1;
 
 
                                 //Play(-1, -1);

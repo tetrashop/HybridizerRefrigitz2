@@ -156,7 +156,7 @@ namespace HybridizerRefrigitz
                                 GalleryStudio.RefregizMemmory tr = new GalleryStudio.RefregizMemmory(MovementsAStarGreedyHeuristicFound, IInoreSelfObjects, UsePenaltyRegardMechnisam, BestMovments, PredictHeuristic, OnlySelf, AStarGreedyHeuristic, ArrangmentsChanged);
 #pragma warning restore CS0436 // The type 'RefregizMemmory' in 'G:\'Personal'_'Files'\Refregitz\PortableChess\Chess\RefregizMemmory.cs' conflicts with the imported type 'RefregizMemmory' in 'GalleryStudio, Version=6.0.0.14, Culture=neutral, PublicKeyToken=null'. Using the type defined in 'G:\'Personal'_'Files'\Refregitz\PortableChess\Chess\RefregizMemmory.cs'.
 #pragma warning restore CS0436 // The type 'RefregizMemmory' in 'G:\'Personal'_'Files'\Refregitz\PortableChess\Chess\RefregizMemmory.cs' conflicts with the imported type 'RefregizMemmory' in 'GalleryStudio, Version=6.0.0.14, Culture=neutral, PublicKeyToken=null'. Using the type defined in 'G:\'Personal'_'Files'\Refregitz\PortableChess\Chess\RefregizMemmory.cs'.
-                                t = (HybridizerRefrigitz.AllDraw)tr.Load(Quantum, HybridizerRefrigitzForm.OrderPlate);
+                                t = (HybridizerRefrigitz.AllDraw)tr.Load(Quantum, AllDraw.OrderPlate);
                                 if (t != null)
                                 {
                                     Curent.Draw = t;
@@ -275,7 +275,7 @@ namespace HybridizerRefrigitz
                             {
                                 Curent.Draw = Curent.RootFound();
                                 rt.AllDrawCurrentAccess = Curent.Draw;
-                                rt.RewriteAllDraw(HybridizerRefrigitzForm.OrderPlate);
+                                rt.RewriteAllDraw(AllDraw.OrderPlate);
                                 HybridizerRefrigitz.AllDraw.DrawTable = false;
                                 //.SetBoxText("\r\nSaved Completed.");
                                 //Curent.RefreshBoxText();
@@ -318,7 +318,7 @@ namespace HybridizerRefrigitz
                         {
                             Curent.Draw = Curent.RootFound();
                             rt.AllDrawCurrentAccess = Curent.Draw;
-                            rt.RewriteAllDraw(HybridizerRefrigitzForm.OrderPlate);
+                            rt.RewriteAllDraw(AllDraw.OrderPlate);
                             HybridizerRefrigitz.AllDraw.DrawTable = false;
                             // Curent.SetBoxText("\r\nSaved Completed.");
                             // Curent.RefreshBoxText();

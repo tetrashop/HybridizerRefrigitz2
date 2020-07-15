@@ -792,6 +792,7 @@ public class GlobalMembersUci
                 go(ref cmd);
 
                 Console.Write("\ngo play");
+                AllDraw.OrderPlateDraw = AllDraw.OrderPlate;
                 t.t.Play(-1, -1);
                 Console.Write("\ngo finished.");
             }

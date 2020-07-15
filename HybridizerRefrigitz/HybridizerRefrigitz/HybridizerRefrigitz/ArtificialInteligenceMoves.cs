@@ -67,7 +67,7 @@ public class ArtificialInteligenceMove
                                AllDraw.Wtime = new HybridizerRefrigitz.Timer(1);
                             else
                                AllDraw.Btime = new HybridizerRefrigitz.Timer(-1);
-                            var arrayA =Task.Factory.StartNew(() =>	t.Draw.InitiateAStarGreedyt(HybridizerRefrigitz.AllDraw.MaxAStarGreedy,1, 4,OrderColor(t.Draw.OrderP), CloneATable(t.brd.GetTable()), t.Draw.OrderP, false, false, 0));
+                            var arrayA =Task.Factory.StartNew(() =>	t.Draw.InitiateAStarGreedyt(HybridizerRefrigitz.AllDraw.MaxAStarGreedy,1, 4,OrderColor(AllDraw.OrderPlate), CloneATable(t.brd.GetTable()), AllDraw.OrderPlate, false, false, 0));
 							//var arrayA =Task.Factory.StartNew(() =>	t.Play(-1,-1));
                             arrayA.Wait();
 							object i=new object();

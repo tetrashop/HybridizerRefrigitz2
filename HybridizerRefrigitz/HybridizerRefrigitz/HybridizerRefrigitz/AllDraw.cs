@@ -56,10 +56,10 @@ namespace HybridizerRefrigitz
     {
         public static Timer Wtime = null;
         public static Timer Btime = null;
-        public static int wtime = 0;
-        public static int btime = 0;
-        public static int winc = 0;
-        public static int binc = 0;
+        public static int wtime = 4 * 60 * 1000;
+        public static int btime = 4 * 60 * 1000;
+        public static int winc = 1000;
+        public static int binc = 1000;
         public static int TimeMax = 0;
 
         public static bool ChangedInTreeOccured = false;
@@ -69,7 +69,7 @@ namespace HybridizerRefrigitz
         public const float MaxTimeInMillisseconds = 10;//Max 10 second
         public static float TimeInitiation;
 
-        public static int CalIdle = 0;
+        public static int CalIdle = 1;
         public static int PlatformHelperProcessorCount = 2;
 
         public static int CompleteNumber = 300;
@@ -192,7 +192,7 @@ namespace HybridizerRefrigitz
         public static int SignKingDangour = -1;
         public static bool DrawTable = true;
         public static int[,] TableVeryfy = new int[8, 8];
-        public static int MaxAStarGreedy = 1;
+        public static int MaxAStarGreedy = 2;
         public static int[,] TableVeryfyConst = new int[8, 8];
         public static List<int[,]> TableCurrent = new List<int[,]>();
         public static bool NoTableFound = false;
@@ -18111,7 +18111,7 @@ namespace HybridizerRefrigitz
                         NumberOfnewMove = 0;
                         Order = DummyOrder;
                         ChessRules.CurrentOrder = DummyCurrentOrder;
-                        int Ord = Order, iAStarGreedy1 = iAStarGreedy - 1, ii1 = ii, jj1 = jj, ik1 = ik, j1 = j;
+                        int Ord = Order, iAStarGreedy1 = iAStarGreedy, ii1 = ii, jj1 = jj, ik1 = ik, j1 = j;
 
                         var array1 = Task.Factory.StartNew(() => Do = this.FullGameThinkingTree(Ord, iAStarGreedy1 - 1, ii1, jj1, ik1, j1, false, LeafAStarGreedy));
 
@@ -23093,7 +23093,8 @@ if (Kind == 2 && ElephantOnTable[i].ElefantThinking[0].AStarGreedy != null && El
                 });
                 //output.Wait(); output.Dispose();
                 TH.Add(output);
-                Task.WaitAll(TH.ToArray());
+
+                Parallel.ForEach(TH, item => Task.WaitAll(item));
 
 
                 TH.Clear();
@@ -23258,8 +23259,8 @@ if (Kind == 2 && ElephantOnTable[i].ElefantThinking[0].AStarGreedy != null && El
                 });
                 //output.Wait(); output.Dispose();
                 TH.Add(output);
-                Task.WaitAll(TH.ToArray());
 
+                Parallel.ForEach(TH, item => Task.WaitAll(item));
 
 
                 TH.Clear();
@@ -24475,7 +24476,7 @@ if (Kind == 2 && ElephantOnTable[i].ElefantThinking[0].AStarGreedy != null && El
                     }
                 }
                 //THIS.Invoke((MethodInvoker)delegate()
-                {
+                /*{
                     Object OOO = new Object();
                     lock (OOO)
                     {
@@ -24493,7 +24494,7 @@ if (Kind == 2 && ElephantOnTable[i].ElefantThinking[0].AStarGreedy != null && El
                             AStarGreedytMaxCount = (int)MaxAStarGreedy;
                         }
                     }
-                }
+                }*/
                 ChessRules.CurrentOrder = Current;
                 Order = DummyOrder;
                 int iiii = ii, jjjj = jj, Ord = Order;
