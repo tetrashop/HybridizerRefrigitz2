@@ -795,6 +795,7 @@ public class GlobalMembersUci
                 AllDraw.OrderPlateDraw = AllDraw.OrderPlate;
                 t.t.Play(-1, -1);
                 Console.Write("\ngo finished.");
+                HybridizerRefrigitz.AllDraw.CalIdle = 0;
             }
 
             else if (token == "position")

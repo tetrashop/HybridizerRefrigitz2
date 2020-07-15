@@ -16526,6 +16526,21 @@ namespace HybridizerRefrigitz
             bool Is = false;
             try
             {
+                if (OrderPlateDraw == 1)
+                {
+                    if (Wtime != null)
+                    {
+                        if (Wtime.EndTime)
+                            return true;
+                    }
+                }
+                else {
+                    if (Btime != null)
+                    {
+                        if (Btime.EndTime)
+                            return true;
+                    }
+                }
                 if (Kind == 1)
                 {
                     Is = Is || InitiateAStarGreedytSoldier(i, Kind, Order);
