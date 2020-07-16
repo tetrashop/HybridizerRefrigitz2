@@ -673,7 +673,7 @@ public class GlobalMembersUci
             //else
             //    StockMove++;
 
-            ss = "position fen " + ss;
+            //ss = "position fen " + ss;
 
             return ss;
             //return fenS.ToString();
@@ -794,6 +794,7 @@ public class GlobalMembersUci
                 Console.Write("\ngo play");
                 AllDraw.OrderPlateDraw = AllDraw.OrderPlate;
                 t.t.Play(-1, -1);
+                HybridizerRefrigitzForm.Table = t.t.Draw.CloneATable(AllDraw.TableListAction[AllDraw.TableListAction.Count - 2]);
                 Console.Write("\ngo finished.");
                 HybridizerRefrigitz.AllDraw.CalIdle = 0;
             }
@@ -904,6 +905,7 @@ public class GlobalMembersUci
             }
         }
         Console.WriteLine("\n+---+---+---+---+---+---+---+---+");
+        Console.WriteLine("\nfen: "+ StartFEN);
 
     }
 }

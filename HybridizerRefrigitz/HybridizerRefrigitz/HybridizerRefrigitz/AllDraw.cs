@@ -23698,7 +23698,7 @@ if (Kind == 2 && ElephantOnTable[i].ElefantThinking[0].AStarGreedy != null && El
             return Do;
         }
         //clone a table
-        int[,] CloneATable(int[,] Tab)
+        public int[,] CloneATable(int[,] Tab)
         {
 
             int[,] Tabl = new int[8, 8];
