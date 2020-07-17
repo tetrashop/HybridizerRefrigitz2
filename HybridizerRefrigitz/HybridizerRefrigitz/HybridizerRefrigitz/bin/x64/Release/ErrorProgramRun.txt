@@ -1,0 +1,33 @@
+System.AggregateException: One or more errors occurred. ---> System.AggregateException: One or more errors occurred. ---> System.OutOfMemoryException: Exception of type 'System.OutOfMemoryException' was thrown.
+   at HybridizerRefrigitz.ThinkingHybridizerRefrigitz.<>c__DisplayClass392_8.<ThinkingHourse>b__7()
+   at System.Threading.Tasks.Task.Execute()
+   --- End of inner exception stack trace ---
+   at System.Threading.Tasks.Task.ThrowIfExceptional(Boolean includeTaskCanceledExceptions)
+   at System.Threading.Tasks.Task.Wait(Int32 millisecondsTimeout, CancellationToken cancellationToken)
+   at HybridizerRefrigitz.ThinkingHybridizerRefrigitz.ThinkingHourse(Int32[]& LoseOcuuredatChiled, Int32& WinOcuuredatChiled, Int32 ord, Int32 ii, Int32 jj, Int32 DummyOrder, Int32 DummyCurrentOrder, Boolean DoEnemySelf, Boolean PenRegStrore, Boolean EnemyCheckMateActionsString, Boolean Castle) in G:\'Personal'_'Files'\HybridizerRefrigitz\HybridizerRefrigitz\HybridizerRefrigitz\ThinkingChess.cs:line 14990
+   at HybridizerRefrigitz.ThinkingHybridizerRefrigitz.<>c__DisplayClass407_1.<Thinking>b__4() in G:\'Personal'_'Files'\HybridizerRefrigitz\HybridizerRefrigitz\HybridizerRefrigitz\ThinkingChess.cs:line 15729
+   at System.Threading.Tasks.Task.Execute()
+   --- End of inner exception stack trace ---
+   at System.Threading.Tasks.Task.ThrowIfExceptional(Boolean includeTaskCanceledExceptions)
+   at System.Threading.Tasks.Task.Wait(Int32 millisecondsTimeout, CancellationToken cancellationToken)
+   at HybridizerRefrigitz.ThinkingHybridizerRefrigitz.Thinking(Int32 iAStarGreedy, AllDraw THIS, Int32[]& LoseOcuuredatChiled, Int32& WinOcuuredatChiled) in G:\'Personal'_'Files'\HybridizerRefrigitz\HybridizerRefrigitz\HybridizerRefrigitz\ThinkingChess.cs:line 15732
+---> (Inner Exception #0) System.AggregateException: One or more errors occurred. ---> System.OutOfMemoryException: Exception of type 'System.OutOfMemoryException' was thrown.
+   at HybridizerRefrigitz.ThinkingHybridizerRefrigitz.<>c__DisplayClass392_8.<ThinkingHourse>b__7()
+   at System.Threading.Tasks.Task.Execute()
+   --- End of inner exception stack trace ---
+   at System.Threading.Tasks.Task.ThrowIfExceptional(Boolean includeTaskCanceledExceptions)
+   at System.Threading.Tasks.Task.Wait(Int32 millisecondsTimeout, CancellationToken cancellationToken)
+   at HybridizerRefrigitz.ThinkingHybridizerRefrigitz.ThinkingHourse(Int32[]& LoseOcuuredatChiled, Int32& WinOcuuredatChiled, Int32 ord, Int32 ii, Int32 jj, Int32 DummyOrder, Int32 DummyCurrentOrder, Boolean DoEnemySelf, Boolean PenRegStrore, Boolean EnemyCheckMateActionsString, Boolean Castle) in G:\'Personal'_'Files'\HybridizerRefrigitz\HybridizerRefrigitz\HybridizerRefrigitz\ThinkingChess.cs:line 14990
+   at HybridizerRefrigitz.ThinkingHybridizerRefrigitz.<>c__DisplayClass407_1.<Thinking>b__4() in G:\'Personal'_'Files'\HybridizerRefrigitz\HybridizerRefrigitz\HybridizerRefrigitz\ThinkingChess.cs:line 15729
+   at System.Threading.Tasks.Task.Execute()
+---> (Inner Exception #0) System.OutOfMemoryException: Exception of type 'System.OutOfMemoryException' was thrown.
+   at HybridizerRefrigitz.ThinkingHybridizerRefrigitz.<>c__DisplayClass392_8.<ThinkingHourse>b__7()
+   at System.Threading.Tasks.Task.Execute()<---
+<---
+: On7/16/2020 8:43:22 PMSystem.OutOfMemoryException: Exception of type 'System.OutOfMemoryException' was thrown.
+   at System.Threading.Thread.StartInternal(IPrincipal principal, StackCrawlMark& stackMark)
+   at System.Threading.Thread.Start()
+   at HybridizerRefrigitz.ThinkingHybridizerRefrigitz.Thinking(Int32 iAStarGreedy, AllDraw THIS, Int32[]& LoseOcuuredatChiled, Int32& WinOcuuredatChiled) in G:\'Personal'_'Files'\HybridizerRefrigitz\HybridizerRefrigitz\HybridizerRefrigitz\ThinkingChess.cs:line 15533: On7/16/2020 8:43:57 PMSystem.OutOfMemoryException: Exception of type 'System.OutOfMemoryException' was thrown.
+   at System.Threading.Thread.StartInternal(IPrincipal principal, StackCrawlMark& stackMark)
+   at System.Threading.Thread.Start()
+   at HybridizerRefrigitz.ThinkingHybridizerRefrigitz.Thinking(Int32 iAStarGreedy, AllDraw THIS, Int32[]& LoseOcuuredatChiled, Int32& WinOcuuredatChiled) in G:\'Personal'_'Files'\HybridizerRefrigitz\HybridizerRefrigitz\HybridizerRefrigitz\ThinkingChess.cs:line 15533: On7/16/2020 8:44:12 PM
