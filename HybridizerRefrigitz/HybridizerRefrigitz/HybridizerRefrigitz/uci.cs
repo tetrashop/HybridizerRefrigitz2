@@ -742,7 +742,7 @@ public class GlobalMembersUci
             }
             else if (token == "ponderhit")
             {
-                HybridizerRefrigitz.AllDraw.CalIdle = 0;
+                //HybridizerRefrigitz.AllDraw.CalIdle = 0;
 
 
 
@@ -796,7 +796,7 @@ public class GlobalMembersUci
                 t.t.Play(-1, -1);
                 HybridizerRefrigitzForm.Table = t.t.Draw.CloneATable(AllDraw.TableListAction[AllDraw.TableListAction.Count - 2]);
                 Console.Write("\ngo finished.");
-                HybridizerRefrigitz.AllDraw.CalIdle = 0;
+               // HybridizerRefrigitz.AllDraw.CalIdle = 0;
             }
 
             else if (token == "position")

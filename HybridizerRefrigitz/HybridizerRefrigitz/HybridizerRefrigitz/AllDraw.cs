@@ -141,7 +141,7 @@ namespace HybridizerRefrigitz
         public static int TaskEnd = 0;
         public static String Root = System.IO.Path.GetDirectoryName(Environment.GetCommandLineArgs()[0]);
         public static int OrderPlate = 1;
-        public static bool Blitz = false;
+        public static bool Blitz = true;
         public static int ConvertedKind = -2;
         public static bool ConvertWait = true;
         public static bool Stockfish = false;
@@ -21769,8 +21769,8 @@ if (Kind == 2 && ElephantOnTable[i].ElefantThinking[0].AStarGreedy != null && El
                         lock (O)
                         {
                             var array = Task.Factory.StartNew(() => Do = FullGameThinkingTreeSoldier(ik, a, Order, iAStarGreedy, ii, jj, ik1, j1, FOUND, LeafAStarGreedy));
-                            //array.Wait(); array.Dispose();
-                            TH.Add(array);
+                            array.Wait(); array.Dispose();
+                            //TH.Add(array);
                         }
                     }
                 });
@@ -21964,8 +21964,8 @@ if (Kind == 2 && ElephantOnTable[i].ElefantThinking[0].AStarGreedy != null && El
                         lock (O)
                         {
                             var array = Task.Factory.StartNew(() => Do = FullGameThinkingTreeElephant(ik, a, Order, iAStarGreedy, ii, jj, ik1, j1, FOUND, LeafAStarGreedy));
-                            //array.Wait(); array.Dispose();
-                            TH.Add(array);
+                            array.Wait(); array.Dispose();
+                            //TH.Add(array);
                         }
                     }
                 });
@@ -22165,8 +22165,8 @@ if (Kind == 2 && ElephantOnTable[i].ElefantThinking[0].AStarGreedy != null && El
                         lock (O)
                         {
                             var array = Task.Factory.StartNew(() => Do = FullGameThinkingTreeHourse(ik, a, Order, iAStarGreedy, ii, jj, ik1, j1, FOUND, LeafAStarGreedy));
-                            //array.Wait(); array.Dispose();
-                            TH.Add(array);
+                            array.Wait(); array.Dispose();
+                            //TH.Add(array);
 
                         }
                     }
@@ -22365,8 +22365,8 @@ if (Kind == 2 && ElephantOnTable[i].ElefantThinking[0].AStarGreedy != null && El
                         lock (O)
                         {
                             var array = Task.Factory.StartNew(() => Do = FullGameThinkingTreeCastle(ik, a, Order, iAStarGreedy, ii, jj, ik1, j1, FOUND, LeafAStarGreedy));
-                            //array.Wait(); array.Dispose();
-                            TH.Add(array);
+                            array.Wait(); array.Dispose();
+                            //TH.Add(array);
 
                         }
                     }
@@ -22567,8 +22567,8 @@ if (Kind == 2 && ElephantOnTable[i].ElefantThinking[0].AStarGreedy != null && El
                         lock (O)
                         {
                             var array = Task.Factory.StartNew(() => Do = FullGameThinkingTreeMinister(ik, a, Order, iAStarGreedy, ii, jj, ik1, j1, FOUND, LeafAStarGreedy));
-                            //array.Wait(); array.Dispose();
-                            TH.Add(array);
+                            array.Wait(); array.Dispose();
+                            //TH.Add(array);
                         }
                     }
                 });
@@ -22769,8 +22769,8 @@ if (Kind == 2 && ElephantOnTable[i].ElefantThinking[0].AStarGreedy != null && El
                         lock (O)
                         {
                             var array = Task.Factory.StartNew(() => Do = FullGameThinkingTreeKing(ik, a, Order, iAStarGreedy, ii, jj, ik1, j1, FOUND, LeafAStarGreedy));
-                            //array.Wait(); array.Dispose();
-                            TH.Add(array);
+                            array.Wait(); array.Dispose();
+                            //TH.Add(array);
 
                         }
                     }
@@ -22799,8 +22799,8 @@ if (Kind == 2 && ElephantOnTable[i].ElefantThinking[0].AStarGreedy != null && El
                         lock (O)
                         {
                             var array = Task.Factory.StartNew(() => Do = FullGameThinkingTreeSoldier(ik, a, Order, iAStarGreedy, ii, jj, ik1, j1, FOUND, LeafAStarGreedy));
-                            //array.Wait(); array.Dispose();
-                            TH.Add(array);
+                            array.Wait(); array.Dispose();
+                            //TH.Add(array);
                         }
                     }
                 });
@@ -22828,8 +22828,8 @@ if (Kind == 2 && ElephantOnTable[i].ElefantThinking[0].AStarGreedy != null && El
                         lock (O)
                         {
                             var array = Task.Factory.StartNew(() => Do = FullGameThinkingTreeElephant(ik, a, Order, iAStarGreedy, ii, jj, ik1, j1, FOUND, LeafAStarGreedy));
-                            //array.Wait(); array.Dispose();
-                            TH.Add(array);
+                            array.Wait(); array.Dispose();
+                            //TH.Add(array);
                         }
                     }
                 });
@@ -22857,8 +22857,8 @@ if (Kind == 2 && ElephantOnTable[i].ElefantThinking[0].AStarGreedy != null && El
                         lock (O)
                         {
                             var array = Task.Factory.StartNew(() => Do = FullGameThinkingTreeHourse(ik, a, Order, iAStarGreedy, ii, jj, ik1, j1, FOUND, LeafAStarGreedy));
-                            //array.Wait(); array.Dispose();
-                            TH.Add(array);
+                            array.Wait(); array.Dispose();
+                            //TH.Add(array);
                         }
                     }
                 });
@@ -22886,8 +22886,8 @@ if (Kind == 2 && ElephantOnTable[i].ElefantThinking[0].AStarGreedy != null && El
                         lock (O)
                         {
                             var array = Task.Factory.StartNew(() => Do = FullGameThinkingTreeCastle(ik, a, Order, iAStarGreedy, ii, jj, ik1, j1, FOUND, LeafAStarGreedy));
-                            //array.Wait(); array.Dispose();
-                            TH.Add(array);
+                            array.Wait(); array.Dispose();
+                            //TH.Add(array);
                         }
                     }
                 });
@@ -22915,8 +22915,8 @@ if (Kind == 2 && ElephantOnTable[i].ElefantThinking[0].AStarGreedy != null && El
                         lock (O)
                         {
                             var array = Task.Factory.StartNew(() => Do = FullGameThinkingTreeMinister(ik, a, Order, iAStarGreedy, ii, jj, ik1, j1, FOUND, LeafAStarGreedy));
-                            //array.Wait(); array.Dispose();
-                            TH.Add(array);
+                            array.Wait(); array.Dispose();
+                            //TH.Add(array);
                         }
                     }
                 });
@@ -22944,8 +22944,8 @@ if (Kind == 2 && ElephantOnTable[i].ElefantThinking[0].AStarGreedy != null && El
                         lock (O)
                         {
                             var array = Task.Factory.StartNew(() => Do = FullGameThinkingTreeKing(ik, a, Order, iAStarGreedy, ii, jj, ik1, j1, FOUND, LeafAStarGreedy));
-                            //array.Wait(); array.Dispose();
-                            TH.Add(array);
+                            array.Wait(); array.Dispose();
+                            //TH.Add(array);
                         }
                     }
                 });
@@ -23108,10 +23108,10 @@ if (Kind == 2 && ElephantOnTable[i].ElefantThinking[0].AStarGreedy != null && El
                         });
                     }
                 });
-                //output.Wait(); output.Dispose();
-                TH.Add(output);
+                output.Wait(); output.Dispose();
+               //TH.Add(output);
 
-                Parallel.ForEach(TH, item => Task.WaitAll(item));
+                //Parallel.ForEach(TH, item => Task.WaitAll(item));
 
 
                 TH.Clear();
@@ -23274,10 +23274,10 @@ if (Kind == 2 && ElephantOnTable[i].ElefantThinking[0].AStarGreedy != null && El
                         });
                     }
                 });
-                //output.Wait(); output.Dispose();
-                TH.Add(output);
+                output.Wait(); output.Dispose();
+                //TH.Add(output);
 
-                Parallel.ForEach(TH, item => Task.WaitAll(item));
+                //Parallel.ForEach(TH, item => Task.WaitAll(item));
 
 
                 TH.Clear();

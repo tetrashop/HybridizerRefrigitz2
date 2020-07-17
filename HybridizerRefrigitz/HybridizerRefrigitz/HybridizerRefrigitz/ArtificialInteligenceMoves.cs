@@ -61,7 +61,7 @@ public class ArtificialInteligenceMove
 										{
 
 								bool Blit=HybridizerRefrigitz.AllDraw.Blitz;
-							HybridizerRefrigitz.AllDraw.Blitz=false;
+							HybridizerRefrigitz.AllDraw.Blitz=true;
 															Idle=true;
                             if (AllDraw.OrderPlate == 1)
                                AllDraw.Wtime = new HybridizerRefrigitz.Timer(1);
@@ -109,18 +109,22 @@ public class ArtificialInteligenceMove
                             Console.Write("\nIdle 1");
                         }
                         while (HybridizerRefrigitz.AllDraw.CalIdle==1)
-						{	
+						{
 
-							//Thread.Sleep(1);
-						}
-						while(ArtificialInteligenceMove.UpdateIsRunning)
+                            //Thread.Sleep(1);
+                        } while (HybridizerRefrigitz.AllDraw.CalIdle == -1)
+                        {
+
+                            //Thread.Sleep(1);
+                        }
+                        while (ArtificialInteligenceMove.UpdateIsRunning)
 						{	
 							//Thread.Sleep(1);
 						}
                         UpdateIsRunning = false;
 
                         HybridizerRefrigitz.AllDraw.IdleInWork=true;
-						HybridizerRefrigitz.AllDraw.CalIdle=0;
+						//HybridizerRefrigitz.AllDraw.CalIdle=0;
 						IdleProgress=true;
                         //				
                         Console.Write("\nIdle ready");
